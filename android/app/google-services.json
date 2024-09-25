@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "894444876029",
+    "project_id": "loginsignupapp-7c92a",
+    "storage_bucket": "loginsignupapp-7c92a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894444876029:android:06b09d39536dc425e20e94",
+        "android_client_info": {
+          "package_name": "com.example.flutter_login_signup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV_KJLOe5aMGSY6mlg1dAm35wAb1o3bsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
