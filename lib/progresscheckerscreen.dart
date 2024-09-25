@@ -70,7 +70,7 @@ class _ProgressCheckerScreenState extends State<ProgressCheckerScreen> {
           ),
           // Background image (ribbon.gif)
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('images/ribbon2.gif'),
                 fit: BoxFit.cover,
@@ -96,12 +96,12 @@ class _ProgressCheckerScreenState extends State<ProgressCheckerScreen> {
                   margin: const EdgeInsets.symmetric(horizontal: 16), // Margins for the card
                   child: Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: 300,
                         width: 300,
                         child: BarChart(
                           BarChartData(
-                            titlesData: FlTitlesData(
+                            titlesData: const FlTitlesData(
                               bottomTitles: AxisTitles(
                                 sideTitles: SideTitles(showTitles: true),
                               ),

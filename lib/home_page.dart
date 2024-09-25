@@ -10,7 +10,7 @@ import 'package:lottie/lottie.dart';
 import 'package:flutter_login_signup/login_page.dart'; // Assuming this is the file for LoginPage
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -304,10 +304,12 @@ class GridDashboard extends StatelessWidget {
     img: "images/setting.png",
   );
 
+  GridDashboard({super.key});
+
   @override
   Widget build(BuildContext context) {
     List<Items> myList = [item1, item2, item3, item4, item5, item6];
-    var color = Color(0xFFE6E6E6); // Light gray color for glassy effect
+    var color = const Color(0xFFE6E6E6); // Light gray color for glassy effect
     return GridView.count(
       crossAxisCount: 2,
       crossAxisSpacing: 18,
@@ -319,7 +321,7 @@ class GridDashboard extends StatelessWidget {
           onTap: () {
             if (data.title == "Level 1") {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => NewScreen()));
+                  MaterialPageRoute(builder: (context) => const NewScreen()));
             }
           },
           child: Container(

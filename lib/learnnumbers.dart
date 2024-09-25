@@ -4,20 +4,22 @@ import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'dart:typed_data';
 
 class LearnNumbers extends StatelessWidget {
-  const LearnNumbers({Key? key}) : super(key: key);
+  const LearnNumbers({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Let's learn Numbers"),
+        title: const Text("Let's learn Numbers"),
       ),
-      body: learnnumberscards(),
+      body: const learnnumberscards(),
     );
   }
 }
 
 class learnnumberscards extends StatefulWidget {
+  const learnnumberscards({super.key});
+
   @override
   State<learnnumberscards> createState() => _learnnumberscardsState();
 }
@@ -28,7 +30,7 @@ class _learnnumberscardsState extends State<learnnumberscards>
     '0','1','2','3','4','5','6','7','8','9','10'
   ];
 
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   bool showPopup = false;
   bool popupShownBefore = false;
 
@@ -40,7 +42,7 @@ class _learnnumberscardsState extends State<learnnumberscards>
     _scrollController.addListener(_onScroll);
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 5),
     );
   }
 
@@ -88,7 +90,7 @@ class _learnnumberscardsState extends State<learnnumberscards>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: alphabetImages.map((imageName) {
                     return Padding(
-                      padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Column(
                         children: [
                           Card(
@@ -128,11 +130,11 @@ class _learnnumberscardsState extends State<learnnumberscards>
                               ),
                             ),
                           ), // GIF card
-                          SizedBox(height: 8.0), // spacing between cards
+                          const SizedBox(height: 8.0), // spacing between cards
                           AlphabetPngCard(
                             imageName: imageName,
                           ), // PNG card
-                          SizedBox(height: 16.0), // spacing between cards
+                          const SizedBox(height: 16.0), // spacing between cards
                         ],
                       ),
                     );
@@ -152,13 +154,13 @@ class _learnnumberscardsState extends State<learnnumberscards>
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   width: MediaQuery.of(context).size.width * 0.6,
                   color: Colors.white,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
+                      const Text(
                         'Congratulations!',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -166,15 +168,15 @@ class _learnnumberscardsState extends State<learnnumberscards>
                           color: Colors.green, // Change color to green
                         ),
                       ),
-                      SizedBox(height: 8.0),
-                      Text(
+                      const SizedBox(height: 8.0),
+                      const Text(
                         'Wohoo! You have learned 10 Numbers.',
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       TextButton(
                         onPressed: _dismissPopup,
-                        child: Text('OK'),
+                        child: const Text('OK'),
                       ),
                     ],
                   ),
@@ -195,7 +197,7 @@ class _learnnumberscardsState extends State<learnnumberscards>
 class AlphabetPngCard extends StatelessWidget {
   final String imageName;
 
-  const AlphabetPngCard({Key? key, required this.imageName}) : super(key: key);
+  const AlphabetPngCard({super.key, required this.imageName});
 
   @override
   Widget build(BuildContext context) {

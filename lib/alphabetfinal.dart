@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AlphabetFinal extends StatefulWidget {
   final int score;
-  AlphabetFinal({required this.score});
+  const AlphabetFinal({super.key, required this.score});
   @override
   _AlphabetFinalState createState() => _AlphabetFinalState();
 }
@@ -125,7 +125,7 @@ class _AlphabetFinalState extends State<AlphabetFinal> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => NumberStartScreen()),
+                              builder: (context) => const NumberStartScreen()),
                         );
                       },
                       child: Card(
@@ -222,7 +222,7 @@ class _AlphabetFinalState extends State<AlphabetFinal> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: AlphabetFinal(score: 0),
   ));

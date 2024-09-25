@@ -6,17 +6,17 @@ import 'challenger2.dart';
 class Thirdstep extends StatelessWidget {
   final int score; // Add a parameter to accept the initial score
 
-  Thirdstep({required this.score});
+  const Thirdstep({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Move Forward'),
-        backgroundColor: Color.fromARGB(255, 207, 238, 252),
+        title: const Text('Move Forward'),
+        backgroundColor: const Color.fromARGB(255, 207, 238, 252),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -36,7 +36,7 @@ class Thirdstep extends StatelessWidget {
 class ThirdGame extends StatefulWidget {
   final int score; // Add a parameter to accept the initial score
 
-  ThirdGame({required this.score});
+  const ThirdGame({super.key, required this.score});
 
   @override
   _ThirdGameState createState() => _ThirdGameState();
@@ -68,7 +68,7 @@ class _ThirdGameState extends State<ThirdGame> {
   }
 
   void checkSolution() {
-    if (ListEquality().equals(solution, ["C", "O", "W"])) {
+    if (const ListEquality().equals(solution, ["C", "O", "W"])) {
       // Correct solution
       setState(() {
         isCorrectSolution = true;
@@ -111,7 +111,7 @@ class _ThirdGameState extends State<ThirdGame> {
             children: [
               if (isCorrectSolution != null && isCorrectSolution!)
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Image.asset(
                     "images/correct.gif", // Path to correct.gif
                     width: 100,
@@ -120,7 +120,7 @@ class _ThirdGameState extends State<ThirdGame> {
                 ),
               if (isCorrectSolution != null && !isCorrectSolution!)
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Image.asset(
                     "images/wrong.gif", // Path to wrong.gif
                     width: 100,
@@ -152,7 +152,7 @@ class _ThirdGameState extends State<ThirdGame> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Display the boxes for C, O, and W
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -189,13 +189,13 @@ class _ThirdGameState extends State<ThirdGame> {
                                     height: double.infinity,
                                     fit: BoxFit.cover,
                                   ) // Render the image if available
-                                : SizedBox(), // Render nothing if no image is set
+                                : const SizedBox(), // Render nothing if no image is set
                           ),
                         ),
                       );
                     },
-                    onWillAccept: (data) => true,
-                    onAccept: (data) {
+                    onWillAcceptWithDetails: (data) => true,
+                    onAcceptWithDetails: (data) {
                       setState(() {
                         if (index >= 0 && index < solution.length) {
                           solution[index] =
@@ -208,29 +208,29 @@ class _ThirdGameState extends State<ThirdGame> {
                   );
                 }),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Display the draggable alphabet images
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: availableLetters.map((letter) {
                   return Draggable<String>(
-                    data: letter,
-                    child: Image.asset("images/$letter.png",
-                        width: 80, height: 80), // Adjusted path and size
+                    data: letter, // Adjusted path and size
                     feedback: Material(
                       child: Image.asset("images/$letter.png",
                           width: 80, height: 80), // Adjusted path and size
                     ),
                     childWhenDragging: Container(),
+                    child: Image.asset("images/$letter.png",
+                        width: 80, height: 80),
                   );
                 }).toList(),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Display the "Check Now" or "Move to Next Challenge" button
               if (!showMoveToNextButton)
                 ElevatedButton(
                   onPressed: checkSolution,
-                  child: Text("Check Now"),
+                  child: const Text("Check Now"),
                 ),
               if (showMoveToNextButton)
                 ElevatedButton(
@@ -238,7 +238,7 @@ class _ThirdGameState extends State<ThirdGame> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Challenger2(score:score)));
                   },
-                  child: Text("Move to Next Challenge"),
+                  child: const Text("Move to Next Challenge"),
                 ),
             ],
           ),
@@ -247,14 +247,14 @@ class _ThirdGameState extends State<ThirdGame> {
           top: 16,
           right: 16,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               "${maxAttempts - attempts} Chance",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
@@ -262,14 +262,14 @@ class _ThirdGameState extends State<ThirdGame> {
           top: 16,
           left: 16,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               "Score: $score",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
@@ -279,7 +279,7 @@ class _ThirdGameState extends State<ThirdGame> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: Thirdstep(score: 0), // Provide the initial score here
   ));
 }

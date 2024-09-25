@@ -10,6 +10,8 @@ import 'package:lottie/lottie.dart';
 import 'dart:async';
 
 class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
+
   @override
   _SignupPageState createState() => _SignupPageState();
 }
@@ -73,7 +75,7 @@ class _SignupPageState extends State<SignupPage> {
         });
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
       });
     } catch (e) {
@@ -148,7 +150,7 @@ class _SignupPageState extends State<SignupPage> {
         children: [
           _buildBackground(),
           SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,8 +215,8 @@ class _SignupPageState extends State<SignupPage> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  const BoxShadow(
+                                boxShadow: const [
+                                  BoxShadow(
                                     color: Color.fromRGBO(243, 207, 236, 0.973),
                                     blurRadius: 20,
                                     offset: Offset(0, 10),
