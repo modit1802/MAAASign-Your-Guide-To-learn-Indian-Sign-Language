@@ -39,7 +39,7 @@ class _AlphabetFinalState extends State<AlphabetFinal> {
     super.dispose();
   }
 
-  // Function to save score to Firestore
+  // Function to save score to Firestore database
   Future<void> _saveScoreToFirestore() async {
     try {
       User? user = FirebaseAuth.instance.currentUser; // Get the current user
