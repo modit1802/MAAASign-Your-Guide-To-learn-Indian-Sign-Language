@@ -105,7 +105,7 @@ class _AlphabetFinalState extends State<AlphabetFinal> {
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'You have completed all the alphabets',
+                      'You have completed all the alphabets !!',
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,
