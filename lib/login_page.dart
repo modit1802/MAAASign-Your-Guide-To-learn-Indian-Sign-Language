@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart'; // Import Lottie package
-import 'package:flutter_login_signup/home_page.dart';
+import 'package:flutter_login_signup/Initial_page_1.dart';
 import 'package:flutter_login_signup/signup_page.dart'; // Import your SignupPage
 
 class LoginPage extends StatefulWidget {
@@ -40,9 +40,9 @@ class _LoginPageState extends State<LoginPage> {
           _showAnimation = false;
         });
         // Navigate to home page or dashboard after successful login
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const InitialPage1()),
         );
       });
     } catch (e) {

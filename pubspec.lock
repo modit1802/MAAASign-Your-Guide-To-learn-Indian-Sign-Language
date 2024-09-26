@@ -90,7 +90,7 @@ packages:
     source: hosted
     version: "4.2.0"
   collection:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: collection
       sha256: ee67cb0715911d28db6bf4af1026078bd6f0128b07a5f66fb2ed94ec6783c09a
@@ -469,6 +469,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.0"
+  tutorial_coach_mark:
+    dependency: "direct main"
+    description:
+      name: tutorial_coach_mark
+      sha256: "1f1fd234790afb929dec7391a4d90aa54ffe8c8e4d278d9283df8e3f5ac5d63e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.11"
   typed_data:
     dependency: transitive
     description:
