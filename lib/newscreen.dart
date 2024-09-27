@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'Quizscreen'; // Corrected import statement
 
 class NewScreen extends StatefulWidget {
+  const NewScreen({super.key});
+
   @override
   _NewScreenState createState() => _NewScreenState();
 }
@@ -19,7 +21,7 @@ class _NewScreenState extends State<NewScreen> {
   void initState() {
     super.initState();
     // Hide the teacher image after 10 seconds
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         showTeacherImage = false;
       });
@@ -68,7 +70,7 @@ class _NewScreenState extends State<NewScreen> {
                     children: [
                       // Alphabet Circle widget
                       AnimatedContainer(
-                        duration: Duration(milliseconds: 500), // Animation duration
+                        duration: const Duration(milliseconds: 500), // Animation duration
                         curve: Curves.easeInOut, // Animation curve
                         height: calculateCardSize(), // Adjust height based on visibility of teacher image
                         width: calculateCardSize(), // Adjust width based on visibility of teacher image
@@ -80,10 +82,10 @@ class _NewScreenState extends State<NewScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10), // Spacer between alphabet and number circle widgets
+                      const SizedBox(height: 10), // Spacer between alphabet and number circle widgets
                       // Number Circle widget
                       AnimatedContainer(
-                        duration: Duration(milliseconds: 500), // Animation duration
+                        duration: const Duration(milliseconds: 500), // Animation duration
                         curve: Curves.easeInOut, // Animation curve
                         height: calculateCardSize(), // Adjust height based on visibility of teacher image
                         width: calculateCardSize(), // Adjust width based on visibility of teacher image
@@ -97,7 +99,7 @@ class _NewScreenState extends State<NewScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(width: 10), // Spacer between the columns
+                  const SizedBox(width: 10), // Spacer between the columns
                   // Column for teacher2.gif image
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

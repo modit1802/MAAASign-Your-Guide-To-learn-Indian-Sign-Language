@@ -4,10 +4,12 @@ import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'dart:typed_data';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,12 +21,14 @@ class MyApp extends StatelessWidget {
           color: Colors.transparent,
         ),
       ),
-      home: LearnAlphabet(),
+      home: const LearnAlphabet(),
     );
   }
 }
 
 class LearnAlphabet extends StatelessWidget {
+  const LearnAlphabet({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +55,7 @@ class LearnAlphabet extends StatelessWidget {
         ),
         child: const Column(
           children: [
-            const Expanded(
+            Expanded(
               child: Stack(
                 children: [
                   AlphabetLearn(),
@@ -80,7 +84,7 @@ class _AlphabetLearnState extends State<AlphabetLearn> with SingleTickerProvider
     'V', 'W', 'X', 'Y', 'Z'
   ];
 
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -201,7 +205,7 @@ class _AlphabetLearnState extends State<AlphabetLearn> with SingleTickerProvider
 class AlphabetPngCard extends StatelessWidget {
   final String imageName;
 
-  const AlphabetPngCard({Key? key, required this.imageName}) : super(key: key);
+  const AlphabetPngCard({super.key, required this.imageName});
 
   @override
   Widget build(BuildContext context) {

@@ -30,32 +30,32 @@ class _QuizScreenState extends State<QuizScreen> {
   int _score = 0;
   List<Map<String, dynamic>> _quizData = [
     {
-      'questionGifUrl': 'https://drive.google.com/uc?export=download&id=1ODB7YN499zVAzNszu19HZNx5NNGzfLd5',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
       'options': ['C', 'D', 'A', 'B'],
       'correctIndex': 0,
     },
     {
-      'questionGifUrl': 'https://drive.google.com/uc?export=download&id=1OEoc899qdBdgSqeqhfhV3rxdLTF3sG7E',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png',
       'options': ['D', 'Z', 'M', 'N'],
       'correctIndex': 0,
     },
     {
-      'questionGifUrl': 'https://drive.google.com/uc?export=download&id=1OXTBEORoH0D87UGcIMwbJ5umS09X6QdT',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png',
       'options': ['D', 'E', 'P', 'O'],
       'correctIndex': 1,
     },
     {
-      'questionGifUrl': 'https://drive.google.com/uc?export=download&id=1OW9N7vCNG7yz1X18d8mD5oAlfXNTs3d8',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/G_rcvxfs.png',
       'options': ['Q', 'R', 'G', 'T'],
       'correctIndex': 2,
     },
     {
-      'questionGifUrl': 'https://drive.google.com/uc?export=download&id=1OPb3lixGJJKGoorglWK0LQ8DT9X6mwqt',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/K_rv6591.png',
       'options': ['W', 'M', 'K', 'O'],
       'correctIndex': 2,
     },
     {
-      'questionGifUrl': 'https://drive.google.com/uc?export=download&id=1OMFWCGvnFhBxk3l9pOXgfKmIORuOpojg',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/M_bboxf8.png',
       'options': ['M', 'S', 'T', 'U'],
       'correctIndex': 1,
     },

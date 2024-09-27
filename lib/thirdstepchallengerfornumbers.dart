@@ -4,17 +4,17 @@ import 'package:flutter_login_signup/challenger2number.dart';
 class Thirdstepchallengersfornumbers extends StatelessWidget {
   final int score; // Accept score from the previous screen
 
-  Thirdstepchallengersfornumbers({required this.score});
+  const Thirdstepchallengersfornumbers({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Move Forward"),
-        backgroundColor: Color.fromARGB(255, 207, 238, 252),
+        title: const Text("Move Forward"),
+        backgroundColor: const Color.fromARGB(255, 207, 238, 252),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -36,7 +36,7 @@ class Thirdstepchallengersfornumbers extends StatelessWidget {
 class ThirdGame extends StatefulWidget {
   final int score; // Accept score from the previous screen
 
-  ThirdGame({required this.score});
+  const ThirdGame({super.key, required this.score});
 
   @override
   _ThirdGameState createState() => _ThirdGameState();
@@ -96,7 +96,7 @@ class _ThirdGameState extends State<ThirdGame> {
         children: [
           if (isCorrectSolution != null && isCorrectSolution!)
             Container(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Image.asset(
                 "images/correct.gif", // Path to correct.gif
                 width: 100,
@@ -105,7 +105,7 @@ class _ThirdGameState extends State<ThirdGame> {
             ),
           if (isCorrectSolution != null && !isCorrectSolution!)
             Container(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               child: Image.asset(
                 "images/wrong.gif", // Path to wrong.gif
                 width: 100,
@@ -117,7 +117,7 @@ class _ThirdGameState extends State<ThirdGame> {
             width: 300,
             height: 200,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           // Display the box for solution
           GestureDetector(
             onTap: () {
@@ -142,10 +142,10 @@ class _ThirdGameState extends State<ThirdGame> {
                         fit: BoxFit.contain,
                       ),
                     ) // Render dropped image
-                  : SizedBox(), // Render nothing if no image is dropped
+                  : const SizedBox(), // Render nothing if no image is dropped
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           // Display draggable number cards
           Wrap(
             spacing: 10,
@@ -180,30 +180,30 @@ class _ThirdGameState extends State<ThirdGame> {
               );
             }).toList(),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           // Display "Check Solution" or "Move Forward" button based on solution
           if (!buttonClicked)
             ElevatedButton(
               onPressed: checkSolution,
-              child: Text("Check Solution"),
+              child: const Text("Check Solution"),
             ),
           if (isCorrectSolution != null && isCorrectSolution! && buttonClicked)
             ElevatedButton(
               onPressed: moveForward,
-              child: Text("Move Forward"),
+              child: const Text("Move Forward"),
             ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           // Display score and remaining attempts
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
                 "Score: $score",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
                 "${maxAttempts - attempts} Chance",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -214,7 +214,7 @@ class _ThirdGameState extends State<ThirdGame> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: Thirdstepchallengersfornumbers(score: 0), // Provide the initial score here
   ));
 }
