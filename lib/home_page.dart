@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(16.0),
                                     child: _currentUser != null
                                         ? Text(
-                                            " $username  Test your knowledge by clicking on Week number", // Display user's display name if available
+                                            " $username  test your knowledge by clicking on Week number", // Display user's display name if available
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(
                                                 color: Color.fromARGB(255, 231, 240, 255),
@@ -305,6 +305,8 @@ class GridDashboard extends StatelessWidget {
             }
           },
           child: Container(
+            height: 50,
+            width: 50,
             decoration: BoxDecoration(
               color: isWeek1Selected
                   ? selectedColor.withOpacity(0.9)
