@@ -10,11 +10,11 @@ class Challenger4 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Move Forward'),
-        backgroundColor: Color.fromARGB(255, 207, 238, 252),
+        title: const Text('Move Forward'),
+        backgroundColor: const Color.fromARGB(255, 207, 238, 252),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -65,7 +65,7 @@ class _ThirdGameState extends State<ThirdGame> {
   }
 
   void checkSolution() {
-    if (ListEquality().equals(solution, ["B", "O", "X"])) {
+    if (const ListEquality().equals(solution, ["B", "O", "X"])) {
       // Correct solution
       setState(() {
         isCorrectSolution = true;
@@ -148,6 +148,7 @@ class _ThirdGameState extends State<ThirdGame> {
                   ),
                 ],
               ),
+
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -174,6 +175,7 @@ class _ThirdGameState extends State<ThirdGame> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: solution[index] != null
+
                                 ? Image.network(
                               cloudinaryUrls[solution[index]!]!,
                               width: double.infinity,
@@ -197,6 +199,7 @@ class _ThirdGameState extends State<ThirdGame> {
                   );
                 }),
               ),
+
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -219,11 +222,12 @@ class _ThirdGameState extends State<ThirdGame> {
                   );
                 }).toList(),
               ),
+
               SizedBox(height: 20),
               if (!showMoveToNextButton)
                 ElevatedButton(
                   onPressed: checkSolution,
-                  child: Text("Check Now"),
+                  child: const Text("Check Now"),
                 ),
               if (showMoveToNextButton)
                 ElevatedButton(
@@ -235,7 +239,7 @@ class _ThirdGameState extends State<ThirdGame> {
                       ),
                     );
                   },
-                  child: Text("Move to Next Challenge"),
+                  child: const Text("Move to Next Challenge"),
                 ),
             ],
           ),
@@ -244,14 +248,14 @@ class _ThirdGameState extends State<ThirdGame> {
           top: 16,
           right: 16,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               "${maxAttempts - attempts} Chance",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
@@ -259,14 +263,14 @@ class _ThirdGameState extends State<ThirdGame> {
           top: 16,
           left: 16,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               "Score: $score",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
