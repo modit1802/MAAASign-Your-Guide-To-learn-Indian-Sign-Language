@@ -282,7 +282,6 @@ class GridDashboard extends StatelessWidget {
     img: "images/setting.png",
   );
 
-  GridDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
