@@ -5,23 +5,27 @@ import 'package:flutter_login_signup/learnnumbers.dart';
 import 'package:flutter_login_signup/moveforwardtonumbers.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 class NumberStartScreen extends StatelessWidget {
+  const NumberStartScreen({super.key});
+
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz'),
-        backgroundColor: Color.fromARGB(255, 207, 238, 252), // Set the app bar background color
+        title: const Text('Quiz'),
+        backgroundColor: const Color.fromARGB(255, 207, 238, 252), // Set the app bar background color
       ),
-      body: QuizScreen(),
+      body: const QuizScreen(),
     );
   }
 
 }
 class QuizScreen extends StatefulWidget {
+  const QuizScreen({super.key});
+
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
@@ -29,7 +33,7 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   int _currentQuestionIndex = 0;
   int _score = 0;
-  List<Map<String, dynamic>> _quizData = [
+  final List<Map<String, dynamic>> _quizData = [
     {
       'questionGifUrl': 'https://drive.google.com/uc?id=1O_KggV8RMdHKzg03Ic0ppLMXwxZcmK-T',
       'options': ['8', '6', '10', '0'],
@@ -84,7 +88,7 @@ class _QuizScreenState extends State<QuizScreen> {
     }
 
     // Reset card colors and text colors for the next question
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         _cardColors = List.filled(4, Colors.white);
         _textColors = List.filled(4, Colors.black);
@@ -92,7 +96,7 @@ class _QuizScreenState extends State<QuizScreen> {
     });
 
     // Move to the next question or result screen
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         if (_currentQuestionIndex < _quizData.length - 1) {
           _currentQuestionIndex++;
@@ -111,7 +115,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -131,9 +135,9 @@ class _QuizScreenState extends State<QuizScreen> {
                 Text(
                   'Question ${_currentQuestionIndex + 1}/${_quizData.length}',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Card(
                   elevation: 4, // Add elevation for a shadow effect
                   shape: RoundedRectangleBorder(
@@ -161,7 +165,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ...List.generate(_quizData[_currentQuestionIndex]['options'].length, (index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -201,7 +205,7 @@ class ResultScreen extends StatefulWidget {
   final int score;
   final int totalQuestions;
 
-  ResultScreen({required this.score, required this.totalQuestions});
+  const ResultScreen({super.key, required this.score, required this.totalQuestions});
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
@@ -214,7 +218,7 @@ class _ResultScreenState extends State<ResultScreen> {
   void initState() {
     super.initState();
     // Hide the ribbons after 5 seconds
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       setState(() {
         _showRibbons = false;
       });
@@ -225,11 +229,11 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Result'),
-        backgroundColor: Color.fromARGB(255, 207, 238, 252), // Set the app bar background color
+        title: const Text('Result'),
+        backgroundColor: const Color.fromARGB(255, 207, 238, 252), // Set the app bar background color
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -242,7 +246,7 @@ class _ResultScreenState extends State<ResultScreen> {
         ),
         child: Stack(
           children: [
-            _showRibbons ? Positioned.fill(child: Image.asset('images/greenleaf.gif', fit: BoxFit.cover)) : SizedBox(),
+            _showRibbons ? Positioned.fill(child: Image.asset('images/greenleaf.gif', fit: BoxFit.cover)) : const SizedBox(),
             SingleChildScrollView( // Wrap the Column with SingleChildScrollView
               child: Center(
                 child: Column(
@@ -258,17 +262,17 @@ class _ResultScreenState extends State<ResultScreen> {
                           left: 0,
                           right: 0,
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               'Your Score: ${widget.score}/${widget.totalQuestions * 100}',
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold), // Set text to bold
+                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold), // Set text to bold
                               textAlign: TextAlign.center,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     // Use Expanded and Flex to ensure equal size for both cards
                     FractionallySizedBox(
                       widthFactor: 1.0,
@@ -283,7 +287,7 @@ class _ResultScreenState extends State<ResultScreen> {
                             onPressed: () {
                               // Action for the "Learn" button
                               // Add your functionality here
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => LearnNumbers()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const LearnNumbers()));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
@@ -293,7 +297,7 @@ class _ResultScreenState extends State<ResultScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10), // Add spacing between buttons
+                    const SizedBox(height: 10), // Add spacing between buttons
                     FractionallySizedBox(
                       widthFactor: 1.0,
                       child: Padding(

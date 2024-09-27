@@ -5,8 +5,8 @@ import 'package:flutter_login_signup/thirdstepchallengerfornumbers.dart';
 class MoveForwardtonumbers extends StatelessWidget {
   final int score; // Add a parameter to accept the score
 
-  MoveForwardtonumbers
-  ({required this.score}); // Constructor to receive the score
+  const MoveForwardtonumbers
+  ({super.key, required this.score}); // Constructor to receive the score
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +14,14 @@ class MoveForwardtonumbers extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           color: Colors.blue,
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Color.fromARGB(255, 207, 238, 252),
-        title: Text('Move Forward to Numbers Match'),
+        backgroundColor: const Color.fromARGB(255, 207, 238, 252),
+        title: const Text('Move Forward to Numbers Match'),
         actions: [
           IconButton(
             icon: Image.asset(
@@ -38,7 +38,7 @@ class MoveForwardtonumbers extends StatelessWidget {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -58,7 +58,7 @@ class MoveForwardtonumbers extends StatelessWidget {
 class AlphabetFruitMatch extends StatefulWidget {
   final int score; // Add a parameter to accept the score
 
-  AlphabetFruitMatch({required this.score}); // Constructor to receive the score
+  const AlphabetFruitMatch({super.key, required this.score}); // Constructor to receive the score
 
   @override
   _AlphabetFruitMatchState createState() => _AlphabetFruitMatchState();
@@ -96,7 +96,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     );
     score = widget.score; // Initialize score with the received score
   }
@@ -117,10 +117,10 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Score: $score', // Display the score
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
               Expanded(
                 child: Row(
@@ -132,11 +132,6 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                         children: alphabetList
                             .map((alphabet) => Draggable<String>(
                                   data: alphabet,
-                                  child: Image.asset(
-                                    'images/$alphabet.png',
-                                    width: 100,
-                                    height: 100,
-                                  ),
                                   feedback: Image.asset(
                                     'images/$alphabet.png',
                                     width: 100,
@@ -144,6 +139,11 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                                     fit: BoxFit.cover,
                                   ),
                                   childWhenDragging: Container(),
+                                  child: Image.asset(
+                                    'images/$alphabet.png',
+                                    width: 100,
+                                    height: 100,
+                                  ),
                                 ))
                             .toList(),
                       ),
@@ -159,7 +159,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                                   builder: (context, accepted, rejected) {
                                     return Padding(
                                       padding:
-                                          EdgeInsets.symmetric(vertical: 16.0),
+                                          const EdgeInsets.symmetric(vertical: 16.0),
                                       child: accepted == entry.key
                                           ? Image.asset(
                                               'images/${images[entry.key]}',
@@ -168,11 +168,6 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                                             )
                                           : Draggable<String>(
                                               data: entry.key,
-                                              child: Image.asset(
-                                                'images/${images[entry.key]}',
-                                                width: 100,
-                                                height: 100,
-                                              ),
                                               feedback: Image.asset(
                                                 'images/${images[entry.key]}',
                                                 width: 100,
@@ -180,11 +175,16 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                                                 fit: BoxFit.cover,
                                               ),
                                               childWhenDragging: Container(),
+                                              child: Image.asset(
+                                                'images/${images[entry.key]}',
+                                                width: 100,
+                                                height: 100,
+                                              ),
                                             ),
                                     );
                                   },
-                                  onWillAccept: (data) => true,
-                                  onAccept: (data) {
+                                  onWillAcceptWithDetails: (data) => true,
+                                  onAcceptWithDetails: (data) {
                                     if (matches[data] == entry.value) {
                                       setState(() {
                                         score = score + 100;
@@ -201,7 +201,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                                       setState(() {
                                         showMagicEffect = true;
                                       });
-                                      Future.delayed(Duration(seconds: 1), () {
+                                      Future.delayed(const Duration(seconds: 1), () {
                                         setState(() {
                                           showMagicEffect = false;
                                         });
@@ -212,8 +212,8 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                               }).toList(),
                             );
                           },
-                          onWillAccept: (data) => true,
-                          onAccept: (data) {},
+                          onWillAcceptWithDetails: (data) => true,
+                          onAcceptWithDetails: (data) {},
                         ),
                       ),
                     ),
@@ -223,7 +223,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
             ],
           ),
         ),
-        if (showRibbon) RibbonWidget(),
+        if (showRibbon) const RibbonWidget(),
         if (showNextStepButton)
           Positioned(
             bottom: 20,
@@ -236,7 +236,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                     Navigator.push(
                         context, MaterialPageRoute(builder: (context) => Thirdstepchallengersfornumbers(score:score)));
                   },
-                  child: Text('Move to next step'),
+                  child: const Text('Move to next step'),
                 ),
               ),
             ),
@@ -258,13 +258,13 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
       showNextStepButton = true; // Set the flag to true when game is completed
     });
     _controller.forward();
-    _ribbonTimer = Timer(Duration(seconds: 10), () {
+    _ribbonTimer = Timer(const Duration(seconds: 10), () {
       // Start a timer to hide the ribbon after 10 seconds
       setState(() {
         showRibbon = false;
       });
     });
-    _buttonTimer = Timer(Duration(seconds: 20), () {
+    _buttonTimer = Timer(const Duration(seconds: 20), () {
       // Start a timer to hide the button after 20 seconds
       setState(() {
         showNextStepButton = false;
@@ -274,6 +274,8 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
 }
 
 class RibbonWidget extends StatelessWidget {
+  const RibbonWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(
@@ -286,7 +288,7 @@ class RibbonWidget extends StatelessWidget {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: MoveForwardtonumbers(score: 0), // Pass the initial score
   ));
 }

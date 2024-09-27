@@ -4,6 +4,8 @@ import 'package:flutter_login_signup/Initial_page_1.dart';
 import 'Quizscreen';  // Make sure to import your QuizScreen here
 
 class NewScreen extends StatefulWidget {
+  const NewScreen({super.key});
+
   @override
   _NewScreenState createState() => _NewScreenState();
 }
@@ -19,8 +21,8 @@ class _NewScreenState extends State<NewScreen> {
   @override
   void initState() {
     super.initState();
-    // Hide the teacher image after 2 seconds
-    Future.delayed(const Duration(seconds: 2), () {
+
+    Future.delayed(const Duration(seconds: 10), () {
       setState(() {
         showTeacherImage = false;
       });
@@ -146,6 +148,7 @@ class _NewScreenState extends State<NewScreen> {
                             color: Colors.black26, // Add shadow for better visibility
                             spreadRadius: 2,
                             blurRadius: 4,
+
                           ),
                         ],
                       ),
@@ -206,6 +209,7 @@ class _NewScreenState extends State<NewScreen> {
                             color: Colors.black26, // Add shadow for better visibility
                             spreadRadius: 2,
                             blurRadius: 4,
+
                           ),
                         ],
                       ),
@@ -245,6 +249,7 @@ class _NewScreenState extends State<NewScreen> {
                         color: Color.fromARGB(255, 0, 109, 160), // Icon color
                       ),
                     ),
+
                   ),
                 ],
               ),

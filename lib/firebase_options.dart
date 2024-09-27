@@ -35,6 +35,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '894444876029',
     projectId: 'loginsignupapp-7c92a',
     authDomain: 'loginsignupapp-7c92a.firebaseapp.com',
+    databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
     storageBucket: 'loginsignupapp-7c92a.appspot.com',
     measurementId: 'G-D3MBLDBHP5',
   );
@@ -44,6 +45,7 @@ class DefaultFirebaseOptions {
     appId: '1:894444876029:android:06b09d39536dc425e20e94',
     messagingSenderId: '894444876029',
     projectId: 'loginsignupapp-7c92a',
+    databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
     storageBucket: 'loginsignupapp-7c92a.appspot.com',
   );
 
@@ -52,6 +54,7 @@ class DefaultFirebaseOptions {
     appId: '1:894444876029:ios:0e12ec5362480ce3e20e94',
     messagingSenderId: '894444876029',
     projectId: 'loginsignupapp-7c92a',
+    databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
     storageBucket: 'loginsignupapp-7c92a.appspot.com',
     iosBundleId: 'com.example.flutterLoginSignup',
   );
@@ -61,6 +64,7 @@ class DefaultFirebaseOptions {
     appId: '1:894444876029:ios:0e12ec5362480ce3e20e94',
     messagingSenderId: '894444876029',
     projectId: 'loginsignupapp-7c92a',
+    databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
     storageBucket: 'loginsignupapp-7c92a.appspot.com',
     iosBundleId: 'com.example.flutterLoginSignup',
   );
@@ -71,7 +75,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '894444876029',
     projectId: 'loginsignupapp-7c92a',
     authDomain: 'loginsignupapp-7c92a.firebaseapp.com',
+    databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
     storageBucket: 'loginsignupapp-7c92a.appspot.com',
     measurementId: 'G-2R3C2Z62JN',
   );
+
 }

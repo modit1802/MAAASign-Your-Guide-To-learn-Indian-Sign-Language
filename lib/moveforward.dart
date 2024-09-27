@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'thirdstep.dart';
 
 class MoveForward extends StatelessWidget {
-  final int score; // Add a parameter to accept the score
+  final int score;
 
-  MoveForward({required this.score}); // Constructor to receive the score
+  const MoveForward({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
@@ -13,31 +13,29 @@ class MoveForward extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           color: Colors.blue,
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: Color.fromARGB(255, 207, 238, 252),
-        title: Text('Move Forward'),
+        backgroundColor: const Color.fromARGB(255, 207, 238, 252),
+        title: const Text('Move Forward'),
         actions: [
           IconButton(
-            icon: Image.asset(
-              'images/trophy.png', // Replace 'path/to/trophy.png' with the actual path to your trophy image
+            icon: Image.network(
+              'https://res.cloudinary.com/dfph32nsq/image/upload/v1727345720/trophy_obnjfz.png', // Replace with your trophy image URL
               width: 50, // Adjust the size as needed
               height: 50,
             ),
             onPressed: () {
               // Define the action for trophy icon press
-              // For example: Show achievements or leaderboards
-              // You can replace this with your desired functionality
             },
           ),
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -55,9 +53,9 @@ class MoveForward extends StatelessWidget {
 }
 
 class AlphabetFruitMatch extends StatefulWidget {
-  final int score; // Add a parameter to accept the score
+  final int score;
 
-  AlphabetFruitMatch({required this.score}); // Constructor to receive the score
+  const AlphabetFruitMatch({super.key, required this.score});
 
   @override
   _AlphabetFruitMatchState createState() => _AlphabetFruitMatchState();
@@ -73,37 +71,45 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
     'D': 'Dog',
     'E': 'Egg',
   };
+
+  // Replace image paths with corresponding URLs
   Map<String, String> images = {
-    'O': 'orange.png',
-    'K': 'kite.png',
-    'C': 'cherry.png',
-    'D': 'dog.png',
-    'E': 'egg.png',
+    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png',
+    'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/K_rv6591.png',
+    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
+    'D': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png',
+    'E': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png',
   };
-  late int score; // Declare score variable
+  Map<String, String> images2 = {
+    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346887/orange_fqmwtr.png',
+    'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346884/kite_t2qkvv.png',
+    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346881/cherry_awgcoa.png',
+    'D': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346882/dog_ju2ibt.png',
+    'E': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346883/egg_owyxyy.png',
+  };
+  late int score;
   bool showRibbon = false;
-  bool showNextStepButton =
-      false; // Flag to control the visibility of the button
+  bool showNextStepButton = false;
   late AnimationController _controller;
   late Timer _ribbonTimer;
   late Timer _buttonTimer;
-  bool showMagicEffect = false; // Flag to track whether the magic effect is shown
+  bool showMagicEffect = false;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     );
-    score = widget.score; // Initialize score with the received score
+    score = widget.score;
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    _ribbonTimer.cancel(); // Cancel the ribbon timer when disposing the widget
-    _buttonTimer.cancel(); // Cancel the button timer when disposing the widget
+    _ribbonTimer.cancel();
+    _buttonTimer.cancel();
     super.dispose();
   }
 
@@ -115,10 +121,10 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
-                'Score: $score', // Display the score
-                style: TextStyle(fontSize: 20),
+                'Score: $score',
+                style: const TextStyle(fontSize: 20),
               ),
               Expanded(
                 child: Row(
@@ -129,89 +135,62 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: alphabetList
                             .map((alphabet) => Draggable<String>(
-                                  data: alphabet,
-                                  child: Image.asset(
-                                    'images/$alphabet.png',
-                                    width: 100,
-                                    height: 100,
-                                  ),
-                                  feedback: Image.asset(
-                                    'images/$alphabet.png',
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  childWhenDragging: Container(),
-                                ))
+                          data: alphabet,
+                          feedback: Image.network(
+                            images[alphabet]!, // Use the image URL from the map
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                          childWhenDragging: Container(),
+                          child: Image.network(
+                            images[alphabet]!, // Use the image URL from the map
+                            width: 100,
+                            height: 100,
+                          ),
+                        ))
                             .toList(),
                       ),
                     ),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: DragTarget<String>(
-                          builder: (context, accepted, rejected) {
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: matches.entries.map((entry) {
-                                return DragTarget<String>(
-                                  builder: (context, accepted, rejected) {
-                                    return Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 16.0),
-                                      child: accepted == entry.key
-                                          ? Image.asset(
-                                              'images/${images[entry.key]}',
-                                              width: 100,
-                                              height: 100,
-                                            )
-                                          : Draggable<String>(
-                                              data: entry.key,
-                                              child: Image.asset(
-                                                'images/${images[entry.key]}',
-                                                width: 100,
-                                                height: 100,
-                                              ),
-                                              feedback: Image.asset(
-                                                'images/${images[entry.key]}',
-                                                width: 100,
-                                                height: 100,
-                                                fit: BoxFit.cover,
-                                              ),
-                                              childWhenDragging: Container(),
-                                            ),
-                                    );
-                                  },
-                                  onWillAccept: (data) => true,
-                                  onAccept: (data) {
-                                    if (matches[data] == entry.value) {
-                                      setState(() {
-                                        score = score + 100;
-                                        alphabetList.remove(data);
-                                        matches.remove(entry.key);
-                                        if (alphabetList.isEmpty) {
-                                          _completeGame();
-                                        }
-                                      });
-                                      if (!_controller.isAnimating) {
-                                        _controller.reset();
-                                        _controller.forward();
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: matches.entries.map((entry) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                              child: DragTarget<String>(
+                                builder: (context, accepted, rejected) {
+                                  return Column(
+                                    children: [
+                                      Text(entry.value),
+                                      Image.network(
+                                        images2[entry.key]!, // Target image
+                                        width: 100,
+                                        height: 100,
+                                      ),
+                                    ],
+                                  );
+                                },
+                                onWillAccept: (data) {
+                                  // Check if the dragged item matches the target
+                                  return data == entry.key;
+                                },
+                                onAccept: (data) {
+                                  if (data == entry.key) {
+                                    setState(() {
+                                      score += 100;
+                                      alphabetList.remove(data); // Remove matched item
+                                      matches.remove(entry.key); // Remove matched pair
+                                      if (alphabetList.isEmpty) {
+                                        _completeGame(); // Call game completion logic
                                       }
-                                      setState(() {
-                                        showMagicEffect = true;
-                                      });
-                                      Future.delayed(Duration(seconds: 1), () {
-                                        setState(() {
-                                          showMagicEffect = false;
-                                        });
-                                      });
-                                    }
-                                  },
-                                );
-                              }).toList(),
+                                    });
+                                  }
+                                },
+                              ),
                             );
-                          },
-                          onWillAccept: (data) => true,
-                          onAccept: (data) {},
+                          }).toList(),
                         ),
                       ),
                     ),
@@ -221,7 +200,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
             ],
           ),
         ),
-        if (showRibbon) RibbonWidget(),
+        if (showRibbon) const RibbonWidget(),
         if (showNextStepButton)
           Positioned(
             bottom: 20,
@@ -230,19 +209,18 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                 padding: const EdgeInsets.all(108.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Action to perform when button is pressed
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => Thirdstep(score: score)));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Thirdstep(score: score)));
                   },
-                  child: Text('Move to next step'),
+                  child: const Text('Move to next step'),
                 ),
               ),
             ),
           ),
         if (showMagicEffect)
           Positioned.fill(
-            child: Image.asset(
-              'images/star.gif',
+            child: Image.network(
+              'https://res.cloudinary.com/dfph32nsq/image/upload/v1727345820/star_cpjyys.gif', // Replace with your star effect URL
               fit: BoxFit.cover,
             ),
           ),
@@ -253,17 +231,15 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
   void _completeGame() {
     setState(() {
       showRibbon = true;
-      showNextStepButton = true; // Set the flag to true when game is completed
+      showNextStepButton = true;
     });
     _controller.forward();
-    _ribbonTimer = Timer(Duration(seconds: 10), () {
-      // Start a timer to hide the ribbon after 10 seconds
+    _ribbonTimer = Timer(const Duration(seconds: 10), () {
       setState(() {
         showRibbon = false;
       });
     });
-    _buttonTimer = Timer(Duration(seconds: 20), () {
-      // Start a timer to hide the button after 20 seconds
+    _buttonTimer = Timer(const Duration(seconds: 20), () {
       setState(() {
         showNextStepButton = false;
       });
@@ -272,11 +248,13 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
 }
 
 class RibbonWidget extends StatelessWidget {
+  const RibbonWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Positioned.fill(
-      child: Image.asset(
-        'images/ribbon.gif',
+      child: Image.network(
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727345841/ribbon_i1czrh.gif', // Replace with your ribbon GIF URL
         fit: BoxFit.cover,
       ),
     );
@@ -284,7 +262,7 @@ class RibbonWidget extends StatelessWidget {
 }
 
 void main() {
-  runApp(MaterialApp(
-    home: MoveForward(score: 0), // Pass the initial score
+  runApp(const MaterialApp(
+    home: MoveForward(score: 0),
   ));
 }

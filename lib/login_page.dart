@@ -43,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const InitialPage1()),
+
         );
       });
     } catch (e) {
@@ -72,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
   void _goToSignupPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SignupPage()),
+      MaterialPageRoute(builder: (context) => const SignupPage()),
     );
   }
 
@@ -89,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           _buildBackground(), // Background gradient
           SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

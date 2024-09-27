@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 
 class numberfinal extends StatefulWidget {
   final int score;
-  numberfinal({required this.score});
+  const numberfinal({super.key, required this.score});
   @override
   _AlphabetFinalState createState() => _AlphabetFinalState();
 }
@@ -148,7 +148,7 @@ class _AlphabetFinalState extends State<numberfinal> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProgressCheckerScreen()));
+                                builder: (context) => const ProgressCheckerScreen()));
                       },
                       child: Card(
                       elevation: 5,
@@ -238,7 +238,7 @@ class _AlphabetFinalState extends State<numberfinal> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: numberfinal(score: 0),
   ));
