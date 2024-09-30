@@ -2,8 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'dart:typed_data';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Initialize Firebase
   runApp(const MyApp());
 }
 
@@ -26,15 +31,45 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class LearnAlphabet extends StatelessWidget {
+class LearnAlphabet extends StatefulWidget {
   const LearnAlphabet({super.key});
+
+  @override
+  _LearnAlphabetState createState() => _LearnAlphabetState();
+}
+
+class _LearnAlphabetState extends State<LearnAlphabet> {
+  final FirebaseAuth _auth = FirebaseAuth.instance; // Initialize Firebase Auth
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance; // Initialize Firestore
+
+  @override
+  void initState() {
+    super.initState();
+    _storePoints();
+  }
+
+  Future<void> _storePoints() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser; // Get the current user
+      if (user != null) {
+        String uid = user.uid; // Get the user's UID
+        await FirebaseFirestore.instance.collection('users').doc(uid).set({
+          'learnalphabet': 20, // Store the score
+          'timestamp': FieldValue.serverTimestamp(), // Store the current time
+        }, SetOptions(merge: true)); // Merge with existing data if present
+        print("Score saved to Firestore for user ID: $uid");
+      }
+    } catch (e) {
+      print("Error saving score: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Let's Learn Alphabet"),
-        backgroundColor: const Color.fromARGB(255, 207, 238, 252),
+        backgroundColor: const Color.fromARGB(255, 219, 69, 249),
         elevation: 0.0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -49,7 +84,11 @@ class LearnAlphabet extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color.fromARGB(255, 207, 238, 252), Color.fromARGB(255, 242, 222, 246), Colors.white],
+            colors: [
+             Color.fromARGB(255, 219, 69, 249),
+            Color.fromARGB(255, 135, 205, 238),
+              Colors.white
+            ],
             stops: [0.0, 0.5, 1.0],
           ),
         ),
@@ -76,7 +115,8 @@ class AlphabetLearn extends StatefulWidget {
   State<AlphabetLearn> createState() => _AlphabetLearnState();
 }
 
-class _AlphabetLearnState extends State<AlphabetLearn> with SingleTickerProviderStateMixin {
+class _AlphabetLearnState extends State<AlphabetLearn>
+    with SingleTickerProviderStateMixin {
   List<String> alphabetImages = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G',
     'H', 'I', 'J', 'K', 'L', 'M', 'N',
@@ -140,7 +180,7 @@ class _AlphabetLearnState extends State<AlphabetLearn> with SingleTickerProvider
                             children: [
                               Card(
                                 elevation: 6.0,
-                                color: Colors.white, // Set the background color to white
+                                color: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
@@ -193,7 +233,7 @@ class _AlphabetLearnState extends State<AlphabetLearn> with SingleTickerProvider
     final ByteData data = await rootBundle.load(path);
     final Uint8List bytes = data.buffer.asUint8List();
     return Container(
-      color: Colors.white, // Set the background color to white
+      color: Colors.white,
       child: Image.memory(
         bytes,
         fit: BoxFit.cover,
@@ -214,7 +254,7 @@ class AlphabetPngCard extends StatelessWidget {
       height: 300,
       child: Card(
         elevation: 6.0,
-        color: Colors.white, // Set the background color to white
+        color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),

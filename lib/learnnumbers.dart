@@ -1,33 +1,72 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show ByteData, rootBundle;
 import 'dart:typed_data';
 
-class LearnNumbers extends StatelessWidget {
+class LearnNumbers extends StatefulWidget {
   const LearnNumbers({super.key});
 
+  @override
+  State<LearnNumbers> createState() => _LearnNumbersState();
+}
+
+class _LearnNumbersState extends State<LearnNumbers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Let's learn Numbers"),
+        backgroundColor: const Color.fromARGB(255, 219, 69, 249),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          color: Colors.blue,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-      body: const learnnumberscards(),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 219, 69, 249),
+              Color.fromARGB(255, 135, 205, 238),
+              Colors.white,
+            ],
+            stops: [0.0, 0.5, 1.0],
+          ),
+        ),
+        child: const LearnNumbersCards(),
+      ),
     );
   }
 }
 
-class learnnumberscards extends StatefulWidget {
-  const learnnumberscards({super.key});
+class LearnNumbersCards extends StatefulWidget {
+  const LearnNumbersCards({super.key});
 
   @override
-  State<learnnumberscards> createState() => _learnnumberscardsState();
+  State<LearnNumbersCards> createState() => _LearnNumbersCardsState();
 }
 
-class _learnnumberscardsState extends State<learnnumberscards>
+class _LearnNumbersCardsState extends State<LearnNumbersCards>
     with SingleTickerProviderStateMixin {
-  List<String> alphabetImages = [
-    '0','1','2','3','4','5','6','7','8','9','10'
+  List<String> numberImages = [
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10'
   ];
 
   final ScrollController _scrollController = ScrollController();
@@ -44,6 +83,7 @@ class _learnnumberscardsState extends State<learnnumberscards>
       vsync: this,
       duration: const Duration(seconds: 5),
     );
+    _updateLearnNumberInFirebase(20);
   }
 
   @override
@@ -73,6 +113,21 @@ class _learnnumberscardsState extends State<learnnumberscards>
       showPopup = false;
       popupShownBefore = true;
     });
+    _updateLearnNumberInFirebase(20);
+  }
+
+  Future<void> _updateLearnNumberInFirebase(int learnNumber) async {
+    // Get the current user's uid from FirebaseAuth
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      String uid = user.uid;
+
+      // Update Firestore with the 'learn_number' field for the user
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
+        'learnnumber': learnNumber,
+      }, SetOptions(merge: true)); // Merging to avoid overwriting other fields
+    }
   }
 
   @override
@@ -88,7 +143,7 @@ class _learnnumberscardsState extends State<learnnumberscards>
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: alphabetImages.map((imageName) {
+                  children: numberImages.map((imageName) {
                     return Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Column(
@@ -107,7 +162,8 @@ class _learnnumberscardsState extends State<learnnumberscards>
                                 width: 300,
                                 height: 300,
                                 child: FutureBuilder<Uint8List>(
-                                  future: _loadGif('images/Numbers/$imageName.gif'),
+                                  future:
+                                      _loadGif('images/Numbers/$imageName.gif'),
                                   builder: (context, snapshot) {
                                     if (snapshot.connectionState ==
                                             ConnectionState.done &&
@@ -122,7 +178,8 @@ class _learnnumberscardsState extends State<learnnumberscards>
                                       return Container(
                                         width: 300,
                                         height: 300,
-                                        color: Colors.grey, // Placeholder color while loading
+                                        color: Colors
+                                            .grey, // Placeholder color while loading
                                       );
                                     }
                                   },
