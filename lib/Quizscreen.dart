@@ -109,7 +109,7 @@ class _QuizScreenState extends State<Quiz_Screen> {
       appBar: AppBar(
         title: Text("Let's Play Quiz"),
         backgroundColor: Color.fromARGB(255, 207, 238, 252),
-         leading: IconButton(
+        leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.blue,
           onPressed: () {
@@ -234,8 +234,8 @@ class _ResultScreenState extends State<ResultScreen> {
       appBar: AppBar(
         title: Text('Result'),
         backgroundColor: Color.fromARGB(255, 207, 238, 252), // Set the app bar background color
-        elevation: 0, 
-         leading: IconButton(
+        elevation: 0,
+        leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.blue,
           onPressed: () {
@@ -295,7 +295,7 @@ class _ResultScreenState extends State<ResultScreen> {
                             onPressed: () {
                               // Add your functionality here
                               Navigator.push(context,
-                                MaterialPageRoute(builder: (context) =>LearnAlphabet()));
+                                  MaterialPageRoute(builder: (context) =>LearnAlphabet()));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
@@ -319,7 +319,7 @@ class _ResultScreenState extends State<ResultScreen> {
                             onPressed: () {
                               // Add your functionality here
                               Navigator.push(context,
-                                MaterialPageRoute(builder: (context) =>MoveForward(score: widget.score)));
+                                  MaterialPageRoute(builder: (context) =>MoveForward(score: widget.score)));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
