@@ -6,7 +6,7 @@ class MoveForwardtonumbers extends StatelessWidget {
   final int score; // Add a parameter to accept the score
 
   const MoveForwardtonumbers
-  ({super.key, required this.score}); // Constructor to receive the score
+      ({super.key, required this.score}); // Constructor to receive the score
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
     '6': 'boys',
   };
   Map<String, String> images = {
-   '1': 'teddy.png',
+    '1': 'teddy.png',
     '2': 'banana.png',
     '4': 'icecream.png',
     '5': 'five.png',
@@ -85,7 +85,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
   late int score; // Declare score variable
   bool showRibbon = false;
   bool showNextStepButton =
-      false; // Flag to control the visibility of the button
+  false; // Flag to control the visibility of the button
   late AnimationController _controller;
   late Timer _ribbonTimer;
   late Timer _buttonTimer;
@@ -131,20 +131,20 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: alphabetList
                             .map((alphabet) => Draggable<String>(
-                                  data: alphabet,
-                                  feedback: Image.asset(
-                                    'images/$alphabet.png',
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  childWhenDragging: Container(),
-                                  child: Image.asset(
-                                    'images/$alphabet.png',
-                                    width: 100,
-                                    height: 100,
-                                  ),
-                                ))
+                          data: alphabet,
+                          feedback: Image.asset(
+                            'images/$alphabet.png',
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                          childWhenDragging: Container(),
+                          child: Image.asset(
+                            'images/$alphabet.png',
+                            width: 100,
+                            height: 100,
+                          ),
+                        ))
                             .toList(),
                       ),
                     ),
@@ -159,28 +159,28 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                                   builder: (context, accepted, rejected) {
                                     return Padding(
                                       padding:
-                                          const EdgeInsets.symmetric(vertical: 16.0),
+                                      const EdgeInsets.symmetric(vertical: 16.0),
                                       child: accepted == entry.key
                                           ? Image.asset(
-                                              'images/${images[entry.key]}',
-                                              width: 100,
-                                              height: 100,
-                                            )
+                                        'images/${images[entry.key]}',
+                                        width: 100,
+                                        height: 100,
+                                      )
                                           : Draggable<String>(
-                                              data: entry.key,
-                                              feedback: Image.asset(
-                                                'images/${images[entry.key]}',
-                                                width: 100,
-                                                height: 100,
-                                                fit: BoxFit.cover,
-                                              ),
-                                              childWhenDragging: Container(),
-                                              child: Image.asset(
-                                                'images/${images[entry.key]}',
-                                                width: 100,
-                                                height: 100,
-                                              ),
-                                            ),
+                                        data: entry.key,
+                                        feedback: Image.asset(
+                                          'images/${images[entry.key]}',
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        childWhenDragging: Container(),
+                                        child: Image.asset(
+                                          'images/${images[entry.key]}',
+                                          width: 100,
+                                          height: 100,
+                                        ),
+                                      ),
                                     );
                                   },
                                   onWillAcceptWithDetails: (data) => true,
