@@ -51,6 +51,17 @@ class _ThirdGameState extends State<ThirdGame> {
   late int score; // Initialize score
   bool buttonClicked = false; // Track if the button has been clicked
 
+  // Map for Cloudinary URLs for each number and other images
+  final Map<String, String> cloudinaryImages = {
+    "3": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/3_ywml29.png",
+    "2": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
+    "6": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png",
+    "8": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/8_ynuzfh.png",
+    "correct": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
+    "wrong": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
+    "main": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726635/six_iy2km3.png"
+  };
+
   @override
   void initState() {
     super.initState();
@@ -83,9 +94,9 @@ class _ThirdGameState extends State<ThirdGame> {
   void moveForward() {
     // Navigate to next screen or perform any action you want when solution is correct
     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Challenger4Image(score:score)));
+        context,
+        MaterialPageRoute(
+            builder: (context) => Challenger4Image(score: score)));
   }
 
   @override
@@ -97,8 +108,8 @@ class _ThirdGameState extends State<ThirdGame> {
           if (isCorrectSolution != null && isCorrectSolution!)
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Image.asset(
-                "images/correct.gif", // Path to correct.gif
+              child: Image.network(
+                cloudinaryImages["correct"]!, // URL for correct gif
                 width: 100,
                 height: 100,
               ),
@@ -106,14 +117,14 @@ class _ThirdGameState extends State<ThirdGame> {
           if (isCorrectSolution != null && !isCorrectSolution!)
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Image.asset(
-                "images/wrong.gif", // Path to wrong.gif
+              child: Image.network(
+                cloudinaryImages["wrong"]!, // URL for wrong gif
                 width: 100,
                 height: 100,
               ),
             ),
-          Image.asset(
-            "images/six.png",
+          Image.network(
+            cloudinaryImages["main"]!, // Main image URL
             width: 300,
             height: 200,
           ),
@@ -135,13 +146,13 @@ class _ThirdGameState extends State<ThirdGame> {
               alignment: Alignment.center,
               child: solution != null
                   ? SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: Image.asset(
-                        "images/$solution.png",
-                        fit: BoxFit.contain,
-                      ),
-                    ) // Render dropped image
+                width: 100,
+                height: 100,
+                child: Image.network(
+                  cloudinaryImages[solution]!, // Render dropped image from Cloudinary
+                  fit: BoxFit.contain,
+                ),
+              )
                   : const SizedBox(), // Render nothing if no image is dropped
             ),
           ),
@@ -168,8 +179,8 @@ class _ThirdGameState extends State<ThirdGame> {
                     borderRadius: BorderRadius.circular(12), // Round corners
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12), // Round corners
-                      child: Image.asset(
-                        "images/$number.png",
+                      child: Image.network(
+                        cloudinaryImages[number]!, // Use Cloudinary URL for each number
                         width: double.infinity,
                         height: double.infinity,
                         fit: BoxFit.cover,
@@ -215,6 +226,6 @@ class _ThirdGameState extends State<ThirdGame> {
 
 void main() {
   runApp(const MaterialApp(
-    home: Challenger3Image(score:0), // Provide the initial score here
+    home: Challenger3Image(score: 0), // Provide the initial score here
   ));
 }

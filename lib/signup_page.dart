@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter_login_signup/home_page.dart';
+import 'package:flutter_login_signup/Initial_page_1.dart';
 import 'package:flutter_login_signup/login_page.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:async';
@@ -75,7 +75,7 @@ class _SignupPageState extends State<SignupPage> {
         });
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => const InitialPage1()),
         );
       });
     } catch (e) {
