@@ -14,6 +14,7 @@ class LearnPage extends StatefulWidget {
   const LearnPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LearnPageState createState() => _LearnPageState();
 }
 
@@ -313,7 +314,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
-                          color: const Color.fromARGB(255, 0, 255, 8)
+                          color: Color.fromARGB(255, 0, 255, 4)
                               .withOpacity(0.7),
                           backgroundBlendMode: BlendMode.modulate,
                         ),

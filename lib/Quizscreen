@@ -28,6 +28,7 @@ class Quiz_Screen extends StatefulWidget {
 class _QuizScreenState extends State<Quiz_Screen> {
   int _currentQuestionIndex = 0;
   int _score = 0;
+  
   List<Map<String, dynamic>> _quizData = [
     {
       'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
