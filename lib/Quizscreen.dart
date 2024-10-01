@@ -1,107 +1,95 @@
 import 'dart:async';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/learnalphabet.dart';
-import 'package:flutter_login_signup/learnnumbers.dart';
-import 'package:flutter_login_signup/moveforwardtonumbers.dart';
-
+import 'learnalphabet.dart';
+import 'moveforward.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
-class NumberStartScreen extends StatelessWidget {
-  const NumberStartScreen({super.key});
 
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quiz'),
-        backgroundColor: const Color.fromARGB(255, 207, 238, 252), // Set the app bar background color
-      ),
-      body: const QuizScreen(),
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ));
+    return MaterialApp(
+      home: Quiz_Screen(),
     );
   }
-
 }
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
 
+class Quiz_Screen extends StatefulWidget {
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizScreenState extends State<Quiz_Screen> {
   int _currentQuestionIndex = 0;
   int _score = 0;
-  final List<Map<String, dynamic>> _quizData = [
+  List<Map<String, dynamic>> _quizData = [
     {
-      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716936/10_iwh2ip.png',
-      'options': ['8', '6', '10', '0'],
-      'correctIndex': 2,
-    },
-    {
-      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717006/8_iml5cs.png',
-      'options': ['7', '8', '5', '2'],
-      'correctIndex': 1,
-    },
-    {
-      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717008/5_ag2kbp.png',
-      'options': ['5', '3', '1', '0'],
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
+      'options': ['C', 'D', 'A', 'B'],
       'correctIndex': 0,
     },
     {
-      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717003/1_g5k8rj.png',
-      'options': ['2', '1', '0', '10'],
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png',
+      'options': ['D', 'Z', 'M', 'N'],
+      'correctIndex': 0,
+    },
+    {
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png',
+      'options': ['D', 'E', 'P', 'O'],
       'correctIndex': 1,
     },
     {
-      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717005/7_jrfg35.png',
-      'options': ['4', '6', '7', '2'],
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/G_rcvxfs.png',
+      'options': ['Q', 'R', 'G', 'T'],
       'correctIndex': 2,
     },
     {
-      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716936/0_e1tfib.png',
-      'options': ['1', '0', '2', '3'],
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/K_rv6591.png',
+      'options': ['W', 'M', 'K', 'O'],
+      'correctIndex': 2,
+    },
+    {
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/M_bboxf8.png',
+      'options': ['M', 'S', 'T', 'U'],
       'correctIndex': 1,
     },
-    // Add more questions here...
   ];
 
   List<Color> _cardColors = List.filled(4, Colors.white);
   List<Color> _textColors = List.filled(4, Colors.black);
 
   void _answerQuestion(int selectedOptionIndex) {
-    // Check if the selected answer is correct
     if (selectedOptionIndex == _quizData[_currentQuestionIndex]['correctIndex']) {
-      // Update score and set card color to green for correct answer
       setState(() {
         _score += 100;
         _cardColors[selectedOptionIndex] = Colors.green;
         _textColors[selectedOptionIndex] = Colors.white;
       });
     } else {
-      // Set card color to red for incorrect answer
       setState(() {
         _cardColors[selectedOptionIndex] = Colors.red;
         _textColors[selectedOptionIndex] = Colors.white;
       });
     }
 
-    // Reset card colors and text colors for the next question
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 1), () {
       setState(() {
         _cardColors = List.filled(4, Colors.white);
         _textColors = List.filled(4, Colors.black);
       });
     });
 
-    // Move to the next question or result screen
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 1), () {
       setState(() {
         if (_currentQuestionIndex < _quizData.length - 1) {
           _currentQuestionIndex++;
         } else {
-          // Navigate to result screen when all questions are answered
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ResultScreen(score: _score, totalQuestions: _quizData.length)),
@@ -113,9 +101,24 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ));
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Let's Play Quiz"),
+        backgroundColor: Color.fromARGB(255, 207, 238, 252),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          color: Colors.blue,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ), // Removes shadow from AppBar
+      ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -135,20 +138,20 @@ class _QuizScreenState extends State<QuizScreen> {
                 Text(
                   'Question ${_currentQuestionIndex + 1}/${_quizData.length}',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Card(
-                  elevation: 4, // Add elevation for a shadow effect
+                  elevation: 4,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15), // Adjust the border radius for rounded corners
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15), // Same border radius as the Card
+                    borderRadius: BorderRadius.circular(15),
                     child: Image.network(
                       _quizData[_currentQuestionIndex]['questionGifUrl'],
                       height: 300,
-                      width: double.infinity, // Make the image expand to full width
+                      width: double.infinity,
                       fit: BoxFit.cover,
                       loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
                         if (loadingProgress == null) {
@@ -165,7 +168,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 ...List.generate(_quizData[_currentQuestionIndex]['options'].length, (index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -173,9 +176,9 @@ class _QuizScreenState extends State<QuizScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Card(
                         color: _cardColors[index],
-                        elevation: 4, // Add elevation for a shadow effect
+                        elevation: 4,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15), // Adjust the border radius for rounded corners
+                          borderRadius: BorderRadius.circular(15),
                         ),
                         child: TextButton(
                           onPressed: () => _answerQuestion(index),
@@ -184,7 +187,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             child: Text(
                               _quizData[_currentQuestionIndex]['options'][index],
                               style: TextStyle(
-                                color: _textColors[index], // Set text color based on user interaction
+                                color: _textColors[index],
                               ),
                             ),
                           ),
@@ -206,7 +209,7 @@ class ResultScreen extends StatefulWidget {
   final int score;
   final int totalQuestions;
 
-  const ResultScreen({super.key, required this.score, required this.totalQuestions});
+  ResultScreen({required this.score, required this.totalQuestions});
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
@@ -218,8 +221,7 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   void initState() {
     super.initState();
-    // Hide the ribbons after 5 seconds
-    Timer(const Duration(seconds: 5), () {
+    Timer(Duration(seconds: 5), () {
       setState(() {
         _showRibbons = false;
       });
@@ -230,11 +232,19 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Result'),
-        backgroundColor: const Color.fromARGB(255, 207, 238, 252), // Set the app bar background color
+        title: Text('Result'),
+        backgroundColor: Color.fromARGB(255, 207, 238, 252), // Set the app bar background color
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          color: Colors.blue,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),// Removes shadow from AppBar
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -247,87 +257,73 @@ class _ResultScreenState extends State<ResultScreen> {
         ),
         child: Stack(
           children: [
-            _showRibbons
-                ? Positioned.fill(
-              child: Image.network(
-                'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717465/greenleaf_vryta1.gif',
-                fit: BoxFit.cover,
-              ),
-            )
-                : const SizedBox(),
-            SingleChildScrollView( // Wrap the Column with SingleChildScrollView
+            _showRibbons ? Positioned.fill(child: Image.asset('images/greenleaf.gif', fit: BoxFit.cover)) : SizedBox(),
+            SingleChildScrollView(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Display the wooden background image
                     Stack(
                       children: [
-                        Image.network(
-                          'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717492/wooden2_y0rlzl.png',
-                        ),
-                        // Overlay the score text on the wooden background image
+                        Image.asset('images/wooden2.png'),
                         Positioned(
-                          bottom: 50, // Adjust the position of the text as needed
+                          bottom: 50,
                           left: 0,
                           right: 0,
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            padding: EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               'Your Score: ${widget.score}/${widget.totalQuestions * 100}',
-                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold), // Set text to bold
+                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    // Use Expanded and Flex to ensure equal size for both cards
+                    SizedBox(height: 20),
                     FractionallySizedBox(
                       widthFactor: 1.0,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Card(
-                          elevation: 4, // Add elevation for a shadow effect
+                          elevation: 4,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15), // Adjust the border radius for rounded corners
+                            borderRadius: BorderRadius.circular(15),
                           ),
                           child: TextButton(
                             onPressed: () {
-                              // Action for the "Learn" button
                               // Add your functionality here
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const LearnNumbers()));
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) =>LearnAlphabet()));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Image.network(
-                                'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717531/learn_cjf6uk.png', // Cloudinary image
-                              ),
+                              child: Image.asset('images/learn.png'),
                             ),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10), // Add spacing between buttons
+                    SizedBox(height: 10),
                     FractionallySizedBox(
                       widthFactor: 1.0,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Card(
-                          elevation: 4, // Add elevation for a shadow effect
+                          elevation: 4,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15), // Adjust the border radius for rounded corners
+                            borderRadius: BorderRadius.circular(15),
                           ),
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => MoveForwardtonumbers(score: widget.score)));
+                              // Add your functionality here
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) =>MoveForward(score: widget.score)));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Image.network(
-                                'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717556/move_dtx6i4.png', // Cloudinary image
-                              ),
+                              child: Image.asset('images/move.png'),
                             ),
                           ),
                         ),

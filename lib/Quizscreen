@@ -15,17 +15,17 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.light,
     ));
     return MaterialApp(
-      home: QuizScreen(),
+      home: Quiz_Screen(),
     );
   }
 }
 
-class QuizScreen extends StatefulWidget {
+class Quiz_Screen extends StatefulWidget {
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizScreenState extends State<Quiz_Screen> {
   int _currentQuestionIndex = 0;
   int _score = 0;
   
