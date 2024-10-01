@@ -10,7 +10,7 @@ void main() {
 class NumberStartScreen extends StatelessWidget {
   const NumberStartScreen({super.key});
 
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,32 +35,32 @@ class _QuizScreenState extends State<QuizScreen> {
   int _score = 0;
   final List<Map<String, dynamic>> _quizData = [
     {
-      'questionGifUrl': 'https://drive.google.com/uc?id=1O_KggV8RMdHKzg03Ic0ppLMXwxZcmK-T',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716936/10_iwh2ip.png',
       'options': ['8', '6', '10', '0'],
       'correctIndex': 2,
     },
     {
-      'questionGifUrl': 'https://drive.google.com/uc?id=1OeomXu7e7XPOIlaceHLECx8gkYzUAmNT',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717006/8_iml5cs.png',
       'options': ['7', '8', '5', '2'],
       'correctIndex': 1,
     },
     {
-      'questionGifUrl': 'https://drive.usercontent.google.com/download?id=1OZqxsYspFey5EAj1VHRCtxLLAP6mGoVU&authuser=1',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717008/5_ag2kbp.png',
       'options': ['5', '3', '1', '0'],
       'correctIndex': 0,
     },
     {
-      'questionGifUrl': 'https://drive.google.com/uc?id=1OZ_3Ny15MZcD7dFenWoba0exuzgXjPl8',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717003/1_g5k8rj.png',
       'options': ['2', '1', '0', '10'],
       'correctIndex': 1,
     },
     {
-      'questionGifUrl': 'https://drive.google.com/uc?id=1OZnpkgNZTcYGAOS_RtyOUGeL8wL-9RSw',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717005/7_jrfg35.png',
       'options': ['4', '6', '7', '2'],
       'correctIndex': 2,
     },
     {
-      'questionGifUrl': 'https://drive.google.com/uc?id=1OcwqxUUqa_sH0PVX4e0iD223mbWg2PSu',
+      'questionGifUrl': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716936/0_e1tfib.png',
       'options': ['1', '0', '2', '3'],
       'correctIndex': 1,
     },
@@ -201,6 +201,7 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 }
+
 class ResultScreen extends StatefulWidget {
   final int score;
   final int totalQuestions;
@@ -246,7 +247,14 @@ class _ResultScreenState extends State<ResultScreen> {
         ),
         child: Stack(
           children: [
-            _showRibbons ? Positioned.fill(child: Image.asset('images/greenleaf.gif', fit: BoxFit.cover)) : const SizedBox(),
+            _showRibbons
+                ? Positioned.fill(
+              child: Image.network(
+                'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717465/greenleaf_vryta1.gif',
+                fit: BoxFit.cover,
+              ),
+            )
+                : const SizedBox(),
             SingleChildScrollView( // Wrap the Column with SingleChildScrollView
               child: Center(
                 child: Column(
@@ -255,7 +263,9 @@ class _ResultScreenState extends State<ResultScreen> {
                     // Display the wooden background image
                     Stack(
                       children: [
-                        Image.asset('images/wooden2.png'),
+                        Image.network(
+                          'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717492/wooden2_y0rlzl.png',
+                        ),
                         // Overlay the score text on the wooden background image
                         Positioned(
                           bottom: 50, // Adjust the position of the text as needed
@@ -291,7 +301,9 @@ class _ResultScreenState extends State<ResultScreen> {
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Image.asset('images/learn.png'), // Set the image for the "Learn" button
+                              child: Image.network(
+                                'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717531/learn_cjf6uk.png', // Cloudinary image
+                              ),
                             ),
                           ),
                         ),
@@ -313,7 +325,9 @@ class _ResultScreenState extends State<ResultScreen> {
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Image.asset('images/move.png'), // Set the image for the "Move Forward" button
+                              child: Image.network(
+                                'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717556/move_dtx6i4.png', // Cloudinary image
+                              ),
                             ),
                           ),
                         ),

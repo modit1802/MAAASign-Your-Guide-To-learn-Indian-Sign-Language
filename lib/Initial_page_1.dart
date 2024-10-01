@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login_signup/LearnPage.dart';
 import 'package:flutter_login_signup/home_page.dart';
 
 class InitialPage1 extends StatefulWidget {
@@ -14,7 +15,7 @@ class _InitialPage1State extends State<InitialPage1> {
 
   // Pages for each tab
   final List<Widget> _pages = [
-    HomePage(), // Replace with your actual HomePage
+    LearnPage(), // Replace with your actual HomePage
     HomePage(), // Replace with your ScorePage
     HomePage(), // Replace with your TestPage
     HomePage(), // Replace with your AboutPage

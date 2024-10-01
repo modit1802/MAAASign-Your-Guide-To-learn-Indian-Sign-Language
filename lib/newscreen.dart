@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_signup/Initial_page_1.dart';
-import 'Quizscreen';  // Make sure to import your QuizScreen here
+// import 'AlphabetScreen.dart';  // Import the alphabet screen
+import 'numberstartscreen.dart';  // Import the number screen
+import 'Quizscreen.dart';  // Import the quiz screen
 
 class NewScreen extends StatefulWidget {
   const NewScreen({super.key});
@@ -53,203 +55,203 @@ class _NewScreenState extends State<NewScreen> {
       body: Stack(
         children: [
           _buildBackground(),
-          SingleChildScrollView( // Wrap content in SingleChildScrollView
+          SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => QuizScreen()), // Define your quiz screen widget here
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center, // Center align the Row
-                  children: [
-                    // Column for alphabet and number circle widgets
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center, // Center align the Column
-                      children: [
-                        // Alphabet Circle widget
-                        const SizedBox(height: 100), 
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 500), // Animation duration
-                          curve: Curves.easeInOut, // Animation curve
-                          height: calculateCardSize(), // Adjust height based on visibility of teacher image
-                          width: calculateCardSize(), // Adjust width based on visibility of teacher image
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Column for alphabet and number circle widgets
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 100),
+                      // Alphabet Circle widget
+                      GestureDetector(
+                        onTap: () {
+                          // Navigate to the AlphabetScreen when the alphabet image is tapped
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Quiz_Screen()), // Correct way to navigate to Quiz_Screen
+                          );
+
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                          height: calculateCardSize(),
+                          width: calculateCardSize(),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15), // Rounded corners
+                            borderRadius: BorderRadius.circular(15),
                             child: Image.asset(
-                              'images/alphabet.png', // Adjust the path to your image
-                              fit: BoxFit.fill, // Ensure the image covers the entire card, possibly distorting its aspect ratio
+                              'images/alphabet.png',
+                              fit: BoxFit.fill,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10), // Spacer between alphabet and number circle widgets
-                        // Number Circle widget
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 500), // Animation duration
-                          curve: Curves.easeInOut, // Animation curve
-                          height: calculateCardSize(), // Adjust height based on visibility of teacher image
-                          width: calculateCardSize(), // Adjust width based on visibility of teacher image
+                      ),
+                      const SizedBox(height: 10),
+                      // Number Circle widget
+                      GestureDetector(
+                        onTap: () {
+                          // Navigate to the NumberScreen when the number image is tapped
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NumberStartScreen()), // Change to your number screen
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                          height: calculateCardSize(),
+                          width: calculateCardSize(),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15), // Rounded corners
+                            borderRadius: BorderRadius.circular(15),
                             child: Image.asset(
-                              'images/number.jpeg', // Adjust the path to your image
-                              fit: BoxFit.fill, // Ensure the image covers the entire card, possibly distorting its aspect ratio
+                              'images/number.jpeg',
+                              fit: BoxFit.fill,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(width: 10), // Spacer between the columns
-                    // Column for teacher2.gif image
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Conditional rendering of Teacher2.gif image
-                        if (showTeacherImage)
-                          Image.asset(
-                            'images/teacher2.gif', // Adjust the path to your image
-                            height: 600, // Adjust height as needed
-                            width: 170, // Adjust width as needed
-                          ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 10),
+                  // Column for teacher2.gif image
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (showTeacherImage)
+                        Image.asset(
+                          'images/teacher2.gif',
+                          height: 600,
+                          width: 170,
+                        ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
           // Custom buttons at the top center (Home, Score, Test, About)
           Positioned(
-            bottom: 20, // Adjust for padding from the top
-            left: 0, // Set left to 0 to utilize full width
-            right: 0, // Set right to 0 to utilize full width
-            child: Center( // Wrap in Center widget
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Center(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center, // Center align the Row
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Home Button
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()), // Navigate to InitialPage1 when tapped
+                        MaterialPageRoute(builder: (context) => const InitialPage1()),
                       );
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(10), // Add padding inside the container
+                      padding: const EdgeInsets.all(10),
                       decoration: const BoxDecoration(
-                        color: Colors.white, // Background color for the circular button
-                        shape: BoxShape.circle, // Make it circular
+                        color: Colors.white,
+                        shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black26, // Add shadow for better visibility
+                            color: Colors.black26,
                             spreadRadius: 2,
                             blurRadius: 4,
-
                           ),
                         ],
                       ),
                       child: const Icon(
-                        Icons.home, // Home icon
+                        Icons.home,
                         size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160), // Icon color
+                        color: Color.fromARGB(255, 0, 109, 160),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 20), // Spacer between home button and score button
-
-                  // Score Button
+                  const SizedBox(width: 20),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()), // Navigate to HomePage when tapped
+                        MaterialPageRoute(builder: (context) => const InitialPage1()),
                       );
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(10), // Add padding inside the container
+                      padding: const EdgeInsets.all(10),
                       decoration: const BoxDecoration(
-                        color: Colors.white, // Background color for the circular button
-                        shape: BoxShape.circle, // Make it circular
+                        color: Colors.white,
+                        shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black26, // Add shadow for better visibility
+                            color: Colors.black26,
                             spreadRadius: 2,
                             blurRadius: 4,
                           ),
                         ],
                       ),
                       child: const Icon(
-                        Icons.score, // Score icon
+                        Icons.score,
                         size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160), // Icon color
+                        color: Color.fromARGB(255, 0, 109, 160),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 20), // Spacer between score button and test button
-
-                  // Test Button
+                  const SizedBox(width: 20),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()), // Navigate to HomePage when tapped
+                        MaterialPageRoute(builder: (context) => const InitialPage1()),
                       );
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(10), // Add padding inside the container
+                      padding: const EdgeInsets.all(10),
                       decoration: const BoxDecoration(
-                        color: Colors.white, // Background color for the circular button
-                        shape: BoxShape.circle, // Make it circular
+                        color: Colors.white,
+                        shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black26, // Add shadow for better visibility
+                            color: Colors.black26,
                             spreadRadius: 2,
                             blurRadius: 4,
-
                           ),
                         ],
                       ),
                       child: const Icon(
-                        Icons.assignment, // Test icon
+                        Icons.assignment,
                         size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160), // Icon color
+                        color: Color.fromARGB(255, 0, 109, 160),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 20), // Spacer between test button and about button
-
-                  // About Button
+                  const SizedBox(width: 20),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()), // Navigate to HomePage when tapped
+                        MaterialPageRoute(builder: (context) => const InitialPage1()),
                       );
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(10), // Add padding inside the container
+                      padding: const EdgeInsets.all(10),
                       decoration: const BoxDecoration(
-                        color: Colors.white, // Background color for the circular button
-                        shape: BoxShape.circle, // Make it circular
+                        color: Colors.white,
+                        shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black26, // Add shadow for better visibility
+                            color: Colors.black26,
                             spreadRadius: 2,
                             blurRadius: 4,
                           ),
                         ],
                       ),
                       child: const Icon(
-                        Icons.info, // About icon
+                        Icons.info,
                         size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160), // Icon color
+                        color: Color.fromARGB(255, 0, 109, 160),
                       ),
                     ),
-
                   ),
                 ],
               ),
