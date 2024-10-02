@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_signup/Initial_page_1.dart';
-// import 'AlphabetScreen.dart';  // Import the alphabet screen
+import 'package:flutter_login_signup/alphabetstart.dart';
 import 'numberstartscreen.dart';  // Import the number screen
 import 'Quizscreen.dart';  // Import the quiz screen
 
@@ -72,7 +72,7 @@ class _NewScreenState extends State<NewScreen> {
                           // Navigate to the AlphabetScreen when the alphabet image is tapped
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Quiz_Screen()), // Correct way to navigate to Quiz_Screen
+                            MaterialPageRoute(builder: (context) => AlphabetStartscreen()), // Correct way to navigate to Quiz_Screen
                           );
 
                         },
