@@ -12,8 +12,7 @@ class InitialPage1 extends StatefulWidget {
 class _InitialPage1State extends State<InitialPage1> {
   int _currentIndex = 0; // Track the selected index of the BottomNavigationBar
   PageController _pageController = PageController(); // Controller for PageView
-
-  // Pages for each tab
+  
   final List<Widget> _pages = [
     LearnPage(), // Replace with your actual HomePage
     HomePage(), // Replace with your ScorePage

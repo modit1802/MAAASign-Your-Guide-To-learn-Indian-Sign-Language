@@ -1,7 +1,9 @@
 import 'dart:async'; // Import the async package for Timer
 import 'package:flutter/material.dart';
 import 'package:flutter_login_signup/learnalphabet.dart';
+import 'package:flutter_login_signup/moveforward.dart';
 import 'package:flutter_login_signup/practiceassignment1.dart';
+import 'package:flutter_login_signup/thirdstep.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import shared_preferences
 
 class AlphabetStartscreen extends StatefulWidget {
@@ -120,7 +122,7 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                   const SizedBox(height: 16),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const LearnAlphabet()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const MoveForward(score: 0)));
                     },
                     child: const SizedBox(
                       width: 300,
@@ -143,7 +145,7 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                   const SizedBox(height: 16),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const LearnAlphabet()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Thirdstep(score: 0,)));
                     },
                     child: const SizedBox(
                       width: 300,
@@ -155,7 +157,7 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              "Challenger to pass Week 1",
+                              "Challenger to pass Alphabets",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 20, color: Colors.white),
                             ),

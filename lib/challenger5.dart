@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'alphabetfinal.dart';
+import 'package:flutter_login_signup/challenger6.dart';
 
 class Challenger5 extends StatelessWidget {
   final int score;
@@ -41,12 +41,12 @@ class ThirdGame extends StatefulWidget {
 
 class _ThirdGameState extends State<ThirdGame> {
   List<String?> solution = ["wooden", "wooden", "wooden"];
-  List<String> availableLetters = ["C", "A", "R", "O"];
+  List<String> availableLetters = ["A", "C", "R", "O"];
 
   // Mapping letters to their Cloudinary URLs
   final Map<String, String> cloudinaryUrls = {
-    "C": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png",
     "A": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/A_zlgdfc.png",
+    "C": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png",
     "R": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
     "O": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
     "wooden": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png",
@@ -137,7 +137,7 @@ class _ThirdGameState extends State<ThirdGame> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Image.network(
-                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727364017/car_aruq15.png",
+                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/car_ooxplt.png",
                         width: 180,
                         height: 180,
                       ),
@@ -152,14 +152,16 @@ class _ThirdGameState extends State<ThirdGame> {
                   return DragTarget<String>(
                     builder: (context, accepted, rejected) {
                       return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (solution[index] != null) {
-                              availableLetters.add(solution[index]!);
-                              solution[index] = "wooden";
-                            }
-                          });
-                        },
+onTap: () {
+  setState(() {
+    // If the solution slot has a letter, remove it from the solution
+    if (solution[index] != "wooden" && solution[index] != null) {
+      availableLetters.add(solution[index]!);
+      solution[index] = "wooden";  // Just clear the solution without adding "wooden"
+    }
+  });
+},
+
                         child: Container(
                           width: 100,
                           height: 100,
@@ -228,7 +230,7 @@ class _ThirdGameState extends State<ThirdGame> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AlphabetFinal(score: score),
+                        builder: (context) => Challenger6(score: score),
                       ),
                     );
                   },

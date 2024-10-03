@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'challenger2.dart';
 import 'package:collection/collection.dart';
+
 class Thirdstep extends StatelessWidget {
   final int score;
 
@@ -49,17 +50,17 @@ class _ThirdGameState extends State<ThirdGame> {
 
   // Cloudinary URLs for the alphabets and solutions
   final Map<String, String> cloudinaryUrls = {
-    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
     'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png',
-    'W': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/W_bkgjob.png',
+    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
     'R': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png',
-    'cow': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/cow_ohjl68.png',
+    'W': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/W_bkgjob.png',
+    'cow': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/cow_acsn7t.png',
     'correct': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
     'wrong': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
     'wooden': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
   };
 
-  List<String> availableLetters = ["C", "O", "W", "R"];
+  List<String> availableLetters = ["O", "C", "R", "W"];
   bool? isCorrectSolution;
   int attempts = 0;
   int maxAttempts = 3;
@@ -134,11 +135,31 @@ class _ThirdGameState extends State<ThirdGame> {
                 width: 300,
                 height: 200,
               ),
-              Image.network(
-                cloudinaryUrls['cow']!, // Cow image from Cloudinary
-                width: 300,
-                height: 200,
+              
+              // First Image with Card
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Material(
+                    elevation: 4,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      width: 200,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Image.network(
+                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/cow_acsn7t.png",
+                        width: 180,
+                        height: 180,
+                      ),
+                    ),
+                  ),
+                ],
               ),
+              
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -148,9 +169,9 @@ class _ThirdGameState extends State<ThirdGame> {
                       return GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (solution[index] != null) {
+                            if (solution[index] != "wooden" && solution[index] != null) {
                               availableLetters.add(solution[index]!);
-                              solution[index] = "wooden";
+                              solution[index] = "wooden";  // Fixed this part
                             }
                           });
                         },
@@ -166,11 +187,11 @@ class _ThirdGameState extends State<ThirdGame> {
                             borderRadius: BorderRadius.circular(12),
                             child: solution[index] != null
                                 ? Image.network(
-                              cloudinaryUrls[solution[index]!]!,
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                            )
+                                    cloudinaryUrls[solution[index]!]!,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                  )
                                 : const SizedBox(),
                           ),
                         ),
@@ -261,10 +282,4 @@ class _ThirdGameState extends State<ThirdGame> {
       ],
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: Thirdstep(score: 0), // Provide the initial score here
-  ));
 }

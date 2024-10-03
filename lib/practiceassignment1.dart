@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/Initial_page_1.dart';
+import 'package:flutter_login_signup/thirdstep.dart';
 
 class PracticeAssignment1 extends StatefulWidget {
   @override
@@ -260,7 +260,11 @@ class ResultScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context); // Go back to the quiz
+                Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Thirdstep(score: 0))); // Go back to the quiz
               },
               child: const Text('Back to Quiz'),
             ),
