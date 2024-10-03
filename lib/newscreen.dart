@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_signup/Initial_page_1.dart';
 import 'package:flutter_login_signup/alphabetstart.dart';
-import 'numberstartscreen.dart';  // Import the number screen
-import 'Quizscreen.dart';  // Import the quiz screen
+import 'package:flutter_login_signup/numberstartscreen.dart'; // Import the number screen// Import the quiz screen
+import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
 
 class NewScreen extends StatefulWidget {
   const NewScreen({super.key});
@@ -14,21 +15,46 @@ class NewScreen extends StatefulWidget {
 
 class _NewScreenState extends State<NewScreen> {
   bool showTeacherImage = true;
-
-  double calculateCardSize() {
-    // Calculate card size based on the visibility of the teacher image
-    return showTeacherImage ? 150.0 : 250.0;
-  }
+  bool _showGif = true;
 
   @override
   void initState() {
     super.initState();
+    _checkFirstLaunch(); // Check if this is the first launch
 
+    // Timer to hide the teacher image
     Future.delayed(const Duration(seconds: 10), () {
       setState(() {
         showTeacherImage = false;
       });
     });
+
+    // Timer to hide the GIF after 10 seconds
+    Timer(const Duration(seconds: 10), () {
+      setState(() {
+        _showGif = false; // Hide the GIF after 10 seconds
+      });
+    });
+  }
+
+  // Check if the GIF should be shown
+  Future<void> _checkFirstLaunch() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isFirstLaunch = prefs.getBool('isFirstLaunch');
+
+    if (isFirstLaunch == null || isFirstLaunch) {
+      // This is the first launch or the value is null
+      setState(() {
+        _showGif = true;
+      });
+      // Set the preference to false so that GIF is not shown next time
+      await prefs.setBool('isFirstLaunch', false);
+    } else {
+      // Not the first launch, hide the GIF
+      setState(() {
+        _showGif = false;
+      });
+    }
   }
 
   Widget _buildBackground() {
@@ -72,15 +98,14 @@ class _NewScreenState extends State<NewScreen> {
                           // Navigate to the AlphabetScreen when the alphabet image is tapped
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => AlphabetStartscreen()), // Correct way to navigate to Quiz_Screen
+                            MaterialPageRoute(builder: (context) => AlphabetStartscreen()), // Correct way to navigate to AlphabetStartscreen
                           );
-
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
-                          height: calculateCardSize(),
-                          width: calculateCardSize(),
+                          height: 250.0,
+                          width: 250.0,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Image.asset(
@@ -103,8 +128,8 @@ class _NewScreenState extends State<NewScreen> {
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
-                          height: calculateCardSize(),
-                          width: calculateCardSize(),
+                          height: 250,
+                          width: 250,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Image.asset(
@@ -118,17 +143,6 @@ class _NewScreenState extends State<NewScreen> {
                   ),
                   const SizedBox(width: 10),
                   // Column for teacher2.gif image
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (showTeacherImage)
-                        Image.asset(
-                          'images/teacher2.gif',
-                          height: 600,
-                          width: 170,
-                        ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -257,6 +271,41 @@ class _NewScreenState extends State<NewScreen> {
               ),
             ),
           ),
+          if (_showGif)
+            Container(
+              color: Colors.black.withOpacity(0.5),
+              // Black overlay with opacity
+            ),
+          if (_showGif)
+            Positioned(
+              bottom: 20, // Position it at the bottom of the screen
+              left: 0,
+              right: 0,
+              child: Center(
+                child: Image.asset(
+                  'images/teacher2.gif', // Update the image path here
+                  height: 300, // Set the height of the GIF
+                  fit: BoxFit.contain, // Adjust how the GIF is displayed
+                ),
+              ),
+            ),
+          if (_showGif)
+            Positioned(
+              bottom: 320, // Position close button at the top of the screen
+              right: 20, // Align to the right side
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _showGif = false; // Hide the GIF when the close button is pressed
+                  });
+                },
+                child: const Icon(
+                  Icons.close,
+                  size: 30,
+                  color: Colors.white, // White cross icon for the close button
+                ),
+              ),
+            ),
         ],
       ),
     );

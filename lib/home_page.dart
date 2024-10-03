@@ -287,7 +287,7 @@ class GridDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Items> myList = [item1, item2, item3, item4, item5, item6];
     var defaultColor = const Color(0xFFE6E6E6); // Light gray color for glassy effect
-    var selectedColor = Colors.green; // Green color when condition is met
+    var selectedColor = Color.fromARGB(255, 255, 183, 0); // Green color when condition is met
     var textColor = Colors.white; // White text color when condition is met
 
     return GridView.count(
