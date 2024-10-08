@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'challenger4.dart';
+import 'alphabetfinal.dart';
 
-class Challenger3 extends StatelessWidget {
+class Challenger6 extends StatelessWidget {
   final int score;
-  Challenger3({required this.score});
+  Challenger6({required this.score});
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +40,15 @@ class ThirdGame extends StatefulWidget {
 }
 
 class _ThirdGameState extends State<ThirdGame> {
-  // Solution and letters available
   List<String?> solution = ["wooden", "wooden", "wooden"];
-  List<String> availableLetters = ["D", "G", "O", "H"];
+  List<String> availableLetters = ["R", "E", "N", "P"];
 
-  // Cloudinary URLs
+  // Mapping letters to their Cloudinary URLs
   final Map<String, String> cloudinaryUrls = {
-    "D": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png",
-    "G": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/G_rcvxfs.png",
-    "O": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
-    "H": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/H_hv5qdm.png",
+    "R": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
+    "E": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png",
+    "N": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727852328/N_rvbtxz.png",
+    "P": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727852327/P_xczbe3.png",
     "wooden": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png",
   };
 
@@ -65,9 +64,8 @@ class _ThirdGameState extends State<ThirdGame> {
     score = widget.score;
   }
 
-  // Solution checking logic
   void checkSolution() {
-    if (ListEquality().equals(solution, ["D", "O", "G"])) {
+    if (ListEquality().equals(solution, ["P", "E", "N"])) {
       setState(() {
         isCorrectSolution = true;
         showMoveToNextButton = true;
@@ -83,7 +81,7 @@ class _ThirdGameState extends State<ThirdGame> {
       setState(() {
         attempts++;
         if (attempts >= maxAttempts) {
-          solution = ["D", "O", "G"];
+          solution = ["P", "E", "N"];
           isCorrectSolution = false;
           showMoveToNextButton = false;
         } else {
@@ -121,7 +119,7 @@ class _ThirdGameState extends State<ThirdGame> {
                   ),
                 ),
               Image.network(
-                "https://res.cloudinary.com/dfph32nsq/image/upload/v1727363980/Challenger_3_senbky.png",
+                "https://res.cloudinary.com/dfph32nsq/image/upload/v1727363980/Challenger_5_bpyctt.png",
                 width: 300,
                 height: 200,
               ),
@@ -139,7 +137,7 @@ class _ThirdGameState extends State<ThirdGame> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Image.network(
-                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/dog_rlu4zj.png",
+                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727969908/pen_ibwjeo.png",
                         width: 180,
                         height: 180,
                       ),
@@ -148,13 +146,13 @@ class _ThirdGameState extends State<ThirdGame> {
                 ],
               ),
               SizedBox(height: 20),
-              // Solution boxes with Cloudinary images
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(3, (index) {
                   return DragTarget<String>(
                     builder: (context, accepted, rejected) {
-                      return GestureDetector(onTap: () {
+                      return GestureDetector(
+onTap: () {
   setState(() {
     // If the solution slot has a letter, remove it from the solution
     if (solution[index] != "wooden" && solution[index] != null) {
@@ -176,11 +174,11 @@ class _ThirdGameState extends State<ThirdGame> {
                             borderRadius: BorderRadius.circular(12),
                             child: solution[index] != null
                                 ? Image.network(
-                                    cloudinaryUrls[solution[index]!]!,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                  )
+                              cloudinaryUrls[solution[index]!]!,
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.cover,
+                            )
                                 : SizedBox(),
                           ),
                         ),
@@ -199,7 +197,6 @@ class _ThirdGameState extends State<ThirdGame> {
                 }),
               ),
               SizedBox(height: 20),
-              // Draggable letters (Cloudinary images)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: availableLetters.map((letter) {
@@ -222,7 +219,6 @@ class _ThirdGameState extends State<ThirdGame> {
                 }).toList(),
               ),
               SizedBox(height: 20),
-              // Check button or move to next challenge
               if (!showMoveToNextButton)
                 ElevatedButton(
                   onPressed: checkSolution,
@@ -234,7 +230,7 @@ class _ThirdGameState extends State<ThirdGame> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Challenger4(score: score),
+                        builder: (context) => AlphabetFinal(score: score),
                       ),
                     );
                   },
@@ -243,7 +239,6 @@ class _ThirdGameState extends State<ThirdGame> {
             ],
           ),
         ),
-        // Remaining attempts and score
         Positioned(
           top: 16,
           right: 16,
@@ -281,6 +276,6 @@ class _ThirdGameState extends State<ThirdGame> {
 
 void main() {
   runApp(MaterialApp(
-    home: Challenger3(score: 0),
+    home: Challenger6(score: 0),
   ));
 }

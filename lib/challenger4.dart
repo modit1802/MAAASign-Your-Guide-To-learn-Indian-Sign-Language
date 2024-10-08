@@ -140,7 +140,7 @@ class _ThirdGameState extends State<ThirdGame> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Image.network(
-                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727364017/box_vfvohv.png",
+                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/box_madnit.png",
                         width: 180,
                         height: 180,
                       ),
@@ -157,13 +157,15 @@ class _ThirdGameState extends State<ThirdGame> {
                     builder: (context, accepted, rejected) {
                       return GestureDetector(
                         onTap: () {
-                          setState(() {
-                            if (solution[index] != null) {
-                              availableLetters.add(solution[index]!);
-                              solution[index] = "wooden";
-                            }
-                          });
-                        },
+  setState(() {
+    // If the solution slot has a letter, remove it from the solution
+    if (solution[index] != "wooden" && solution[index] != null) {
+      availableLetters.add(solution[index]!);
+      solution[index] = "wooden";  // Just clear the solution without adding "wooden"
+    }
+  });
+},
+
                         child: Container(
                           width: 100,
                           height: 100,

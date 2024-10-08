@@ -314,7 +314,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
-                          color: Color.fromARGB(255, 0, 255, 4)
+                          color: Color.fromARGB(201, 250, 180, 1)
                               .withOpacity(0.7),
                           backgroundBlendMode: BlendMode.modulate,
                         ),
@@ -397,7 +397,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
-                          color: const Color.fromARGB(255, 0, 255, 8)
+                          color: Color.fromARGB(201, 250, 180, 1)
                               .withOpacity(0.7),
                           backgroundBlendMode: BlendMode.modulate,
                         ),
@@ -437,6 +437,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
               ),
             ),
           ),
+          
         ],
       ),
     );
