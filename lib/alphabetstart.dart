@@ -1,4 +1,4 @@
- // Import the async package for Timer
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login_signup/learnalphabet.dart';
 import 'package:flutter_login_signup/moveforward.dart';
