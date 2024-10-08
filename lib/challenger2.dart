@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'challenger3.dart';
 
+
 class Challenger2 extends StatelessWidget {
   final int score;
   Challenger2({required this.score});
