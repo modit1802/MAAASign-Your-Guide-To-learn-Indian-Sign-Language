@@ -13,7 +13,7 @@ class Challenger2 extends StatelessWidget {
       body: Container(
         height:double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -66,7 +66,7 @@ class _ThirdGameState extends State<ThirdGame> {
 
   // Checking solution logic
   void checkSolution() {
-    if (ListEquality().equals(solution, ["B", "A", "T"])) {
+    if (const ListEquality().equals(solution, ["B", "A", "T"])) {
       // Correct solution
       setState(() {
         isCorrectSolution = true;
@@ -106,7 +106,7 @@ class _ThirdGameState extends State<ThirdGame> {
             children: [
               if (isCorrectSolution != null && isCorrectSolution!)
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Image.network(
                     "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
                     width: 100,
@@ -115,7 +115,7 @@ class _ThirdGameState extends State<ThirdGame> {
                 ),
               if (isCorrectSolution != null && !isCorrectSolution!)
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Image.network(
                     "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
                     width: 100,
@@ -150,7 +150,7 @@ class _ThirdGameState extends State<ThirdGame> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Solution boxes (use Cloudinary images based on selection)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -184,7 +184,7 @@ class _ThirdGameState extends State<ThirdGame> {
                               height: double.infinity,
                               fit: BoxFit.cover,
                             )
-                                : SizedBox(),
+                                : const SizedBox(),
                           ),
                         ),
                       );
@@ -204,7 +204,7 @@ class _ThirdGameState extends State<ThirdGame> {
                   );
                 }),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Draggable letters (Cloudinary images)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -227,12 +227,12 @@ class _ThirdGameState extends State<ThirdGame> {
                   );
                 }).toList(),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Check button or move to next challenge
               if (!showMoveToNextButton)
                 ElevatedButton(
                   onPressed: checkSolution,
-                  child: Text("Check Now"),
+                  child: const Text("Check Now"),
                 ),
               if (showMoveToNextButton)
                 ElevatedButton(
@@ -243,7 +243,7 @@ class _ThirdGameState extends State<ThirdGame> {
                           builder: (context) => Challenger3(score: score)),
                     );
                   },
-                  child: Text("Move to Next Challenge"),
+                  child: const Text("Move to Next Challenge"),
                 ),
             ],
           ),
@@ -253,14 +253,14 @@ class _ThirdGameState extends State<ThirdGame> {
           top: 50,
           right: 16,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               "${maxAttempts - attempts} Chance",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
@@ -268,14 +268,14 @@ class _ThirdGameState extends State<ThirdGame> {
           top: 50,
           left: 16,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               "Score: $score",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
