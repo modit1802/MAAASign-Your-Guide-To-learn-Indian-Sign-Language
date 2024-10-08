@@ -1,10 +1,9 @@
-import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_signup/Initial_page_1.dart';
 import 'package:flutter_login_signup/alphabetstart.dart';
-import 'package:flutter_login_signup/numberstartscreen.dart'; // Import the number screen// Import the quiz screen
-import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
+import 'package:flutter_login_signup/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
 
 class NewScreen extends StatefulWidget {
   const NewScreen({super.key});
@@ -20,55 +19,24 @@ class _NewScreenState extends State<NewScreen> {
   @override
   void initState() {
     super.initState();
-    _checkFirstLaunch(); // Check if this is the first launch
 
-    // Timer to hide the teacher image
-    Future.delayed(const Duration(seconds: 10), () {
-      setState(() {
-        showTeacherImage = false;
-      });
-    });
-
-    // Timer to hide the GIF after 10 seconds
-    Timer(const Duration(seconds: 10), () {
-      setState(() {
-        _showGif = false; // Hide the GIF after 10 seconds
-      });
-    });
   }
-
-  // Check if the GIF should be shown
-  Future<void> _checkFirstLaunch() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isFirstLaunch = prefs.getBool('isFirstLaunch');
-
-    if (isFirstLaunch == null || isFirstLaunch) {
-      // This is the first launch or the value is null
-      setState(() {
-        _showGif = true;
-      });
-      // Set the preference to false so that GIF is not shown next time
-      await prefs.setBool('isFirstLaunch', false);
-    } else {
-      // Not the first launch, hide the GIF
-      setState(() {
-        _showGif = false;
-      });
-    }
-  }
+ 
 
   Widget _buildBackground() {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          colors: [
-            Color.fromARGB(255, 219, 69, 249),
-            Color.fromARGB(255, 135, 205, 238),
-          ],
-        ),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+              Color.fromARGB(255, 255, 86, 247),
+              Color.fromARGB(255, 105, 207, 255),
+              Colors.white
+                ],
+                stops: [0.0, 0.5, 1.0]
       ),
-    );
+    ));
   }
 
   @override
@@ -273,25 +241,24 @@ class _NewScreenState extends State<NewScreen> {
           ),
           if (_showGif)
             Container(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.black.withOpacity(0.92),
               // Black overlay with opacity
             ),
           if (_showGif)
-            Positioned(
-              bottom: 20, // Position it at the bottom of the screen
-              left: 0,
-              right: 0,
-              child: Center(
-                child: Image.asset(
-                  'images/teacher2.gif', // Update the image path here
-                  height: 300, // Set the height of the GIF
-                  fit: BoxFit.contain, // Adjust how the GIF is displayed
+            Center(
+              child: Positioned(
+                child: Center(
+                  child: Image.asset(
+                    'images/teacher2.gif', // Update the image path here
+                    height: 350, // Set the height of the GIF
+                    fit: BoxFit.contain, // Adjust how the GIF is displayed
+                  ),
                 ),
               ),
             ),
           if (_showGif)
             Positioned(
-              bottom: 320, // Position close button at the top of the screen
+              top: 60, // Position close button at the top of the screen
               right: 20, // Align to the right side
               child: GestureDetector(
                 onTap: () {
@@ -301,7 +268,7 @@ class _NewScreenState extends State<NewScreen> {
                 },
                 child: const Icon(
                   Icons.close,
-                  size: 30,
+                  size: 50,
                   color: Colors.white, // White cross icon for the close button
                 ),
               ),

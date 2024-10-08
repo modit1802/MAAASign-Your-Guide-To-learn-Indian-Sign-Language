@@ -121,7 +121,7 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Quiz Practice"),
-        backgroundColor: const Color.fromARGB(255, 207, 238, 252),
+        backgroundColor:Color.fromARGB(255, 255, 150, 250),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.blue,
@@ -133,14 +133,16 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
       body: Stack(
         children: [
           Container(
+            height: double.infinity,
+            width: double.infinity,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color.fromARGB(255, 207, 238, 252),
-                  Color.fromARGB(255, 242, 222, 246),
-                  Colors.white,
+              Color.fromARGB(255, 255, 150, 250),
+              Color.fromARGB(255, 159, 223, 252),
+              Colors.white
                 ],
               ),
             ),

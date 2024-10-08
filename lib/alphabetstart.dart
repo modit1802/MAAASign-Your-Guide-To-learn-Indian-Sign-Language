@@ -1,10 +1,9 @@
-import 'dart:async'; // Import the async package for Timer
+ // Import the async package for Timer
 import 'package:flutter/material.dart';
 import 'package:flutter_login_signup/learnalphabet.dart';
 import 'package:flutter_login_signup/moveforward.dart';
 import 'package:flutter_login_signup/practiceassignment1.dart';
 import 'package:flutter_login_signup/thirdstep.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // Import shared_preferences
 
 class AlphabetStartscreen extends StatefulWidget {
   const AlphabetStartscreen({super.key});
@@ -19,32 +18,10 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
   @override
   void initState() {
     super.initState();
-    _checkGifVisibility(); // Check if the GIF should be shown
-    // Start a timer for 10 seconds to hide the GIF automatically
-    Timer(const Duration(seconds: 10), () {
-      setState(() {
-        _showGif = false; // Hide the GIF after 10 seconds
-      });
-    });
   }
 
   // Method to check if the GIF has been shown before
-  Future<void> _checkGifVisibility() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? hasShownGif = prefs.getBool('hasShownGif'); // Retrieve the value
-
-    // If it has not been shown before, show it and update the value
-    if (hasShownGif == null || !hasShownGif) {
-      setState(() {
-        _showGif = true; // Show the GIF
-      });
-      await prefs.setBool('hasShownGif', true); // Mark as shown
-    } else {
-      setState(() {
-        _showGif = false; // Do not show the GIF
-      });
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +36,9 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color.fromARGB(255, 135, 205, 238),
-                  Color.fromARGB(255, 250, 163, 213),
-                  Colors.white
+              Color.fromARGB(255, 255, 150, 250),
+              Color.fromARGB(255, 159, 223, 252),
+              Colors.white
                 ],
                 stops: [0.0, 0.5, 1.0],
               ),
@@ -174,25 +151,25 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
           // Add the GIF at the center bottom with a close button
           if (_showGif)
             Container(
-              color: Colors.black.withOpacity(0.5),
+              color: Color.fromARGB(255, 34, 34, 34).withOpacity(0.92),
               // Black overlay with opacity
             ),
           if (_showGif)
-            Positioned(
-              bottom: 20, // Position it at the bottom of the screen
-              left: 0,
-              right: 0,
-              child: Center(
-                child: Image.asset(
-                  'images/week1screenbeg.gif', // Update the image path here
-                  height: 300, // Set the height of the GIF
-                  fit: BoxFit.contain, // Adjust how the GIF is displayed
+            Center(
+              child: Positioned(
+               
+                child: Center(
+                  child: Image.asset(
+                    'images/week1screenbeg.gif', // Update the image path here
+                    height: 350, // Set the height of the GIF
+                    fit: BoxFit.contain, // Adjust how the GIF is displayed
+                  ),
                 ),
               ),
             ),
           if (_showGif)
             Positioned(
-              bottom: 320, // Position close button at the top of the screen
+              top: 60, // Position close button at the top of the screen
               right: 20, // Align to the right side
               child: GestureDetector(
                 onTap: () {
@@ -202,7 +179,7 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                 },
                 child: const Icon(
                   Icons.close,
-                  size: 30,
+                  size: 50,
                   color: Colors.white, // White cross icon for the close button
                 ),
               ),

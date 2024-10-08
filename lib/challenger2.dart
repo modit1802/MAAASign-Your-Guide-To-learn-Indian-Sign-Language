@@ -9,19 +9,17 @@ class Challenger2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Move Forward'),
-        backgroundColor: Color.fromARGB(255, 207, 238, 252),
-      ),
       body: Container(
+        height:double.infinity,
+        width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color.fromARGB(255, 207, 238, 252),
-              Color.fromARGB(255, 242, 222, 246),
-              Colors.white,
+              Color.fromARGB(255, 255, 150, 250),
+              Color.fromARGB(255, 159, 223, 252),
+              Colors.white
             ],
           ),
         ),
@@ -193,10 +191,13 @@ class _ThirdGameState extends State<ThirdGame> {
                     onWillAccept: (data) => true,
                     onAccept: (data) {
                       setState(() {
-                        if (index >= 0 && index < solution.length) {
-                          solution[index] = data;
-                          availableLetters.remove(data);
+                       if (solution[index] != "wooden" &&
+                            solution[index] != null) {
+                          // If the target already has a letter, move it back to availableLetters
+                          availableLetters.add(solution[index]!);
                         }
+                        solution[index] = data;
+                        availableLetters.remove(data); // Remove the newly placed letter from options
                       });
                     },
                   );
@@ -248,7 +249,7 @@ class _ThirdGameState extends State<ThirdGame> {
         ),
         // Displaying remaining attempts and score
         Positioned(
-          top: 16,
+          top: 50,
           right: 16,
           child: Container(
             padding: EdgeInsets.all(8),
@@ -263,7 +264,7 @@ class _ThirdGameState extends State<ThirdGame> {
           ),
         ),
         Positioned(
-          top: 16,
+          top: 50,
           left: 16,
           child: Container(
             padding: EdgeInsets.all(8),
