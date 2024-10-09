@@ -14,11 +14,14 @@ class _LearnNumbersState extends State<LearnNumbers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Let's learn Numbers"),
+        title: const Text("Numbers",
+        style: TextStyle(
+          color: Colors.white,
+        ),),
         backgroundColor: const Color.fromARGB(255, 219, 69, 249),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: Colors.blue,
+          color: const Color.fromARGB(255, 255, 255, 255),
           onPressed: () {
             Navigator.pop(context);
           },

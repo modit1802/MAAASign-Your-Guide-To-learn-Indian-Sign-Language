@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show ByteData, NetworkAssetBundle, rootBundle;
-import 'dart:typed_data';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
@@ -68,12 +66,15 @@ class _LearnAlphabetState extends State<LearnAlphabet> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Let's Learn Alphabet"),
+        title: const Text("Alphabets",
+        style: TextStyle(
+          color: Colors.white,
+        ),),
         backgroundColor: const Color.fromARGB(255, 219, 69, 249),
         elevation: 0.0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: Colors.blue,
+          color: const Color.fromARGB(255, 255, 255, 255),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -236,57 +237,76 @@ class _AlphabetLearnState extends State<AlphabetLearn> with SingleTickerProvider
                   opacity: _animation.value,
                   child: Transform.translate(
                     offset: Offset(0.0, 50 * (1 - _animation.value)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: alphabetImages.map((imageName) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                          child: Column(
-                            children: [
-                              // Display GIF
-                              Card(
-                                elevation: 6.0,
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  child: SizedBox(
-                                    width: 300,
-                                    height: 300,
-                                    child: Image.network(
-                                      alphabetGifs[imageName]!,
-                                      fit: BoxFit.cover,
+                    child: SingleChildScrollView(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: alphabetImages.map((imageName) {
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                            child: Column(
+                              children: [
+                                // Display GIF
+                                Card(
+                                  elevation: 6.0,
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    child: SizedBox(
+                                      width: 300,
+                                      height: 300,
+                                      child: Image.network(
+                                                alphabetGifs[imageName]!,
+                                                loadingBuilder: (context, child, loadingProgress) {
+                                               if (loadingProgress == null) {
+                                                      return child;
+                                                } else {
+                                                      return const Center(
+                                                          child: CircularProgressIndicator(),
+                                      );
+                        }
+                      },
+                                        ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 8.0),
-                              // Display PNG of the same size
-                              Card(
-                                elevation: 6.0,
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  child: SizedBox(
-                                    width: 300,
-                                    height: 300,
-                                    child: Image.network(
-                                      alphabetPngs[imageName]!,
-                                      fit: BoxFit.cover,
+                                const SizedBox(height: 8.0),
+                                // Display PNG of the same size
+                                Card(
+                                  elevation: 6.0,
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    child: SizedBox(
+                                      width: 300,
+                                      height: 300,
+                                      child: Image.network(
+                                        alphabetPngs[imageName]!,
+                                        
+                                        loadingBuilder: (context, child, loadingProgress) {
+                                               if (loadingProgress == null) {
+                                                      return child;
+                                                } else {
+                                                      return const Center(
+                                                          child: CircularProgressIndicator(),
+                                      );
+                        }
+                      },
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 16.0),
-                            ],
-                          ),
-                        );
-                      }).toList(),
+                                const SizedBox(height: 16.0),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
                 );
