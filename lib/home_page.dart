@@ -3,6 +3,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_signup/Week 2/week2_entry.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login_signup/newscreen.dart';
@@ -305,6 +306,9 @@ class GridDashboard extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => NewScreen()));
 
             }
+            else if (data.title == "Week 2") {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Week2NewScreen()));
+            }
           },
           child: Container(
             height: 50,
@@ -365,6 +369,3 @@ class Items {
 
   Items({required this.title, required this.subtitle, required this.event, required this.img});
 }
-
-
-
