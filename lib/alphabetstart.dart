@@ -1,4 +1,4 @@
- // Import the async package for Timer
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login_signup/learnalphabet.dart';
 import 'package:flutter_login_signup/moveforward.dart';
@@ -151,7 +151,7 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
           // Add the GIF at the center bottom with a close button
           if (_showGif)
             Container(
-              color: Color.fromARGB(255, 34, 34, 34).withOpacity(0.92),
+              color: const Color.fromARGB(255, 34, 34, 34).withOpacity(0.92),
               // Black overlay with opacity
             ),
           if (_showGif)
