@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter_login_signup/Week 2/learngreeting.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -409,6 +410,89 @@ class _LearnDashboardState extends State<LearnDashboard> {
                         children: [
                           Text(
                             'Learn Numbers',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Spacer(),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 8, bottom: 8),
+                              child: Text(
+                                'Tap to Learn',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LearnGreetings()),
+              ).then((_) {
+                // Refresh the page when user comes back from LearnNumbers
+                setState(() {});
+              });
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation: 5,
+              child: Container(
+                height: 200,
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        image: const DecorationImage(
+                          image: AssetImage('images/Greetings.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    if (widget.learnNumberScore <= 0)
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: const Color.fromARGB(255, 0, 0, 0)
+                              .withOpacity(0.95),
+                          backgroundBlendMode: BlendMode.saturation,
+                        ),
+                      ),
+                    if (widget.learnNumberScore == 20)
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Color.fromARGB(201, 250, 180, 1)
+                              .withOpacity(0.7),
+                          backgroundBlendMode: BlendMode.modulate,
+                        ),
+                      ),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Learn Greetings',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 24,
