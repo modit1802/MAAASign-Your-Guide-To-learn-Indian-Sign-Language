@@ -76,9 +76,10 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                           width: 250.0,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              'images/Greetings.png',
-                              fit: BoxFit.fill,
+                            child: Image.network(
+                              "https://res.cloudinary.com/dfph32nsq/image/upload/v1728396016/Greetings_axhoob.png",
+                              height: 300,
+                              width: 300,
                             ),
                           ),
                         ),
@@ -100,9 +101,10 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                           width: 250,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              'images/Relation.png',
-                              fit: BoxFit.fill,
+                            child: Image.network(
+                              "https://res.cloudinary.com/dfph32nsq/image/upload/v1728396016/Relation_nb0fvd.png",
+                              height: 300,
+                              width: 300,
                             ),
                           ),
                         ),
