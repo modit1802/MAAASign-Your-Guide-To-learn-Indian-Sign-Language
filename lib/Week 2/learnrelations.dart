@@ -18,20 +18,20 @@ class MyApp extends StatelessWidget {
           color: Colors.transparent,
         ),
       ),
-      home: const LearnGreetings(),
+      home: const LearnRelations(),
     );
   }
 }
 
-class LearnGreetings extends StatelessWidget {
-  const LearnGreetings({super.key});
+class LearnRelations extends StatelessWidget {
+  const LearnRelations({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Greetings",
+          "Let's Learn Relations",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -41,25 +41,25 @@ class LearnGreetings extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 142, 45, 226),
         elevation: 0,
       ),
-      body: const GreetingGifs(),
+      body: const RelationGifs(),
     );
   }
 }
 
-class GreetingGifs extends StatelessWidget {
-  const GreetingGifs({super.key});
+class RelationGifs extends StatelessWidget {
+  const RelationGifs({super.key});
 
-  final Map<String, String> greetingGifs = const {
-    'good_morning': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779713/Good_Morning_rjebay.gif',
-    'good_afternoon': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779712/Good_Afternoon_c3fncs.gif',
-    'good_night': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779712/Good_Night_zzlnue.gif',
-    'hello': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779713/Hello_zgvlfu.gif',
-    'hy': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779714/Hy_pihzlx.gif',
-    'goodbye': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779723/GoodBye_gepcer.gif',
-    'namaste': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729780741/Namaste_rfiiu5.gif',
-    'see_you_again': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729780742/See_You_Again_ho1jfa.gif',
-    'see_you_tomorrow': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729780742/See_You_Tomorrow_dfktq1.gif',
-    'welcome': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779712/Welcome_ojt24g.gif',
+  final Map<String, String> relationGifs = const {
+    'baby': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729788460/Baby_rbccwi.gif',
+    'mother': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729788563/Mother_hok65t.gif',
+    'father': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729788458/Father_pdglue.gif',
+    'brother': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729788516/Brother_qae3tm.gif',
+    'sister': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729788460/Sister_tfciqn.gif',
+    'girl_child': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729788460/Girl_Child_zph4el.gif',
+    'people': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729788458/People_gmwkic.gif',
+    'friend': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729788457/Friend_byufdj.gif',
+    'man': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729788457/Man_x6myyv.gif',
+    'female_person': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729789179/Female_Person_dwckqh.gif',
   };
 
   @override
@@ -81,7 +81,7 @@ class GreetingGifs extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: greetingGifs.entries.map((entry) {
+            children: relationGifs.entries.map((entry) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
