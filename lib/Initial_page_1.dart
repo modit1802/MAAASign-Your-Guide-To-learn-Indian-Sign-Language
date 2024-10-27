@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_signup/LearnPage.dart';
 import 'package:flutter_login_signup/home_page.dart';
+import 'package:flutter_login_signup/about_page.dart';
 
 class InitialPage1 extends StatefulWidget {
   const InitialPage1({super.key});
@@ -17,7 +18,7 @@ class _InitialPage1State extends State<InitialPage1> {
     LearnPage(), // Replace with your actual HomePage
     HomePage(), // Replace with your ScorePage
     HomePage(), // Replace with your TestPage
-    HomePage(), // Replace with your AboutPage
+    AboutPage(), // Replace with your AboutPage
   ];
 
   // Method to handle navigation on bottom nav bar
