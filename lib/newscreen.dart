@@ -1,9 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_signup/Initial_page_1.dart';
-// import 'AlphabetScreen.dart';  // Import the alphabet screen
-import 'numberstartscreen.dart';  // Import the number screen
-import 'Quizscreen.dart';  // Import the quiz screen
+import 'package:flutter_login_signup/alphabetstart.dart';
+import 'package:flutter_login_signup/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
 
 class NewScreen extends StatefulWidget {
   const NewScreen({super.key});
@@ -14,35 +14,29 @@ class NewScreen extends StatefulWidget {
 
 class _NewScreenState extends State<NewScreen> {
   bool showTeacherImage = true;
-
-  double calculateCardSize() {
-    // Calculate card size based on the visibility of the teacher image
-    return showTeacherImage ? 150.0 : 250.0;
-  }
+  bool _showGif = true;
 
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 10), () {
-      setState(() {
-        showTeacherImage = false;
-      });
-    });
   }
+ 
 
   Widget _buildBackground() {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          colors: [
-            Color.fromARGB(255, 219, 69, 249),
-            Color.fromARGB(255, 135, 205, 238),
-          ],
-        ),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+              Color.fromARGB(255, 255, 86, 247),
+              Color.fromARGB(255, 105, 207, 255),
+              Colors.white
+                ],
+                stops: [0.0, 0.5, 1.0]
       ),
-    );
+    ));
   }
 
   @override
@@ -72,15 +66,14 @@ class _NewScreenState extends State<NewScreen> {
                           // Navigate to the AlphabetScreen when the alphabet image is tapped
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Quiz_Screen()), // Correct way to navigate to Quiz_Screen
+                            MaterialPageRoute(builder: (context) => AlphabetStartscreen()), // Correct way to navigate to AlphabetStartscreen
                           );
-
                         },
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
-                          height: calculateCardSize(),
-                          width: calculateCardSize(),
+                          height: 250.0,
+                          width: 250.0,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Image.asset(
@@ -103,8 +96,8 @@ class _NewScreenState extends State<NewScreen> {
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
-                          height: calculateCardSize(),
-                          width: calculateCardSize(),
+                          height: 250,
+                          width: 250,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Image.asset(
@@ -118,17 +111,6 @@ class _NewScreenState extends State<NewScreen> {
                   ),
                   const SizedBox(width: 10),
                   // Column for teacher2.gif image
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (showTeacherImage)
-                        Image.asset(
-                          'images/teacher2.gif',
-                          height: 600,
-                          width: 170,
-                        ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -257,6 +239,40 @@ class _NewScreenState extends State<NewScreen> {
               ),
             ),
           ),
+          if (_showGif)
+            Container(
+              color: Colors.black.withOpacity(0.92),
+              // Black overlay with opacity
+            ),
+          if (_showGif)
+            Center(
+              child: Positioned(
+                child: Center(
+                  child: Image.asset(
+                    'images/teacher2.gif', // Update the image path here
+                    height: 350, // Set the height of the GIF
+                    fit: BoxFit.contain, // Adjust how the GIF is displayed
+                  ),
+                ),
+              ),
+            ),
+          if (_showGif)
+            Positioned(
+              top: 60, // Position close button at the top of the screen
+              right: 20, // Align to the right side
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _showGif = false; // Hide the GIF when the close button is pressed
+                  });
+                },
+                child: const Icon(
+                  Icons.close,
+                  size: 50,
+                  color: Colors.white, // White cross icon for the close button
+                ),
+              ),
+            ),
         ],
       ),
     );

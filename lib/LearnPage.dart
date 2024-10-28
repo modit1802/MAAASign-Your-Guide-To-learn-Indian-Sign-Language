@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
+import 'package:flutter_login_signup/Week 2/learngreeting.dart';
+import 'package:flutter_login_signup/Week 2/learnrelations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ class LearnPage extends StatefulWidget {
   const LearnPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LearnPageState createState() => _LearnPageState();
 }
 
@@ -253,9 +256,10 @@ class _LearnPageState extends State<LearnPage> {
   }
 }
 
+
 class LearnDashboard extends StatefulWidget {
   final int learnAlphabetScore;
-  final int learnNumberScore; // New parameter for learn number score
+  final int learnNumberScore;
 
   const LearnDashboard(
       {super.key, required this.learnAlphabetScore, required this.learnNumberScore});
@@ -271,13 +275,13 @@ class _LearnDashboardState extends State<LearnDashboard> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
+          // Learn Alphabet Card
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const LearnAlphabet()),
               ).then((_) {
-                // Refresh the page when user comes back from LearnAlphabet
                 setState(() {});
               });
             },
@@ -286,81 +290,81 @@ class _LearnDashboardState extends State<LearnDashboard> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               elevation: 5,
-              child: Container(
-                height: 200,
-                width: double.infinity,
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        image: const DecorationImage(
-                          image: AssetImage('images/alphabetcardforlearn.jpg'),
-                          fit: BoxFit.cover,
+              child: Column(
+                children: [
+                  // Learn text at the top
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: Text(
+                      'Learn Alphabet',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // Image container
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: const DecorationImage(
+                        image: AssetImage('images/alphabet_learn.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        if (widget.learnAlphabetScore <= 0)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.95),
+                              backgroundBlendMode: BlendMode.saturation,
+                            ),
+                          ),
+                        if (widget.learnAlphabetScore == 20)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              backgroundBlendMode: BlendMode.modulate,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  // Tap to Learn text at the bottom
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        'Tap to Learn',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
                         ),
                       ),
                     ),
-                    if (widget.learnAlphabetScore <= 0)
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: const Color.fromARGB(255, 0, 0, 0)
-                              .withOpacity(0.95),
-                          backgroundBlendMode: BlendMode.saturation,
-                        ),
-                      ),
-                    if (widget.learnAlphabetScore == 20)
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: const Color.fromARGB(255, 0, 255, 8)
-                              .withOpacity(0.7),
-                          backgroundBlendMode: BlendMode.modulate,
-                        ),
-                      ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Learn Alphabet',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Spacer(),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 8, bottom: 8),
-                              child: Text(
-                                'Tap to Learn',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
           const SizedBox(height: 20),
+
+          // Learn Numbers Card
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const LearnNumbers()),
               ).then((_) {
-                // Refresh the page when user comes back from LearnNumbers
                 setState(() {});
               });
             },
@@ -369,70 +373,235 @@ class _LearnDashboardState extends State<LearnDashboard> {
                 borderRadius: BorderRadius.circular(15.0),
               ),
               elevation: 5,
-              child: Container(
-                height: 200,
-                width: double.infinity,
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        image: const DecorationImage(
-                          image: AssetImage('images/numbercardforlearn.jpg'),
-                          fit: BoxFit.cover,
+              child: Column(
+                children: [
+                  // Learn text at the top
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: Text(
+                      'Learn Numbers',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // Image container
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: const DecorationImage(
+                        image: AssetImage('images/numbercardforlearn.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        if (widget.learnNumberScore <= 0)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.95),
+                              backgroundBlendMode: BlendMode.saturation,
+                            ),
+                          ),
+                        if (widget.learnNumberScore == 20)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              backgroundBlendMode: BlendMode.modulate,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  // Tap to Learn text at the bottom
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        'Tap to Learn',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
                         ),
                       ),
                     ),
-                    if (widget.learnNumberScore <= 0)
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: const Color.fromARGB(255, 0, 0, 0)
-                              .withOpacity(0.95),
-                          backgroundBlendMode: BlendMode.saturation,
-                        ),
-                      ),
-                    if (widget.learnNumberScore == 20)
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: const Color.fromARGB(255, 0, 255, 8)
-                              .withOpacity(0.7),
-                          backgroundBlendMode: BlendMode.modulate,
-                        ),
-                      ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Learn Numbers',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Spacer(),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 8, bottom: 8),
-                              child: Text(
-                                'Tap to Learn',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // Learn Greetings Card
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LearnGreetings()),
+              ).then((_) {
+                setState(() {});
+              });
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation: 5,
+              child: Column(
+                children: [
+                  // Learn text at the top
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: Text(
+                      'Learn Greetings',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  // Image container
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: const DecorationImage(
+                        image: AssetImage('images/greetings.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        if (widget.learnNumberScore <= 0)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.95),
+                              backgroundBlendMode: BlendMode.saturation,
+                            ),
+                          ),
+                        if (widget.learnNumberScore == 20)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              backgroundBlendMode: BlendMode.modulate,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  // Tap to Learn text at the bottom
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        'Tap to Learn',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // Learn Relations Card
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LearnRelations()),
+              ).then((_) {
+                setState(() {});
+              });
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation: 5,
+              child: Column(
+                children: [
+                  // Learn text at the top
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: Text(
+                      'Learn Relations',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // Image container
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: const DecorationImage(
+                        image: AssetImage('images/Relation.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        if (widget.learnNumberScore <= 0)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.95),
+                              backgroundBlendMode: BlendMode.saturation,
+                            ),
+                          ),
+                        if (widget.learnNumberScore == 20)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              backgroundBlendMode: BlendMode.modulate,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  // Tap to Learn text at the bottom
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        'Tap to Learn',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

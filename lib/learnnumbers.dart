@@ -1,9 +1,6 @@
-import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show ByteData, rootBundle;
-import 'dart:typed_data';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LearnNumbers extends StatefulWidget {
   const LearnNumbers({super.key});
@@ -17,11 +14,14 @@ class _LearnNumbersState extends State<LearnNumbers> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Let's learn Numbers"),
+        title: const Text("Numbers",
+        style: TextStyle(
+          color: Colors.white,
+        ),),
         backgroundColor: const Color.fromARGB(255, 219, 69, 249),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: Colors.blue,
+          color: const Color.fromARGB(255, 255, 255, 255),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -55,19 +55,34 @@ class LearnNumbersCards extends StatefulWidget {
 
 class _LearnNumbersCardsState extends State<LearnNumbersCards>
     with SingleTickerProviderStateMixin {
-  List<String> numberImages = [
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10'
-  ];
+  // Cloudinary GIF and PNG URLs for numbers
+  Map<String, String> numberGifs = {
+    '0': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468447/0_axhirl.gif',
+    '1': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468449/1_ljz1ju.gif',
+    '2': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468441/2_lwos6k.gif',
+    '3': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468442/3_xuxqu6.gif',
+    '4': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468443/4_oaa3k5.gif',
+    '5': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468443/5_zldhao.gif',
+    '6': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468443/6_hgxmcy.gif',
+    '7': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468444/7_pm4jey.gif',
+    '8': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468445/8_ppx7wc.gif',
+    '9': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468446/9_fgfksn.gif',
+    '10': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468447/10_fb0hxd.gif',
+  };
+
+  Map<String, String> numberPngs = {
+    '0': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468140/0_num_hzxxvg.png',
+    '1': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468141/1_num_exnnlu.png',
+    '2': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468143/2_num_tb62qp.png',
+    '3': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468140/3_num_qb0ovx.png',
+    '4': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468141/4_num_vbwkaj.png',
+    '5': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468142/5_num_c2sbks.png',
+    '6': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468143/6_num_rygxkv.png',
+    '7': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468144/7_num_iblbw8.png',
+    '8': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468144/8_num_qm8gci.png',
+    '9': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468139/9_num_cpzgzn.png',
+    '10': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468139/10_num_k0k0h7.png',
+  };
 
   final ScrollController _scrollController = ScrollController();
   bool showPopup = false;
@@ -95,14 +110,11 @@ class _LearnNumbersCardsState extends State<LearnNumbersCards>
 
   void _onScroll() {
     if (!popupShownBefore && _scrollController.offset >= 10 * 300.0) {
-      // User has scrolled 10 cards (assuming each card is 300 pixels wide)
       setState(() {
         showPopup = true;
       });
 
-      // Start the animation when popup appears
       _animationController.forward().then((value) {
-        // After 5 seconds, hide the popup
         _dismissPopup();
       });
     }
@@ -117,16 +129,14 @@ class _LearnNumbersCardsState extends State<LearnNumbersCards>
   }
 
   Future<void> _updateLearnNumberInFirebase(int learnNumber) async {
-    // Get the current user's uid from FirebaseAuth
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
       String uid = user.uid;
 
-      // Update Firestore with the 'learn_number' field for the user
       await FirebaseFirestore.instance.collection('users').doc(uid).set({
         'learnnumber': learnNumber,
-      }, SetOptions(merge: true)); // Merging to avoid overwriting other fields
+      }, SetOptions(merge: true));
     }
   }
 
@@ -143,55 +153,31 @@ class _LearnNumbersCardsState extends State<LearnNumbersCards>
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: numberImages.map((imageName) {
+                  children: numberGifs.keys.map((imageName) {
                     return Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Column(
                         children: [
                           Card(
-                            elevation: 6.0, // Set elevation for shadow effect
+                            elevation: 6.0,
                             shape: RoundedRectangleBorder(
-                              // Set rounded corners
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             child: ClipRRect(
-                              // Clip the image with rounded corners
                               borderRadius: BorderRadius.circular(15.0),
-                              // Same value as above
                               child: SizedBox(
                                 width: 300,
                                 height: 300,
-                                child: FutureBuilder<Uint8List>(
-                                  future:
-                                      _loadGif('images/Numbers/$imageName.gif'),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                            ConnectionState.done &&
-                                        snapshot.hasData) {
-                                      return Image.memory(
-                                        snapshot.data!,
-                                        width: 300,
-                                        height: 300,
-                                        fit: BoxFit.cover,
-                                      );
-                                    } else {
-                                      return Container(
-                                        width: 300,
-                                        height: 300,
-                                        color: Colors
-                                            .grey, // Placeholder color while loading
-                                      );
-                                    }
-                                  },
+                                child: Image.network(
+                                  numberGifs[imageName]!,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                          ), // GIF card
-                          const SizedBox(height: 8.0), // spacing between cards
-                          AlphabetPngCard(
-                            imageName: imageName,
-                          ), // PNG card
-                          const SizedBox(height: 16.0), // spacing between cards
+                          ),
+                          const SizedBox(height: 8.0),
+                          NumberPngCard(imageName: imageName, numberPngs: numberPngs),
+                          const SizedBox(height: 16.0),
                         ],
                       ),
                     );
@@ -222,7 +208,7 @@ class _LearnNumbersCardsState extends State<LearnNumbersCards>
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18.0,
-                          color: Colors.green, // Change color to green
+                          color: Colors.green,
                         ),
                       ),
                       const SizedBox(height: 8.0),
@@ -244,17 +230,13 @@ class _LearnNumbersCardsState extends State<LearnNumbersCards>
       ],
     );
   }
-
-  Future<Uint8List> _loadGif(String path) async {
-    final ByteData data = await rootBundle.load(path);
-    return data.buffer.asUint8List();
-  }
 }
 
-class AlphabetPngCard extends StatelessWidget {
+class NumberPngCard extends StatelessWidget {
   final String imageName;
+  final Map<String, String> numberPngs;
 
-  const AlphabetPngCard({super.key, required this.imageName});
+  const NumberPngCard({super.key, required this.imageName, required this.numberPngs});
 
   @override
   Widget build(BuildContext context) {
@@ -262,17 +244,14 @@ class AlphabetPngCard extends StatelessWidget {
       width: 300,
       height: 300,
       child: Card(
-        elevation: 6.0, // Set elevation for shadow effect
+        elevation: 6.0,
         shape: RoundedRectangleBorder(
-          // Set rounded corners
           borderRadius: BorderRadius.circular(15.0),
         ),
         child: ClipRRect(
-          // Clip the image with rounded corners
           borderRadius: BorderRadius.circular(15.0),
-          // Same value as above
-          child: Image.asset(
-            'images/Numbers/$imageName.png',
+          child: Image.network(
+            numberPngs[imageName]!,
             fit: BoxFit.cover,
           ),
         ),

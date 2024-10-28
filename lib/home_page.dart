@@ -3,6 +3,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_signup/Week 2/week2_entry.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login_signup/newscreen.dart';
@@ -287,7 +288,7 @@ class GridDashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Items> myList = [item1, item2, item3, item4, item5, item6];
     var defaultColor = const Color(0xFFE6E6E6); // Light gray color for glassy effect
-    var selectedColor = Colors.green; // Green color when condition is met
+    var selectedColor = Color.fromARGB(255, 255, 183, 0); // Green color when condition is met
     var textColor = Colors.white; // White text color when condition is met
 
     return GridView.count(
@@ -304,6 +305,9 @@ class GridDashboard extends StatelessWidget {
             if (data.title == "Week 1") {
               Navigator.push(context, MaterialPageRoute(builder: (context) => NewScreen()));
 
+            }
+            else if (data.title == "Week 2") {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Week2NewScreen()));
             }
           },
           child: Container(
@@ -365,6 +369,3 @@ class Items {
 
   Items({required this.title, required this.subtitle, required this.event, required this.img});
 }
-
-
-

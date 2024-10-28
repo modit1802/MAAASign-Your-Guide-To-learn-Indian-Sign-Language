@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_signup/LearnPage.dart';
 import 'package:flutter_login_signup/home_page.dart';
+import 'package:flutter_login_signup/about_page.dart';
 
 class InitialPage1 extends StatefulWidget {
   const InitialPage1({super.key});
@@ -12,13 +13,12 @@ class InitialPage1 extends StatefulWidget {
 class _InitialPage1State extends State<InitialPage1> {
   int _currentIndex = 0; // Track the selected index of the BottomNavigationBar
   PageController _pageController = PageController(); // Controller for PageView
-
-  // Pages for each tab
+  
   final List<Widget> _pages = [
     LearnPage(), // Replace with your actual HomePage
     HomePage(), // Replace with your ScorePage
     HomePage(), // Replace with your TestPage
-    HomePage(), // Replace with your AboutPage
+    AboutPage(), // Replace with your AboutPage
   ];
 
   // Method to handle navigation on bottom nav bar

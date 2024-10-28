@@ -41,14 +41,14 @@ class ThirdGame extends StatefulWidget {
 
 class _ThirdGameState extends State<ThirdGame> {
   // Solution and letters available
-  List<String?> solution = ["wooden", "wooden", "wooden", "wooden"];
-  List<String> availableLetters = ["F", "I", "S", "H"];
+  List<String?> solution = ["wooden", "wooden", "wooden"];
+  List<String> availableLetters = ["D", "G", "O", "H"];
 
   // Cloudinary URLs
   final Map<String, String> cloudinaryUrls = {
-    "F": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/F_fzej17.png",
-    "I": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/I_alfmyv.png",
-    "S": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/S_d7ctxo.png",
+    "D": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png",
+    "G": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/G_rcvxfs.png",
+    "O": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
     "H": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/H_hv5qdm.png",
     "wooden": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png",
   };
@@ -67,7 +67,7 @@ class _ThirdGameState extends State<ThirdGame> {
 
   // Solution checking logic
   void checkSolution() {
-    if (ListEquality().equals(solution, ["F", "I", "S", "H"])) {
+    if (ListEquality().equals(solution, ["D", "O", "G"])) {
       setState(() {
         isCorrectSolution = true;
         showMoveToNextButton = true;
@@ -83,7 +83,7 @@ class _ThirdGameState extends State<ThirdGame> {
       setState(() {
         attempts++;
         if (attempts >= maxAttempts) {
-          solution = ["F", "I", "S", "H"];
+          solution = ["D", "O", "G"];
           isCorrectSolution = false;
           showMoveToNextButton = false;
         } else {
@@ -139,7 +139,7 @@ class _ThirdGameState extends State<ThirdGame> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Image.network(
-                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727365601/fish_pw8byj.png",
+                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/dog_rlu4zj.png",
                         width: 180,
                         height: 180,
                       ),
@@ -151,18 +151,19 @@ class _ThirdGameState extends State<ThirdGame> {
               // Solution boxes with Cloudinary images
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(4, (index) {
+                children: List.generate(3, (index) {
                   return DragTarget<String>(
                     builder: (context, accepted, rejected) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (solution[index] != null) {
-                              availableLetters.add(solution[index]!);
-                              solution[index] = "wooden";
-                            }
-                          });
-                        },
+                      return GestureDetector(onTap: () {
+  setState(() {
+    // If the solution slot has a letter, remove it from the solution
+    if (solution[index] != "wooden" && solution[index] != null) {
+      availableLetters.add(solution[index]!);
+      solution[index] = "wooden";  // Just clear the solution without adding "wooden"
+    }
+  });
+},
+
                         child: Container(
                           width: 100,
                           height: 100,
@@ -175,11 +176,11 @@ class _ThirdGameState extends State<ThirdGame> {
                             borderRadius: BorderRadius.circular(12),
                             child: solution[index] != null
                                 ? Image.network(
-                              cloudinaryUrls[solution[index]!]!,
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                            )
+                                    cloudinaryUrls[solution[index]!]!,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                  )
                                 : SizedBox(),
                           ),
                         ),
