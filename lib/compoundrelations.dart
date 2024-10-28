@@ -19,20 +19,20 @@ class MyApp extends StatelessWidget {
           color: Colors.transparent,
         ),
       ),
-      home: const SimpleSentences(),
+      home: const CompoundRelations(),
     );
   }
 }
 
-class SimpleSentences extends StatelessWidget {
-  const SimpleSentences({super.key});
+class CompoundRelations extends StatelessWidget {
+  const CompoundRelations({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Simple Greetings",
+          "Let's Learn Compound Relations",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -55,12 +55,9 @@ class GreetingGifs extends StatefulWidget {
 }
 
 class _GreetingGifsState extends State<GreetingGifs> {
-  final Map<String, String> greetingGifs = const {
-    'hello': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/hello_q0jqlg.mp4',
-    'hy': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113627/hy_ewk653.mp4',
-    'goodbye': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/good_bye_fdlupb.mp4',
-    'namaste': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113630/namaste_ywacpg.mp4',
-    'welcome': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113634/welcome_rnwqkq.mp4',
+  final Map<String, String> relationGifs = const {
+    'girl_child': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730126015/Girl_Child_Compound_tak7ap.mp4',
+    'female_person': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730126384/female_person_compound_xjqdb6.mp4',
   };
 
   int _currentIndex = 0;
@@ -69,7 +66,7 @@ class _GreetingGifsState extends State<GreetingGifs> {
   @override
   void initState() {
     super.initState();
-    _videoWidgets.addAll(greetingGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
+    _videoWidgets.addAll(relationGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
   }
 
   @override

@@ -1,5 +1,5 @@
-// TODO Implement this library.
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,19 +47,51 @@ class CompoundSentences extends StatelessWidget {
   }
 }
 
-class GreetingGifs extends StatelessWidget {
+class GreetingGifs extends StatefulWidget {
   const GreetingGifs({super.key});
 
+  @override
+  _GreetingGifsState createState() => _GreetingGifsState();
+}
+
+class _GreetingGifsState extends State<GreetingGifs> {
   final Map<String, String> greetingGifs = const {
-    'hello': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779713/Hello_zgvlfu.gif',
-    'hy': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779714/Hy_pihzlx.gif',
-    'goodbye': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779723/GoodBye_gepcer.gif',
-    'namaste': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729780741/Namaste_rfiiu5.gif',
-    'welcome': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1729779712/Welcome_ojt24g.gif',
+    'good_morning': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730117184/Good_Morning_Compound_ysc8ze.mp4',
+    'good_afternoon': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730126439/good_afternoon_compound_pdtr0m.mp4',
+    'good_night': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730126673/Good_Night_simple_qnclg4.mp4',
+    'see_you_again': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113629/see_you_again_pq2rok.mp4',
+    'see_you_tomorrow': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113636/see_you_tomorrow_kkhlel.mp4',
   };
+
+  int _currentIndex = 0;
+  final List<VideoWidget> _videoWidgets = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _videoWidgets.addAll(greetingGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
+  }
+
+  @override
+  void dispose() {
+    for (var videoWidget in _videoWidgets) {
+      videoWidget.controller.dispose();
+    }
+    super.dispose();
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _videoWidgets[_currentIndex].controller.pause();
+      _currentIndex = index;
+      _videoWidgets[_currentIndex].controller.play();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -73,40 +105,123 @@ class GreetingGifs extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: greetingGifs.entries.map((entry) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Card(
-                      elevation: 10.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: SizedBox(
-                          width: 180, // Aspect ratio of 9:16
-                          height: 320,
-                          child: Image.network(
-                            entry.value,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+        child: PageView.builder(
+          onPageChanged: _onPageChanged,
+          itemCount: _videoWidgets.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    elevation: 10.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: SizedBox(
+                        width: screenWidth, // Full width of the screen
+                        height: screenWidth * (16 / 9), // Maintain 16:9 aspect ratio
+                        child: _videoWidgets[index],
                       ),
                     ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
+    );
+  }
+}
+
+class VideoWidget extends StatefulWidget {
+  final String videoUrl;
+  late final VideoPlayerController controller;
+
+  VideoWidget({Key? key, required this.videoUrl}) : super(key: key) {
+    controller = VideoPlayerController.network(videoUrl);
+  }
+
+  @override
+  _VideoWidgetState createState() => _VideoWidgetState();
+}
+
+class _VideoWidgetState extends State<VideoWidget> {
+  int _playCount = 0;
+  bool _showReplayButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(_onVideoEnd);
+    widget.controller.initialize().then((_) {
+      setState(() {});
+      widget.controller.play();
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_onVideoEnd);
+    widget.controller.dispose();
+    super.dispose();
+  }
+
+  void _onVideoEnd() {
+    if (widget.controller.value.position == widget.controller.value.duration) {
+      _playCount++;
+      if (_playCount < 2) {
+        widget.controller.seekTo(Duration.zero);
+        widget.controller.play();
+      } else {
+        setState(() {
+          _showReplayButton = true;
+        });
+      }
+    }
+  }
+
+  void _replayVideo() {
+    setState(() {
+      _playCount = 0;
+      _showReplayButton = false;
+      widget.controller.seekTo(Duration.zero);
+      widget.controller.play();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        widget.controller.value.isInitialized
+            ? AspectRatio(
+          aspectRatio: widget.controller.value.aspectRatio,
+          child: VideoPlayer(widget.controller),
+        )
+            : const Center(child: CircularProgressIndicator()),
+        if (_showReplayButton)
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: _replayVideo,
+              child: Container(
+                color: Colors.black54, // Translucent black overlay
+                child: Center(
+                  child: Icon(
+                    Icons.replay,
+                    color: Colors.white,
+                    size: 50,
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

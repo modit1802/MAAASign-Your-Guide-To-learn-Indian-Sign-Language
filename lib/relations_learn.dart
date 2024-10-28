@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/simplesentences.dart';
-import 'package:flutter_login_signup/compoundsentences.dart';
+import 'package:flutter_login_signup/simplerelations.dart';
+import 'package:flutter_login_signup/compoundrelations.dart';
 
 class SentenceStartscreen extends StatefulWidget {
   const SentenceStartscreen({super.key});
@@ -43,7 +43,7 @@ class _SentenceStartscreenState extends State<SentenceStartscreen> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SimpleSentences()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SimpleRelations()));
                     },
                     child: const SizedBox(
                       width: 300, // Set fixed width
@@ -55,7 +55,7 @@ class _SentenceStartscreenState extends State<SentenceStartscreen> {
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              "Simple Greetings",
+                              "Simple Relations",
                               style: TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),
@@ -66,7 +66,7 @@ class _SentenceStartscreenState extends State<SentenceStartscreen> {
                   const SizedBox(height: 16), // Space between the cards
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CompoundSentences()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CompoundRelations()));
                     },
                     child: const SizedBox(
                       width: 300,
@@ -78,7 +78,7 @@ class _SentenceStartscreenState extends State<SentenceStartscreen> {
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              "Compound Greetings",
+                              "Compound Relations",
                               style: TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),
