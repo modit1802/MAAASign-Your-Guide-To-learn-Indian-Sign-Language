@@ -56,9 +56,9 @@ class GreetingGifs extends StatefulWidget {
 
 class _GreetingGifsState extends State<GreetingGifs> {
   final Map<String, String> greetingGifs = const {
-    'good_morning': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730117184/Good_Morning_Compound_ysc8ze.mp4',
-    'good_afternoon': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730126439/good_afternoon_compound_pdtr0m.mp4',
-    'good_night': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730126673/Good_Night_simple_qnclg4.mp4',
+    'good_morning': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186221/good_morning_size_reduced_xxgzis.mp4',
+    'good_afternoon': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186218/good_afternoon_size_reduced_cckblt.mp4',
+    'good_night': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186218/Good_Night_simple_asxfpe.mp4',
     'see_you_again': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113629/see_you_again_pq2rok.mp4',
     'see_you_tomorrow': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113636/see_you_tomorrow_kkhlel.mp4',
   };
