@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login_signup/newscreen.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_login_signup/login_page.dart'; // Assuming this is the file for LoginPage
-
+import 'package:flutter_login_signup/week3_start_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -308,6 +308,9 @@ class GridDashboard extends StatelessWidget {
             }
             else if (data.title == "Week 2") {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Week2NewScreen()));
+            }
+            else if (data.title == "Week 3") {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Week3()));
             }
           },
           child: Container(

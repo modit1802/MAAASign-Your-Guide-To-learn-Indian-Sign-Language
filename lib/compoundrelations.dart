@@ -19,20 +19,20 @@ class MyApp extends StatelessWidget {
           color: Colors.transparent,
         ),
       ),
-      home: const CompoundSentences(),
+      home: const CompoundRelations(),
     );
   }
 }
 
-class CompoundSentences extends StatelessWidget {
-  const CompoundSentences({super.key});
+class CompoundRelations extends StatelessWidget {
+  const CompoundRelations({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Compound Greetings",
+          "Let's Learn Compound Relations",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -55,12 +55,9 @@ class GreetingGifs extends StatefulWidget {
 }
 
 class _GreetingGifsState extends State<GreetingGifs> {
-  final Map<String, String> greetingGifs = const {
-    'good_morning': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186221/good_morning_size_reduced_xxgzis.mp4',
-    'good_afternoon': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186218/good_afternoon_size_reduced_cckblt.mp4',
-    'good_night': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186218/Good_Night_simple_asxfpe.mp4',
-    'see_you_again': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113629/see_you_again_pq2rok.mp4',
-    'see_you_tomorrow': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113636/see_you_tomorrow_kkhlel.mp4',
+  final Map<String, String> relationGifs = const {
+    'girl_child': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186218/girl_child_size_reduced_ijfvv8.mp4',
+    'female_person': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186219/female_person_size_reduced_kxzkmo.mp4',
   };
 
   int _currentIndex = 0;
@@ -69,7 +66,7 @@ class _GreetingGifsState extends State<GreetingGifs> {
   @override
   void initState() {
     super.initState();
-    _videoWidgets.addAll(greetingGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
+    _videoWidgets.addAll(relationGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
   }
 
   @override

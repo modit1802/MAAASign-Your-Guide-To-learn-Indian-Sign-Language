@@ -19,20 +19,20 @@ class MyApp extends StatelessWidget {
           color: Colors.transparent,
         ),
       ),
-      home: const CompoundSentences(),
+      home: const SimpleRelations(),
     );
   }
 }
 
-class CompoundSentences extends StatelessWidget {
-  const CompoundSentences({super.key});
+class SimpleRelations extends StatelessWidget {
+  const SimpleRelations({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Compound Greetings",
+          "Let's Learn Simple Relations",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -55,12 +55,15 @@ class GreetingGifs extends StatefulWidget {
 }
 
 class _GreetingGifsState extends State<GreetingGifs> {
-  final Map<String, String> greetingGifs = const {
-    'good_morning': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186221/good_morning_size_reduced_xxgzis.mp4',
-    'good_afternoon': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186218/good_afternoon_size_reduced_cckblt.mp4',
-    'good_night': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186218/Good_Night_simple_asxfpe.mp4',
-    'see_you_again': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113629/see_you_again_pq2rok.mp4',
-    'see_you_tomorrow': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113636/see_you_tomorrow_kkhlel.mp4',
+  final Map<String, String> relationGifs = const {
+    'baby': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125689/baby_m5j2ml.mp4',
+    'mother': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125682/mother_xsdqsk.mp4',
+    'father': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125688/father_shv0s8.mp4',
+    'brother': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125688/brother_zrrtqr.mp4',
+    'sister': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125684/sister_bxolqx.mp4',
+    'people': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125684/people_jjw2bk.mp4',
+    'friend': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125682/friend_kjbxg8.mp4',
+    'man': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125683/man_vy9lea.mp4',
   };
 
   int _currentIndex = 0;
@@ -69,7 +72,7 @@ class _GreetingGifsState extends State<GreetingGifs> {
   @override
   void initState() {
     super.initState();
-    _videoWidgets.addAll(greetingGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
+    _videoWidgets.addAll(relationGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
   }
 
   @override
