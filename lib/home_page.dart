@@ -250,7 +250,7 @@ class GridDashboard extends StatelessWidget {
 
   final Items item2 = Items(
     title: "Week 2",
-    subtitle: "Learn Greetings and etiquettes in Indian Sign language",
+    subtitle: "Learn Greetings and Relations in Indian Sign language",
     event: "",
     img: "images/food.png",
   );
