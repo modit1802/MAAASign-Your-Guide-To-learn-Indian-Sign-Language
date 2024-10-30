@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_signup/Initial_page_1.dart';
-import 'package:flutter_login_signup/Week 2/alphabetstart.dart';
-import 'package:flutter_login_signup/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
+import 'package:SignEase/Initial_page_1.dart';
+import 'package:SignEase/Week 2/alphabetstart.dart';
+import 'package:SignEase/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
 
 class Week2NewScreen extends StatefulWidget {
   const Week2NewScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/simplesentences.dart';
-import 'package:flutter_login_signup/compoundsentences.dart';
+import 'package:SignEase/simplesentences.dart';
+import 'package:SignEase/compoundsentences.dart';
 
 class SentenceStartscreen extends StatefulWidget {
   const SentenceStartscreen({super.key});

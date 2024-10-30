@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/Week 2/learnalphabet.dart';
-import 'package:flutter_login_signup/Week 2/moveforward.dart';
-import 'package:flutter_login_signup/Week 2/practiceassignment1.dart';
-import 'package:flutter_login_signup/Week 2/thirdstep.dart';
+import 'package:SignEase/Week 2/learnalphabet.dart';
+import 'package:SignEase/Week 2/moveforward.dart';
+import 'package:SignEase/Week 2/practiceassignment1.dart';
+import 'package:SignEase/Week 2/thirdstep.dart';
 
 class AlphabetStartscreen extends StatefulWidget {
   const AlphabetStartscreen({super.key});

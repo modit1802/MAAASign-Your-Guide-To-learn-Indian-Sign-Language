@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter_login_signup/challenger6.dart';
+import 'package:SignEase/challenger6.dart';
 
 class Challenger5 extends StatelessWidget {
   final int score;

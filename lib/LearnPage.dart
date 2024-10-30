@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter_login_signup/Week 2/learngreeting.dart';
-import 'package:flutter_login_signup/Week 2/learnrelations.dart';
+import 'package:SignEase/Week 2/learngreeting.dart';
+import 'package:SignEase/Week 2/learnrelations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_login_signup/learnalphabet.dart';
-import 'package:flutter_login_signup/learnnumbers.dart';
+import 'package:SignEase/learnalphabet.dart';
+import 'package:SignEase/learnnumbers.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_login_signup/login_page.dart'; // Assuming this is the file for LoginPage
+import 'package:SignEase/login_page.dart'; // Assuming this is the file for LoginPage
 
 class LearnPage extends StatefulWidget {
   const LearnPage({super.key});

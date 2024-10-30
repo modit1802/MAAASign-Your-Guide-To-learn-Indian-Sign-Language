@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/numberfinal.dart';
+import 'package:SignEase/numberfinal.dart';
 
 class Challenger4Image extends StatelessWidget {
   final int score; // Accept score from the previous screen

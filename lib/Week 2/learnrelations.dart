@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/relations_learn.dart'; // Import the SentenceStartscreen file
+import 'package:SignEase/relations_learn.dart'; // Import the SentenceStartscreen file
 
 void main() {
   runApp(const MyApp());

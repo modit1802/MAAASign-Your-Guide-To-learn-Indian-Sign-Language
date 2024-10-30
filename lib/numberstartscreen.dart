@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/learnalphabet.dart';
-import 'package:flutter_login_signup/learnnumbers.dart';
-import 'package:flutter_login_signup/moveforwardtonumbers.dart';
+import 'package:SignEase/learnalphabet.dart';
+import 'package:SignEase/learnnumbers.dart';
+import 'package:SignEase/moveforwardtonumbers.dart';
 
 void main() {
   runApp(const MyApp());

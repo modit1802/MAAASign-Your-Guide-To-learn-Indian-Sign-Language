@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_signup/Initial_page_1.dart';
-import 'package:flutter_login_signup/numberstartscreen.dart';
+import 'package:SignEase/Initial_page_1.dart';
+import 'package:SignEase/numberstartscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

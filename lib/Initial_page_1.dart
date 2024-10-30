@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/LearnPage.dart';
-import 'package:flutter_login_signup/home_page.dart';
-import 'package:flutter_login_signup/about_page.dart';
+import 'package:SignEase/LearnPage.dart';
+import 'package:SignEase/home_page.dart';
+import 'package:SignEase/about_page.dart';
 
 class InitialPage1 extends StatefulWidget {
   const InitialPage1({super.key});

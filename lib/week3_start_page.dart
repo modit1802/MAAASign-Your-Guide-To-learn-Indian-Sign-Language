@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_signup/Initial_page_1.dart';
-import 'package:flutter_login_signup/alphabetstart.dart';
-import 'package:flutter_login_signup/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
+import 'package:SignEase/Initial_page_1.dart';
+import 'package:SignEase/alphabetstart.dart';
+import 'package:SignEase/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
 
 class Week3 extends StatefulWidget {
   const Week3({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/challenger2number.dart';
+import 'package:SignEase/challenger2number.dart';
 
 class ThirdStepChallengersForNumbers extends StatelessWidget {
   final int score; // Accept score from the previous screen

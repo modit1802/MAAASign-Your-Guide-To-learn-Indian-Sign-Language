@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/thirdstepchallengerfornumbers.dart';
+import 'package:SignEase/thirdstepchallengerfornumbers.dart';
 
 class MoveForwardtonumbers extends StatelessWidget {
   final int score;

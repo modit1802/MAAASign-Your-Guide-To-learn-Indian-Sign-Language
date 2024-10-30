@@ -3,13 +3,13 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/Week 2/week2_entry.dart';
+import 'package:SignEase/Week 2/week2_entry.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_login_signup/newscreen.dart';
+import 'package:SignEase/newscreen.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_login_signup/login_page.dart'; // Assuming this is the file for LoginPage
-import 'package:flutter_login_signup/week3_start_page.dart';
+import 'package:SignEase/login_page.dart'; // Assuming this is the file for LoginPage
+import 'package:SignEase/week3_start_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
