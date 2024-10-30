@@ -1,7 +1,7 @@
 
+import 'package:SignEase/TemporaryQuiz.dart';
 import 'package:SignEase/learnalphabet.dart';
 import 'package:SignEase/matchmaker_alphabet.dart';
-import 'package:SignEase/practiceassignment1.dart';
 import 'package:flutter/material.dart';
 
 class AlphabetStartscreen extends StatefulWidget {
@@ -129,7 +129,7 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                     ),
                       const SizedBox(height: 12), // Space between the cards
                       _buildCard(
-                      onTap: () => _handleCardTap(1, PracticeAssignment1()),
+                      onTap: () => _handleCardTap(1, QuizApp()),
                       imagePath: 'images/quiz.png',
                       color: const Color.fromARGB(255, 255, 255, 255),
                       title: 'Play Quiz',
