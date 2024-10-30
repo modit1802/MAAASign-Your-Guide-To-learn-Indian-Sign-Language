@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/thirdstepchallengerfornumbers.dart';
+import 'package:flutter_login_signup/Challengers%20For%20Week%201/challengernumbers/challenger1number.dart';
 
 class MoveForwardtonumbers extends StatelessWidget {
   final int score;
@@ -220,7 +220,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ThirdStepChallengersForNumbers(score: score)),
+                      MaterialPageRoute(builder: (context) => Challenger1Number(score: score)),
                     );
                   },
                   child: const Text('Move to next step'),

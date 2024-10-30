@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_signup/Initial_page_1.dart';
 import 'package:flutter_login_signup/alphabetstart.dart';
-import 'package:flutter_login_signup/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
+import 'package:flutter_login_signup/numberstart.dart';
+import 'package:flutter_login_signup/Challengers%20For%20Week%201/challengeralphabets/challenger1.dart'; 
 
 class NewScreen extends StatefulWidget {
   const NewScreen({super.key});
@@ -13,268 +13,246 @@ class NewScreen extends StatefulWidget {
 }
 
 class _NewScreenState extends State<NewScreen> {
-  bool showTeacherImage = true;
   bool _showGif = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-  }
- 
-
-  Widget _buildBackground() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Color.fromARGB(255, 255, 86, 247),
-              Color.fromARGB(255, 105, 207, 255),
-              Colors.white
-                ],
-                stops: [0.0, 0.5, 1.0]
-      ),
-    ));
-  }
+  int? _selectedCardIndex; // Track the selected card index
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
+      statusBarColor: Color.fromARGB(0, 0, 0, 0),
       statusBarIconBrightness: Brightness.light,
     ));
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       body: Stack(
         children: [
           _buildBackground(),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Column for alphabet and number circle widgets
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  const SizedBox(height: 55),
+                  
+                  // Alphabet Circle widget - Card 1
+                  _buildCard(
+                    onTap: () => _handleCardTap(0, const AlphabetStartscreen()),
+                    imagePath: 'images/alphabetsicon.png',
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    title: 'Alphabets',
+                    description: 'Learn alphabets with the help of interactive learning material, quizes and exciting match games!',
+                    index: 0,
+                  ),
+                  
+                  const SizedBox(height: 10),
+
+                  // Number Circle widget - Card 2
+                  _buildCard(
+                    onTap: () => _handleCardTap(1, const NumberStartscreen()),
+                    imagePath: 'images/numbersicon.png',
+                    color: Colors.white,
+                    title: 'Numbers',
+                    description: 'Learn Numbers with the help of interactive learning material, quizes and exciting match games!',
+                    index: 1,
+                  ),
+                  
+                  const SizedBox(height: 10),
+
+                  // Challenger Circle widget - Card 3
+                  _buildCard(
+                    onTap: () => _handleCardTap(2, Challenger1(score: 0)),
+                    imagePath: 'images/challenger.png',
+                    color: Colors.white,
+                    title: 'Challenger',
+                    description: 'Take on challenges and test your skills if you are master with alphabets and numbers to Pass Week 1 Challenge!',
+                    index: 2,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (_showGif)
+            ..._buildGifOverlay(context),
+          _buildBottomButtons(),
+        ],
+      ),
+    );
+  }
+
+  // Handle Card Tap with index and navigation
+  void _handleCardTap(int index, Widget nextPage) {
+    setState(() {
+      _selectedCardIndex = index;
+    });
+    Future.delayed(const Duration(milliseconds: 200), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => nextPage),
+      ).then((_) => setState(() {
+            _selectedCardIndex = null; // Reset after navigation
+          }));
+    });
+  }
+
+  // Background Builder
+  Widget _buildBackground() {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Colors.white],
+        ),
+      ),
+    );
+  }
+
+  // Card Builder for consistency
+  Widget _buildCard({
+    required VoidCallback onTap,
+    required String imagePath,
+    required Color color,
+    required String title,
+    required String description,
+    required int index,
+  }) {
+    final bool isSelected = _selectedCardIndex == index;
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 10,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77): color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            height: 140,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    imagePath,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(height: 100),
-                      // Alphabet Circle widget
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to the AlphabetScreen when the alphabet image is tapped
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AlphabetStartscreen()), // Correct way to navigate to AlphabetStartscreen
-                          );
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                          height: 250.0,
-                          width: 250.0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              'images/alphabet.png',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? Colors.white : Colors.black,
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      // Number Circle widget
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to the NumberScreen when the number image is tapped
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => NumberStartScreen()), // Change to your number screen
-                          );
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                          height: 250,
-                          width: 250,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              'images/number.jpeg',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
+                      const SizedBox(height: 8),
+                      Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isSelected ? Colors.white : Colors.black,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(width: 10),
-                  // Column for teacher2.gif image
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          // Custom buttons at the top center (Home, Score, Test, About)
-          Positioned(
-            bottom: 20,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.home,
-                        size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.score,
-                        size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.assignment,
-                        size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.info,
-                        size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          if (_showGif)
-            Container(
-              color: Colors.black.withOpacity(0.92),
-              // Black overlay with opacity
-            ),
-          if (_showGif)
-            Center(
-              child: Positioned(
-                child: Center(
-                  child: Image.asset(
-                    'images/teacher2.gif', // Update the image path here
-                    height: 350, // Set the height of the GIF
-                    fit: BoxFit.contain, // Adjust how the GIF is displayed
-                  ),
-                ),
-              ),
-            ),
-          if (_showGif)
-            Positioned(
-              top: 60, // Position close button at the top of the screen
-              right: 20, // Align to the right side
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _showGif = false; // Hide the GIF when the close button is pressed
-                  });
-                },
-                child: const Icon(
-                  Icons.close,
-                  size: 50,
-                  color: Colors.white, // White cross icon for the close button
-                ),
-              ),
-            ),
-        ],
+        ),
       ),
     );
+  }
+
+  // GIF Overlay Builder
+  List<Widget> _buildGifOverlay(BuildContext context) {
+    return [
+      Container(color: Colors.black.withOpacity(0.92)),
+      Center(
+        child: Image.asset(
+          'images/teacher2.gif',
+          height: 350,
+          fit: BoxFit.contain,
+        ),
+      ),
+      Positioned(
+        top: 60,
+        right: 20,
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              _showGif = false;
+            });
+          },
+          child: const Icon(
+            Icons.close,
+            size: 50,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ];
+  }
+
+  // Bottom Buttons
+  Widget _buildBottomButtons() {
+    return Positioned(
+      bottom: 20,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildBottomButton(icon: Icons.home, onTap: () => _navigateToPage(const InitialPage1())),
+            const SizedBox(width: 20),
+            _buildBottomButton(icon: Icons.score, onTap: () => _navigateToPage(const InitialPage1())),
+            const SizedBox(width: 20),
+            _buildBottomButton(icon: Icons.assignment, onTap: () => _navigateToPage(const InitialPage1())),
+            const SizedBox(width: 20),
+            _buildBottomButton(icon: Icons.info, onTap: () => _navigateToPage(const InitialPage1())),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Bottom Button Builder for consistency
+  Widget _buildBottomButton({required IconData icon, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              spreadRadius: 2,
+              blurRadius: 4,
+            ),
+          ],
+        ),
+        child: Icon(
+          icon,
+          size: 30,
+          color: const Color.fromARGB(255, 165, 74, 17),
+        ),
+      ),
+    );
+  }
+
+  // Navigation Helper
+  void _navigateToPage(Widget page) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
   }
 }

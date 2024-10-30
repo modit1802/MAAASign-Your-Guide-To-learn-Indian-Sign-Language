@@ -3,39 +3,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
-class PracticeAssignment1 extends StatefulWidget {
+class PracticeAssignment2 extends StatefulWidget {
   @override
-  _PracticeAssignment1State createState() => _PracticeAssignment1State();
+  _PracticeAssignment2State createState() => _PracticeAssignment2State();
 }
 
-class _PracticeAssignment1State extends State<PracticeAssignment1> {
+class _PracticeAssignment2State extends State<PracticeAssignment2> {
   List<Map<String, dynamic>> questionsAndSolutions = [
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/A_zlgdfc.png', 'solution': 'A'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/B_nf0pwi.png', 'solution': 'B'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png', 'solution': 'C'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png', 'solution': 'D'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png', 'solution': 'E'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/F_fzej17.png', 'solution': 'F'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/G_rcvxfs.png', 'solution': 'G'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/H_hv5qdm.png', 'solution': 'H'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/I_alfmyv.png', 'solution': 'I'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727852328/J_kv1mk8.png', 'solution': 'J'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/K_rv6591.png', 'solution': 'K'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/L_mkou5r.png', 'solution': 'L'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/M_bboxf8.png', 'solution': 'M'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727852328/N_rvbtxz.png', 'solution': 'N'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png', 'solution': 'O'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727852327/P_xczbe3.png', 'solution': 'P'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/Q_h2pzug.png', 'solution': 'Q'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png', 'solution': 'R'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/S_d7ctxo.png', 'solution': 'S'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/T_i5ye3w.png', 'solution': 'T'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/U_gvylmm.png', 'solution': 'U'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727852327/V_ansgpz.png', 'solution': 'V'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/W_bkgjob.png', 'solution': 'W'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/X_kedszo.png', 'solution': 'X'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727852328/Y_z2fkfj.png', 'solution': 'Y'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727852328/Z_xqqrra.png', 'solution': 'Z'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263998/1_ypmmhh.png', 'solution': '1'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716936/0_e1tfib.png', 'solution': '0'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263999/2_tb6h2y.png', 'solution': '2'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730264000/4_hltwy4.png', 'solution': '4'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263999/10_qkdwqf.png', 'solution': '10'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730264000/3_tbfqjk.png', 'solution': '3'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730264002/5_nofsuk.png', 'solution': '5'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730264003/6_ireutv.png', 'solution': '6'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263998/7_msy2e3.png', 'solution': '7'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263999/9_mgaajm.png', 'solution': '9'},
+    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263999/8_kabrqo.png', 'solution': '8'},
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];
@@ -100,12 +85,11 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
 
     // Generate random wrong options
     while (options.length < 4) {
-      String randomLetter = String.fromCharCode(
-          65 + random.nextInt(26)); // Generate random letter A-Z
-      if (!options.contains(randomLetter)) {
-        options.add(randomLetter);
-      }
+    String randomNumber = random.nextInt(11).toString(); // Generate a random number between 0 and 10
+    if (!options.contains(randomNumber)) {
+      options.add(randomNumber);
     }
+  }
 
     options.shuffle(); // Shuffle options to mix them
     return options;
@@ -240,7 +224,6 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
           ),
   );
 }
-
   // Helper method to build option cards
   Widget buildOptionCard(int index) {
     return Expanded(
@@ -316,42 +299,43 @@ class _ResultScreenState extends State<ResultScreen> {
     }
   }
 
-  Future<void> saveResultToMongoDB() async {
-    // Get the user ID from Firebase
-    String? userId = await getUserId();
-    if (userId != null) {
-      // Check if user already exists in the collection
-      var userDoc =
-          await userCollection.findOne(mongo.where.eq('userId', userId));
+Future<void> saveResultToMongoDB() async {
+  // Get the user ID from Firebase
+  String? userId = await getUserId();
+  if (userId != null) {
+    // Check if user already exists in the collection
+    var userDoc = await userCollection.findOne(mongo.where.eq('userId', userId));
 
-      if (userDoc == null) {
-        // If user doesn't exist, insert new document
-        await userCollection.insert({
-          'userId': userId,
-          'week': {
-            'week1': {
-              'Score_alphabet':{
-                  'score_alphabet': widget.score,
-                  'incorrectQuestions_alphabet': widget.incorrectQuestions,
-              }
+    // Define the week key
+    String weekKey = 'week1';
 
+    if (userDoc == null) {
+      // If user doesn't exist, insert new document with only Score_number
+      await userCollection.insert({
+        'userId': userId,
+        'week': {
+          weekKey: {
+            'Score_number': {
+              'score_number': widget.score,
+              'incorrectQuestions_number': widget.incorrectQuestions,
             }
           }
-        });
-      } else {
-        // If user exists, update their week 1 data
-        await userCollection.update(
-          mongo.where.eq('userId', userId),
-          mongo.modify.set('week.week1.Score_alphabet', {
-            'score_alphabet': widget.score,
-            'incorrectQuestions_alphabet': widget.incorrectQuestions,
-          }),
-        );
-      }
-
-      print("Data inserted/updated for user ID: $userId");
+        }
+      });
+    } else {
+      // If user exists, add or update only the Score_number field inside week1
+      await userCollection.update(
+        mongo.where.eq('userId', userId),
+        mongo.modify.set('week.$weekKey.Score_number', {
+          'score_number': widget.score,
+          'incorrectQuestions_number': widget.incorrectQuestions,
+        }),
+      );
     }
+
+    print("Data inserted/updated for user ID: $userId, week key: $weekKey");
   }
+}
 
   Future<String?> getUserId() async {
     User? user = FirebaseAuth.instance.currentUser;
@@ -384,7 +368,7 @@ class _ResultScreenState extends State<ResultScreen> {
         Navigator.pop(context);
         return false;
       },
-      child: Scaffold(
+     child: Scaffold(
         backgroundColor: Color.fromARGB(255, 250, 233, 215),
         body: Container(
           child: Padding(

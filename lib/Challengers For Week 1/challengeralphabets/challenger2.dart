@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
+import 'dart:async'; // for Future.delayed
 import 'package:collection/collection.dart';
-import 'alphabetfinal.dart';
+import 'package:flutter_login_signup/Challengers%20For%20Week%201/challengeralphabets/challenger3.dart';
 
-class Challenger6 extends StatelessWidget {
+class Challenger2 extends StatelessWidget {
   final int score;
-  Challenger6({required this.score});
+
+  Challenger2({required this.score});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Move Forward'),
-        backgroundColor: Color.fromARGB(255, 207, 238, 252),
-      ),
       body: Container(
-        decoration: BoxDecoration(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color.fromARGB(255, 207, 238, 252),
-              Color.fromARGB(255, 242, 222, 246),
-              Colors.white,
+              Color.fromARGB(255, 255, 150, 250),
+              Color.fromARGB(255, 159, 223, 252),
+              Colors.white
             ],
           ),
         ),
@@ -33,6 +33,7 @@ class Challenger6 extends StatelessWidget {
 
 class ThirdGame extends StatefulWidget {
   final int score;
+
   ThirdGame({required this.score});
 
   @override
@@ -40,23 +41,38 @@ class ThirdGame extends StatefulWidget {
 }
 
 class _ThirdGameState extends State<ThirdGame> {
-  List<String?> solution = ["wooden", "wooden", "wooden"];
-  List<String> availableLetters = ["R", "E", "N", "P"];
-
-  // Mapping letters to their Cloudinary URLs
+  List<String?> solution = [
+    "wooden",
+    "wooden",
+    "wooden"
+  ]; // Initialize with placeholders
   final Map<String, String> cloudinaryUrls = {
-    "R": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
-    "E": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png",
-    "N": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727852328/N_rvbtxz.png",
-    "P": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727852327/P_xczbe3.png",
-    "wooden": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png",
+    "B":
+        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/B_nf0pwi.png",
+    "T":
+        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/T_i5ye3w.png",
+    "A":
+        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/A_zlgdfc.png",
+    "R":
+        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
+    'bat':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969908/bat_hhcjp7.png',
+    'correct':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
+    'wrong':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
+    'wooden':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
   };
 
+  List<String> availableLetters = ["B", "T", "A", "R"];
   bool? isCorrectSolution;
   int attempts = 0;
   int maxAttempts = 3;
   bool showMoveToNextButton = false;
   late int score;
+  final ScrollController _scrollController =
+      ScrollController(); // Add ScrollController
 
   @override
   void initState() {
@@ -65,7 +81,7 @@ class _ThirdGameState extends State<ThirdGame> {
   }
 
   void checkSolution() {
-    if (ListEquality().equals(solution, ["P", "E", "N"])) {
+    if (ListEquality().equals(solution, ["B", "A", "T"])) {
       setState(() {
         isCorrectSolution = true;
         showMoveToNextButton = true;
@@ -77,19 +93,49 @@ class _ThirdGameState extends State<ThirdGame> {
           score += 25;
         }
       });
+      _scrollToGif();
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Challenger3(score: score),
+          ),
+        );
+      });
     } else {
       setState(() {
         attempts++;
         if (attempts >= maxAttempts) {
-          solution = ["P", "E", "N"];
+          solution = ["B", "A", "T"];
           isCorrectSolution = false;
           showMoveToNextButton = false;
+          score = 0;
         } else {
           isCorrectSolution = false;
           showMoveToNextButton = false;
         }
       });
+      _scrollToGif(); // Trigger scrolling to wrong.gif
     }
+  }
+
+  // Function to handle scrolling up to the wrong.gif and then back down
+  void _scrollToGif() async {
+    await _scrollController.animateTo(
+      _scrollController.position.minScrollExtent, // Scroll to top
+      duration: const Duration(seconds: 1),
+      curve: Curves.easeInOut,
+    );
+
+    // Wait for 2 seconds while showing the wrong.gif
+    await Future.delayed(const Duration(seconds: 1));
+
+    // Scroll back down
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: const Duration(seconds: 1),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
@@ -97,32 +143,35 @@ class _ThirdGameState extends State<ThirdGame> {
     return Stack(
       children: [
         SingleChildScrollView(
+          controller:
+              _scrollController, // Assign ScrollController to the scroll view
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (isCorrectSolution != null && isCorrectSolution!)
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Image.network(
-                    "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
-                    width: 100,
-                    height: 100,
+                    cloudinaryUrls['correct']!, // Correct gif from Cloudinary
+                    width: 300,
+                    height: 200,
                   ),
                 ),
               if (isCorrectSolution != null && !isCorrectSolution!)
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Image.network(
-                    "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-                    width: 100,
-                    height: 100,
+                    cloudinaryUrls['wrong']!, // Wrong gif from Cloudinary
+                    width: 300,
+                    height: 200,
                   ),
                 ),
               Image.network(
-                "https://res.cloudinary.com/dfph32nsq/image/upload/v1727363980/Challenger_5_bpyctt.png",
+                "https://res.cloudinary.com/dfph32nsq/image/upload/v1727363980/Challenger_2_jrppoz.png",
                 width: 300,
                 height: 200,
               ),
+              // First Image with Card
               Stack(
                 alignment: Alignment.center,
                 children: [
@@ -137,7 +186,7 @@ class _ThirdGameState extends State<ThirdGame> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Image.network(
-                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727969908/pen_ibwjeo.png",
+                        cloudinaryUrls['bat']!,
                         width: 180,
                         height: 180,
                       ),
@@ -145,23 +194,22 @@ class _ThirdGameState extends State<ThirdGame> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(3, (index) {
                   return DragTarget<String>(
                     builder: (context, accepted, rejected) {
                       return GestureDetector(
-onTap: () {
-  setState(() {
-    // If the solution slot has a letter, remove it from the solution
-    if (solution[index] != "wooden" && solution[index] != null) {
-      availableLetters.add(solution[index]!);
-      solution[index] = "wooden";  // Just clear the solution without adding "wooden"
-    }
-  });
-},
-
+                        onTap: () {
+                          setState(() {
+                            if (solution[index] != "wooden" &&
+                                solution[index] != null) {
+                              availableLetters.add(solution[index]!);
+                              solution[index] = "wooden"; // Clear letter
+                            }
+                          });
+                        },
                         child: Container(
                           width: 100,
                           height: 100,
@@ -174,12 +222,12 @@ onTap: () {
                             borderRadius: BorderRadius.circular(12),
                             child: solution[index] != null
                                 ? Image.network(
-                              cloudinaryUrls[solution[index]!]!,
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.cover,
-                            )
-                                : SizedBox(),
+                                    cloudinaryUrls[solution[index]!]!,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                  )
+                                : const SizedBox(),
                           ),
                         ),
                       );
@@ -187,23 +235,27 @@ onTap: () {
                     onWillAccept: (data) => true,
                     onAccept: (data) {
                       setState(() {
-                        if (index >= 0 && index < solution.length) {
-                          solution[index] = data;
-                          availableLetters.remove(data);
+                        if (solution[index] != "wooden" &&
+                            solution[index] != null) {
+                          // If the target already has a letter, move it back to availableLetters
+                          availableLetters.add(solution[index]!);
                         }
+                        solution[index] = data;
+                        availableLetters.remove(
+                            data); // Remove the newly placed letter from options
                       });
                     },
                   );
                 }),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: availableLetters.map((letter) {
                   return Draggable<String>(
                     data: letter,
                     child: Image.network(
-                      cloudinaryUrls[letter]!,
+                      cloudinaryUrls[letter]!, // Cloudinary URL for the letter
                       width: 80,
                       height: 80,
                     ),
@@ -218,11 +270,11 @@ onTap: () {
                   );
                 }).toList(),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               if (!showMoveToNextButton)
                 ElevatedButton(
                   onPressed: checkSolution,
-                  child: Text("Check Now"),
+                  child: const Text("Check Now"),
                 ),
               if (showMoveToNextButton)
                 ElevatedButton(
@@ -230,52 +282,47 @@ onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AlphabetFinal(score: score),
+                        builder: (context) => Challenger3(
+                            score: score), // Navigate to next challenge
                       ),
                     );
                   },
-                  child: Text("Move to Next Challenge"),
+                  child: const Text("Move to Next Challenge"),
                 ),
             ],
           ),
         ),
         Positioned(
-          top: 16,
+          top: 50,
           right: 16,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
-              "${maxAttempts - attempts} Chance",
-              style: TextStyle(color: Colors.white),
+              "${maxAttempts - attempts} Chance Left",
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
         Positioned(
-          top: 16,
+          top: 50,
           left: 16,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               "Score: $score",
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
       ],
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: Challenger6(score: 0),
-  ));
 }

@@ -1,6 +1,4 @@
-// TODO Implement this library.
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(const MyApp());
 }

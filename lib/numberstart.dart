@@ -1,16 +1,15 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/learnalphabet.dart';
+import 'package:flutter_login_signup/learnnumbers.dart';
 import 'package:flutter_login_signup/matchmaker_alphabet.dart';
-import 'package:flutter_login_signup/practiceassignment1.dart';
-class AlphabetStartscreen extends StatefulWidget {
-  const AlphabetStartscreen({super.key});
+import 'package:flutter_login_signup/practiceassignment2.dart';
+class NumberStartscreen extends StatefulWidget {
+  const NumberStartscreen({super.key});
 
   @override
-  State<AlphabetStartscreen> createState() => _AlphabetStartscreenState();
+  State<NumberStartscreen> createState() => _NumberStartscreenState();
 }
 
-class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
+class _NumberStartscreenState extends State<NumberStartscreen> {
   bool _showGif = true; // State variable to control GIF visibility
   int? _selectedCardIndex;
   @override
@@ -119,16 +118,16 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                     children: [
                       const SizedBox(height: 12),
                       _buildCard(
-                      onTap: () => _handleCardTap(0, const LearnAlphabet()),
+                      onTap: () => _handleCardTap(0, const LearnNumbers()),
                       imagePath: 'images/alphabetsicon.png',
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      title: 'Learn Alphabets',
-                      description: 'Learn alphabets with the help of interactive learning material!',
+                      title: 'Learn Numbers',
+                      description: 'Learn Numbers with the help of interactive learning material!',
                       index: 0,
                     ),
                       const SizedBox(height: 12), // Space between the cards
                       _buildCard(
-                      onTap: () => _handleCardTap(1, PracticeAssignment1()),
+                      onTap: () => _handleCardTap(1, PracticeAssignment2()),
                       imagePath: 'images/quiz.png',
                       color: const Color.fromARGB(255, 255, 255, 255),
                       title: 'Play Quiz',

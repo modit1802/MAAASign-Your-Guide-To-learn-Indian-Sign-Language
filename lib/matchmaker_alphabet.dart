@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class MoveForward extends StatelessWidget {
+class Match_maker_alphabet extends StatelessWidget {
   final int score;
 
-  const MoveForward({super.key, required this.score});
+  const Match_maker_alphabet({super.key, required this.score});
 
   @override
   Widget build(BuildContext context) {
