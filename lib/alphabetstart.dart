@@ -1,5 +1,3 @@
-
-import 'package:SignEase/TemporaryQuiz.dart';
 import 'package:SignEase/learnalphabet.dart';
 import 'package:SignEase/matchmaker_alphabet.dart';
 import 'package:SignEase/practiceassignment1.dart';
