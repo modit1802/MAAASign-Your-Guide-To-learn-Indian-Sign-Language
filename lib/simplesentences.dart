@@ -32,7 +32,7 @@ class SimpleSentences extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Compound Greetings",
+          "Let's Learn Simple Greetings",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
