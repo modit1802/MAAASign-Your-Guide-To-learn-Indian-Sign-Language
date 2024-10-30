@@ -162,78 +162,93 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
   @override
  Widget build(BuildContext context) {
   return Scaffold(
-    backgroundColor: Color.fromARGB(255, 250, 233, 215),
+    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+    appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 252, 133, 37),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {},
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
+      ),
     body: selectedQuestions.isNotEmpty
-        ? Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
+        ? 
+        SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 50,),
-                  Container(
-                    height: MediaQuery.of(context).size.width * 0.080,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16.0),
-                      child: LinearProgressIndicator(
-                        value: (6 - selectedQuestions.length) / 6,
-                        valueColor:
-                            const AlwaysStoppedAnimation<Color>( Color.fromARGB(255, 189, 74, 2)),
-                        backgroundColor: const Color.fromARGB(255, 189, 187, 187),
+                      // Orange section with "Quiz Mania" title
+                      Container(
+            height: 200,
+            padding: const EdgeInsets.all(16),
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 252, 133, 37),
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+            ),
+                      ),
+                  Transform.translate(
+                    offset: const Offset(0, -120),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        width: 400,
+                        height: 250,
+                        child: Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          elevation: 8,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Center(
+                          child: Image.network(
+                            selectedQuestions[0]['question'],
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  const Center(
-                    child: Text(
-                      "Select the correct option",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 189, 74, 2),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.35,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 255, 240, 210),
-                      borderRadius: BorderRadius.circular(16.0),
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 255, 170, 0),
-                        width: 3.0,
-                      ),
-                    ),
-                    child: Center(
-                      child: Image.network(
-                        selectedQuestions[0]['question'],
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
                   // Display options in two rows with two options each
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildOptionCard(0),
-                      buildOptionCard(1),
-                    ],
+                  Transform.translate(
+                    offset: const Offset(0, -120),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16,right: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          buildOptionCard(0),
+                          buildOptionCard(1),
+                        ],
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildOptionCard(2),
-                      buildOptionCard(3),
-                    ],
+                  Transform.translate(
+                    offset: const Offset(0, -120),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16,right: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          buildOptionCard(2),
+                          buildOptionCard(3),
+                        ],
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 30),
                 ],
               ),
-            ),
-          )
+            )
         : const Center(
             child:
                 CircularProgressIndicator(), // Show loading indicator while fetching data
@@ -253,6 +268,7 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
                 )
             : null, // Disable tap if an option is already selected
         child: Card(
+          elevation: 12,
           color: _cardColors[index],
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
@@ -385,7 +401,7 @@ class _ResultScreenState extends State<ResultScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 250, 233, 215),
+        backgroundColor: const Color.fromARGB(255, 250, 233, 215),
         body: Container(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
