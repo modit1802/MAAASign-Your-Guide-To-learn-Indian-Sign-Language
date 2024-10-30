@@ -32,7 +32,7 @@ class SimpleRelations extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Simple Relations",
+          "Let's Learn Compound Greetings",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -78,16 +78,16 @@ class _GreetingGifsState extends State<GreetingGifs> {
   @override
   void dispose() {
     for (var videoWidget in _videoWidgets) {
-      videoWidget.controller.dispose();
+      videoWidget.disposeController(); // Ensure all controllers are disposed
     }
     super.dispose();
   }
 
   void _onPageChanged(int index) {
     setState(() {
-      _videoWidgets[_currentIndex].controller.pause();
+      _videoWidgets[_currentIndex].pauseVideo(); // Pause the current video
       _currentIndex = index;
-      _videoWidgets[_currentIndex].controller.play();
+      _videoWidgets[_currentIndex].playVideo(); // Play the new video
     });
   }
 
@@ -151,6 +151,24 @@ class VideoWidget extends StatefulWidget {
 
   @override
   _VideoWidgetState createState() => _VideoWidgetState();
+
+  void playVideo() {
+    if (controller.value.isInitialized) {
+      controller.play();
+    }
+  }
+
+  void pauseVideo() {
+    if (controller.value.isInitialized) {
+      controller.pause();
+    }
+  }
+
+  void disposeController() {
+    if (controller.value.isInitialized) {
+      controller.dispose();
+    }
+  }
 }
 
 class _VideoWidgetState extends State<VideoWidget> {
@@ -170,7 +188,6 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   void dispose() {
     widget.controller.removeListener(_onVideoEnd);
-    widget.controller.dispose();
     super.dispose();
   }
 
