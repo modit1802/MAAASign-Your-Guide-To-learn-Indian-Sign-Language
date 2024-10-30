@@ -1,5 +1,5 @@
+import 'package:SignEase/numberfinal.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/numberfinal.dart';
 import 'dart:async'; // for Future.delayed;
 import 'package:collection/collection.dart';
 

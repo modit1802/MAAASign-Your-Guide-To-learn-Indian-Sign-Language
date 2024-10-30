@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:SignEase/Challengers%20For%20Week%201/challengernumbers/challenger1number.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/Challengers%20For%20Week%201/challengernumbers/challenger1number.dart';
 
 class MoveForwardtonumbers extends StatelessWidget {
   final int score;

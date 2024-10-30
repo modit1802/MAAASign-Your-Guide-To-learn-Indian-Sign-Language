@@ -1,7 +1,7 @@
+import 'package:SignEase/Challengers%20For%20Week%201/challengernumbers/challenger1number.dart';
 import 'package:flutter/material.dart';
 import 'dart:async'; // for Future.delayed
 import 'package:collection/collection.dart';
-import 'package:flutter_login_signup/Challengers%20For%20Week%201/challengernumbers/challenger1number.dart';
 
 class Challenger6 extends StatelessWidget {
   Challenger6({required this.score});

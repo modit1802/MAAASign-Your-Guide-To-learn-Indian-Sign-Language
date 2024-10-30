@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/simplesentences.dart';
-import 'package:flutter_login_signup/compoundsentences.dart';
+import 'package:SignEase/simplesentences.dart';
+import 'package:SignEase/compoundsentences.dart';
 
 class SentenceStartscreen extends StatefulWidget {
   const SentenceStartscreen({super.key});
@@ -55,7 +55,7 @@ class _SentenceStartscreenState extends State<SentenceStartscreen> {
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              "Simple Sentences",
+                              "Simple Greetings",
                               style: TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),
@@ -78,7 +78,7 @@ class _SentenceStartscreenState extends State<SentenceStartscreen> {
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              "Compound Sentences",
+                              "Compound Greetings",
                               style: TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),

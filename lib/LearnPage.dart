@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter_login_signup/Week 2/learngreeting.dart';
-import 'package:flutter_login_signup/Week 2/learnrelations.dart';
+import 'package:SignEase/Week 2/learngreeting.dart';
+import 'package:SignEase/Week 2/learnrelations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_login_signup/learnalphabet.dart';
-import 'package:flutter_login_signup/learnnumbers.dart';
+import 'package:SignEase/learnalphabet.dart';
+import 'package:SignEase/learnnumbers.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_login_signup/login_page.dart'; // Assuming this is the file for LoginPage
+import 'package:SignEase/login_page.dart'; // Assuming this is the file for LoginPage
 
 class LearnPage extends StatefulWidget {
   const LearnPage({super.key});
@@ -296,9 +296,9 @@ class _LearnDashboardState extends State<LearnDashboard> {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     color: Colors.white,
-                    child: Text(
+                    child: const Text(
                       'Learn Alphabet',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -330,7 +330,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.0),
-                              color: Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              color: const Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
                               backgroundBlendMode: BlendMode.modulate,
                             ),
                           ),
@@ -341,7 +341,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     color: Colors.white,
-                    child: Align(
+                    child: const Align(
                       alignment: Alignment.bottomRight,
                       child: Text(
                         'Tap to Learn',
@@ -379,7 +379,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     color: Colors.white,
-                    child: Text(
+                    child: const Text(
                       'Learn Numbers',
                       style: TextStyle(
                         color: Colors.black,
@@ -413,7 +413,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.0),
-                              color: Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              color: const Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
                               backgroundBlendMode: BlendMode.modulate,
                             ),
                           ),
@@ -424,7 +424,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     color: Colors.white,
-                    child: Align(
+                    child: const Align(
                       alignment: Alignment.bottomRight,
                       child: Text(
                         'Tap to Learn',
@@ -462,7 +462,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     color: Colors.white,
-                    child: Text(
+                    child: const Text(
                       'Learn Greetings',
                       style: TextStyle(
                         color: Colors.black,
@@ -496,7 +496,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.0),
-                              color: Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              color: const Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
                               backgroundBlendMode: BlendMode.modulate,
                             ),
                           ),
@@ -507,7 +507,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     color: Colors.white,
-                    child: Align(
+                    child: const Align(
                       alignment: Alignment.bottomRight,
                       child: Text(
                         'Tap to Learn',
@@ -545,7 +545,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     color: Colors.white,
-                    child: Text(
+                    child: const Text(
                       'Learn Relations',
                       style: TextStyle(
                         color: Colors.black,
@@ -579,7 +579,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.0),
-                              color: Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              color: const Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
                               backgroundBlendMode: BlendMode.modulate,
                             ),
                           ),
@@ -590,7 +590,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     color: Colors.white,
-                    child: Align(
+                    child: const Align(
                       alignment: Alignment.bottomRight,
                       child: Text(
                         'Tap to Learn',

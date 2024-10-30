@@ -3,13 +3,13 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/Week 2/week2_entry.dart';
+import 'package:SignEase/Week 2/week2_entry.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_login_signup/newscreen.dart';
+import 'package:SignEase/newscreen.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_login_signup/login_page.dart'; // Assuming this is the file for LoginPage
-
+import 'package:SignEase/login_page.dart'; // Assuming this is the file for LoginPage
+import 'package:SignEase/week3_start_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -250,7 +250,7 @@ class GridDashboard extends StatelessWidget {
 
   final Items item2 = Items(
     title: "Week 2",
-    subtitle: "Learn Greetings and etiquettes in Indian Sign language",
+    subtitle: "Learn Greetings and Relations in Indian Sign language",
     event: "",
     img: "images/food.png",
   );
@@ -308,6 +308,9 @@ class GridDashboard extends StatelessWidget {
             }
             else if (data.title == "Week 2") {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Week2NewScreen()));
+            }
+            else if (data.title == "Week 3") {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Week3()));
             }
           },
           child: Container(

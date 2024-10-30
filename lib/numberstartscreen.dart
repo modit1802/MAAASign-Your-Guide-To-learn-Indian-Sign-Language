@@ -1,8 +1,8 @@
 import 'dart:async';
+import 'package:SignEase/compoundsentences.dart';
+import 'package:SignEase/learnnumbers.dart';
+import 'package:SignEase/matchmaker_number.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login_signup/learnalphabet.dart';
-import 'package:flutter_login_signup/learnnumbers.dart';
-import 'package:flutter_login_signup/matchmaker_number.dart';
 
 void main() {
   runApp(const MyApp());

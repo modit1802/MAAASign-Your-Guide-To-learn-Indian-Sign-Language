@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart'; // Import Lottie package
-import 'package:flutter_login_signup/Initial_page_1.dart';
-import 'package:flutter_login_signup/signup_page.dart'; // Import your SignupPage
+import 'package:SignEase/Initial_page_1.dart';
+import 'package:SignEase/signup_page.dart'; // Import your SignupPage
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

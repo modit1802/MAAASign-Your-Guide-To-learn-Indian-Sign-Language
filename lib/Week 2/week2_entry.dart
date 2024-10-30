@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_signup/Initial_page_1.dart';
-import 'package:flutter_login_signup/alphabetstart.dart';
-import 'package:flutter_login_signup/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
+import 'package:SignEase/Initial_page_1.dart';
+import 'package:SignEase/Week 2/alphabetstart.dart';
+import 'package:SignEase/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
 
 class Week2NewScreen extends StatefulWidget {
   const Week2NewScreen({super.key});
@@ -251,7 +251,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
               child: Positioned(
                 child: Center(
                   child: Image.asset(
-                    'images/teacher2.gif', // Update the image path here
+                    'images/teacher_week.gif', // Update the image path here
                     height: 350, // Set the height of the GIF
                     fit: BoxFit.contain, // Adjust how the GIF is displayed
                   ),

@@ -166,7 +166,7 @@ class _AlphabetLearnState extends State<AlphabetLearn> with SingleTickerProvider
     'I': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728467605/I1_vfzfjq.png',
     'J': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728467606/J1_rndtny.png',
     'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728467605/K1_fm574r.png',
-    'L': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728467605/L1_igjjkc.png ',
+    'L': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728467605/L1_igjjkc.png',
     'M': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728467605/M1_pxewpw.png',
     'N': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728467606/N1_eefhuu.png',
     'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728467606/O1_m520oa.png',

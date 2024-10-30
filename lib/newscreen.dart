@@ -1,9 +1,10 @@
+import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/challenger1.dart';
+import 'package:SignEase/Initial_page_1.dart';
+import 'package:SignEase/alphabetstart.dart';
+import 'package:SignEase/numberstart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_login_signup/Initial_page_1.dart';
-import 'package:flutter_login_signup/alphabetstart.dart';
-import 'package:flutter_login_signup/numberstart.dart';
-import 'package:flutter_login_signup/Challengers%20For%20Week%201/challengeralphabets/challenger1.dart'; 
+
 
 class NewScreen extends StatefulWidget {
   const NewScreen({super.key});
