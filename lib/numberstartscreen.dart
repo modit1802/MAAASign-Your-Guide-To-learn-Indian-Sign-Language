@@ -321,7 +321,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           ),
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => MoveForwardtonumbers(score: widget.score)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Match_maker_numbers(score: widget.score)));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),

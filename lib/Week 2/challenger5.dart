@@ -1,4 +1,3 @@
-import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/challenger6.dart';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
@@ -21,7 +20,7 @@ class Challenger5 extends StatelessWidget {
             colors: [
               Color.fromARGB(255, 207, 238, 252),
               Color.fromARGB(255, 242, 222, 246),
-              Colors.white,
+              Colors.white
             ],
           ),
         ),
@@ -41,14 +40,14 @@ class ThirdGame extends StatefulWidget {
 
 class _ThirdGameState extends State<ThirdGame> {
   List<String?> solution = ["wooden", "wooden", "wooden"];
-  List<String> availableLetters = ["A", "C", "R", "O"];
+  List<String> availableLetters = ["B", "O", "X", "R"];
 
-  // Mapping letters to their Cloudinary URLs
+  // Cloudinary URLs for each letter and placeholder
   final Map<String, String> cloudinaryUrls = {
-    "A": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/A_zlgdfc.png",
-    "C": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png",
-    "R": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
+    "B": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/B_nf0pwi.png",
     "O": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
+    "X": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/X_kedszo.png",
+    "R": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
     "wooden": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png",
   };
 
@@ -65,7 +64,8 @@ class _ThirdGameState extends State<ThirdGame> {
   }
 
   void checkSolution() {
-    if (const ListEquality().equals(solution, ["C", "A", "R"])) {
+    if (const ListEquality().equals(solution, ["B", "O", "X"])) {
+      // Correct solution
       setState(() {
         isCorrectSolution = true;
         showMoveToNextButton = true;
@@ -78,10 +78,12 @@ class _ThirdGameState extends State<ThirdGame> {
         }
       });
     } else {
+      // Incorrect solution
       setState(() {
         attempts++;
         if (attempts >= maxAttempts) {
-          solution = ["C", "A", "R"];
+          // Auto-fill the correct answer after max attempts
+          solution = ["B", "O", "X"];
           isCorrectSolution = false;
           showMoveToNextButton = false;
         } else {
@@ -102,7 +104,7 @@ class _ThirdGameState extends State<ThirdGame> {
             children: [
               if (isCorrectSolution != null && isCorrectSolution!)
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   child: Image.network(
                     "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
                     width: 100,
@@ -111,7 +113,7 @@ class _ThirdGameState extends State<ThirdGame> {
                 ),
               if (isCorrectSolution != null && !isCorrectSolution!)
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.symmetric(vertical: 10),
                   child: Image.network(
                     "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
                     width: 100,
@@ -119,7 +121,7 @@ class _ThirdGameState extends State<ThirdGame> {
                   ),
                 ),
               Image.network(
-                "https://res.cloudinary.com/dfph32nsq/image/upload/v1727363980/Challenger_5_bpyctt.png",
+                "https://res.cloudinary.com/dfph32nsq/image/upload/v1727363980/Challenger_4_bjnmkr.png",
                 width: 300,
                 height: 200,
               ),
@@ -137,7 +139,7 @@ class _ThirdGameState extends State<ThirdGame> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Image.network(
-                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/car_ooxplt.png",
+                        "https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/box_madnit.png",
                         width: 180,
                         height: 180,
                       ),
@@ -145,14 +147,15 @@ class _ThirdGameState extends State<ThirdGame> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(3, (index) {
                   return DragTarget<String>(
                     builder: (context, accepted, rejected) {
                       return GestureDetector(
-onTap: () {
+                        onTap: () {
   setState(() {
     // If the solution slot has a letter, remove it from the solution
     if (solution[index] != "wooden" && solution[index] != null) {
@@ -173,22 +176,23 @@ onTap: () {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: solution[index] != null
+
                                 ? Image.network(
                               cloudinaryUrls[solution[index]!]!,
                               width: double.infinity,
                               height: double.infinity,
                               fit: BoxFit.cover,
                             )
-                                : const SizedBox(),
+                                : SizedBox(),
                           ),
                         ),
                       );
                     },
-                    onWillAcceptWithDetails: (data) => true,
-                    onAcceptWithDetails: (data) {
+                    onWillAccept: (data) => true,
+                    onAccept: (data) {
                       setState(() {
                         if (index >= 0 && index < solution.length) {
-                          solution[index] = data as String?;
+                          solution[index] = data;
                           availableLetters.remove(data);
                         }
                       });
@@ -196,7 +200,8 @@ onTap: () {
                   );
                 }),
               ),
-              const SizedBox(height: 20),
+
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: availableLetters.map((letter) {
@@ -218,7 +223,8 @@ onTap: () {
                   );
                 }).toList(),
               ),
-              const SizedBox(height: 20),
+
+              SizedBox(height: 20),
               if (!showMoveToNextButton)
                 ElevatedButton(
                   onPressed: checkSolution,
@@ -230,7 +236,7 @@ onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Challenger6(score: score),
+                        builder: (context) => Challenger5(score: score),
                       ),
                     );
                   },

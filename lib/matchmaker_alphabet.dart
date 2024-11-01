@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:SignEase/Tutorial_screen_for_challenger_matchmaker.dart';
 import 'package:flutter/material.dart';
 
 class Match_maker_alphabet extends StatelessWidget {
@@ -9,17 +10,9 @@ class Match_maker_alphabet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 250, 233, 215),
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 255, 150, 250),
-              Color.fromARGB(255, 159, 223, 252),
-              Colors.white
-            ],
-          ),
         ),
         child: Stack(
           children: [
@@ -29,6 +22,8 @@ class Match_maker_alphabet extends StatelessWidget {
               top: 40,
               left: 20,
               child: FloatingActionButton(
+                backgroundColor: Color.fromARGB(255, 252, 133, 37),
+                foregroundColor: Colors.white,
                 onPressed: () {
                   // Navigate to the initial page (modify as needed)
                   Navigator.pop(context); // Replace with your initial page
@@ -77,12 +72,13 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
         'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png',
   };
   Map<String, String> images2 = {
-    'O':
-        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/orange_jvyqo7.png',
     'K':
         'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346884/kite_t2qkvv.png',
     'C':
         'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969891/cherry_hsxug7.png',
+    'O':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/orange_jvyqo7.png',
+
     'D':
         'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/dog_rlu4zj.png',
     'E':
@@ -96,15 +92,31 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
   late Timer _buttonTimer;
   bool showMagicEffect = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-    score = widget.score;
-  }
+ @override
+void initState() {
+  super.initState();
+  _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(seconds: 2), // Set your desired duration
+  );
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    _showtutorialscreen();
+  });
+  score = widget.score;
+}
+
+  void _showtutorialscreen() {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => Tutorial_screen_for_challenger_matchmaker(
+        onBackPressed: () {
+          Navigator.pop(context); // Return to the current screen on back press
+        },
+      ),
+    ),
+  );
+}
 
   @override
   void dispose() {
@@ -115,162 +127,190 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 50),
-              Text(
-                'Score: $score',
-                style: const TextStyle(fontSize: 20),
+  @override
+Widget build(BuildContext context) {
+  return Stack(
+    children: [
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 50),
+Positioned(
+          top: 50,
+          left: 16,
+          child: Container(
+            height:60,
+            width:150,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Center(
+              child: Text(
+                "Score: $score",
+                style: const TextStyle(color: Colors.white,fontSize: 24),
               ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: alphabetList
-                            .map((alphabet) => Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0), // Space between images
-                                  child: Draggable<String>(
-                                    data: alphabet,
-                                    feedback: Image.network(
-                                      images[alphabet]!,
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    childWhenDragging: Container(),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 7,
-                                            offset: const Offset(0, 3),
-                                          ),
-                                        ],
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Image.network(
-                                          images[alphabet]!,
-                                          width: 90,
-                                          height: 90,
+            ),
+          ),
+        ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: alphabetList
+                          .map((alphabet) => Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8.0), // Space between images
+                                child: Draggable<String>(
+                                  data: alphabet,
+                                  feedback: Image.network(
+                                    images[alphabet]!,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  childWhenDragging: Container(),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 7,
+                                          offset: const Offset(0, 3),
                                         ),
+                                      ],
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: Image.network(
+                                        images[alphabet]!,
+                                        width: 90,
+                                        height: 90,
                                       ),
                                     ),
                                   ),
-                                ))
-                            .toList(),
-                      ),
+                                ),
+                              ))
+                          .toList(),
                     ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: matches.entries.map((entry) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4.0),
-                              child: DragTarget<String>(
-                                builder: (context, accepted, rejected) {
-                                  return Column(
-                                    children: [
-                                      Text(entry.value),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.circular(12),
-                                          border: Border.all(color: const Color.fromARGB(255, 255, 255, 255)), // Border for card effect
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.5),
-                                              spreadRadius: 2,
-                                              blurRadius: 7,
-                                              offset: const Offset(0, 3),
-                                            ),
-                                          ],
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(12),
-                                          child: Image.network(
-                                            images2[entry.key]!,
-                                            width: 90,
-                                            height: 90,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                                onWillAccept: (data) {
-                                  return data == entry.key;
-                                },
-                                onAccept: (data) {
-                                  if (data == entry.key) {
-                                    setState(() {
-                                      score += 100;
-                                      alphabetList.remove(data);
-                                      matches.remove(entry.key);
-                                      if (alphabetList.isEmpty) {
-                                        _completeGame();
-                                      }
-                                    });
-                                  }
-                                },
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: matches.entries.map((entry) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child:DragTarget<String>(
+  builder: (context, accepted, rejected) {
+    return Column(
+      children: [
+        Text(entry.value),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.white),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.white.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 7,
+                offset: Offset(0, 3),
               ),
             ],
           ),
-        ),
-        if (showRibbon) const RibbonWidget(),
-        if (showNextStepButton)
-          Center(
-            child: Positioned(
-              bottom: 20,
-              child: Padding(
-                padding: const EdgeInsets.all(108.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Back button with icon
-                  },
-                  child: const Icon(Icons.arrow_back), // Back icon
-                ),
-              ),
-            ),
-          ),
-        if (showMagicEffect)
-          Positioned.fill(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
             child: Image.network(
-              'https://res.cloudinary.com/dfph32nsq/image/upload/v1727345820/star_cpjyys.gif', // Replace with your star effect URL
-              fit: BoxFit.cover,
+              images2[entry.key]!,
+              width: 90,
+              height: 90,
             ),
-          ),
-        Positioned(
-          bottom: 20,
-          left: 20,
-          child: ElevatedButton(
-            onPressed: _skipAllAnimations,
-            child: const Text('Skip'),
           ),
         ),
       ],
     );
-  }
+  },
+  onWillAccept: (data) {
+    return data == entry.key;
+  },
+  onAccept: (data) {
+    if (data == entry.key) {
+      setState(() {
+        score += 100;
+        alphabetList.remove(data);
+        matches.remove(entry.key);
+        print('Remaining letters: $alphabetList'); // Debug print
+
+        // Check if the alphabetList is empty
+        if (alphabetList.isEmpty) {
+          _completeGame();
+        }
+      });
+    }
+  },
+),
+
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      if (showRibbon) const RibbonWidget(),
+      if (showNextStepButton)
+        Center(
+          child: Positioned(
+            bottom: 20,
+            child: Padding(
+              padding: const EdgeInsets.all(108.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 252, 133, 37),
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.pop(context); // Back button with icon
+                },
+                child: const Icon(Icons.arrow_back), // Back icon
+              ),
+            ),
+          ),
+        ),
+      if (showMagicEffect)
+        Positioned.fill(
+          child: Image.network(
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727345820/star_cpjyys.gif', // Replace with your star effect URL
+            fit: BoxFit.cover,
+          ),
+        ),
+      Positioned(
+        bottom: 20,
+        left: 20,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color.fromARGB(255, 252, 133, 37),
+            foregroundColor: Colors.white,
+          ),
+          onPressed: _skipAllAnimations,
+          child: const Text('Skip'),
+        ),
+      ),
+    ],
+  );
+}
 
   void _skipAllAnimations() {
     // Simulate dropping all items one by one without increasing score

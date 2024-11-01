@@ -1,91 +1,44 @@
 import 'dart:math';
-import 'package:SignEase/Quiz_Number_ResultScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
-class PracticeAssignment2 extends StatefulWidget {
+class Play_Incorrect_Solution_Numbers extends StatefulWidget {
+  final List<Map<String, dynamic>> incorrectQuestions;
+
+  Play_Incorrect_Solution_Numbers({Key? key, required this.incorrectQuestions})
+      : super(key: key);
+
   @override
-  _PracticeAssignment2State createState() => _PracticeAssignment2State();
+  State<Play_Incorrect_Solution_Numbers> createState() =>
+      _Play_Incorrect_Solution_NumbersState();
 }
 
-class _PracticeAssignment2State extends State<PracticeAssignment2> {
- List<Map<String, dynamic>> questionsAndSolutions = [
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263998/1_ypmmhh.png', 'solution': '1'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716936/0_e1tfib.png', 'solution': '0'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263999/2_tb6h2y.png', 'solution': '2'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730264000/4_hltwy4.png', 'solution': '4'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263999/10_qkdwqf.png', 'solution': '10'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730264000/3_tbfqjk.png', 'solution': '3'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730264002/5_nofsuk.png', 'solution': '5'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730264003/6_ireutv.png', 'solution': '6'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263998/7_msy2e3.png', 'solution': '7'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263999/9_mgaajm.png', 'solution': '9'},
-    { 'question':'https://res.cloudinary.com/dfph32nsq/image/upload/v1730263999/8_kabrqo.png', 'solution': '8'},
-  ];
-
+class _Play_Incorrect_Solution_NumbersState
+    extends State<Play_Incorrect_Solution_Numbers> {
+  List<Map<String, dynamic>> incorrectQuestions = [];
   List<Map<String, dynamic>> selectedQuestions = [];
-  List<Map<String, dynamic>> incorrectQuestions =
-      []; // List to store incorrect questions
-  Random random = Random();
-  int score = 0;
-  int selectedOptionIndex = -1;
   List<String> currentOptions = [];
-  bool isLoading = true;
+  List<Color> _cardColors = List.filled(4, Colors.white);
+  List<Color> _textColors = List.filled(4, Colors.black);
+
+  int score = 0;
   int correctcount = 0;
   int incorrectcount = 0;
-  late mongo.Db db; // MongoDB database instance
-  late mongo.DbCollection userCollection;
-  String? userId; // Flag to track loading state
+  int selectedOptionIndex = -1;
 
   @override
   void initState() {
     super.initState();
-    generateRandomQuiz();
-    _fetchUserId();
-    connectToMongoDB();
-    setOptionsForQuestion(); // Generate options for the first question
-  }
-
-  Future<void> _fetchUserId() async {
-    User? user = FirebaseAuth.instance.currentUser; // Get current user
-    if (user != null) {
-      setState(() {
-        userId = user.uid; // Set user ID
-      });
-      print('User ID: $userId'); // Print user ID in the console for debugging
-    }
-  }
-
-  Future<void> connectToMongoDB() async {
-    db = mongo.Db(
-        'mongodb://moditgrover2003iii:modit1346@cluster0-shard-00-00.eocm8.mongodb.net:27017,cluster0-shard-00-01.eocm8.mongodb.net:27017,cluster0-shard-00-02.eocm8.mongodb.net:27017/mydatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
-
-    try {
-      await db.open();
-      userCollection = db.collection('users');
-      print("Connected to MongoDB!");
-    } catch (e) {
-      print("Error connecting to MongoDB: $e");
-    }
-  }
-
-  void generateRandomQuiz() {
-    selectedQuestions = [...questionsAndSolutions]..shuffle();
-    selectedQuestions =
-        selectedQuestions.sublist(0, 6); // Select 6 random questions
-  }
-
-  void setOptionsForQuestion() {
-    // Generate options for the current question and shuffle them once
-    currentOptions = generateOptions(selectedQuestions[0]['solution']);
-    isLoading = true; // Set loading to true while options are being set
+    incorrectQuestions = widget.incorrectQuestions;
+    // Initialize selectedQuestions with incorrectQuestions
+    selectedQuestions = List.from(incorrectQuestions);
+    setOptionsForQuestion();
   }
 
   List<String> generateOptions(String correctSolution) {
     List<String> options = [];
     options.add(correctSolution); // Add correct answer
 
+    Random random = Random();
     // Generate random wrong options
     while (options.length < 4) {
     String randomNumber = random.nextInt(11).toString(); // Generate a random number between 0 and 10
@@ -98,11 +51,13 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
     return options;
   }
 
-  List<Color> _cardColors = List.filled(4, Colors.white);
-  List<Color> _textColors = List.filled(4, Colors.black);
+  void setOptionsForQuestion() {
+    if (selectedQuestions.isNotEmpty) {
+      currentOptions = generateOptions(selectedQuestions[0]['correctSolution']);
+    }
+  }
 
-  void _answerQuestion(
-      String selectedOption, String correctSolution, int index) {
+  void _answerQuestion(String selectedOption, String correctSolution, int index) {
     setState(() {
       selectedOptionIndex = index; // Mark the selected option
       if (selectedOption == correctSolution) {
@@ -114,15 +69,10 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
         _cardColors[index] = Colors.red;
         _textColors[index] = Colors.white;
         incorrectcount++;
-        // Add the incorrect question to the list with the question and correct solution
-        incorrectQuestions.add({
-          'question': selectedQuestions[0]['question'],
-          'correctSolution': correctSolution,
-        });
       }
     });
 
-    // 2-3 seconds delay before showing the next question
+    // 1-second delay before showing the next question
     Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         _cardColors = List.filled(4, Colors.white);
@@ -134,26 +84,49 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
         selectedQuestions.removeAt(0);
         setOptionsForQuestion(); // Set new options for the next question
       } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Quiz_Number_ResultScreen(
-              score: score,
-              correctcount:correctcount,
-              incorrectcount:incorrectcount,
-              totalQuestions: 6,
-              incorrectQuestions: incorrectQuestions,
-            ),
-          ),
-        );
+         Navigator.pop(context);
       }
     });
+  }
+
+  Widget buildOptionCard(int index) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: selectedOptionIndex == -1
+            ? () => _answerQuestion(
+                  currentOptions[index],
+                  selectedQuestions[0]['correctSolution'],
+                  index,
+                )
+            : null, // Disable tap if an option is already selected
+        child: Card(
+          elevation: 12,
+          color: _cardColors[index],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Center(
+              child: Text(
+                currentOptions[index],
+                style: TextStyle(
+                  fontSize: 28,
+                  color: _textColors[index],
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+      backgroundColor: Color.fromARGB(255, 250, 233, 215),
       body: selectedQuestions.isNotEmpty
           ? SingleChildScrollView(
               child: Column(
@@ -188,7 +161,7 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
                               children: [
                                 // Display the question number
                                 Text(
-                                  'Question ${6 - selectedQuestions.length + 1}/${6}', // Show the question number
+                                  'Question ${6 - selectedQuestions.length + 1}/6',
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -259,45 +232,50 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
                 ],
               ),
             )
-          : const Center(
-              child:
-                  CircularProgressIndicator(), // Show loading indicator while fetching data
-            ),
-    );
-  }
-
-  // Helper method to build option cards
-  Widget buildOptionCard(int index) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: selectedOptionIndex == -1
-            ? () => _answerQuestion(
-                  currentOptions[index],
-                  selectedQuestions[0]['solution'],
-                  index,
-                )
-            : null, // Disable tap if an option is already selected
-        child: Card(
-          elevation: 12,
-          color: _cardColors[index],
+          : Padding(
+  padding: const EdgeInsets.all(16.0),
+  child: Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Card(
+          elevation: 8,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
+          color: Colors.white,
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Center(
-              child: Text(
-                currentOptions[index],
-                style: TextStyle(
-                  fontSize: 28,
-                  color: _textColors[index],
-                  fontWeight: FontWeight.bold,
-                ),
+            padding: const EdgeInsets.all(24),
+            child: Text(
+              "Wohoo !! There are no incorrect questions",
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.orange,
+                fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),
-      ),
-    );
+        const SizedBox(height: 16), // Add spacing between card and button
+        ElevatedButton.icon(
+          onPressed: () {
+            Navigator.pop(context); // Navigates back to the previous screen
+          },
+          icon: Icon(Icons.arrow_back,color: Colors.white,),
+          label: Text("Back To Result Screen",style: TextStyle(color: Colors.white),),
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), backgroundColor: Colors.orange,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ), // Set button color to orange
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+
+  );
   }
 }

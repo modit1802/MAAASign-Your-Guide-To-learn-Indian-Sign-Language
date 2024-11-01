@@ -1,5 +1,7 @@
+import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/learnalphabet.dart';
 import 'package:SignEase/matchmaker_alphabet.dart';
+import 'package:SignEase/newscreen.dart';
 import 'package:SignEase/practiceassignment1.dart';
 import 'package:flutter/material.dart';
 
@@ -187,8 +189,92 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                 ),
               ),
             ),
+            _buildBottomButtons(),
+             Positioned(
+          top: 40,
+          left: 20,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NewScreen())); // Navigates back to the previous screen
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    spreadRadius: 2,
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.arrow_back,
+                color: Color.fromARGB(255, 165, 74, 17),
+              ),
+            ),
+          ),
+        ),
         ],
       ),
     );
   }
+
+
+// Bottom Buttons
+  Widget _buildBottomButtons() {
+    return Positioned(
+      bottom: 20,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildBottomButton(icon: Icons.home, onTap: () => _navigateToPage(const InitialPage1())),
+            const SizedBox(width: 20),
+            _buildBottomButton(icon: Icons.score, onTap: () => _navigateToPage(const InitialPage1())),
+            const SizedBox(width: 20),
+            _buildBottomButton(icon: Icons.assignment, onTap: () => _navigateToPage(const InitialPage1())),
+            const SizedBox(width: 20),
+            _buildBottomButton(icon: Icons.info, onTap: () => _navigateToPage(const InitialPage1())),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Bottom Button Builder for consistency
+  Widget _buildBottomButton({required IconData icon, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              spreadRadius: 2,
+              blurRadius: 4,
+            ),
+          ],
+        ),
+        child: Icon(
+          icon,
+          size: 30,
+          color: const Color.fromARGB(255, 165, 74, 17),
+        ),
+      ),
+    );
+  }
+
+  // Navigation Helper
+  void _navigateToPage(Widget page) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  }
+
 }
