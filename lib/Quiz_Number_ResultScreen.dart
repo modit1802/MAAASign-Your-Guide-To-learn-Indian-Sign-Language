@@ -2,10 +2,8 @@ import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Play_Incorrect_Solution_Numbers.dart';
 import 'package:SignEase/Review_incorrect_alphabet_solution.dart';
-import 'package:SignEase/play_incorrect_solution_alphabet.dart';
 import 'package:SignEase/practiceassignment1.dart';
 import 'package:flutter/material.dart';
-import 'package:SignEase/alphabetstart.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
@@ -159,205 +157,196 @@ class _Quiz_Number_ResultScreenState
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const AlphabetStartscreen()),
-          (route) => false,
-        );
-        return false;
-      },
-      child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 250, 233, 215),
-        body: Screenshot(
-          controller: _screenshotController,
-          child: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    height: 400,
-                    padding: const EdgeInsets.all(16),
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 252, 133, 37),
-                      borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(20)),
-                    ),
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 60),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              width: 200,
-                              height: 200,
-                              decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 255, 176, 111),
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            Container(
-                              width: 150,
-                              height: 150,
-                              decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 249, 147, 63),
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            Container(
-                              width: 110,
-                              height: 110,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    "Your Score",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${widget.score} pts",
-                                    style: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 183, 83, 2),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+      body: Screenshot(
+        controller: _screenshotController,
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: 400,
+                  padding: const EdgeInsets.all(16),
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 252, 133, 37),
+                    borderRadius:
+                        BorderRadius.vertical(bottom: Radius.circular(20)),
                   ),
-                  Transform.translate(
-                    offset: const Offset(0, -130),
+                  child: Align(
+                    alignment: Alignment.topCenter,
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Container(
-                        width: 450,
-                        height: 250,
-                        child: Card(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          elevation: 8,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Center(
-                              child: GridView.count(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 8,
-                                crossAxisSpacing: 8,
-                                childAspectRatio: 3,
-                                physics: const NeverScrollableScrollPhysics(),
-                                children: [
-                                  _buildStatItem("100%", "Completion",
-                                      const Color.fromARGB(255, 247, 136, 44)),
-                                  _buildStatItem(
-                                      "${widget.totalQuestions}",
-                                      "Total Questions",
-                                      const Color.fromARGB(255, 247, 136, 44)),
-                                  _buildStatItem("${widget.correctcount}",
-                                      "Correct", Colors.green),
-                                  _buildStatItem("${widget.incorrectcount}",
-                                      "Wrong", Colors.red),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Transform.translate(
-                    offset: const Offset(0, -180),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: GridView.count(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.only(top: 60),
+                      child: Stack(
+                        alignment: Alignment.center,
                         children: [
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            PracticeAssignment1()));
-                              },
-                              child: _buildCircularButton(
-                                  Icons.refresh, "Play Again", Colors.teal)),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Review_Incorrect_Solution(
-                                            incorrectQuestions:
-                                                widget.incorrectQuestions,
-                                          )));
-                            },
-                            child: _buildCircularButton(Icons.visibility,
-                                "Review Answer", Colors.brown),
+                          Container(
+                            width: 200,
+                            height: 200,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 255, 176, 111),
+                              shape: BoxShape.circle,
+                            ),
                           ),
-                          GestureDetector(
-                            onTap: _shareScore,
-                            child: _buildCircularButton(
-                                Icons.share, "Share Score", Colors.blue),
+                          Container(
+                            width: 150,
+                            height: 150,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(255, 249, 147, 63),
+                              shape: BoxShape.circle,
+                            ),
                           ),
-                          GestureDetector(
-                            onTap: _generateAndSharePDF,
-                            child: _buildCircularButton(Icons.picture_as_pdf,
-                                "Generate PDF", Colors.green),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => InitialPage1()));
-                            },
-                            child: _buildCircularButton(
-                                Icons.home, "Home", Colors.purple),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Play_Incorrect_Solution_Numbers(
-                                            incorrectQuestions:
-                                                widget.incorrectQuestions,
-                                          )));
-                            },
-                            child: _buildCircularButton(Icons.assessment_outlined,
-                                "Incorrect Questions", Colors.grey),
+                          Container(
+                            width: 110,
+                            height: 110,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Your Score",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Text(
+                                  "${widget.score} pts",
+                                  style: const TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 183, 83, 2),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                Transform.translate(
+                  offset: const Offset(0, -130),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      width: 450,
+                      height: 250,
+                      child: Card(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        elevation: 8,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Center(
+                            child: GridView.count(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 8,
+                              crossAxisSpacing: 8,
+                              childAspectRatio: 3,
+                              physics: const NeverScrollableScrollPhysics(),
+                              children: [
+                                _buildStatItem("100%", "Completion",
+                                    const Color.fromARGB(255, 247, 136, 44)),
+                                _buildStatItem(
+                                    "${widget.totalQuestions}",
+                                    "Total Questions",
+                                    const Color.fromARGB(255, 247, 136, 44)),
+                                _buildStatItem("${widget.correctcount}",
+                                    "Correct", Colors.green),
+                                _buildStatItem("${widget.incorrectcount}",
+                                    "Wrong", Colors.red),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Transform.translate(
+                  offset: const Offset(0, -180),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          PracticeAssignment1()));
+                            },
+                            child: _buildCircularButton(
+                                Icons.refresh, "Play Again", Colors.teal)),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Review_Incorrect_Solution(
+                                          incorrectQuestions:
+                                              widget.incorrectQuestions,
+                                        )));
+                          },
+                          child: _buildCircularButton(Icons.visibility,
+                              "Review Answer", Colors.brown),
+                        ),
+                        GestureDetector(
+                          onTap: _shareScore,
+                          child: _buildCircularButton(
+                              Icons.share, "Share Score", Colors.blue),
+                        ),
+                        GestureDetector(
+                          onTap: _generateAndSharePDF,
+                          child: _buildCircularButton(Icons.picture_as_pdf,
+                              "Generate PDF", Colors.green),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => InitialPage1()));
+                          },
+                          child: _buildCircularButton(
+                              Icons.home, "Home", Colors.purple),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Play_Incorrect_Solution_Numbers(
+                                          incorrectQuestions:
+                                              widget.incorrectQuestions,
+                                        )));
+                          },
+                          child: _buildCircularButton(Icons.assessment_outlined,
+                              "Incorrect Questions", Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+              ],
             ),
           ),
         ),
