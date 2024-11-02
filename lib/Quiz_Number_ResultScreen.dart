@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, avoid_print, sized_box_for_whitespace, avoid_unnecessary_containers
+
 import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Play_Incorrect_Solution_Numbers.dart';
@@ -133,13 +135,13 @@ class _Quiz_Number_ResultScreenState
                     pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)),
             pw.SizedBox(height: 20),
             pw.Text("Score: ${widget.score} points",
-                style: pw.TextStyle(fontSize: 18)),
+                style: const pw.TextStyle(fontSize: 18)),
             pw.Text("Total Questions: ${widget.totalQuestions}",
-                style: pw.TextStyle(fontSize: 18)),
+                style: const pw.TextStyle(fontSize: 18)),
             pw.Text("Correct Answers: ${widget.correctcount}",
-                style: pw.TextStyle(fontSize: 18)),
+                style: const pw.TextStyle(fontSize: 18)),
             pw.Text("Incorrect Answers: ${widget.incorrectcount}",
-                style: pw.TextStyle(fontSize: 18)),
+                style: const pw.TextStyle(fontSize: 18)),
           ],
         ),
       ),
@@ -285,7 +287,7 @@ class _Quiz_Number_ResultScreenState
                       children: [
                         GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
@@ -322,7 +324,7 @@ class _Quiz_Number_ResultScreenState
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => InitialPage1()));
+                                    builder: (context) => const InitialPage1()));
                           },
                           child: _buildCircularButton(
                               Icons.home, "Home", Colors.purple),

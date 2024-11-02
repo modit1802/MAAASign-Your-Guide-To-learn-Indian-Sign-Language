@@ -30,6 +30,7 @@ class LearnPronouns extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
         title: const Text(
           "Let's Learn Pronouns",
@@ -39,7 +40,7 @@ class LearnPronouns extends StatelessWidget {
             fontSize: 24,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 142, 45, 226),
+        backgroundColor: const Color.fromARGB(255, 250, 233, 215),
         elevation: 0,
       ),
       body: const GreetingGifs(),
@@ -93,17 +94,7 @@ class _GreetingGifsState extends State<GreetingGifs> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color.fromARGB(255, 142, 45, 226),
-            Color.fromARGB(255, 74, 0, 224),
-            Color.fromARGB(255, 185, 85, 255),
-          ],
-        ),
-      ),
+      
       child: Center(
         child: PageView.builder(
           onPageChanged: _onPageChanged,

@@ -30,16 +30,17 @@ class SimpleRelations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
         title: const Text(
           "Let's Learn Simple Relations",
           style: TextStyle(
-            color: Colors.white,
+            color: Color.fromARGB(255, 0, 0, 0),
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 142, 45, 226),
+        backgroundColor: const Color.fromARGB(255, 250, 233, 215),
         elevation: 0,
       ),
       body: const GreetingGifs(),

@@ -20,22 +20,14 @@ class _SentenceStartscreenState extends State<SentenceStartscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       body: Stack(
         children: [
           Container(
             width: double.infinity,
             height: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromARGB(255, 255, 150, 250),
-                  Color.fromARGB(255, 159, 223, 252),
-                  Colors.white
-                ],
-                stops: [0.0, 0.5, 1.0],
-              ),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 250, 233, 215),
             ),
             child: Center(
               child: Column(

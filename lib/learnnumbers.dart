@@ -13,12 +13,13 @@ class _LearnNumbersState extends State<LearnNumbers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
         title: const Text("Numbers",
         style: TextStyle(
           color: Colors.white,
         ),),
-        backgroundColor: const Color.fromARGB(255, 219, 69, 249),
+        backgroundColor: const Color.fromARGB(255, 250, 233, 215),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           color: const Color.fromARGB(255, 255, 255, 255),
@@ -28,18 +29,7 @@ class _LearnNumbersState extends State<LearnNumbers> {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 219, 69, 249),
-              Color.fromARGB(255, 135, 205, 238),
-              Colors.white,
-            ],
-            stops: [0.0, 0.5, 1.0],
-          ),
-        ),
+
         child: const LearnNumbersCards(),
       ),
     );
