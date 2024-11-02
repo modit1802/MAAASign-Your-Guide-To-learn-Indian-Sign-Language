@@ -211,14 +211,22 @@ class _ThirdGameState extends State<ThirdGame> {
       'solution': ['9'],
       'availableLetters': ["6", "9", "2", "4"],
       'urls': {
-    "9": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/9_gdnhiv.png",
-    "6": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png",
-    "2": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-    "4": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/4_xzh3hq.png",
-    "correct": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
-    "wrong": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-    "nine": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726266/nine_mwshmr.png",
-    'wooden':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
+        "9":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/9_gdnhiv.png",
+        "6":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png",
+        "2":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
+        "4":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/4_xzh3hq.png",
+        "correct":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
+        "wrong":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
+        "nine":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726266/nine_mwshmr.png",
+        'wooden':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
 
@@ -227,14 +235,22 @@ class _ThirdGameState extends State<ThirdGame> {
       'solution': ['6'],
       'availableLetters': ["2", "6", "3", "8"],
       'urls': {
-    "3": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/3_ywml29.png",
-    "2": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-    "6": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png",
-    "8": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/8_ynuzfh.png",
-    "correct": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
-    "wrong": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-    "six": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726635/six_iy2km3.png",
-    'wooden':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
+        "3":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/3_ywml29.png",
+        "2":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
+        "6":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png",
+        "8":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/8_ynuzfh.png",
+        "correct":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
+        "wrong":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
+        "six":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726635/six_iy2km3.png",
+        'wooden':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
 
@@ -243,14 +259,22 @@ class _ThirdGameState extends State<ThirdGame> {
       'solution': ['2'],
       'availableLetters': ["9", "7", "1", "2"],
       'urls': {
-    "2": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-    "1": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/1_tlz5st.png",
-    "9": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/9_gdnhiv.png",
-    "7": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/7_p3h2p5.png",
-    "correct": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
-    "wrong": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-    "two": "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726887/two_k1esxb.png",
-    'wooden':'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
+        "2":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
+        "1":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/1_tlz5st.png",
+        "9":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/9_gdnhiv.png",
+        "7":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/7_p3h2p5.png",
+        "correct":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
+        "wrong":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
+        "two":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726887/two_k1esxb.png",
+        'wooden':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
 
@@ -264,23 +288,25 @@ class _ThirdGameState extends State<ThirdGame> {
   void initState() {
     super.initState();
     score = widget.score;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-    _showtutorialscreen();
-  });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showtutorialscreen();
+    });
     _initializeChallenge();
   }
-void _showtutorialscreen() {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => Tutorial_screen_for_challenger_alphabet(
-        onBackPressed: () {
-          Navigator.pop(context); // Return to the current screen on back press
-        },
+
+  void _showtutorialscreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Tutorial_screen_for_challenger_alphabet(
+          onBackPressed: () {
+            Navigator.pop(
+                context); // Return to the current screen on back press
+          },
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   void _initializeChallenge() {
     // Load the current challenge data based on the currentChallengeIndex
@@ -379,21 +405,25 @@ void _showtutorialscreen() {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: SizedBox(
-              height: 110,
-              child: Row  (
-                children  : [
+              height: 120,
+              child: Row(
+                children: [
                   ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child:     Container(
+                      child: Container(
                         height: 50,
                         width: 50,
                         color: const Color.fromARGB(255, 252, 133, 37),
-                          child: Center(
-                            child: Text(imagePath,style: TextStyle(fontSize: 32,fontWeight: FontWeight.bold,color: Colors.white),textAlign: TextAlign.center,)),
-                          )
-                          
-                      ),
-                      
+                        child: Center(
+                            child: Text(
+                          imagePath,
+                          style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                          textAlign: TextAlign.center,
+                        )),
+                      )),
                   const SizedBox(width: 16),
                   Expanded(
                     child: Column(
@@ -429,200 +459,256 @@ void _showtutorialscreen() {
   }
 
   @override
- @override
-Widget build(BuildContext context) {
-  // Get screen dimensions
-  final screenWidth = MediaQuery.of(context).size.width;
-  final screenHeight = MediaQuery.of(context).size.height;
+  @override
+  Widget build(BuildContext context) {
+    // Get screen dimensions
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
-  return Stack(
-    children: [
-      SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (isCorrectSolution != null && isCorrectSolution!)
-              Container(
-                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
-                child: Image.network(
-                  challengeData[currentChallengeIndex]['urls']['correct'],
-                  width: screenWidth * 0.8,
-                  height: screenHeight * 0.3,
-                ),
-              ),
-            if (isCorrectSolution != null && !isCorrectSolution!)
-              Container(
-                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
-                child: Image.network(
-                  challengeData[currentChallengeIndex]['urls']['wrong'],
-                  width: screenWidth * 0.8,
-                  height: screenHeight * 0.3,
-                ),
-              ),
-            SizedBox(height: screenHeight * 0.13),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Column(
-                  children: [
-                    _buildCard(
-                      onTap: () {},
-                      imagePath: '${currentChallengeIndex + 1}',
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      title: 'Challenger Round',
-                      description:
-                          "Drag the correct yellow color available boxes and drop them in to the wooden boxes as per the spelling of question",
-                      index: 2,
-                    ),
-                    Material(
-                      elevation: screenHeight * 0.01,
-                      borderRadius: BorderRadius.circular(screenWidth * 0.05),
-                      child: Container(
-                        width: screenWidth * 0.7,
-                        height: screenHeight * 0.3,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(screenWidth * 0.05),
-                          color: Colors.white,
-                        ),
-                        child: Image.network(
-                          challengeData[currentChallengeIndex]['urls']
-                              [challengeData[currentChallengeIndex]['question']],
-                          width: screenWidth * 0.4,
-                          height: screenHeight * 0.2,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: screenHeight * 0.03),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(challengeData[currentChallengeIndex]['solution'].length, (index) {
-                return DragTarget<String>(
-                  builder: (context, accepted, rejected) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (solution[index] != "wooden" &&
-                              solution[index] != null) {
-                            availableLetters.add(solution[index]!);
-                            solution[index] = "wooden";
-                          }
-                        });
-                      },
-                      child: Container(
-                        width: screenWidth * 0.2,
-                        height: screenHeight * 0.1,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(screenWidth * 0.03),
-                        ),
-                        alignment: Alignment.center,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(screenWidth * 0.03),
-                          child: solution[index] != null
-                              ? Image.network(
-                                  challengeData[currentChallengeIndex]['urls'][solution[index]!]!,
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                )
-                              : const SizedBox(),
-                        ),
-                      ),
-                    );
-                  },
-                  onWillAccept: (data) => true,
-                  onAccept: (data) {
-                    setState(() {
-                      if (solution[index] != "wooden" && solution[index] != null) {
-                        availableLetters.add(solution[index]!);
-                      }
-                      solution[index] = data;
-                      availableLetters.remove(data);
-                    });
-                  },
-                );
-              }),
-            ),
-            SizedBox(height: screenHeight * 0.03),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: availableLetters.map((letter) {
-                return Draggable<String>(
-                  data: letter,
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          controller: _scrollController,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (isCorrectSolution != null && isCorrectSolution!)
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
                   child: Image.network(
-                    challengeData[currentChallengeIndex]['urls'][letter]!,
-                    width: screenWidth * 0.18,
-                    height: screenHeight * 0.15,
+                    challengeData[currentChallengeIndex]['urls']['correct'],
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.3,
                   ),
-                  feedback: Material(
+                ),
+              if (isCorrectSolution != null && !isCorrectSolution!)
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+                  child: Image.network(
+                    challengeData[currentChallengeIndex]['urls']['wrong'],
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.3,
+                  ),
+                ),
+              SizedBox(height: screenHeight * 0.13),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Column(
+                    children: [
+                      _buildCard(
+                        onTap: () {},
+                        imagePath: '${currentChallengeIndex + 1}',
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        title: 'Challenger Round',
+                        description:
+                            "Drag the correct yellow color available boxes and drop them in to the wooden boxes as per the spelling of question. For more information press the 'tutorial button' on the top",
+                        index: 2,
+                      ),
+                      Material(
+                        elevation: screenHeight * 0.01,
+                        borderRadius: BorderRadius.circular(screenWidth * 0.05),
+                        child: Container(
+                          width: screenWidth * 0.7,
+                          height: screenHeight * 0.3,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.05),
+                            color: Colors.white,
+                          ),
+                          child: Image.network(
+                            challengeData[currentChallengeIndex]['urls'][
+                                challengeData[currentChallengeIndex]
+                                    ['question']],
+                            width: screenWidth * 0.4,
+                            height: screenHeight * 0.2,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: screenHeight * 0.03),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(
+                    challengeData[currentChallengeIndex]['solution'].length,
+                    (index) {
+                  return DragTarget<String>(
+                    builder: (context, accepted, rejected) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (solution[index] != "wooden" &&
+                                solution[index] != null) {
+                              availableLetters.add(solution[index]!);
+                              solution[index] = "wooden";
+                            }
+                          });
+                        },
+                        child: Container(
+                          width: screenWidth * 0.2,
+                          height: screenHeight * 0.1,
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.03),
+                          ),
+                          alignment: Alignment.center,
+                          child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.03),
+                            child: solution[index] != null
+                                ? Image.network(
+                                    challengeData[currentChallengeIndex]['urls']
+                                        [solution[index]!]!,
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                  )
+                                : const SizedBox(),
+                          ),
+                        ),
+                      );
+                    },
+                    onWillAccept: (data) => true,
+                    onAccept: (data) {
+                      setState(() {
+                        if (solution[index] != "wooden" &&
+                            solution[index] != null) {
+                          availableLetters.add(solution[index]!);
+                        }
+                        solution[index] = data;
+                        availableLetters.remove(data);
+                      });
+                    },
+                  );
+                }),
+              ),
+              SizedBox(height: screenHeight * 0.007),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: availableLetters.map((letter) {
+                  return Draggable<String>(
+                    data: letter,
                     child: Image.network(
                       challengeData[currentChallengeIndex]['urls'][letter]!,
-                      width: screenWidth * 0.15,
-                      height: screenHeight * 0.08,
+                      width: screenWidth * 0.20,
+                      height: screenHeight * 0.18,
                     ),
+                    feedback: Material(
+                      child: Image.network(
+                        challengeData[currentChallengeIndex]['urls'][letter]!,
+                        width: screenWidth * 0.17,
+                        height: screenHeight * 0.09,
+                      ),
+                    ),
+                    childWhenDragging: Container(),
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: screenHeight * 0.007),
+              if (!showMoveToNextButton)
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: const Color.fromARGB(255, 252, 133, 37),
                   ),
-                  childWhenDragging: Container(),
-                );
-              }).toList(),
+                  onPressed: checkSolution,
+                  child: const Text("Check Now"),
+                ),
+              if (showMoveToNextButton)
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: const Color.fromARGB(255, 252, 133, 37),
+                  ),
+                  onPressed: _moveToNextChallenge,
+                  child: const Text("Move to Next Challenge"),
+                ),
+            ],
+          ),
+        ),
+// Score widget (Left side)
+        Positioned(
+          top: screenHeight * 0.06,
+          left: screenWidth * 0.04,
+          child: Container(
+            padding: EdgeInsets.all(screenWidth * 0.02),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(screenWidth * 0.03),
             ),
-            SizedBox(height: screenHeight * 0.009),
-            if (!showMoveToNextButton)
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: const Color.fromARGB(255, 252, 133, 37),
-                ),
-                onPressed: checkSolution,
-                child: const Text("Check Now"),
-              ),
-            if (showMoveToNextButton)
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: const Color.fromARGB(255, 252, 133, 37),
-                ),
-                onPressed: _moveToNextChallenge,
-                child: const Text("Move to Next Challenge"),
-              ),
-          ],
-        ),
-      ),
-      Positioned(
-        top: screenHeight * 0.06,
-        right: screenWidth * 0.04,
-        child: Container(
-          padding: EdgeInsets.all(screenWidth * 0.02),
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(screenWidth * 0.03),
+            child: Text(
+              "Score: $score",
+              style:
+                  TextStyle(color: Colors.white, fontSize: screenWidth * 0.04),
+            ),
           ),
-          child: Text(
-            "${maxAttempts - attempts} Chance Left",
+        ),
+
+// Tutorial widget (Center)
+// Tutorial widget with information icon (Center)
+Positioned(
+  top: screenHeight * 0.06,
+  left: screenWidth * 0.4, // Adjust this to align properly in the center
+  child: GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Tutorial_screen_for_challenger_alphabet(
+            onBackPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      );
+    },
+    child: Container(
+      padding: EdgeInsets.all(screenWidth * 0.02),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(screenWidth * 0.03),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min, // Ensures the row only takes the required space
+        children: [
+          Text(
+            "Tutorial",
             style: TextStyle(color: Colors.white, fontSize: screenWidth * 0.04),
           ),
-        ),
-      ),
-      Positioned(
-        top: screenHeight * 0.06,
-        left: screenWidth * 0.04,
-        child: Container(
-          padding: EdgeInsets.all(screenWidth * 0.02),
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(screenWidth * 0.03),
+          SizedBox(width: screenWidth * 0.02), // Space between text and icon
+          Icon(
+            Icons.info_outline,
+            color: Colors.white,
+            size: screenWidth * 0.05, // Adjust icon size as needed
           ),
-          child: Text(
-            "Score: $score",
-            style: TextStyle(color: Colors.white, fontSize: screenWidth * 0.04),
+        ],
+      ),
+    ),
+  ),
+),
+
+// Chances Left widget (Right side)
+        Positioned(
+          top: screenHeight * 0.06,
+          right: screenWidth * 0.04,
+          child: Container(
+            padding: EdgeInsets.all(screenWidth * 0.02),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(screenWidth * 0.03),
+            ),
+            child: Text(
+              "${maxAttempts - attempts} Chance Left",
+              style:
+                  TextStyle(color: Colors.white, fontSize: screenWidth * 0.04),
+            ),
           ),
         ),
-      ),
-    ],
-  );
-}
+      ],
+    );
+  }
 }
