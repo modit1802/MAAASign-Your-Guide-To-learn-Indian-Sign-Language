@@ -814,7 +814,7 @@ class _LearnDashboardState extends State<LearnDashboard> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15.0),
                       image: const DecorationImage(
-                        image: AssetImage('images/pronouns.jpg'),
+                        image: AssetImage('images/pronouns.png'),
                         fit: BoxFit.cover,
                       ),
                     ),

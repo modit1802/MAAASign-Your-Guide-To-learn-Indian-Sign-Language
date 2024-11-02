@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        
         appBarTheme: const AppBarTheme(
           centerTitle: true,
           elevation: 0,
@@ -74,27 +73,15 @@ class _GreetingGifsState extends State<GreetingGifs> {
   };
 
   int _currentIndex = 0;
-  final List<VideoWidget> _videoWidgets = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _videoWidgets.addAll(greetingGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
-  }
 
   @override
   void dispose() {
-    for (var videoWidget in _videoWidgets) {
-      videoWidget.disposeController(); // Ensure all controllers are disposed
-    }
     super.dispose();
   }
 
   void _onPageChanged(int index) {
     setState(() {
-      _videoWidgets[_currentIndex].pauseVideo(); // Pause the current video
       _currentIndex = index;
-      _videoWidgets[_currentIndex].playVideo(); // Play the new video
     });
   }
 
@@ -102,37 +89,38 @@ class _GreetingGifsState extends State<GreetingGifs> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(
-      
-      child: Center(
-        child: PageView.builder(
-          onPageChanged: _onPageChanged,
-          itemCount: _videoWidgets.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Card(
-                    elevation: 10.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: SizedBox(
-                        width: screenWidth, // Full width of the screen
-                        height: screenWidth * (16 / 9), // Maintain 16:9 aspect ratio
-                        child: _videoWidgets[index],
+    return Center(
+      child: PageView.builder(
+        onPageChanged: _onPageChanged,
+        itemCount: greetingGifs.length,
+        itemBuilder: (context, index) {
+          final url = greetingGifs.values.elementAt(index);
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  elevation: 10.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: SizedBox(
+                      width: screenWidth,
+                      height: screenWidth * (16 / 9),
+                      child: VideoWidget(
+                        videoUrl: url,
+                        isActive: index == _currentIndex, // Play only active video
                       ),
                     ),
                   ),
-                ],
-              ),
-            );
-          },
-        ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -140,105 +128,56 @@ class _GreetingGifsState extends State<GreetingGifs> {
 
 class VideoWidget extends StatefulWidget {
   final String videoUrl;
-  late final VideoPlayerController controller;
+  final bool isActive;
 
-  VideoWidget({Key? key, required this.videoUrl}) : super(key: key) {
-    controller = VideoPlayerController.network(videoUrl);
-  }
+  const VideoWidget({
+    Key? key,
+    required this.videoUrl,
+    required this.isActive,
+  }) : super(key: key);
 
   @override
   _VideoWidgetState createState() => _VideoWidgetState();
-
-  void playVideo() {
-    if (controller.value.isInitialized) {
-      controller.play();
-    }
-  }
-
-  void pauseVideo() {
-    if (controller.value.isInitialized) {
-      controller.pause();
-    }
-  }
-
-  void disposeController() {
-    if (controller.value.isInitialized) {
-      controller.dispose();
-    }
-  }
 }
 
 class _VideoWidgetState extends State<VideoWidget> {
-  int _playCount = 0;
-  bool _showReplayButton = false;
+  late VideoPlayerController _controller;
+  bool _isInitialized = false;
 
   @override
   void initState() {
     super.initState();
-    widget.controller.addListener(_onVideoEnd);
-    widget.controller.initialize().then((_) {
-      setState(() {});
-      widget.controller.play();
+    _controller = VideoPlayerController.network(widget.videoUrl);
+    _controller.initialize().then((_) {
+      setState(() {
+        _isInitialized = true;
+      });
+      if (widget.isActive) _controller.play();
     });
   }
 
   @override
-  void dispose() {
-    widget.controller.removeListener(_onVideoEnd);
-    super.dispose();
-  }
-
-  void _onVideoEnd() {
-    if (widget.controller.value.position == widget.controller.value.duration) {
-      _playCount++;
-      if (_playCount < 2) {
-        widget.controller.seekTo(Duration.zero);
-        widget.controller.play();
+  void didUpdateWidget(covariant VideoWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isActive != oldWidget.isActive) {
+      if (widget.isActive) {
+        _controller.play();
       } else {
-        setState(() {
-          _showReplayButton = true;
-        });
+        _controller.pause();
       }
     }
   }
 
-  void _replayVideo() {
-    setState(() {
-      _playCount = 0;
-      _showReplayButton = false;
-      widget.controller.seekTo(Duration.zero);
-      widget.controller.play();
-    });
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        widget.controller.value.isInitialized
-            ? AspectRatio(
-          aspectRatio: widget.controller.value.aspectRatio,
-          child: VideoPlayer(widget.controller),
-        )
-            : const Center(child: CircularProgressIndicator()),
-        if (_showReplayButton)
-          Positioned.fill(
-            child: GestureDetector(
-              onTap: _replayVideo,
-              child: Container(
-                color: Colors.black54, // Translucent black overlay
-                child: Center(
-                  child: Icon(
-                    Icons.replay,
-                    color: Colors.white,
-                    size: 50,
-                  ),
-                ),
-              ),
-            ),
-          ),
-      ],
-    );
+    return _isInitialized
+        ? VideoPlayer(_controller)
+        : const Center(child: CircularProgressIndicator());
   }
 }
