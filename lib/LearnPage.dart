@@ -2,6 +2,10 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:SignEase/Week 2/learngreeting.dart';
 import 'package:SignEase/Week 2/learnrelations.dart';
+import 'package:SignEase/learnnoun.dart';
+import 'package:SignEase/learnpronoun.dart';
+import 'package:SignEase/learnverbs.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -562,6 +566,255 @@ class _LearnDashboardState extends State<LearnDashboard> {
                       borderRadius: BorderRadius.circular(15.0),
                       image: const DecorationImage(
                         image: AssetImage('images/Relation.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        if (widget.learnNumberScore <= 0)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.95),
+                              backgroundBlendMode: BlendMode.saturation,
+                            ),
+                          ),
+                        if (widget.learnNumberScore == 20)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              backgroundBlendMode: BlendMode.modulate,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  // Tap to Learn text at the bottom
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: const Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        'Tap to Learn',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // Learn Verbs Card
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LearnVerbs()),
+              ).then((_) {
+                setState(() {});
+              });
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation: 5,
+              child: Column(
+                children: [
+                  // Learn text at the top
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: const Text(
+                      'Learn Common Verbs',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // Image container
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: const DecorationImage(
+                        image: AssetImage('images/verbs_learn.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        if (widget.learnNumberScore <= 0)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.95),
+                              backgroundBlendMode: BlendMode.saturation,
+                            ),
+                          ),
+                        if (widget.learnNumberScore == 20)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              backgroundBlendMode: BlendMode.modulate,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  // Tap to Learn text at the bottom
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: const Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        'Tap to Learn',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // Learn Nouns Card
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LearnNouns()),
+              ).then((_) {
+                setState(() {});
+              });
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation: 5,
+              child: Column(
+                children: [
+                  // Learn text at the top
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: const Text(
+                      'Learn Nouns',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // Image container
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: const DecorationImage(
+                        image: AssetImage('images/nouns.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        if (widget.learnNumberScore <= 0)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.95),
+                              backgroundBlendMode: BlendMode.saturation,
+                            ),
+                          ),
+                        if (widget.learnNumberScore == 20)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: const Color.fromARGB(201, 250, 180, 1).withOpacity(0.7),
+                              backgroundBlendMode: BlendMode.modulate,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  // Tap to Learn text at the bottom
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: const Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        'Tap to Learn',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+
+          // Learn Pronouns Card
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LearnPronouns()),
+              ).then((_) {
+                setState(() {});
+              });
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation: 5,
+              child: Column(
+                children: [
+                  // Learn text at the top
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.white,
+                    child: const Text(
+                      'Learn Pronouns',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // Image container
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: const DecorationImage(
+                        image: AssetImage('images/pronouns.jpg'),
                         fit: BoxFit.cover,
                       ),
                     ),

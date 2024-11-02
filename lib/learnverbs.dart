@@ -58,11 +58,19 @@ class GreetingGifs extends StatefulWidget {
 
 class _GreetingGifsState extends State<GreetingGifs> {
   final Map<String, String> greetingGifs = const {
-    'hello': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/hello_q0jqlg.mp4',
-    'hy': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113627/hy_ewk653.mp4',
-    'goodbye': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/good_bye_fdlupb.mp4',
-    'namaste': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113630/namaste_ywacpg.mp4',
-    'welcome': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113634/welcome_rnwqkq.mp4',
+    'Come': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/come_l_xxndp7.mp4',
+    'Eat': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/eat_l_kqflhk.mp4',
+    'Drink': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/drink_l_qcxtet.mp4',
+    'Read': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/read_l_pdsx7g.mp4',
+    'Write': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558847/write_l_i7jrlt.mp4',
+    'Sleep': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/sleep_l_wej9uh.mp4',
+    'Walk': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558851/walk_l_urzxqn.mp4',
+    'Talk': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/talk_l_zurskm.mp4',
+    'Wake Up': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/wake_up_l_o1upds.mp4',
+    'Work': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/work_l_ik2ynw.mp4',
+    'Finish': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/finish_l_vl1692.mp4',
+    'Use': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/use_l_nwwifk.mp4',
+    'Cook': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730559387/cook_l_tao1wz.mp4',
   };
 
   int _currentIndex = 0;

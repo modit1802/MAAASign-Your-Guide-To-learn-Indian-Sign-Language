@@ -1,24 +1,29 @@
 import 'dart:math';
-import 'package:SignEase/Pronouns_Result.dart';
+import 'package:SignEase/Nouns_Result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:video_player/video_player.dart';
 
-class PronounQuiz extends StatefulWidget {
+class NounQuiz extends StatefulWidget {
   @override
-  _PronounQuizState createState() => _PronounQuizState();
+  _NounQuizState createState() => _NounQuizState();
 }
 
-class _PronounQuizState extends State<PronounQuiz> {
+class _NounQuizState extends State<NounQuiz> {
   List<Map<String, dynamic>> questionsAndSolutions = [
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/I_jcee6z.mp4', 'solution': 'I'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/you_eyvdmd.mp4', 'solution': 'You'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/he_kldbgn.mp4', 'solution': 'He'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/she_xhozgj.mp4', 'solution': 'She'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/It_ws1bwe.mp4', 'solution': 'It'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/we_duowgj.mp4', 'solution': 'We'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530908/they_wmmoxf.mp4', 'solution': 'They'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4', 'solution': 'School'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/market_vfh9vj.mp4', 'solution': 'Market'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530818/lunch_cbcgwu.mp4', 'solution': 'Lunch'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/tea_i6mkyc.mp4', 'solution': 'Tea'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4', 'solution': 'Office'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/morning_pvtuty.mp4', 'solution': 'Morning'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/breakfast_hb90fq.mp4', 'solution': 'Breakfast'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4', 'solution': 'Hands'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/deaf_ezkwye.mp4', 'solution': 'Deaf'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4', 'solution': 'Dinner'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4', 'solution': 'Book'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/work_zjfapw.mp4', 'solution': 'Work'},
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];
@@ -140,7 +145,7 @@ class _PronounQuizState extends State<PronounQuiz> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Quiz_Pronoun_ResultScreen(
+            builder: (context) => Quiz_Noun_ResultScreen(
               score: score,
               correctcount: correctCount,
               incorrectcount: incorrectCount,

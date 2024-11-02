@@ -43,25 +43,28 @@ class LearnPronouns extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 250, 233, 215),
         elevation: 0,
       ),
-      body: const GreetingGifs(),
+      body: const pronounGifs(),
     );
   }
 }
 
-class GreetingGifs extends StatefulWidget {
-  const GreetingGifs({super.key});
+class pronounGifs extends StatefulWidget {
+  const pronounGifs({super.key});
 
   @override
-  _GreetingGifsState createState() => _GreetingGifsState();
+  _pronounGifsState createState() => _pronounGifsState();
 }
 
-class _GreetingGifsState extends State<GreetingGifs> {
-  final Map<String, String> greetingGifs = const {
-    'hello': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/hello_q0jqlg.mp4',
-    'hy': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113627/hy_ewk653.mp4',
-    'goodbye': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/good_bye_fdlupb.mp4',
-    'namaste': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113630/namaste_ywacpg.mp4',
-    'welcome': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113634/welcome_rnwqkq.mp4',
+class _pronounGifsState extends State<pronounGifs> {
+  final Map<String, String> pronounGifs = const {
+    'I': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558959/I_l_yyecwh.mp4',
+    'You': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558961/you_l_azwpnx.mp4',
+    'He': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558958/he_l_baxnwe.mp4',
+    'She': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558962/she_l_c43uu8.mp4',
+    'It': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558956/it_l_qc8pzw.mp4',
+    'We': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558969/we_l_wbytyb.mp4',
+    'They': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558957/they_l_hgsvu0.mp4',
+
   };
 
   int _currentIndex = 0;
@@ -70,7 +73,7 @@ class _GreetingGifsState extends State<GreetingGifs> {
   @override
   void initState() {
     super.initState();
-    _videoWidgets.addAll(greetingGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
+    _videoWidgets.addAll(pronounGifs.values.map((url) => VideoWidget(videoUrl: url)).toList());
   }
 
   @override

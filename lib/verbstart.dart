@@ -1,6 +1,6 @@
 import 'package:SignEase/learnverbs.dart';
 import 'package:SignEase/matchmaker_alphabet.dart';
-import 'package:SignEase/practiceassignment2.dart';
+import 'package:SignEase/verb_quiz.dart';
 import 'package:flutter/material.dart';
 class VerbStartScreen extends StatefulWidget {
   const VerbStartScreen({super.key});
@@ -127,7 +127,7 @@ class _VerbStartScreenState extends State<VerbStartScreen> {
                       ),
                       const SizedBox(height: 12), // Space between the cards
                       _buildCard(
-                        onTap: () => _handleCardTap(1, PracticeAssignment2()),
+                        onTap: () => _handleCardTap(1, VerbQuiz()),
                         imagePath: 'images/quiz.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Play Quiz',

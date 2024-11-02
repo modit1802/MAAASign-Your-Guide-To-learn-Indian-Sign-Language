@@ -1,24 +1,30 @@
 import 'dart:math';
-import 'package:SignEase/Pronouns_Result.dart';
+import 'package:SignEase/Verbs_Result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:video_player/video_player.dart';
 
-class PronounQuiz extends StatefulWidget {
+class VerbQuiz extends StatefulWidget {
   @override
-  _PronounQuizState createState() => _PronounQuizState();
+  _VerbQuizState createState() => _VerbQuizState();
 }
 
-class _PronounQuizState extends State<PronounQuiz> {
+class _VerbQuizState extends State<VerbQuiz> {
   List<Map<String, dynamic>> questionsAndSolutions = [
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/I_jcee6z.mp4', 'solution': 'I'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/you_eyvdmd.mp4', 'solution': 'You'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/he_kldbgn.mp4', 'solution': 'He'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/she_xhozgj.mp4', 'solution': 'She'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/It_ws1bwe.mp4', 'solution': 'It'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/we_duowgj.mp4', 'solution': 'We'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530908/they_wmmoxf.mp4', 'solution': 'They'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530660/finish_abglyx.mp4', 'solution': 'Finish'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4', 'solution': 'Eat'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4', 'solution': 'Walk'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/talk_jh3iqu.mp4', 'solution': 'Talk'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/work_ejax98.mp4', 'solution': 'Work'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/wake_up_c6pbs5.mp4', 'solution': 'Wake Up'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/use_gzlhmv.mp4', 'solution': 'Use'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/read_w5djtk.mp4', 'solution': 'Read'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/sleep_vwyvtz.mp4', 'solution': 'Sleep'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4', 'solution': 'Cook'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/write_omxdnp.mp4', 'solution': 'Write'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4', 'solution': 'Drink'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4', 'solution': 'Come'},
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];
@@ -140,7 +146,7 @@ class _PronounQuizState extends State<PronounQuiz> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Quiz_Pronoun_ResultScreen(
+            builder: (context) => Quiz_Verb_ResultScreen(
               score: score,
               correctcount: correctCount,
               incorrectcount: incorrectCount,
@@ -198,7 +204,7 @@ class _PronounQuizState extends State<PronounQuiz> {
                   ),
                   SizedBox(height: screenHeight * 0.02),
                   Text(
-                    "Identify the signs for each pronoun",
+                    "Identify the signs for each verb",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: isSmallScreen ? 18 : 24,
@@ -208,7 +214,7 @@ class _PronounQuizState extends State<PronounQuiz> {
                 ],
               ),
             ),
-            SizedBox(height: screenHeight * 0.02), // Reduce space between header and video
+            SizedBox(height: screenHeight * 0.02),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: Card(
@@ -265,7 +271,7 @@ class _PronounQuizState extends State<PronounQuiz> {
                 ),
               ),
             ),
-            SizedBox(height: screenHeight * 0.01), // Adjust space before options
+            SizedBox(height: screenHeight * 0.01),
             for (int i = 0; i < currentOptions.length; i++)
               Padding(
                 padding: EdgeInsets.symmetric(
