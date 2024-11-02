@@ -429,190 +429,200 @@ void _showtutorialscreen() {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (isCorrectSolution != null && isCorrectSolution!)
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Image.network(
-                    challengeData[currentChallengeIndex]['urls']['correct'],
-                    width: 300,
-                    height: 200,
-                  ),
+ @override
+Widget build(BuildContext context) {
+  // Get screen dimensions
+  final screenWidth = MediaQuery.of(context).size.width;
+  final screenHeight = MediaQuery.of(context).size.height;
+
+  return Stack(
+    children: [
+      SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (isCorrectSolution != null && isCorrectSolution!)
+              Container(
+                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+                child: Image.network(
+                  challengeData[currentChallengeIndex]['urls']['correct'],
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.3,
                 ),
-              if (isCorrectSolution != null && !isCorrectSolution!)
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Image.network(
-                    challengeData[currentChallengeIndex]['urls']['wrong'],
-                    width: 300,
-                    height: 200,
-                  ),
+              ),
+            if (isCorrectSolution != null && !isCorrectSolution!)
+              Container(
+                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+                child: Image.network(
+                  challengeData[currentChallengeIndex]['urls']['wrong'],
+                  width: screenWidth * 0.8,
+                  height: screenHeight * 0.3,
                 ),
-              const SizedBox(height: 100),
-              Stack(
-                alignment: Alignment.center,  
-                children: [
-                  Column(
-                    children: [
-                      _buildCard(
-                        onTap: () {},
-                        imagePath: '${currentChallengeIndex+1}',
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Challenger Round',
-                        description:
-                            "Drag the correct yellow color available boxes and drop them in to the wooden boxes as per the spelling of question",
-                        index: 2,
-                      ),
-                      Material(
-                        elevation: 4,
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          width: 200,
-                          height: 200,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
-                          ),
-                          child: Image.network(
-                            challengeData[currentChallengeIndex]['urls'][
-                                challengeData[currentChallengeIndex]
-                                    ['question']],
-                            width: 180,
-                            height: 180,
-                          ),
+              ),
+            SizedBox(height: screenHeight * 0.13),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Column(
+                  children: [
+                    _buildCard(
+                      onTap: () {},
+                      imagePath: '${currentChallengeIndex + 1}',
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      title: 'Challenger Round',
+                      description:
+                          "Drag the correct yellow color available boxes and drop them in to the wooden boxes as per the spelling of question",
+                      index: 2,
+                    ),
+                    Material(
+                      elevation: screenHeight * 0.01,
+                      borderRadius: BorderRadius.circular(screenWidth * 0.05),
+                      child: Container(
+                        width: screenWidth * 0.7,
+                        height: screenHeight * 0.3,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(screenWidth * 0.05),
+                          color: Colors.white,
+                        ),
+                        child: Image.network(
+                          challengeData[currentChallengeIndex]['urls']
+                              [challengeData[currentChallengeIndex]['question']],
+                          width: screenWidth * 0.4,
+                          height: screenHeight * 0.2,
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(challengeData[currentChallengeIndex]['solution'].length, (index) {
-                  return DragTarget<String>(
-                    builder: (context, accepted, rejected) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (solution[index] != "wooden" &&
-                                solution[index] != null) {
-                              availableLetters.add(solution[index]!);
-                              solution[index] = "wooden";
-                            }
-                          });
-                        },
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          alignment: Alignment.center,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: solution[index] != null
-                                ? Image.network(
-                                    challengeData[currentChallengeIndex]['urls']
-                                        [solution[index]!]!,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                  )
-                                : const SizedBox(),
-                          ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: screenHeight * 0.03),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(challengeData[currentChallengeIndex]['solution'].length, (index) {
+                return DragTarget<String>(
+                  builder: (context, accepted, rejected) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (solution[index] != "wooden" &&
+                              solution[index] != null) {
+                            availableLetters.add(solution[index]!);
+                            solution[index] = "wooden";
+                          }
+                        });
+                      },
+                      child: Container(
+                        width: screenWidth * 0.2,
+                        height: screenHeight * 0.1,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(screenWidth * 0.03),
                         ),
-                      );
-                    },
-                    onWillAccept: (data) => true,
-                    onAccept: (data) {
-                      setState(() {
-                        if (solution[index] != "wooden" &&
-                            solution[index] != null) {
-                          availableLetters.add(solution[index]!);
-                        }
-                        solution[index] = data;
-                        availableLetters.remove(data);
-                      });
-                    },
-                  );
-                }),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: availableLetters.map((letter) {
-                  return Draggable<String>(
-                    data: letter,
+                        alignment: Alignment.center,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(screenWidth * 0.03),
+                          child: solution[index] != null
+                              ? Image.network(
+                                  challengeData[currentChallengeIndex]['urls'][solution[index]!]!,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                )
+                              : const SizedBox(),
+                        ),
+                      ),
+                    );
+                  },
+                  onWillAccept: (data) => true,
+                  onAccept: (data) {
+                    setState(() {
+                      if (solution[index] != "wooden" && solution[index] != null) {
+                        availableLetters.add(solution[index]!);
+                      }
+                      solution[index] = data;
+                      availableLetters.remove(data);
+                    });
+                  },
+                );
+              }),
+            ),
+            SizedBox(height: screenHeight * 0.03),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: availableLetters.map((letter) {
+                return Draggable<String>(
+                  data: letter,
+                  child: Image.network(
+                    challengeData[currentChallengeIndex]['urls'][letter]!,
+                    width: screenWidth * 0.18,
+                    height: screenHeight * 0.15,
+                  ),
+                  feedback: Material(
                     child: Image.network(
                       challengeData[currentChallengeIndex]['urls'][letter]!,
-                      width: 80,
-                      height: 80,
+                      width: screenWidth * 0.15,
+                      height: screenHeight * 0.08,
                     ),
-                    feedback: Material(
-                      child: Image.network(
-                        challengeData[currentChallengeIndex]['urls'][letter]!,
-                        width: 80,
-                        height: 80,
-                      ),
-                    ),
-                    childWhenDragging: Container(),
-                  );
-                }).toList(),
+                  ),
+                  childWhenDragging: Container(),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: screenHeight * 0.009),
+            if (!showMoveToNextButton)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: const Color.fromARGB(255, 252, 133, 37),
+                ),
+                onPressed: checkSolution,
+                child: const Text("Check Now"),
               ),
-              const SizedBox(height: 20),
-              if (!showMoveToNextButton)
-                ElevatedButton(
-                  onPressed: checkSolution,
-                  child: const Text("Check Now"),
+            if (showMoveToNextButton)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: const Color.fromARGB(255, 252, 133, 37),
                 ),
-              if (showMoveToNextButton)
-                ElevatedButton(
-                  onPressed: _moveToNextChallenge,
-                  child: const Text("Move to Next Challenge"),
-                ),
-            ],
+                onPressed: _moveToNextChallenge,
+                child: const Text("Move to Next Challenge"),
+              ),
+          ],
+        ),
+      ),
+      Positioned(
+        top: screenHeight * 0.06,
+        right: screenWidth * 0.04,
+        child: Container(
+          padding: EdgeInsets.all(screenWidth * 0.02),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(screenWidth * 0.03),
+          ),
+          child: Text(
+            "${maxAttempts - attempts} Chance Left",
+            style: TextStyle(color: Colors.white, fontSize: screenWidth * 0.04),
           ),
         ),
-        Positioned(
-          top: 50,
-          right: 16,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              "${maxAttempts - attempts} Chance Left",
-              style: const TextStyle(color: Colors.white),
-            ),
+      ),
+      Positioned(
+        top: screenHeight * 0.06,
+        left: screenWidth * 0.04,
+        child: Container(
+          padding: EdgeInsets.all(screenWidth * 0.02),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(screenWidth * 0.03),
+          ),
+          child: Text(
+            "Score: $score",
+            style: TextStyle(color: Colors.white, fontSize: screenWidth * 0.04),
           ),
         ),
-        Positioned(
-          top: 50,
-          left: 16,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              "Score: $score",
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
+}
 }

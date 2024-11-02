@@ -195,7 +195,7 @@ void _answerQuestion(
                                   child: Stack(
                                     alignment: Alignment.center,
                                     children: [
-                                      CircularProgressIndicator(
+                                      const CircularProgressIndicator(
                                         color: Color.fromARGB(255, 189, 74, 2),
                                       ),
                                       Image.network(
@@ -270,7 +270,7 @@ void _answerQuestion(
           color: Colors.white,
           child: Container(
             padding: const EdgeInsets.all(24),
-            child: Text(
+            child: const Text(
               "Wohoo !! There are no incorrect questions",
               style: TextStyle(
                 fontSize: 24,
@@ -286,8 +286,8 @@ void _answerQuestion(
           onPressed: () {
             Navigator.pop(context); // Navigates back to the previous screen
           },
-          icon: Icon(Icons.arrow_back,color: Colors.white,),
-          label: Text("Back To Result Screen",style: TextStyle(color: Colors.white),),
+          icon: const Icon(Icons.arrow_back,color: Colors.white,),
+          label: const Text("Back To Result Screen",style: TextStyle(color: Colors.white),),
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), backgroundColor: Colors.orange,
             shape: RoundedRectangleBorder(
@@ -304,47 +304,41 @@ void _answerQuestion(
   }
 
 Widget buildOptionCard(int index) {
-  double screenWidth = MediaQuery.of(context).size.width;
-  double screenHeight = MediaQuery.of(context).size.height;
-
-  // Ensure index is within bounds
-  if (index >= currentOptions.length || index >= _cardColors.length || index >= _textColors.length) {
-    return SizedBox.shrink(); // Return an empty widget if index is out of bounds
-  }
-
-  return Expanded(
-    child: GestureDetector(
-      onTap: selectedOptionIndex == -1
-          ? () => _answerQuestion(
-                currentOptions[index], // Use default if null
-                selectedQuestions[0]['solution'] ?? 'No Solution', // Ensure this is not null
-                index,
-              )
-          : null, // Disable tap if an option is already selected
-      child: Card(
-        elevation: screenWidth < 600 ? 8 : 12,
-        color: _cardColors[index], // Fallback to a default color
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(screenWidth * 0.04),
-        ),
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            vertical: screenHeight * 0.03,
-            horizontal: screenWidth * 0.04,
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Expanded(
+      child: GestureDetector(
+        onTap: selectedOptionIndex == -1
+            ? () => _answerQuestion(
+                  currentOptions[index],
+                  selectedQuestions[0]['correctSolution'],
+                  index,
+                )
+            : null, // Disable tap if an option is already selected
+        child: Card(
+          elevation: screenWidth < 600 ? 8 : 12,
+          color: _cardColors[index],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(screenWidth * 0.04),
           ),
-          child: Center(
-            child: Text(
-              currentOptions[index], // Provide a fallback string
-              style: TextStyle(
-                fontSize: screenWidth < 600 ? 20 : 28,
-                color: _textColors[index], // Default text color
-                fontWeight: FontWeight.bold,
+          child: Container(
+            padding: EdgeInsets.symmetric(
+            vertical: screenHeight * 0.03, // Adjust vertical padding based on screen size
+            horizontal: screenWidth * 0.04,
+            ),
+            child: Center(
+              child: Text(
+                currentOptions[index],
+                style: TextStyle(
+                  fontSize: screenWidth < 600 ? 20 : 28,
+                  color: _textColors[index],
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }

@@ -94,6 +94,7 @@ void initState() {
                             fontSize: 12,
                             color: Colors.black,
                           ),
+                          textAlign: TextAlign.justify,
                         ),
                       ],
                     ),
@@ -156,6 +157,7 @@ Widget _buildCard2({
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
+                        textAlign: TextAlign.justify,
                       ),
                       const SizedBox(height: 8),
                       ...descriptionPoints.map((point) {

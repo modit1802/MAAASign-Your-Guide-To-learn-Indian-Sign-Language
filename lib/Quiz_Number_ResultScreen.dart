@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Play_Incorrect_Solution_Numbers.dart';
 import 'package:SignEase/Review_incorrect_alphabet_solution.dart';
-import 'package:SignEase/practiceassignment1.dart';
+import 'package:SignEase/practiceassignment2.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -291,7 +291,7 @@ class _Quiz_Number_ResultScreenState
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          PracticeAssignment1()));
+                                          PracticeAssignment2()));
                             },
                             child: _buildCircularButton(
                                 Icons.refresh, "Play Again", Colors.teal)),

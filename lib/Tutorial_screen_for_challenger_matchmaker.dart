@@ -86,6 +86,7 @@ void initState() {
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
+                          textAlign: TextAlign.justify,
                         ),
                         const SizedBox(height: 8),
                         Text(
@@ -94,6 +95,7 @@ void initState() {
                             fontSize: 12,
                             color: Colors.black,
                           ),
+                          textAlign: TextAlign.justify,
                         ),
                       ],
                     ),
@@ -156,6 +158,7 @@ Widget _buildCard2({
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
+                        textAlign: TextAlign.justify,
                       ),
                       const SizedBox(height: 8),
                       ...descriptionPoints.map((point) {
@@ -165,6 +168,7 @@ Widget _buildCard2({
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 4.0),
                           child: RichText(
+                            textAlign: TextAlign.justify,
                             text: TextSpan(
                               children: [
                                 TextSpan(
@@ -181,6 +185,7 @@ Widget _buildCard2({
                                     fontSize: 14,
                                     color: Colors.black,
                                   ),
+                                  
                                 ),
                               ],
                             ),
@@ -255,7 +260,7 @@ Widget _buildCard2({
                             icon: Icon(
                               Icons.play_circle_fill,
                               size: 64,
-                              color: Colors.white.withOpacity(0.8),
+                              color: const Color.fromARGB(255, 164, 163, 163).withOpacity(0.8),
                             ),
                             onPressed: () {
                               setState(() {

@@ -36,7 +36,8 @@ class LearnAlphabet extends StatefulWidget {
   _LearnAlphabetState createState() => _LearnAlphabetState();
 }
 
-class _LearnAlphabetState extends State<LearnAlphabet> {// Initialize Firestore
+class _LearnAlphabetState extends State<LearnAlphabet> {
+  // Initialize Firestore
 
   @override
   void initState() {
@@ -65,15 +66,17 @@ class _LearnAlphabetState extends State<LearnAlphabet> {// Initialize Firestore
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
-        title: const Text("Alphabets",
-        style: TextStyle(
-          color: Colors.white,
-        ),),
+        title: const Text(
+          "Learn Alphabets",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         backgroundColor: const Color.fromARGB(255, 250, 233, 215),
         elevation: 0.0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          color: const Color.fromARGB(255, 255, 255, 255),
+          icon: const Icon(Icons.arrow_back),
+          color: const Color.fromARGB(255, 0, 0, 0),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -103,12 +106,35 @@ class AlphabetLearn extends StatefulWidget {
   State<AlphabetLearn> createState() => _AlphabetLearnState();
 }
 
-class _AlphabetLearnState extends State<AlphabetLearn> with SingleTickerProviderStateMixin {
+class _AlphabetLearnState extends State<AlphabetLearn>
+    with SingleTickerProviderStateMixin {
   List<String> alphabetImages = [
-    'A', 'B', 'C', 'D', 'E', 'F', 'G',
-    'H', 'I', 'J', 'K', 'L', 'M', 'N',
-    'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-    'V', 'W', 'X', 'Y', 'Z'
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z'
   ];
 
   // Map to store Cloudinary URLs for each alphabet (PNG and GIF)
@@ -141,33 +167,59 @@ class _AlphabetLearnState extends State<AlphabetLearn> with SingleTickerProvider
     'Z': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728462628/Z.gif',
   };
 
-final Map<String, String> alphabetPngs = {
-    'A': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/A-labelled_sed7ad.png',
-    'B': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/B-labelled_jppjzn.png',
-    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/C-labelled_h4kxsi.png',
-    'D': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/D-labelled_sbsek7.png',
-    'E': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/E-labelled_bovjls.png',
-    'F': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/F-labelled_kxce14.png',
-    'G': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/G-labelled_oxmqrx.png',
-    'H': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/H-labelled_lbiwjc.png',
-    'I': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/I-labelled_p4zjxd.png',
-    'J': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/J-labelled_k4o6y3.png',
-    'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/K-labelled_ti6ypj.png',
-    'L': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/L-labelled_vuydr9.png',
-    'M': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/M-labelled_bsovuc.png',
-    'N': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355183/N-labelled_p8wypu.png',
-    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355183/O-labelled_lhvsun.png',
-    'P': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355198/P-labelled_fzfe3d.png',
-    'Q': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355198/Q-labelled_gvyepx.png',
-    'R': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355198/R-labelled_fxi6de.png',
-    'S': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355199/S-labelled_fjph3z.png',
-    'T': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355199/T-labelled_blzhjl.png',
-    'U': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/U-labelled_blgp2r.png',
-    'V': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/V-labelled_rndws0.png',
-    'W': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/W-labelled_lpl5ga.png',
-    'X': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/X-labelled_bk8rem.png',
-    'Y': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/Y-labelled_najbm5.png',
-    'Z': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/Z-labelled_g2fqxi.png',
+  final Map<String, String> alphabetPngs = {
+    'A':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/A-labelled_sed7ad.png',
+    'B':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/B-labelled_jppjzn.png',
+    'C':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/C-labelled_h4kxsi.png',
+    'D':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/D-labelled_sbsek7.png',
+    'E':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/E-labelled_bovjls.png',
+    'F':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/F-labelled_kxce14.png',
+    'G':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/G-labelled_oxmqrx.png',
+    'H':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/H-labelled_lbiwjc.png',
+    'I':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/I-labelled_p4zjxd.png',
+    'J':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/J-labelled_k4o6y3.png',
+    'K':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/K-labelled_ti6ypj.png',
+    'L':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/L-labelled_vuydr9.png',
+    'M':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/M-labelled_bsovuc.png',
+    'N':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355183/N-labelled_p8wypu.png',
+    'O':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355183/O-labelled_lhvsun.png',
+    'P':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355198/P-labelled_fzfe3d.png',
+    'Q':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355198/Q-labelled_gvyepx.png',
+    'R':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355198/R-labelled_fxi6de.png',
+    'S':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355199/S-labelled_fjph3z.png',
+    'T':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355199/T-labelled_blzhjl.png',
+    'U':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/U-labelled_blgp2r.png',
+    'V':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/V-labelled_rndws0.png',
+    'W':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/W-labelled_lpl5ga.png',
+    'X':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/X-labelled_bk8rem.png',
+    'Y':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/Y-labelled_najbm5.png',
+    'Z':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/Z-labelled_g2fqxi.png',
   };
 
   final ScrollController _scrollController = ScrollController();
@@ -206,102 +258,115 @@ final Map<String, String> alphabetPngs = {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scrollbar(
-      thumbVisibility: true,
+
+@override
+Widget build(BuildContext context) {
+  // Get the screen size
+  final screenWidth = MediaQuery.of(context).size.width;
+  final screenHeight = MediaQuery.of(context).size.height;
+
+  return Scrollbar(
+    thumbVisibility: true,
+    controller: _scrollController,
+    child: SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
       controller: _scrollController,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        controller: _scrollController,
-        child: Center(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: AnimatedBuilder(
-              animation: _animation,
-              builder: (context, child) {
-                return Opacity(
-                  opacity: _animation.value,
-                  child: Transform.translate(
-                    offset: Offset(0.0, 50 * (1 - _animation.value)),
-                    child: SingleChildScrollView(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: alphabetImages.map((imageName) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                            child: Column(
-                              children: [
-                                // Display GIF
-                                Card(
-                                  elevation: 6.0,
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    child: SizedBox(
-                                      width: 300,
-                                      height: 300,
-                                      child: Image.network(
-                                                alphabetGifs[imageName]!,
-                                                loadingBuilder: (context, child, loadingProgress) {
-                                               if (loadingProgress == null) {
-                                                      return child;
-                                                } else {
-                                                      return const Center(
-                                                          child: CircularProgressIndicator(),
-                                      );
-                        }
-                      },
-                                        ),
+      child: Center(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) {
+              return Opacity(
+                opacity: _animation.value,
+                child: Transform.translate(
+                  offset: Offset(0.0, screenHeight * 0.05 * (1 - _animation.value)), // Adjust offset based on screen height
+                  child: SingleChildScrollView(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: alphabetImages.map((imageName) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.02, // Adjust horizontal padding
+                          ),
+                          child: Column(
+                            children: [
+                              // Display GIF
+                              Card(
+                                elevation: screenHeight * 0.01, // Adjust elevation
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                  child: SizedBox(
+                                    width: screenWidth * 0.8, // Adjust width dynamically
+                                    height: screenHeight * 0.4, // Adjust height dynamically
+                                    child: Image.network(
+                                      alphabetGifs[imageName]!,
+                                      loadingBuilder: (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        } else {
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: screenWidth * 0.01,
+                                              color: Color.fromARGB(255, 189, 74, 2), // Adjust loader size
+                                            ),
+                                          );
+                                        }
+                                      },
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 8.0),
-                                // Display PNG of the same size
-                                Card(
-                                  elevation: 6.0,
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    child: SizedBox(
-                                      width: 300,
-                                      height: 300,
-                                      child: Image.network(
-                                        alphabetPngs[imageName]!,
-                                        
-                                        loadingBuilder: (context, child, loadingProgress) {
-                                               if (loadingProgress == null) {
-                                                      return child;
-                                                } else {
-                                                      return const Center(
-                                                          child: CircularProgressIndicator(),
-                                      );
-                        }
-                      },
-                                      ),
+                              ),
+                              SizedBox(height: screenHeight * 0.01), // Adjust vertical spacing
+                              // Display PNG of the same size
+                              Card(
+                                elevation: screenHeight * 0.01, // Adjust elevation
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                  child: SizedBox(
+                                    width: screenWidth * 0.8, // Adjust width dynamically
+                                    height: screenHeight * 0.4, // Adjust height dynamically
+                                    child: Image.network(
+                                      alphabetPngs[imageName]!,
+                                      loadingBuilder: (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        } else {
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: screenWidth * 0.01,
+                                              color: Color.fromARGB(255, 189, 74, 2), // Adjust loader size
+                                            ),
+                                          );
+                                        }
+                                      },
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 16.0),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
+                              ),
+                              SizedBox(height: screenHeight * 0.02), // Adjust vertical spacing
+                            ],
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 }

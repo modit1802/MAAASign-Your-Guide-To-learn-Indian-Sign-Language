@@ -10,19 +10,20 @@ class LearnNumbers extends StatefulWidget {
 }
 
 class _LearnNumbersState extends State<LearnNumbers> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
-        title: const Text("Numbers",
+        title: const Text("Learn Numbers",
         style: TextStyle(
-          color: Colors.white,
+          color: Color.fromARGB(255, 0, 0, 0),
         ),),
         backgroundColor: const Color.fromARGB(255, 250, 233, 215),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          color: const Color.fromARGB(255, 255, 255, 255),
+          icon: const Icon(Icons.arrow_back),
+          color: const Color.fromARGB(255, 0, 0, 0),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -45,6 +46,21 @@ class LearnNumbersCards extends StatefulWidget {
 
 class _LearnNumbersCardsState extends State<LearnNumbersCards>
     with SingleTickerProviderStateMixin {
+  
+      List<String> numberImages = [
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+  ];
+
   // Cloudinary GIF and PNG URLs for numbers
   Map<String, String> numberGifs = {
     '0': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468447/0_axhirl.gif',
@@ -77,17 +93,22 @@ class _LearnNumbersCardsState extends State<LearnNumbersCards>
   final ScrollController _scrollController = ScrollController();
   bool showPopup = false;
   bool popupShownBefore = false;
-
+  late Animation<double> _animation;
+  late AnimationController _controller;
   late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    _animationController = AnimationController(
+    _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 5),
+      duration: const Duration(milliseconds: 500),
     );
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+    _controller.forward();
     _updateLearnNumberInFirebase(20);
   }
 
@@ -131,95 +152,115 @@ class _LearnNumbersCardsState extends State<LearnNumbersCards>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            controller: _scrollController,
-            child: Center(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: numberGifs.keys.map((imageName) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: Column(
-                        children: [
-                          Card(
-                            elevation: 6.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: SizedBox(
-                                width: 300,
-                                height: 300,
-                                child: Image.network(
-                                  numberGifs[imageName]!,
-                                  fit: BoxFit.cover,
+Widget build(BuildContext context) {
+  // Get the screen size
+  final screenWidth = MediaQuery.of(context).size.width;
+  final screenHeight = MediaQuery.of(context).size.height;
+
+  return Scrollbar(
+    thumbVisibility: true,
+    controller: _scrollController,
+    child: SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      controller: _scrollController,
+      child: Center(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) {
+              return Opacity(
+                opacity: _animation.value,
+                child: Transform.translate(
+                  offset: Offset(0.0, screenHeight * 0.05 * (1 - _animation.value)), // Adjust offset based on screen height
+                  child: SingleChildScrollView(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: numberImages.map((imageName) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.02, // Adjust horizontal padding
+                          ),
+                          child: Column(
+                            children: [
+                              // Display GIF
+                              Card(
+                                elevation: screenHeight * 0.01, // Adjust elevation
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                  child: SizedBox(
+                                    width: screenWidth * 0.8, // Adjust width dynamically
+                                    height: screenHeight * 0.4, // Adjust height dynamically
+                                    child: Image.network(
+                                      numberGifs[imageName]!,
+                                      loadingBuilder: (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        } else {
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: screenWidth * 0.01,
+                                              color: Color.fromARGB(255, 189, 74, 2), // Adjust loader size
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              SizedBox(height: screenHeight * 0.01), // Adjust vertical spacing
+                              // Display PNG of the same size
+                              Card(
+                                elevation: screenHeight * 0.01, // Adjust elevation
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                  child: SizedBox(
+                                    width: screenWidth * 0.8, // Adjust width dynamically
+                                    height: screenHeight * 0.4, // Adjust height dynamically
+                                    child: Image.network(
+                                      numberPngs[imageName]!,
+                                      loadingBuilder: (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        } else {
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: screenWidth * 0.01,
+                                              color: Color.fromARGB(255, 189, 74, 2), // Adjust loader size
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: screenHeight * 0.02), // Adjust vertical spacing
+                            ],
                           ),
-                          const SizedBox(height: 8.0),
-                          NumberPngCard(imageName: imageName, numberPngs: numberPngs),
-                          const SizedBox(height: 16.0),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
-          ),
-        ),
-        if (showPopup)
-          Center(
-            child: GestureDetector(
-              onTap: _dismissPopup,
-              child: Card(
-                elevation: 6.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(16.0),
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        'Congratulations!',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          color: Colors.green,
-                        ),
-                      ),
-                      const SizedBox(height: 8.0),
-                      const Text(
-                        'Wohoo! You have learned 10 Numbers.',
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 16.0),
-                      TextButton(
-                        onPressed: _dismissPopup,
-                        child: const Text('OK'),
-                      ),
-                    ],
+                        );
+                      }).toList(),
+                    ),
                   ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
-      ],
-    );
-  }
+        ),
+      ),
+    ),
+  );
+}
+
 }
 
 class NumberPngCard extends StatelessWidget {
