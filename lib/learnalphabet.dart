@@ -36,9 +36,7 @@ class LearnAlphabet extends StatefulWidget {
   _LearnAlphabetState createState() => _LearnAlphabetState();
 }
 
-class _LearnAlphabetState extends State<LearnAlphabet> {
-  final FirebaseAuth _auth = FirebaseAuth.instance; // Initialize Firebase Auth
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance; // Initialize Firestore
+class _LearnAlphabetState extends State<LearnAlphabet> {// Initialize Firestore
 
   @override
   void initState() {
@@ -65,12 +63,13 @@ class _LearnAlphabetState extends State<LearnAlphabet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
         title: const Text("Alphabets",
         style: TextStyle(
           color: Colors.white,
         ),),
-        backgroundColor: const Color.fromARGB(255, 219, 69, 249),
+        backgroundColor: const Color.fromARGB(255, 250, 233, 215),
         elevation: 0.0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -81,18 +80,6 @@ class _LearnAlphabetState extends State<LearnAlphabet> {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 219, 69, 249),
-              Color.fromARGB(255, 135, 205, 238),
-              Colors.white
-            ],
-            stops: [0.0, 0.5, 1.0],
-          ),
-        ),
         child: const Column(
           children: [
             Expanded(

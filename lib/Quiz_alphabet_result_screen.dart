@@ -283,7 +283,7 @@ class _Quiz_alphabet_ResultScreenState
                       children: [
                         GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
