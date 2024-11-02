@@ -1,6 +1,6 @@
 import 'package:SignEase/learnpronoun.dart';
 import 'package:SignEase/matchmaker_alphabet.dart';
-import 'package:SignEase/practiceassignment2.dart';
+import 'package:SignEase/pronoun_quiz.dart';
 import 'package:flutter/material.dart';
 class PronounStartScreen extends StatefulWidget {
   const PronounStartScreen({super.key});
@@ -127,7 +127,7 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                       ),
                       const SizedBox(height: 12), // Space between the cards
                       _buildCard(
-                        onTap: () => _handleCardTap(1, PracticeAssignment2()),
+                        onTap: () => _handleCardTap(1, PronounQuiz()),
                         imagePath: 'images/quiz.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Play Quiz',
