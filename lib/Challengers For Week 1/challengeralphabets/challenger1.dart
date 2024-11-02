@@ -1,5 +1,5 @@
+import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/Result_Challenger_Week1.dart';
 import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/tutorialscreen.dart';
-import 'package:SignEase/alphabetfinal.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:collection/collection.dart';
@@ -364,9 +364,9 @@ class _ThirdGameState extends State<ThirdGame> {
     } else {
       // Once all challenges are completed, navigate to Challenger2
       print("Navigating to Challenger2 with score: $score");
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => AlphabetFinal(score: score)),
+        MaterialPageRoute(builder: (context) => Result_Challenger_Week1(score: score)),
       );
     }
   }
