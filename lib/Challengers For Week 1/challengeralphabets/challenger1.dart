@@ -345,7 +345,7 @@ class _ThirdGameState extends State<ThirdGame> {
               List.from(challengeData[currentChallengeIndex]['solution']);
           isCorrectSolution = false;
           showMoveToNextButton = false;
-                  incorrectQuestions.add({
+        incorrectQuestions.add({
           'question':challengeData[currentChallengeIndex]['question'],
           'solution':challengeData[currentChallengeIndex]['solution'],
           'available_letters':challengeData[currentChallengeIndex]['availableLetters'],
@@ -468,7 +468,7 @@ class _ThirdGameState extends State<ThirdGame> {
     );
   }
 
-  @override
+ 
   @override
   Widget build(BuildContext context) {
     // Get screen dimensions

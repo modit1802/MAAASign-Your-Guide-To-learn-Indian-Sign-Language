@@ -1,3 +1,4 @@
+import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/Review_Incorrect_challengers.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
@@ -17,6 +18,7 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
   String? score_challenger;
   String? score_alpha;
   String? score_number;
+  List<Map<String, dynamic>>? incorrectQuestions;
   bool isLoading = true; // Initial state is loading
 
   @override
@@ -38,120 +40,142 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
     }
   }
 
-Future<void> fetchResultsFromMongoDB() async {
-  String? userId = await getUserId();
-  var result = await userCollection.findOne(mongo.where.eq('userId', userId));
-  setState(() {
-    if (result != null) {
-      score_challenger = result['week']?['week1']?['Score_Challenger_week1']
-              ?['score_challenger']
-          ?.toString();
-      score_alpha = result['week']?['week1']?['Score_alphabet']
-              ?['score_alphabet']
-          ?.toString();
-      score_number = result['week']?['week1']?['Score_number']
-              ?['score_number']
-          ?.toString();
+  Future<void> fetchResultsFromMongoDB() async {
+    String? userId = await getUserId();
+    var result = await userCollection.findOne(mongo.where.eq('userId', userId));
+    setState(() {
+      if (result != null) {
+        score_challenger = result['week']?['week1']?['Score_Challenger_week1']
+                ?['score_challenger']
+            ?.toString();
+        score_alpha = result['week']?['week1']?['Score_alphabet']
+                ?['score_alphabet']
+            ?.toString();
+        score_number = result['week']?['week1']?['Score_number']
+                ?['score_number']
+            ?.toString();
 
-      // Set scores to 0 if they are null
-      score_alpha ??= '0';
-      score_number ??= '0';
+        var data = result['week']?['week1']?['Score_Challenger_week1']
+            ?['Incorrect_challenges'];
+        
+        if (data != null && data is List) {
+        incorrectQuestions = data.map<Map<String, dynamic>>((item) {
+          return {
+            'question': item['question'],
+            'solution': List<String>.from(item['solution'] ?? []),
+            'availableLetters': List<String>.from(item['available_letters'] ?? []),
+            'urls': Map<String, String>.from(item['urls'] ?? {}),
+          };
+        }).toList();
+      } else {
+        incorrectQuestions = []; // Set to an empty list if null or not a list
+      }
 
-      print(score_alpha);
-      print(score_number);
-    } else {
-      score_challenger = 'Please attempt the challenger';
-      print('No data found');
-    }
-    isLoading = false;
-  });
-  await db.close();
-}
+        // Set scores to 0 if they are null
+        score_alpha ??= '0';
+        score_number ??= '0';
+        print(incorrectQuestions);
+        print(score_alpha);
+        print(score_number);
+      } else {
+        score_challenger = 'Please attempt the challenger';
+        print('No data found');
+      }
+      isLoading = false;
+    });
+    await db.close();
+  }
 
-Widget _buildScoreCard() {
-  return Card(
-    elevation: 10,
-    color: Colors.white,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-    child: Padding(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        children: [
-          const Text(
-            "Quiz Scores of Week 1",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: SfCartesianChart(
-              primaryXAxis: CategoryAxis(),
-              series: <CartesianSeries<ScoreData, String>>[
-                ColumnSeries<ScoreData, String>(
-                  dataSource: [
-                    ScoreData('Alphabets', double.tryParse(score_alpha!) ?? 0),
-                  ],
-                  xValueMapper: (ScoreData data, _) => data.label,
-                  yValueMapper: (ScoreData data, _) => data.value,
-                  color: Colors.red,
-                  dataLabelSettings: const DataLabelSettings(isVisible: true),
-                ),
-                ColumnSeries<ScoreData, String>(
-                  dataSource: [
-                    ScoreData('Numbers', double.tryParse(score_number!) ?? 0),
-                  ],
-                  xValueMapper: (ScoreData data, _) => data.label,
-                  yValueMapper: (ScoreData data, _) => data.value,
-                  color: Colors.orange,
-                  dataLabelSettings: const DataLabelSettings(isVisible: true),
-                ),
-              ],
+  Widget _buildScoreCard() {
+    return Card(
+      elevation: 10,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            const Text(
+              "Quiz Scores of Week 1",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-          ),
-        ],
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: SfCartesianChart(
+                primaryXAxis: CategoryAxis(),
+                series: <CartesianSeries<ScoreData, String>>[
+                  ColumnSeries<ScoreData, String>(
+                    dataSource: [
+                      ScoreData(
+                          'Alphabets', double.tryParse(score_alpha!) ?? 0),
+                    ],
+                    xValueMapper: (ScoreData data, _) => data.label,
+                    yValueMapper: (ScoreData data, _) => data.value,
+                    color: Colors.red,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                  ColumnSeries<ScoreData, String>(
+                    dataSource: [
+                      ScoreData('Numbers', double.tryParse(score_number!) ?? 0),
+                    ],
+                    xValueMapper: (ScoreData data, _) => data.label,
+                    yValueMapper: (ScoreData data, _) => data.value,
+                    color: Colors.orange,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
+
   Future<String?> getUserId() async {
     User? user = FirebaseAuth.instance.currentUser;
     return user?.uid;
   }
-@override
-Widget build(BuildContext context) {
-  // Set score based on score_challenger, defaulting to 0 if null
-  double score = double.tryParse(score_challenger ?? '0') ?? 0.0;
-  double percentage = (score / 1000).clamp(0.0, 1.0); // Percentage calculation based on score_challenger
 
-  return Scaffold(
-    backgroundColor: const Color.fromARGB(255, 250, 233, 215),
-    body: isLoading // Check if loading
-        ? Center( // Center the loading indicator
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(const Color.fromARGB(255, 189, 74, 2)), // Set the color
-            ),
-          )
-        : SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 40),
-                Padding(
-                  padding: const EdgeInsets.only(left:8.0,right:8,top: 8),
-                  child: _buildCard(
-                    onTap: () {},
-                    iconData: Icons.calendar_month,
-                    color: Colors.white,
-                    title:"Week 1 Progress Report",
-                    description: "Scroll Down to check your Detailed progress report of week 1. It includes Challenger Result, Quiz results",
-                    index: 1,
-                    titleColor: const Color.fromARGB(255, 0, 0, 0),
-                    iconColor: const Color.fromARGB(255, 189, 74, 2),
-                    descriptionColor: const Color.fromARGB(255, 0, 0, 0),
+  @override
+  Widget build(BuildContext context) {
+    // Set score based on score_challenger, defaulting to 0 if null
+    double score = double.tryParse(score_challenger ?? '0') ?? 0.0;
+    double percentage = (score / 1000)
+        .clamp(0.0, 1.0); // Percentage calculation based on score_challenger
+
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+      body: isLoading // Check if loading
+          ? Center(
+              // Center the loading indicator
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    const Color.fromARGB(255, 189, 74, 2)), // Set the color
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
+                    child: _buildCard(
+                      onTap: () {},
+                      iconData: Icons.calendar_month,
+                      color: Colors.white,
+                      title: "Week 1 Progress Report",
+                      description:
+                          "Scroll Down to check your Detailed progress report of week 1. It includes Challenger Result, Quiz results",
+                      index: 1,
+                      titleColor: const Color.fromARGB(255, 0, 0, 0),
+                      iconColor: const Color.fromARGB(255, 189, 74, 2),
+                      descriptionColor: const Color.fromARGB(255, 0, 0, 0),
+                    ),
                   ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 70.0),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
                     child: CircularPercentIndicator(
                       radius: 100.0,
                       lineWidth: 15.0,
@@ -166,53 +190,65 @@ Widget build(BuildContext context) {
                       circularStrokeCap: CircularStrokeCap.round,
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: _buildCard(
-                    onTap: () {},
-                    iconData: Icons.check_circle,
-                    color: percentage > 0.6 ? Colors.green : Colors.red,
-                    title: percentage > 0.6 ? "Success" : "Practice Needed",
-                    description: percentage > 0.6
-                        ? "Congratulations you have successfully completed week 1. Scroll down to view detailed progress report"
-                        : "Your score is not up to the mark. We recommend you to practice week 1 again. Scroll down to view detailed progress report",
-                    index: 1,
-                    titleColor: Colors.white,
-                    iconColor: percentage > 0.6 ? Colors.green : Colors.red,
-                    descriptionColor: Colors.white,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: _buildCard(
-                    onTap: () {},
-                    iconData: Icons.quiz,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    title: (score_alpha == null && score_number == null)
-                        ? "Quiz Not Attempted"
-                        : "Quiz Scores",
-                    description: (score_alpha == null && score_number == null)
-                        ? "You have not attempted the quiz for numbers and alphabets. Please first attempt the quiz then come to check the scores"
-                        : "🔔 Below are your quiz scores presented in both letters and numbers! Red bar represents the Alphabet score and Orange bar represents the Numbers score",
-                    index: 1,
-                  ),
-                ),
-                // Show the score card only if both score_alpha and score_number are available
-                if (score_alpha != null && score_number != null)
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: _buildScoreCard(),
+                    child: _buildCard(
+                      onTap: () {},
+                      iconData: Icons.check_circle,
+                      color: percentage > 0.6 ? Colors.green : Colors.red,
+                      title: percentage > 0.6 ? "Success" : "Practice Needed",
+                      description: percentage > 0.6
+                          ? "Congratulations you have successfully completed week 1. Scroll down to view detailed progress report"
+                          : "Your score is not up to the mark. We recommend you to practice week 1 again. Scroll down to view detailed progress report",
+                      index: 1,
+                      titleColor: Colors.white,
+                      iconColor: percentage > 0.6 ? Colors.green : Colors.red,
+                      descriptionColor: Colors.white,
+                    ),
                   ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _buildCard2(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Review_Incorrect_Challengers(incorrectChallenger:incorrectQuestions)));
+                      },
+                      iconData: Icons.remove_red_eye,
+                      color: Colors.white,
+                      title: "Review Incorrect Challengers",
+                      description: "Tap me to view the incorrect challengers",
+                      index: 0,
+                      titleColor: const Color.fromARGB(255, 0, 0, 0),
+                      descriptionColor: const Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: _buildCard(
+                      onTap: () {},
+                      iconData: Icons.quiz,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      title: (score_alpha == null && score_number == null)
+                          ? "Quiz Not Attempted"
+                          : "Quiz Scores",
+                      description: (score_alpha == null && score_number == null)
+                          ? "You have not attempted the quiz for numbers and alphabets. Please first attempt the quiz then come to check the scores"
+                          : "🔔 Below are your quiz scores presented in both letters and numbers! Red bar represents the Alphabet score and Orange bar represents the Numbers score",
+                      index: 1,
+                    ),
+                  ),
+                  // Show the score card only if both score_alpha and score_number are available
+                  if (score_alpha != null && score_number != null)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: _buildScoreCard(),
+                    ),
+                ],
+              ),
             ),
-          ),
-  );
-}
+    );
+  }
 
-
- 
   Widget _buildNoAttemptCard() {
     return Card(
       elevation: 10,
@@ -292,6 +328,72 @@ Widget build(BuildContext context) {
       ),
     );
   }
+
+   Widget _buildCard2({
+    required VoidCallback onTap,
+    required IconData iconData,
+    required Color color,
+    required String title,
+    required String description,
+    required int index,
+    Color titleColor = Colors.black, // Default title color
+    Color iconColor =
+        const Color.fromARGB(255, 206, 109, 30), // Default icon color
+    Color descriptionColor = Colors.black, // Default description color
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 10,
+        color: color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: SizedBox(
+            height: 100,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    color: Colors.white,
+                    child: Icon(iconData, color: iconColor), // Set icon color
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: titleColor, // Set title color
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: descriptionColor, // Set description color
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 }
 
 class ScoreData {
