@@ -34,6 +34,7 @@ class ThirdGame extends StatefulWidget {
 class _ThirdGameState extends State<ThirdGame> {
   late int score;
   bool? isCorrectSolution;
+  List<Map<String, dynamic>> incorrectQuestions = [];
   int attempts = 0;
   int maxAttempts = 3;
   int currentChallengeIndex = 0; // Track the current challenge index
@@ -287,6 +288,7 @@ class _ThirdGameState extends State<ThirdGame> {
   @override
   void initState() {
     super.initState();
+
     score = widget.score;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showtutorialscreen();
@@ -343,10 +345,17 @@ class _ThirdGameState extends State<ThirdGame> {
               List.from(challengeData[currentChallengeIndex]['solution']);
           isCorrectSolution = false;
           showMoveToNextButton = false;
+                  incorrectQuestions.add({
+          'question':challengeData[currentChallengeIndex]['question'],
+          'solution':challengeData[currentChallengeIndex]['solution'],
+          'available_letters':challengeData[currentChallengeIndex]['availableLetters'],
+          'urls':challengeData[currentChallengeIndex]['urls']
+        });
         } else {
           isCorrectSolution = false;
           showMoveToNextButton = false;
         }
+
       });
       _scrollToGif();
     }
@@ -366,7 +375,8 @@ class _ThirdGameState extends State<ThirdGame> {
       print("Navigating to Challenger2 with score: $score");
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Result_Challenger_Week1(score: score)),
+        MaterialPageRoute(
+            builder: (context) => Result_Challenger_Week1(score: score,incorrectquestions:incorrectQuestions)),
       );
     }
   }
@@ -650,46 +660,50 @@ class _ThirdGameState extends State<ThirdGame> {
 
 // Tutorial widget (Center)
 // Tutorial widget with information icon (Center)
-Positioned(
-  top: screenHeight * 0.06,
-  left: screenWidth * 0.4, // Adjust this to align properly in the center
-  child: GestureDetector(
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Tutorial_screen_for_challenger_alphabet(
-            onBackPressed: () {
-              Navigator.pop(context);
+        Positioned(
+          top: screenHeight * 0.06,
+          left:
+              screenWidth * 0.4, // Adjust this to align properly in the center
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Tutorial_screen_for_challenger_alphabet(
+                    onBackPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              );
             },
+            child: Container(
+              padding: EdgeInsets.all(screenWidth * 0.02),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(screenWidth * 0.03),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize
+                    .min, // Ensures the row only takes the required space
+                children: [
+                  Text(
+                    "Tutorial",
+                    style: TextStyle(
+                        color: Colors.white, fontSize: screenWidth * 0.04),
+                  ),
+                  SizedBox(
+                      width: screenWidth * 0.02), // Space between text and icon
+                  Icon(
+                    Icons.info_outline,
+                    color: Colors.white,
+                    size: screenWidth * 0.05, // Adjust icon size as needed
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
-      );
-    },
-    child: Container(
-      padding: EdgeInsets.all(screenWidth * 0.02),
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(screenWidth * 0.03),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min, // Ensures the row only takes the required space
-        children: [
-          Text(
-            "Tutorial",
-            style: TextStyle(color: Colors.white, fontSize: screenWidth * 0.04),
-          ),
-          SizedBox(width: screenWidth * 0.02), // Space between text and icon
-          Icon(
-            Icons.info_outline,
-            color: Colors.white,
-            size: screenWidth * 0.05, // Adjust icon size as needed
-          ),
-        ],
-      ),
-    ),
-  ),
-),
 
 // Chances Left widget (Right side)
         Positioned(

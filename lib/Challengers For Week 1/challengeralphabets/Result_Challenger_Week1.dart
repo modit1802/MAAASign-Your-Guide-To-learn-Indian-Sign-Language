@@ -7,8 +7,10 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:percent_indicator/percent_indicator.dart';
 
 class Result_Challenger_Week1 extends StatefulWidget {
-  const Result_Challenger_Week1({super.key, required this.score});
   final int score;
+  final List<Map<String, dynamic>> incorrectquestions;
+  const Result_Challenger_Week1({Key?key, required this.score, required this.incorrectquestions}): super(key: key);
+
 
   @override
   State<Result_Challenger_Week1> createState() =>
@@ -20,12 +22,14 @@ class _Result_Challenger_Week1State extends State<Result_Challenger_Week1> {
   late mongo.Db db;
   late mongo.DbCollection userCollection;
   late int score;
+  late List<Map<String,dynamic>> incorrect;
 
   @override
   void initState() {
     super.initState();
     connectToMongoDB();
     score = widget.score;
+    incorrect=widget.incorrectquestions;
   }
 
   Future<void> connectToMongoDB() async {
@@ -64,6 +68,7 @@ class _Result_Challenger_Week1State extends State<Result_Challenger_Week1> {
           weekKey: {
             'Score_Challenger_week1': {
               'score_challenger': widget.score,
+              'Incorrect_challenges':widget.incorrectquestions,
             }
           }
         }
@@ -74,7 +79,7 @@ class _Result_Challenger_Week1State extends State<Result_Challenger_Week1> {
         mongo.where.eq('userId', userId),
         mongo.modify.set('week.$weekKey.Score_Challenger_week1', {
           'score_challenger': widget.score,
-          
+          'Incorrect_challenges':widget.incorrectquestions,
         }),
       );
     }
