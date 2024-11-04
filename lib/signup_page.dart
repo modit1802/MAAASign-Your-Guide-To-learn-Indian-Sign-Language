@@ -8,6 +8,8 @@ import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/login_page.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:async';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -25,6 +27,7 @@ class _SignupPageState extends State<SignupPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool _isObscure = true;
   bool _isSigningUp = false;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   bool _showAnimation = false;
 
   @override
@@ -32,6 +35,45 @@ class _SignupPageState extends State<SignupPage> {
     super.initState();
     _initializeFirebase();
   }
+
+  Future<void> _googleSignInMethod() async {
+  try {
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) {
+      // User canceled the sign-in
+      print("User cancelled Google Sign-In");
+      return;
+    }
+    
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Sign in with the credential
+    UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+    // Store user info in Firestore
+    await _firestore.collection('users').doc(userCredential.user!.uid).set({
+      'name': userCredential.user!.displayName,
+      'email': userCredential.user!.email,
+    });
+
+    // Navigate to the initial page
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const InitialPage1()),
+    );
+  } catch (e) {
+    print("Google Sign-In Error: $e");
+    // You can show a dialog or a snackbar with the error message
+  }
+}
+
+
 
   Future<void> _initializeFirebase() async {
     try {
@@ -130,6 +172,62 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
+  Future<void> _signInWithGoogle() async {
+  try {
+    setState(() {
+      _isSigningUp = true; // Indicate that the sign-in process has started
+    });
+
+    // Start the Google sign-in flow
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) {
+      print("User cancelled Google Sign-In");
+      return; // Exit if the user cancels the sign-in process
+    }
+
+    // Get the authentication details from the request
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Sign in to Firebase with the Google [UserCredential]
+    UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+    // Check if the user exists in Firestore
+    final userDoc = await _firestore.collection('users').doc(userCredential.user!.uid).get();
+    if (!userDoc.exists) {
+      // If user does not exist, create a new document
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'name': userCredential.user!.displayName,
+        'email': userCredential.user!.email,
+        'photoUrl': userCredential.user!.photoURL, // Optional: Store user's photo URL
+        'createdAt': FieldValue.serverTimestamp(), // Optional: Track user creation time
+      });
+    }
+
+    // Navigate to the initial page
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const InitialPage1()),
+    );
+  } catch (e) {
+    print("Google sign-in error: $e");
+    // Optionally show a dialog or snackbar with the error message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Sign-in failed. Please try again.")),
+    );
+  } finally {
+    setState(() {
+      _isSigningUp = false; // Reset the signing up state
+    });
+  }
+}
+
+
   void _goToLoginPage() {
     Navigator.push(
       context,
@@ -172,11 +270,6 @@ class _SignupPageState extends State<SignupPage> {
                                   color: Color.fromARGB(221, 255, 255, 255),
                                   fontSize: 40,
                                 ),
-                              ),
-                              Image.asset(
-                                'assets/hello.gif',
-                                width: 150,
-                                height: 80,
                               ),
                             ],
                           ),
@@ -381,6 +474,27 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                          
                           const SizedBox(height: 30),
+                          FadeInUp(
+  duration: const Duration(milliseconds: 1600),
+  child: MaterialButton(
+    onPressed: _googleSignInMethod,
+    height: 50,
+    color: Colors.red, // You can change the color
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(50),
+    ),
+    child: const Center(
+      child: Text(
+        "Sign in with Google",
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ),
+),
+
                           FadeInUp(
                             duration: const Duration(milliseconds: 1700),
                             child: GestureDetector(

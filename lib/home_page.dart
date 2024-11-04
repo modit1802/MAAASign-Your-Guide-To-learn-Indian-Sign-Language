@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
+
 import 'package:flutter/material.dart';
 import 'package:SignEase/Week 2/week2_entry.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:SignEase/newscreen.dart';
 import 'package:lottie/lottie.dart';
-import 'package:SignEase/login_page.dart'; // Assuming this is the file for LoginPage
+// Assuming this is the file for LoginPage
 import 'package:SignEase/week3_start_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +19,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseDatabase _database = FirebaseDatabase.instance;
   bool _showAnimation = false;
   User? _currentUser;
   String username = "";
@@ -59,29 +58,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _logout() async {
-    setState(() {
-      _showAnimation = true;
-    });
 
-    try {
-      await _auth.signOut();
-      Timer(const Duration(seconds: 5), () {
-        setState(() {
-          _showAnimation = false;
-        });
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const LoginPage()),
-        );
-      });
-    } catch (e) {
-      print('Logout Error: $e');
-      setState(() {
-        _showAnimation = false;
-      });
-    }
-  }
 
   Future<void> fetchUserName() async {
     User? user = FirebaseAuth.instance.currentUser;
@@ -111,15 +88,6 @@ class _HomePageState extends State<HomePage> {
           SafeArea(
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.logout, color: Colors.white),
-                      onPressed: _logout,
-                    ),
-                  ],
-                ),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Container(

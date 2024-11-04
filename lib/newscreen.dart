@@ -213,13 +213,13 @@ class _NewScreenState extends State<NewScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildBottomButton(icon: Icons.home, onTap: () => _navigateToPage(const InitialPage1())),
+            _buildBottomButton(icon: Icons.home, onTap: () => _navigateToPage(const InitialPage1(index: 0,))),
             const SizedBox(width: 20),
-            _buildBottomButton(icon: Icons.score, onTap: () => _navigateToPage(const InitialPage1())),
+           _buildBottomButton(icon: Icons.fact_check, onTap: () => _navigateToPage(const InitialPage1(index: 1,))),
             const SizedBox(width: 20),
-            _buildBottomButton(icon: Icons.assignment, onTap: () => _navigateToPage(const InitialPage1())),
+            _buildBottomButton(icon: Icons.score, onTap: () => _navigateToPage(const InitialPage1(index:2))),
             const SizedBox(width: 20),
-            _buildBottomButton(icon: Icons.info, onTap: () => _navigateToPage(const InitialPage1())),
+            _buildBottomButton(icon: Icons.info, onTap: () => _navigateToPage(const InitialPage1(index:3))),
           ],
         ),
       ),

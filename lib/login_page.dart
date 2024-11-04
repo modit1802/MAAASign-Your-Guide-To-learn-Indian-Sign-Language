@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart'; // Import Google Sign-In package
 import 'package:lottie/lottie.dart'; // Import Lottie package
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/signup_page.dart'; // Import your SignupPage
@@ -19,9 +21,11 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool _isObscure = true;
   bool _isSigningIn = false;
   bool _showAnimation = false;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   void _login() async {
     setState(() {
@@ -70,12 +74,83 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+ void _googleLogin() async {
+  setState(() {
+    _isSigningIn = true;
+    _showAnimation = true;
+  });
+
+  try {
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    
+    // Check if the user has canceled the sign-in
+    if (googleUser == null) {
+      setState(() {
+        _isSigningIn = false;
+        _showAnimation = false;
+      });
+      return;
+    }
+
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Sign in to Firebase with the Google credentials
+    await _auth.signInWithCredential(credential);
+    
+    // Now you can access user details from the googleUser object
+    String userName = googleUser.displayName ?? "User";
+    String userEmail = googleUser.email;
+    
+    // Optionally store user information in Firestore or local state management
+    await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+      'name': userName,
+      'email': userEmail,
+      'photoUrl': googleUser.photoUrl, // Optional
+    }, SetOptions(merge: true)); // Merge to avoid overwriting existing data
+
+    // Navigate to the home page after successful login
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const InitialPage1()),
+    );
+
+  } catch (e) {
+    print('Google Login Error: $e');
+    // Handle login error
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Login Failed'),
+        content: const Text('Failed to sign in with Google.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  } finally {
+    setState(() {
+      _isSigningIn = false;
+      _showAnimation = false;
+    });
+  }
+}
+
+
   void _goToSignupPage() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const SignupPage()),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          _buildBackground(), // Background gradient
+          _buildBackground(),
           SingleChildScrollView(
             child: SizedBox(
               width: double.infinity,
@@ -113,10 +188,9 @@ class _LoginPageState extends State<LoginPage> {
                                     fontSize: 40),
                               ),
                               Image.asset(
-                                'assets/hello.gif', // Adjust the path as per your project structure
+                                'assets/hello.gif',
                                 width: 150,
                                 height: 80,
-                                // You can adjust width and height as per your requirement
                               ),
                             ],
                           ),
@@ -169,8 +243,7 @@ class _LoginPageState extends State<LoginPage> {
                                     child: TextField(
                                       controller: _emailController,
                                       decoration: const InputDecoration(
-                                          prefixIcon:
-                                              Icon(Icons.email, color: Colors.grey),
+                                          prefixIcon: Icon(Icons.email, color: Colors.grey),
                                           hintText: "Email",
                                           hintStyle: TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -186,8 +259,7 @@ class _LoginPageState extends State<LoginPage> {
                                       obscureText: _isObscure,
                                       controller: _passwordController,
                                       decoration: InputDecoration(
-                                          prefixIcon:
-                                              const Icon(Icons.lock, color: Colors.grey),
+                                          prefixIcon: const Icon(Icons.lock, color: Colors.grey),
                                           suffixIcon: GestureDetector(
                                             onTap: () {
                                               setState(() {
@@ -210,27 +282,11 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 40),
-                          FadeInUp(
-                            duration: const Duration(milliseconds: 1500),
-                            child: GestureDetector(
-                              onTap: () {
-                                // Navigate to SignupPage when Signup is tapped
-                                _goToSignupPage();
-                              },
-                              child: const Text.rich(
-                                TextSpan(
-                                  text: "Forgot Password?",
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                              ),
-                            ),
-                          ),
                           const SizedBox(height: 20),
                           FadeInUp(
                             duration: const Duration(milliseconds: 1600),
                             child: _isSigningIn
-                                ? const CircularProgressIndicator() // Show loading indicator
+                                ? const CircularProgressIndicator()
                                 : MaterialButton(
                                     onPressed: _login,
                                     height: 50,
@@ -253,18 +309,25 @@ class _LoginPageState extends State<LoginPage> {
                           FadeInUp(
                             duration: const Duration(milliseconds: 1700),
                             child: GestureDetector(
-                              onTap: _goToSignupPage,
-                              child: const Text.rich(
-                                TextSpan(
-                                  text: "Don't Have an account? ",
-                                  style: TextStyle(color: Colors.grey),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: "Signup",
+                              onTap: _googleLogin, // Call Google login on tap
+                              child: Container(
+                                height: 50,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(color: Colors.grey.shade300),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.login, color: Colors.blueAccent),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      "Login with Google",
                                       style: TextStyle(
-                                        color: Colors.grey,
+                                        color: Colors.blueAccent,
                                         fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline,
                                       ),
                                     ),
                                   ],
@@ -272,7 +335,19 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 100),
+                          const SizedBox(height: 30),
+                          FadeInUp(
+                            duration: const Duration(milliseconds: 1700),
+                            child: GestureDetector(
+                              onTap: _goToSignupPage,
+                              child: const Text(
+                                "Don't have an account? Sign up!",
+                                style: TextStyle(
+                                    color: Color.fromARGB(221, 2, 204, 251),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -281,13 +356,18 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-           if (_showAnimation) _buildLoadingOverlay(), // Show loading overlay
+          if (_showAnimation)
+            Positioned(
+              top: 100,
+              left: 0,
+              right: 0,
+              child: Lottie.asset('assets/loading.json'), // Your Lottie animation
+            ),
         ],
       ),
     );
   }
-
-  // Widget to build the background gradient
+    // Widget to build the background gradient
   Widget _buildBackground() {
     return Container(
       decoration: const BoxDecoration(

@@ -42,6 +42,7 @@ class AboutPage extends StatelessWidget {
               // Feature 1 Card
               Card(
                 elevation: 4,
+                color:Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -62,6 +63,7 @@ class AboutPage extends StatelessWidget {
               // Feature 2 Card
               Card(
                 elevation: 4,
+                color:Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -82,6 +84,7 @@ class AboutPage extends StatelessWidget {
               // Feature 3 Card
               Card(
                 elevation: 4,
+                color:Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -102,6 +105,7 @@ class AboutPage extends StatelessWidget {
               // Feature 4 Card
               Card(
                 elevation: 4,
+                color:Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -122,6 +126,7 @@ class AboutPage extends StatelessWidget {
               // Feature 5 Card
               Card(
                 elevation: 4,
+                color:Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

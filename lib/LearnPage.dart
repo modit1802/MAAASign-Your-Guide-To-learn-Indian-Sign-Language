@@ -5,9 +5,7 @@ import 'package:SignEase/Week 2/learnrelations.dart';
 import 'package:SignEase/learnnoun.dart';
 import 'package:SignEase/learnpronoun.dart';
 import 'package:SignEase/learnverbs.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,7 +24,6 @@ class LearnPage extends StatefulWidget {
 
 class _LearnPageState extends State<LearnPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseDatabase _database = FirebaseDatabase.instance;
   bool _showAnimation = false;
   User? _currentUser;
   String username = "";
@@ -127,15 +124,6 @@ class _LearnPageState extends State<LearnPage> {
               onRefresh: _refreshLearnPage, // Trigger refresh logic
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.logout, color: Colors.white),
-                        onPressed: _logout,
-                      ),
-                    ],
-                  ),
                   Expanded(
                     child: SingleChildScrollView(
                       physics:
