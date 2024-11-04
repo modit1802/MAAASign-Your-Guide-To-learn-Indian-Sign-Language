@@ -78,9 +78,10 @@ class _Bingo_Noun_ResultScreenState
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_noun': {
-                'score_noun': widget.score,
-                'incorrectQuestions_noun': widget.incorrectQuestions,
+              'Score_noun2': {
+                'score_noun2': widget.score,
+                'incorrectQuestions_noun2': widget.incorrectQuestions,
+                'incorrectcount2':widget.incorrectcount,
               }
             }
           }
@@ -89,9 +90,9 @@ class _Bingo_Noun_ResultScreenState
         // If user exists, add or update only the Score_noun field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_noun', {
-            'score_noun': widget.score,
-            'incorrectQuestions_noun': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_noun2', {
+            'score_noun2': widget.score,
+            'incorrectQuestions_noun2': widget.incorrectQuestions,
           }),
         );
       }

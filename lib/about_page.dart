@@ -4,9 +4,7 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('About'),
-      ),
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -18,7 +16,7 @@ class AboutPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.teal,
+                  color: Color.fromARGB(255, 165, 74, 17),
                 ),
               ),
               SizedBox(height: 16),
@@ -36,7 +34,7 @@ class AboutPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.teal,
+                  color: Color.fromARGB(255, 165, 74, 17),
                 ),
               ),
               SizedBox(height: 12),
@@ -48,7 +46,7 @@ class AboutPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  leading: Icon(Icons.school, color: Colors.teal),
+                  leading: Icon(Icons.school, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
                     'Learn the Basics',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -68,7 +66,7 @@ class AboutPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  leading: Icon(Icons.assignment, color: Colors.teal),
+                  leading: Icon(Icons.assignment, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
                     'Practice Assignments',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -88,7 +86,7 @@ class AboutPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  leading: Icon(Icons.emoji_events, color: Colors.teal),
+                  leading: Icon(Icons.emoji_events, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
                     'Challenger Mode',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -108,7 +106,7 @@ class AboutPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  leading: Icon(Icons.video_library, color: Colors.teal),
+                  leading: Icon(Icons.video_library, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
                     'Engaging Media',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -128,7 +126,7 @@ class AboutPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  leading: Icon(Icons.translate, color: Colors.teal),
+                  leading: Icon(Icons.translate, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
                     'Topic-Comment Structure',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -147,7 +145,7 @@ class AboutPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Colors.teal,
+                  color: Color.fromARGB(255, 165, 74, 17),
                 ),
               ),
             ],

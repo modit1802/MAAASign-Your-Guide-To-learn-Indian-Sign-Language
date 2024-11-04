@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:math';
 
-import 'bingo_result.dart';
+import 'bingo_result_noun.dart';
 
 void main() {
   runApp(VideoBingoGame());

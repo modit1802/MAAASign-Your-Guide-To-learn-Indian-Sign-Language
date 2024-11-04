@@ -81,6 +81,7 @@ class _Quiz_Noun_ResultScreenState
               'Score_noun': {
                 'score_noun': widget.score,
                 'incorrectQuestions_noun': widget.incorrectQuestions,
+                'incorrectcount1':widget.incorrectcount,
               }
             }
           }
