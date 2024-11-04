@@ -2,9 +2,9 @@
 
 import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/play_incorrect_pronoun.dart';
+import 'package:SignEase/play_incorrect_noun.dart';
 import 'package:SignEase/review_incorrect_videos.dart';
-import 'package:SignEase/pronoun_quiz.dart';
+import 'package:SignEase/noun_quiz.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -13,14 +13,14 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class Quiz_Pronoun_ResultScreen extends StatefulWidget {
+class Bingo_Noun_ResultScreen extends StatefulWidget {
   final int score;
   final int totalQuestions;
   final int correctcount;
   final int incorrectcount;
   final List<Map<String, dynamic>> incorrectQuestions;
 
-  const Quiz_Pronoun_ResultScreen({
+  const Bingo_Noun_ResultScreen({
     Key? key,
     required this.score,
     required this.totalQuestions,
@@ -30,12 +30,12 @@ class Quiz_Pronoun_ResultScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Quiz_Pronoun_ResultScreen> createState() =>
-      _Quiz_Pronoun_ResultScreenState();
+  State<Bingo_Noun_ResultScreen> createState() =>
+      _Bingo_Noun_ResultScreenState();
 }
 
-class _Quiz_Pronoun_ResultScreenState
-    extends State<Quiz_Pronoun_ResultScreen> {
+class _Bingo_Noun_ResultScreenState
+    extends State<Bingo_Noun_ResultScreen> {
   final ScreenshotController _screenshotController = ScreenshotController();
 
   late mongo.Db db;
@@ -73,25 +73,25 @@ class _Quiz_Pronoun_ResultScreenState
       String weekKey = 'week3';
 
       if (userDoc == null) {
-        // If user doesn't exist, insert new document with only Score_number
+        // If user doesn't exist, insert new document with only Score_noun
         await userCollection.insert({
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_pronoun': {
-                'score_pronoun': widget.score,
-                'incorrectQuestions_pronoun': widget.incorrectQuestions,
+              'Score_noun': {
+                'score_noun': widget.score,
+                'incorrectQuestions_noun': widget.incorrectQuestions,
               }
             }
           }
         });
       } else {
-        // If user exists, add or update only the Score_number field inside week1
+        // If user exists, add or update only the Score_noun field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_pronoun', {
-            'score_pronoun': widget.score,
-            'incorrectQuestions_pronoun': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_noun', {
+            'score_noun': widget.score,
+            'incorrectQuestions_noun': widget.incorrectQuestions,
           }),
         );
       }
@@ -291,7 +291,7 @@ class _Quiz_Pronoun_ResultScreenState
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          PronounQuiz()));
+                                          NounQuiz()));
                             },
                             child: _buildCircularButton(
                                 Icons.refresh, "Play Again", Colors.teal)),
@@ -335,7 +335,7 @@ class _Quiz_Pronoun_ResultScreenState
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PLay_Incorrect_Pronouns(
+                                        PLay_Incorrect_Nouns(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
                                         )));

@@ -20,10 +20,18 @@ class _ReviewIncorrectSolutionState extends State<ReviewIncorrectSolution> {
     super.initState();
     // Initialize VideoPlayerControllers for each video in the incorrect questions list
     _controllers = widget.incorrectQuestions.map<VideoPlayerController>((question) {
-      return VideoPlayerController.network(question['question'])
-        ..initialize().then((_) {
-          setState(() {}); // Refresh UI after video initialization
-        });
+      final controller = VideoPlayerController.network(question['question']);
+      controller.initialize().then((_) {
+        setState(() {}); // Refresh UI after video initialization
+        controller.play(); // Autoplay on initialization
+      });
+      // Listen for video end to update the UI
+      controller.addListener(() {
+        if (controller.value.position == controller.value.duration) {
+          setState(() {}); // Update UI to show play icon
+        }
+      });
+      return controller;
     }).toList();
   }
 
@@ -77,9 +85,11 @@ class _ReviewIncorrectSolutionState extends State<ReviewIncorrectSolution> {
                           ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                controller.value.isPlaying
-                                    ? controller.pause()
-                                    : controller.play();
+                                if (controller.value.isPlaying) {
+                                  controller.pause();
+                                } else {
+                                  controller.play();
+                                }
                               });
                             },
                             child: Icon(

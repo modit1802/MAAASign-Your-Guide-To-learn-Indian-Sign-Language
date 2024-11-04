@@ -70,28 +70,28 @@ class _Quiz_Noun_ResultScreenState
       var userDoc = await userCollection.findOne(mongo.where.eq('userId', userId));
 
       // Define the week key
-      String weekKey = 'week1';
+      String weekKey = 'week3';
 
       if (userDoc == null) {
-        // If user doesn't exist, insert new document with only Score_number
+        // If user doesn't exist, insert new document with only Score_noun
         await userCollection.insert({
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_number': {
-                'score_number': widget.score,
-                'incorrectQuestions_number': widget.incorrectQuestions,
+              'Score_noun': {
+                'score_noun': widget.score,
+                'incorrectQuestions_noun': widget.incorrectQuestions,
               }
             }
           }
         });
       } else {
-        // If user exists, add or update only the Score_number field inside week1
+        // If user exists, add or update only the Score_noun field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_number', {
-            'score_number': widget.score,
-            'incorrectQuestions_number': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_noun', {
+            'score_noun': widget.score,
+            'incorrectQuestions_noun': widget.incorrectQuestions,
           }),
         );
       }

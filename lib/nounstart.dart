@@ -2,6 +2,7 @@ import 'package:SignEase/learnnoun.dart';
 import 'package:SignEase/matchmaker_alphabet.dart';
 import 'package:SignEase/noun_quiz.dart';
 import 'package:flutter/material.dart';
+import 'package:SignEase/noun_practice2.dart';
 class NounStartScreen extends StatefulWidget {
   const NounStartScreen({super.key});
 
@@ -136,7 +137,7 @@ class _NounStartScreenState extends State<NounStartScreen> {
                       ),
                       const SizedBox(height: 12),
                       _buildCard(
-                        onTap: () => _handleCardTap(2, const Match_maker_alphabet(score: 0,)),
+                        onTap: () => _handleCardTap(2, VideoBingoGame()),
                         imagePath: 'images/match.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Guess the Perfect Pairs',

@@ -71,25 +71,25 @@ class _Quiz_Verb_ResultScreenState
       String weekKey = 'week1';
 
       if (userDoc == null) {
-        // If user doesn't exist, insert new document with only Score_number
+        // If user doesn't exist, insert new document with only Score_verb
         await userCollection.insert({
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_number': {
-                'score_number': widget.score,
-                'incorrectQuestions_number': widget.incorrectQuestions,
+              'Score_verb': {
+                'score_verb': widget.score,
+                'incorrectQuestions_verb': widget.incorrectQuestions,
               }
             }
           }
         });
       } else {
-        // If user exists, add or update only the Score_number field inside week1
+        // If user exists, add or update only the Score_verb field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_number', {
-            'score_number': widget.score,
-            'incorrectQuestions_number': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_verb', {
+            'score_verb': widget.score,
+            'incorrectQuestions_verb': widget.incorrectQuestions,
           }),
         );
       }
