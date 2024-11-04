@@ -27,20 +27,14 @@ class BingoScreen extends StatefulWidget {
 }
 
 class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStateMixin {
-  final Map<String, String> nounGifs = {
-    'Book': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4',
-    'School': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4',
-    'Lunch': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530818/lunch_cbcgwu.mp4',
-    'Hands': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4',
-    'Morning': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/morning_pvtuty.mp4',
-    'Deaf': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/deaf_ezkwye.mp4',
-    'Tea': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/tea_i6mkyc.mp4',
-    'Office': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4',
-    'Breakfast': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/breakfast_hb90fq.mp4',
-    'Dinner': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4',
-    'Market': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/market_vfh9vj.mp4',
-    'Work': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/work_zjfapw.mp4',
-  };
+  final Map<String, String> pronounGifs =
+    {'I': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/I_jcee6z.mp4',
+    'You': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/you_eyvdmd.mp4',
+    'He': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/he_kldbgn.mp4',
+    'She': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/she_xhozgj.mp4',
+    'It': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/It_ws1bwe.mp4',
+    'We': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/we_duowgj.mp4',
+    'They': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530908/they_wmmoxf.mp4'};
 
   late String targetNoun;
   late List<String> currentOptions;
@@ -79,7 +73,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
         return;
       }
 
-      List<String> nouns = nounGifs.keys.toList();
+      List<String> nouns = pronounGifs.keys.toList();
       targetNoun = nouns[random.nextInt(nouns.length)];
       nouns.remove(targetNoun);
 
@@ -112,7 +106,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
         chancesLeft--;
         if (chancesLeft == 0) {
           showAnswer = true;
-          incorrectQuestions.add({'question': nounGifs[targetNoun], 'correctSolution': targetNoun});
+          incorrectQuestions.add({'question': pronounGifs[targetNoun], 'correctSolution': targetNoun});
           Future.delayed(Duration(seconds: 2), () {
             _generateNewRound();
           });
@@ -190,7 +184,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
                       onTap: () => _checkAnswer(noun),
                       child: VideoTile(
                         key: ValueKey(noun),
-                        url: nounGifs[noun] ?? '',
+                        url: pronounGifs[noun] ?? '',
                         isCorrect: showAnswer && noun == targetNoun,
                         isIncorrect: showAnswer && noun != targetNoun,
                       ),

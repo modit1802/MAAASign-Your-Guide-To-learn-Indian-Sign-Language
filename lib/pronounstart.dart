@@ -1,7 +1,8 @@
 import 'package:SignEase/learnpronoun.dart';
-import 'package:SignEase/matchmaker_alphabet.dart';
 import 'package:SignEase/pronoun_quiz.dart';
 import 'package:flutter/material.dart';
+
+import 'pronoun_practice2.dart';
 class PronounStartScreen extends StatefulWidget {
   const PronounStartScreen({super.key});
 
@@ -136,11 +137,11 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                       ),
                       const SizedBox(height: 12),
                       _buildCard(
-                        onTap: () => _handleCardTap(2, const Match_maker_alphabet(score: 0,)),
-                        imagePath: 'images/match.png',
+                        onTap: () => _handleCardTap(2, VideoBingoGame()),
+                        imagePath: 'images/bingo.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Guess the Perfect Pairs',
-                        description: "Matchmaker's Challenge: Test your memory by pairing items before time runs out in this fun and engaging game!",
+                        title: 'Bingo Bonanza!',
+                        description: "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card. It's a visual feast of fun and a test of your word-guessing skills.",
                         index: 2,
                       ),
                       const SizedBox(height: 12),

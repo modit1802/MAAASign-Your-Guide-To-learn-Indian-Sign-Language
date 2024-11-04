@@ -135,13 +135,13 @@ class _NounStartScreenState extends State<NounStartScreen> {
                         description: "Let's Play a simple Quiz consisting of one image question with 4 options Test your knowledge of nouns!",
                         index: 1,
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 12), // Space between the cards
                       _buildCard(
                         onTap: () => _handleCardTap(2, VideoBingoGame()),
-                        imagePath: 'images/match.png',
+                        imagePath: 'images/bingo.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Guess the Perfect Pairs',
-                        description: "Matchmaker's Challenge: Test your memory by pairing items before time runs out in this fun and engaging game!",
+                        title: 'Bingo Bonanza!',
+                        description: "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card. It's a visual feast of fun and a test of your word-guessing skills.",
                         index: 2,
                       ),
                       const SizedBox(height: 12),

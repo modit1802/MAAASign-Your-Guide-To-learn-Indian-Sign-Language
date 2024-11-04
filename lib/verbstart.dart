@@ -1,7 +1,8 @@
 import 'package:SignEase/learnverbs.dart';
-import 'package:SignEase/matchmaker_alphabet.dart';
 import 'package:SignEase/verb_quiz.dart';
 import 'package:flutter/material.dart';
+
+import 'verb_practice2.dart';
 class VerbStartScreen extends StatefulWidget {
   const VerbStartScreen({super.key});
 
@@ -131,16 +132,16 @@ class _VerbStartScreenState extends State<VerbStartScreen> {
                         imagePath: 'images/quiz.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Play Quiz',
-                        description: "Let's Play a simple Quiz consisting of one image question with 4 options Test your knowledge of verbs!",
+                        description: "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card. It's a visual feast of fun and a test of your word-guessing skills.",
                         index: 1,
                       ),
                       const SizedBox(height: 12),
                       _buildCard(
-                        onTap: () => _handleCardTap(2, const Match_maker_alphabet(score: 0,)),
-                        imagePath: 'images/match.png',
+                        onTap: () => _handleCardTap(2, VideoBingoGame()),
+                        imagePath: 'images/bingo.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Guess the Perfect Pairs',
-                        description: "Matchmaker's Challenge: Test your memory by pairing items before time runs out in this fun and engaging game!",
+                        title: 'Bingo Bonanza!',
+                        description: "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card. It's a visual feast of fun and a test of your word-guessing skills.",
                         index: 2,
                       ),
                       const SizedBox(height: 12),

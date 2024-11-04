@@ -27,20 +27,20 @@ class BingoScreen extends StatefulWidget {
 }
 
 class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStateMixin {
-  final Map<String, String> nounGifs = {
-    'Book': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4',
-    'School': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4',
-    'Lunch': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530818/lunch_cbcgwu.mp4',
-    'Hands': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4',
-    'Morning': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/morning_pvtuty.mp4',
-    'Deaf': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/deaf_ezkwye.mp4',
-    'Tea': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/tea_i6mkyc.mp4',
-    'Office': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4',
-    'Breakfast': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/breakfast_hb90fq.mp4',
-    'Dinner': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4',
-    'Market': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/market_vfh9vj.mp4',
-    'Work': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/work_zjfapw.mp4',
-  };
+  final Map<String, String> verbGifs =
+    {'Finish': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530660/finish_abglyx.mp4', 
+    'Eat' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4', 
+    'Walk' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4', 
+    'Talk' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/talk_jh3iqu.mp4', 
+    'Work' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/work_ejax98.mp4', 
+    'Wake Up' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/wake_up_c6pbs5.mp4', 
+    'Use' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/use_gzlhmv.mp4', 
+    'Read' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/read_w5djtk.mp4', 
+    'Sleep' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/sleep_vwyvtz.mp4', 
+    'Cook' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4', 
+    'Write' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/write_omxdnp.mp4', 
+    'Drink' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4', 
+    'Come' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4', };
 
   late String targetNoun;
   late List<String> currentOptions;
@@ -79,7 +79,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
         return;
       }
 
-      List<String> nouns = nounGifs.keys.toList();
+      List<String> nouns = verbGifs.keys.toList();
       targetNoun = nouns[random.nextInt(nouns.length)];
       nouns.remove(targetNoun);
 
@@ -112,7 +112,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
         chancesLeft--;
         if (chancesLeft == 0) {
           showAnswer = true;
-          incorrectQuestions.add({'question': nounGifs[targetNoun], 'correctSolution': targetNoun});
+          incorrectQuestions.add({'question': verbGifs[targetNoun], 'correctSolution': targetNoun});
           Future.delayed(Duration(seconds: 2), () {
             _generateNewRound();
           });
@@ -190,7 +190,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
                       onTap: () => _checkAnswer(noun),
                       child: VideoTile(
                         key: ValueKey(noun),
-                        url: nounGifs[noun] ?? '',
+                        url: verbGifs[noun] ?? '',
                         isCorrect: showAnswer && noun == targetNoun,
                         isIncorrect: showAnswer && noun != targetNoun,
                       ),
