@@ -5,7 +5,6 @@ import 'package:SignEase/numberstart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class NewScreen extends StatefulWidget {
   const NewScreen({super.key});
 
@@ -15,7 +14,57 @@ class NewScreen extends StatefulWidget {
 
 class _NewScreenState extends State<NewScreen> {
   bool _showGif = true;
-  int? _selectedCardIndex; // Track the selected card index
+  int? _selectedCardIndex;
+  int _currentIndex = 0; // This keeps track of the selected tab index
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex =index; // Update the current index to highlight the selected tab
+    });
+
+    // You can add navigation or specific actions based on the selected index
+    switch (index) {
+      case 0:
+        // Navigate to the Home screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 0),
+          ),
+        ); // Replace with your actual route
+        break;
+      case 1:
+        // Navigate to the Test screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 1),
+          ),
+        ); // Replace with your actual route
+        break;
+      case 2:
+        // Navigate to the Score screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 2),
+          ),
+        );  // Replace with your actual route
+        break;
+      case 3:
+        // Navigate to the About screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 3),
+          ),
+        );  // Replace with your actual route
+        break;
+      default:
+        break;
+    }
+  }
+  // Track the selected card index
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +74,72 @@ class _NewScreenState extends State<NewScreen> {
     ));
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+      bottomNavigationBar: Container(
+  decoration: const BoxDecoration(
+    color: Color.fromARGB(255, 250, 233, 215),
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(20.0),
+      topRight: Radius.circular(20.0),
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black26,
+        blurRadius: 10.0,
+      ),
+    ],
+  ),
+  child: ClipRRect(
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(20.0),
+      topRight: Radius.circular(20.0),
+    ),
+    child: BottomAppBar(
+      color: Colors.transparent,
+      elevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.home,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here (default is 24)
+              ),
+              onPressed: () => _onItemTapped(0),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.fact_check,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here
+              ),
+              onPressed: () => _onItemTapped(1),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.score,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here
+              ),
+              onPressed: () => _onItemTapped(2),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.info,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here
+              ),
+              onPressed: () => _onItemTapped(3),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+),
+
       body: Stack(
         children: [
           _buildBackground(),
@@ -35,17 +150,18 @@ class _NewScreenState extends State<NewScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 55),
-                  
+
                   // Alphabet Circle widget - Card 1
                   _buildCard(
                     onTap: () => _handleCardTap(0, const AlphabetStartscreen()),
                     imagePath: 'images/alphabetsicon.png',
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Alphabets',
-                    description: 'Learn alphabets with the help of interactive learning material, quizes and exciting match games!',
+                    description:
+                        'Learn alphabets with the help of interactive learning material, quizes and exciting match games!',
                     index: 0,
                   ),
-                  
+
                   const SizedBox(height: 10),
 
                   // Number Circle widget - Card 2
@@ -54,10 +170,11 @@ class _NewScreenState extends State<NewScreen> {
                     imagePath: 'images/numbersicon.png',
                     color: Colors.white,
                     title: 'Numbers',
-                    description: 'Learn Numbers with the help of interactive learning material, quizes and exciting match games!',
+                    description:
+                        'Learn Numbers with the help of interactive learning material, quizes and exciting match games!',
                     index: 1,
                   ),
-                  
+
                   const SizedBox(height: 10),
 
                   // Challenger Circle widget - Card 3
@@ -66,16 +183,16 @@ class _NewScreenState extends State<NewScreen> {
                     imagePath: 'images/challenger.png',
                     color: Colors.white,
                     title: 'Challenger',
-                    description: 'Take on challenges and test your skills if you are master with alphabets and numbers to Pass Week 1 Challenge!',
+                    description:
+                        'Take on challenges and test your skills if you are master with alphabets and numbers to Pass Week 1 Challenge!',
                     index: 2,
                   ),
                 ],
               ),
             ),
           ),
-          if (_showGif)
-            ..._buildGifOverlay(context),
-          _buildBottomButtons(),
+          if (_showGif) ..._buildGifOverlay(context),
+          //_buildBottomButtons(),
         ],
       ),
     );
@@ -123,7 +240,7 @@ class _NewScreenState extends State<NewScreen> {
       onTap: onTap,
       child: Card(
         elevation: 10,
-        color: isSelected ? const Color.fromARGB(255, 255, 145, 77): color,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -213,13 +330,25 @@ class _NewScreenState extends State<NewScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildBottomButton(icon: Icons.home, onTap: () => _navigateToPage(const InitialPage1(index: 0,))),
+            _buildBottomButton(
+                icon: Icons.home,
+                onTap: () => _navigateToPage(const InitialPage1(
+                      index: 0,
+                    ))),
             const SizedBox(width: 20),
-           _buildBottomButton(icon: Icons.fact_check, onTap: () => _navigateToPage(const InitialPage1(index: 1,))),
+            _buildBottomButton(
+                icon: Icons.fact_check,
+                onTap: () => _navigateToPage(const InitialPage1(
+                      index: 1,
+                    ))),
             const SizedBox(width: 20),
-            _buildBottomButton(icon: Icons.score, onTap: () => _navigateToPage(const InitialPage1(index:2))),
+            _buildBottomButton(
+                icon: Icons.score,
+                onTap: () => _navigateToPage(const InitialPage1(index: 2))),
             const SizedBox(width: 20),
-            _buildBottomButton(icon: Icons.info, onTap: () => _navigateToPage(const InitialPage1(index:3))),
+            _buildBottomButton(
+                icon: Icons.info,
+                onTap: () => _navigateToPage(const InitialPage1(index: 3))),
           ],
         ),
       ),
@@ -227,7 +356,8 @@ class _NewScreenState extends State<NewScreen> {
   }
 
   // Bottom Button Builder for consistency
-  Widget _buildBottomButton({required IconData icon, required VoidCallback onTap}) {
+  Widget _buildBottomButton(
+      {required IconData icon, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
