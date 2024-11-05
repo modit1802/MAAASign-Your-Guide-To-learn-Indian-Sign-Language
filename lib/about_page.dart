@@ -42,7 +42,7 @@ class AboutPage extends StatelessWidget {
               // Feature 1 Card
               Card(
                 elevation: 4,
-                color:Colors.white,
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -63,7 +63,7 @@ class AboutPage extends StatelessWidget {
               // Feature 2 Card
               Card(
                 elevation: 4,
-                color:Colors.white,
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -84,7 +84,7 @@ class AboutPage extends StatelessWidget {
               // Feature 3 Card
               Card(
                 elevation: 4,
-                color:Colors.white,
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -105,7 +105,7 @@ class AboutPage extends StatelessWidget {
               // Feature 4 Card
               Card(
                 elevation: 4,
-                color:Colors.white,
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -126,7 +126,7 @@ class AboutPage extends StatelessWidget {
               // Feature 5 Card
               Card(
                 elevation: 4,
-                color:Colors.white,
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -145,14 +145,85 @@ class AboutPage extends StatelessWidget {
               SizedBox(height: 24),
 
               // Closing Statement
+              // Text(
+              //   'Get started on your journey to learning Indian Sign Language with our app. Practice, take on challenges, and immerse yourself in a new way to communicate!',
+              //   style: TextStyle(
+              //     fontSize: 16,
+              //     fontWeight: FontWeight.bold,
+              //     color: Color.fromARGB(255, 165, 74, 17),
+              //   ),
+              // ),
+              // SizedBox(height: 24),
+
+              // Developer Section
               Text(
-                'Get started on your journey to learning Indian Sign Language with our app. Practice, take on challenges, and immerse yourself in a new way to communicate!',
+                'Meet the Developers',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 165, 74, 17),
                 ),
               ),
+              SizedBox(height: 12),
+
+              // Developer Pictures and Names
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('images/modit.png'), // Replace with actual path
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Modit', // Replace with actual name
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 165, 74, 17),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('images/ansh.jpg'), // Replace with actual path
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Ansh', // Replace with actual name
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 165, 74, 17),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('images/amogh.png'), // Replace with actual path
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Amogh', // Replace with actual name
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 165, 74, 17),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 24),
             ],
           ),
         ),
