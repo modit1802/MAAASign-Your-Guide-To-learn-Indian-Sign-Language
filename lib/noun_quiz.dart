@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:SignEase/Pronouns_Result.dart';
+import 'package:SignEase/Nouns_Result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
@@ -145,7 +145,7 @@ class _NounQuizState extends State<NounQuiz> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Quiz_Pronoun_ResultScreen(
+            builder: (context) => Quiz_Noun_ResultScreen(
               score: score,
               correctcount: correctCount,
               incorrectcount: incorrectCount,
