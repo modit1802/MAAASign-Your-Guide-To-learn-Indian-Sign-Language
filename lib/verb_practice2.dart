@@ -13,6 +13,7 @@ class VideoBingoGame extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Video Bingo Game',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Color.fromARGB(255, 250, 233, 215),
       ),
@@ -28,18 +29,18 @@ class BingoScreen extends StatefulWidget {
 
 class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStateMixin {
   final Map<String, String> verbGifs =
-    {'Finish': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530660/finish_abglyx.mp4', 
-    'Eat' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4', 
-    'Walk' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4', 
-    'Talk' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/talk_jh3iqu.mp4', 
-    'Work' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/work_ejax98.mp4', 
-    'Wake Up' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/wake_up_c6pbs5.mp4', 
-    'Use' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/use_gzlhmv.mp4', 
-    'Read' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/read_w5djtk.mp4', 
-    'Sleep' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/sleep_vwyvtz.mp4', 
-    'Cook' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4', 
-    'Write' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/write_omxdnp.mp4', 
-    'Drink' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4', 
+  {'Finish': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530660/finish_abglyx.mp4',
+    'Eat' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4',
+    'Walk' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4',
+    'Talk' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/talk_jh3iqu.mp4',
+    'Work' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/work_ejax98.mp4',
+    'Wake Up' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/wake_up_c6pbs5.mp4',
+    'Use' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/use_gzlhmv.mp4',
+    'Read' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/read_w5djtk.mp4',
+    'Sleep' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/sleep_vwyvtz.mp4',
+    'Cook' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4',
+    'Write' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/write_omxdnp.mp4',
+    'Drink' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4',
     'Come' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4', };
 
   late String targetNoun;
@@ -53,6 +54,8 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
   late AnimationController _controller;
   int chancesLeft = 3;
   bool showAnswer = false;
+  String selectedNoun = ''; // Track the selected noun
+  Map<String, bool> selectionStatus = {}; // Track the selection status of each option
 
   @override
   void initState() {
@@ -89,13 +92,16 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
       questionCount++;
       chancesLeft = 3;
       showAnswer = false;
+      selectedNoun = ''; // Reset selected noun for the new round
+      selectionStatus = {}; // Reset selection status for the new round
       _controller.forward(from: 0);
     });
   }
 
-  void _checkAnswer(String selectedNoun) {
+  void _checkAnswer(String noun) {
     setState(() {
-      if (selectedNoun == targetNoun) {
+      selectedNoun = noun; // Update the selected noun
+      if (noun == targetNoun) {
         int points = chancesLeft == 3 ? 100 : chancesLeft == 2 ? 50 : chancesLeft == 1 ? 25 : 0;
         score += points;
         correctCount++;
@@ -110,8 +116,10 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
       } else {
         incorrectCount++;
         chancesLeft--;
+        selectionStatus[noun] = false; // Mark the selected option as incorrect
         if (chancesLeft == 0) {
           showAnswer = true;
+          selectionStatus[targetNoun] = true; // Mark the correct answer
           incorrectQuestions.add({'question': verbGifs[targetNoun], 'correctSolution': targetNoun});
           Future.delayed(Duration(seconds: 2), () {
             _generateNewRound();
@@ -187,12 +195,17 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
                   itemBuilder: (context, index) {
                     String noun = currentOptions[index];
                     return GestureDetector(
-                      onTap: () => _checkAnswer(noun),
                       child: VideoTile(
                         key: ValueKey(noun),
                         url: verbGifs[noun] ?? '',
-                        isCorrect: showAnswer && noun == targetNoun,
-                        isIncorrect: showAnswer && noun != targetNoun,
+                        isCorrect: showAnswer && selectionStatus[noun] == true, // Check if this option is the correct answer
+                        isIncorrect: showAnswer && selectionStatus[noun] == false, // Check if this option was selected incorrectly
+                        isSelected: selectionStatus[noun] == false || selectionStatus[noun] == true, // Check if this option was selected
+                        onSelected: (isSelected) {
+                          if (isSelected) {
+                            _checkAnswer(noun);
+                          }
+                        },
                       ),
                     );
                   },
@@ -211,7 +224,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: Colors.grey.withOpacity(0.7),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Text(
         text,
@@ -220,13 +233,21 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
     );
   }
 }
-
 class VideoTile extends StatefulWidget {
   final String url;
   final bool isCorrect;
   final bool isIncorrect;
+  final bool isSelected; // Track if this option is selected
+  final ValueChanged<bool> onSelected;
 
-  const VideoTile({Key? key, required this.url, this.isCorrect = false, this.isIncorrect = false}) : super(key: key);
+  const VideoTile({
+    Key? key,
+    required this.url,
+    this.isCorrect = false,
+    this.isIncorrect = false,
+    required this.onSelected,
+    this.isSelected = false,
+  }) : super(key: key);
 
   @override
   _VideoTileState createState() => _VideoTileState();
@@ -247,6 +268,12 @@ class _VideoTileState extends State<VideoTile> {
       ..initialize().then((_) {
         setState(() {});
       });
+
+    _controller.addListener(() {
+      setState(() {
+        isPlaying = _controller.value.isPlaying;
+      });
+    });
   }
 
   void _togglePlayPause() {
@@ -262,48 +289,71 @@ class _VideoTileState extends State<VideoTile> {
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Card(
-      color: widget.isCorrect ? Colors.green : widget.isIncorrect ? Colors.red : Colors.grey[850],
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
+      color: widget.isCorrect && widget.isSelected
+          ? Colors.green // Green background if correctly selected
+          : widget.isIncorrect
+          ? Colors.red // Red background if incorrectly selected
+          : Colors.white,
       child: Stack(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: _controller.value.isInitialized
-                ? AspectRatio(
-              aspectRatio: 9 / 16,
-              child: VideoPlayer(_controller),
-            )
-                : Center(child: CircularProgressIndicator()),
-          ),
-          if (widget.isCorrect)
-            Positioned.fill(
-              child: Container(color: Colors.yellow.withOpacity(0.5)),
-            ),
-          Positioned(
-            bottom: 8,
-            right: 8,
-            child: IconButton(
-              icon: Icon(
-                isPlaying ? Icons.pause : Icons.play_arrow,
-                color: Colors.white70,
+          if (_controller.value.isInitialized)
+            ColorFiltered(
+              colorFilter: widget.isCorrect && widget.isSelected
+                  ? ColorFilter.mode(Colors.green.withOpacity(0.5), BlendMode.srcATop)
+                  : ColorFilter.mode(Colors.transparent, BlendMode.srcATop),
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
               ),
-              onPressed: _togglePlayPause,
-              tooltip: isPlaying ? 'Pause' : 'Play',
+            )
+          else
+            Center(child: CircularProgressIndicator()),
+          Positioned(
+            top: 10,
+            left: 10,
+            child: GestureDetector(
+              onTap: () {
+                widget.onSelected(true);
+              },
+              child: Container(
+                padding: EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black54,
+                ),
+                child: Text(
+                  widget.isSelected
+                      ? (widget.isCorrect ? '✅' : '❌')
+                      : '',
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
+              ),
             ),
           ),
+          if (_controller.value.isInitialized)
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: _togglePlayPause,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    isPlaying ? Icons.pause_circle_outline : Icons.play_circle_outline,
+                    color: Colors.white,
+                    size: 48,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

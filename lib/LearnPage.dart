@@ -164,7 +164,7 @@ class _LearnPageState extends State<LearnPage> {
                                       padding: const EdgeInsets.all(16.0),
                                       child: _currentUser != null
                                           ? Text(
-                                              " $username  Learn ISL by clicking on the card",
+                                              "Hi $username ! Learn ISL by clicking on the card",
                                               textAlign: TextAlign.center,
                                               style: const TextStyle(
                                                   color: Color.fromARGB(

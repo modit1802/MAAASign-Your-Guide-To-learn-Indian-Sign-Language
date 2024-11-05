@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.all(16.0),
                                     child: _currentUser != null
                                         ? Text(
-                                            " $username  test your knowledge by clicking on Week number", // Display user's display name if available
+                                            "Hi $username ! Test your knowledge by clicking on the Week number", // Display user's display name if available
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(
                                                 color: Color.fromARGB(255, 231, 240, 255),
@@ -211,50 +211,36 @@ class GridDashboard extends StatelessWidget {
 
   final Items item1 = Items(
     title: "Week 1",
-    subtitle: "Learn Alphabets and Numbers in Indian Sign language",
+    subtitle: "Learn Alphabets and Numbers",
     event: "",
     img: "images/calendar.png",
   );
 
   final Items item2 = Items(
     title: "Week 2",
-    subtitle: "Learn Greetings and Relations in Indian Sign language",
+    subtitle: "Learn Greetings and Relations",
     event: "",
     img: "images/food.png",
   );
 
   final Items item3 = Items(
     title: "Week 3",
-    subtitle: "Learn Parents' names and emotions in Indian Sign language",
+    subtitle: "Learn Common Verbs, Nouns and Pronouns",
     event: "",
     img: "images/map.png",
   );
 
   final Items item4 = Items(
     title: "Week 4",
-    subtitle: "Learn colors and animal names in Indian Sign language",
+    subtitle: "Learn sentence formation in Indian Sign Language",
     event: "",
     img: "images/festival.png",
-  );
-
-  final Items item5 = Items(
-    title: "Week 5",
-    subtitle: "Learn bird names and sentence joiners in Indian Sign language",
-    event: "",
-    img: "images/todo.png",
-  );
-
-  final Items item6 = Items(
-    title: "Week 6",
-    subtitle: "Learn a mix of all weeks in Indian Sign language",
-    event: "",
-    img: "images/setting.png",
   );
 
 
   @override
   Widget build(BuildContext context) {
-    List<Items> myList = [item1, item2, item3, item4, item5, item6];
+    List<Items> myList = [item1, item2, item3, item4,];
     var defaultColor = const Color(0xFFE6E6E6); // Light gray color for glassy effect
     var selectedColor = Color.fromARGB(255, 255, 183, 0); // Green color when condition is met
     var textColor = Colors.white; // White text color when condition is met
