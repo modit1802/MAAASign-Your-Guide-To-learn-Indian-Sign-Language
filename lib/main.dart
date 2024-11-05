@@ -1,3 +1,4 @@
+import 'package:SignEase/sabse_jyada_main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class AuthWrapper extends StatelessWidget {
         } else if (snapshot.hasData) {
           return const InitialPage1();
         } else {
-          return const LoginPage();
+          return const Sabse_Jyada_Main_page();
         }
       },
     );
