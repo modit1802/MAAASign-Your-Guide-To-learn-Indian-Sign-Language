@@ -1,9 +1,9 @@
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/challenger1.dart';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week 2/alphabetstart.dart';
-import 'package:SignEase/numberstartscreen.dart'; // Import the number screen// Import the quiz screen// Import SharedPreferences
+import 'package:SignEase/numberstart.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Week2NewScreen extends StatefulWidget {
   const Week2NewScreen({super.key});
@@ -13,270 +13,377 @@ class Week2NewScreen extends StatefulWidget {
 }
 
 class _Week2NewScreenState extends State<Week2NewScreen> {
-  bool showTeacherImage = true;
   bool _showGif = true;
+  int? _selectedCardIndex;
+  int _currentIndex = 0; // This keeps track of the selected tab index
 
-  @override
-  void initState() {
-    super.initState();
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex =index; // Update the current index to highlight the selected tab
+    });
 
+    // You can add navigation or specific actions based on the selected index
+    switch (index) {
+      case 0:
+        // Navigate to the Home screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 0),
+          ),
+        ); // Replace with your actual route
+        break;
+      case 1:
+        // Navigate to the Test screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 1),
+          ),
+        ); // Replace with your actual route
+        break;
+      case 2:
+        // Navigate to the Score screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 2),
+          ),
+        );  // Replace with your actual route
+        break;
+      case 3:
+        // Navigate to the About screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 3),
+          ),
+        );  // Replace with your actual route
+        break;
+      default:
+        break;
+    }
   }
- 
-
-  Widget _buildBackground() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Color.fromARGB(255, 255, 86, 247),
-              Color.fromARGB(255, 105, 207, 255),
-              Colors.white
-                ],
-                stops: [0.0, 0.5, 1.0]
-      ),
-    ));
-  }
+  // Track the selected card index
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
+      statusBarColor: Color.fromARGB(0, 0, 0, 0),
       statusBarIconBrightness: Brightness.light,
     ));
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+      bottomNavigationBar: Container(
+  decoration: const BoxDecoration(
+    color: Color.fromARGB(255, 250, 233, 215),
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(20.0),
+      topRight: Radius.circular(20.0),
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black26,
+        blurRadius: 10.0,
+      ),
+    ],
+  ),
+  child: ClipRRect(
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(20.0),
+      topRight: Radius.circular(20.0),
+    ),
+    child: BottomAppBar(
+      color: Colors.transparent,
+      elevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.home,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here (default is 24)
+              ),
+              onPressed: () => _onItemTapped(0),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.fact_check,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here
+              ),
+              onPressed: () => _onItemTapped(1),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.score,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here
+              ),
+              onPressed: () => _onItemTapped(2),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.info,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here
+              ),
+              onPressed: () => _onItemTapped(3),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+),
+
       body: Stack(
         children: [
           _buildBackground(),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Column for alphabet and number circle widgets
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  const SizedBox(height: 55),
+
+                  // Alphabet Circle widget - Card 1
+                  _buildCard(
+                    onTap: () => _handleCardTap(0, const AlphabetStartscreen()),
+                    imagePath: 'images/greetings.png',
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    title: 'Greetings',
+                    description:
+                        'Learn Greetings with the help of interactive learning material, quizes and exciting true false games!',
+                    index: 0,
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Number Circle widget - Card 2
+                  _buildCard(
+                    onTap: () => _handleCardTap(1, const NumberStartscreen()),
+                    imagePath: 'images/Relation.png',
+                    color: Colors.white,
+                    title: 'Relations',
+                    description:
+                        'Learn Relations with the help of interactive learning material, quizes and exciting true false games!',
+                    index: 1,
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Challenger Circle widget - Card 3
+                  _buildCard(
+                    onTap: () => _handleCardTap(2, Challenger1(score: 0)),
+                    imagePath: 'images/challenger.png',
+                    color: Colors.white,
+                    title: 'Challenger',
+                    description:
+                        'Take on challenges and test your skills if you are master with greetings and relations to Pass Week 2 Challenge!',
+                    index: 2,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          if (_showGif) ..._buildGifOverlay(context),
+          //_buildBottomButtons(),
+        ],
+      ),
+    );
+  }
+
+  // Handle Card Tap with index and navigation
+  void _handleCardTap(int index, Widget nextPage) {
+    setState(() {
+      _selectedCardIndex = index;
+    });
+    Future.delayed(const Duration(milliseconds: 200), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => nextPage),
+      ).then((_) => setState(() {
+            _selectedCardIndex = null; // Reset after navigation
+          }));
+    });
+  }
+
+  // Background Builder
+  Widget _buildBackground() {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Colors.white],
+        ),
+      ),
+    );
+  }
+
+  // Card Builder for consistency
+  Widget _buildCard({
+    required VoidCallback onTap,
+    required String imagePath,
+    required Color color,
+    required String title,
+    required String description,
+    required int index,
+  }) {
+    final bool isSelected = _selectedCardIndex == index;
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 10,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            height: 140,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    imagePath,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(height: 100),
-                      // Alphabet Circle widget
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to the AlphabetScreen when the alphabet image is tapped
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AlphabetStartscreen()), // Correct way to navigate to AlphabetStartscreen
-                          );
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                          height: 250.0,
-                          width: 250.0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.network(
-                              "https://res.cloudinary.com/dfph32nsq/image/upload/v1728396016/Greetings_axhoob.png",
-                              height: 300,
-                              width: 300,
-                            ),
-                          ),
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? Colors.white : Colors.black,
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      // Number Circle widget
-                      GestureDetector(
-                        onTap: () {
-                          // Navigate to the NumberScreen when the number image is tapped
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => NumberStartScreen()), // Change to your number screen
-                          );
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                          height: 250,
-                          width: 250,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.network(
-                              "https://res.cloudinary.com/dfph32nsq/image/upload/v1728396016/Relation_nb0fvd.png",
-                              height: 300,
-                              width: 300,
-                            ),
-                          ),
+                      const SizedBox(height: 8),
+                      Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isSelected ? Colors.white : Colors.black,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(width: 10),
-                  // Column for teacher2.gif image
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          // Custom buttons at the top center (Home, Score, Test, About)
-          Positioned(
-            bottom: 20,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.home,
-                        size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.score,
-                        size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.assignment,
-                        size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const InitialPage1()),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            spreadRadius: 2,
-                            blurRadius: 4,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.info,
-                        size: 30,
-                        color: Color.fromARGB(255, 0, 109, 160),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          if (_showGif)
-            Container(
-              color: Colors.black.withOpacity(0.92),
-              // Black overlay with opacity
-            ),
-          if (_showGif)
-            Center(
-              child: Positioned(
-                child: Center(
-                  child: Image.asset(
-                    'images/teacher_week.gif', // Update the image path here
-                    height: 350, // Set the height of the GIF
-                    fit: BoxFit.contain, // Adjust how the GIF is displayed
-                  ),
-                ),
-              ),
-            ),
-          if (_showGif)
-            Positioned(
-              top: 60, // Position close button at the top of the screen
-              right: 20, // Align to the right side
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _showGif = false; // Hide the GIF when the close button is pressed
-                  });
-                },
-                child: const Icon(
-                  Icons.close,
-                  size: 50,
-                  color: Colors.white, // White cross icon for the close button
-                ),
-              ),
-            ),
-        ],
+        ),
       ),
     );
+  }
+
+  // GIF Overlay Builder
+  List<Widget> _buildGifOverlay(BuildContext context) {
+    return [
+      Container(color: Colors.black.withOpacity(0.92)),
+      Center(
+        child: Image.asset(
+          'images/teacher_week.gif',
+          height: 350,
+          fit: BoxFit.contain,
+        ),
+      ),
+      Positioned(
+        top: 60,
+        right: 20,
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              _showGif = false;
+            });
+          },
+          child: const Icon(
+            Icons.close,
+            size: 50,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ];
+  }
+
+  // Bottom Buttons
+  Widget _buildBottomButtons() {
+    return Positioned(
+      bottom: 20,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildBottomButton(
+                icon: Icons.home,
+                onTap: () => _navigateToPage(const InitialPage1(
+                      index: 0,
+                    ))),
+            const SizedBox(width: 20),
+            _buildBottomButton(
+                icon: Icons.fact_check,
+                onTap: () => _navigateToPage(const InitialPage1(
+                      index: 1,
+                    ))),
+            const SizedBox(width: 20),
+            _buildBottomButton(
+                icon: Icons.score,
+                onTap: () => _navigateToPage(const InitialPage1(index: 2))),
+            const SizedBox(width: 20),
+            _buildBottomButton(
+                icon: Icons.info,
+                onTap: () => _navigateToPage(const InitialPage1(index: 3))),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Bottom Button Builder for consistency
+  Widget _buildBottomButton(
+      {required IconData icon, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              spreadRadius: 2,
+              blurRadius: 4,
+            ),
+          ],
+        ),
+        child: Icon(
+          icon,
+          size: 30,
+          color: const Color.fromARGB(255, 165, 74, 17),
+        ),
+      ),
+    );
+  }
+
+  // Navigation Helper
+  void _navigateToPage(Widget page) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
   }
 }

@@ -33,7 +33,7 @@ class CompoundSentences extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Common Verbs",
+          "Let's Learn Compund Greetings",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

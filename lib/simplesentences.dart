@@ -33,7 +33,7 @@ class SimpleSentences extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Common Verbs",
+          "Let's Learn Simple Greetings",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -57,12 +57,18 @@ class GreetingGifs extends StatefulWidget {
 
 class _GreetingGifsState extends State<GreetingGifs> {
   final Map<String, String> greetingGifs = const {
-    'hello': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/hello_q0jqlg.mp4',
-    'hy': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113627/hy_ewk653.mp4',
-    'goodbye': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/good_bye_fdlupb.mp4',
-    'namaste': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113630/namaste_ywacpg.mp4',
-    'welcome': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113634/welcome_rnwqkq.mp4',
+    'hello': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/hello_u_hmbf7y.mp4',
+    'hy': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/hy_u_dfsvt4.mp4',
+    'goodbye': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266605/good_bye_u_hz6peg.mp4',
+    'namaste': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/namaste_u_iptdsn.mp4',
+    'welcome': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/welcome_u_np7ibt.mp4',
+	'good_morning': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266607/good_morning_u_ug5jxg.mp4',
+    'good_afternoon': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/good_afternoon_u_wwhvia.mp4',
+    'good_night': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/good_night_u_sgogpu.mp4',
+    'see_you_again': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266603/see_you_again_u_jfm6yv.mp4',
+    'see_you_tomorrow': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/see_you_tomorrow_u_wqcfwu.mp4',
   };
+
 
   int _currentIndex = 0;
 
