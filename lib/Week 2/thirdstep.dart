@@ -1,304 +1,301 @@
+import 'dart:math';
+import 'package:SignEase/Verbs_Result.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:async'; // for Future.delayed
-import 'challenger2.dart';
-import 'package:collection/collection.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'package:video_player/video_player.dart';
 
-class Thirdstep extends StatelessWidget {
-  final int score;
-
-  Thirdstep({required this.score});
-
+class PracticeAssignment2 extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 255, 150, 250),
-              Color.fromARGB(255, 159, 223, 252),
-              Colors.white
-            ],
-          ),
-        ),
-        child: ThirdGame(score: score),
-      ),
-    );
-  }
+  _PracticeAssignment2State createState() => _PracticeAssignment2State();
 }
 
-class ThirdGame extends StatefulWidget {
-  final int score;
+class _PracticeAssignment2State extends State<PracticeAssignment2> {
+  List<Map<String, dynamic>> questionsAndSolutions = [
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/hello_u_hmbf7y.mp4', 'solution': 'Hello'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266605/good_bye_u_hz6peg.mp4', 'solution': 'GoodBye'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/welcome_u_np7ibt.mp4', 'solution': 'Welcome'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/namaste_u_iptdsn.mp4', 'solution': 'Namaste'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/hy_u_dfsvt4.mp4', 'solution': 'Hy'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266607/good_morning_u_ug5jxg.mp4', 'solution': 'Good Morning'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/good_afternoon_u_wwhvia.mp4', 'solution': 'Good Afternoon'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/good_night_u_sgogpu.mp4', 'solution': 'Good Night'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266603/see_you_again_u_jfm6yv.mp4', 'solution': 'See You Again'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/see_you_tomorrow_u_wqcfwu.mp4', 'solution': 'See You Tomorrow'},
+  ];
 
-  ThirdGame({required this.score});
-
-  @override
-  _ThirdGameState createState() => _ThirdGameState();
-}
-
-class _ThirdGameState extends State<ThirdGame> {
-  List<String?> solution = ["wooden", "wooden", "wooden"]; // Initialize with placeholders
-  final Map<String, String> cloudinaryUrls = {
-    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png',
-    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
-    'R': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png',
-    'W': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/W_bkgjob.png',
-    'cow': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/cow_acsn7t.png',
-    'correct': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-    'wrong': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-    'wooden': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-  };
-
-  List<String> availableLetters = ["O", "C", "R", "W"];
-  bool? isCorrectSolution;
-  int attempts = 0;
-  int maxAttempts = 3;
-  bool showMoveToNextButton = false;
-  late int score;
-  final ScrollController _scrollController = ScrollController(); // Add ScrollController
+  List<Map<String, dynamic>> selectedQuestions = [];
+  List<Map<String, dynamic>> incorrectQuestions = [];
+  Random random = Random();
+  int score = 0;
+  int correctCount = 0;
+  int incorrectCount = 0;
+  late mongo.Db db;
+  late mongo.DbCollection userCollection;
+  String? userId;
+  VideoPlayerController? videoController;
+  String displayedAnswer = '';
 
   @override
   void initState() {
     super.initState();
-    score = widget.score;
+    generateRandomQuiz();
+    _fetchUserId();
+    connectToMongoDB();
+    setQuestionAndAnswer();
   }
 
-  void checkSolution() {
-    if (ListEquality().equals(solution, ["C", "O", "W"])) {
+  Future<void> _fetchUserId() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
       setState(() {
-        isCorrectSolution = true;
-        showMoveToNextButton = true;
-        if (attempts == 0) {
-          score += 100;
-        } else if (attempts == 1) {
-          score += 50;
-        } else if (attempts == 2) {
-          score += 25;
-        }
+        userId = user.uid;
       });
-    } else {
-      setState(() {
-        attempts++;
-        if (attempts >= maxAttempts) {
-          solution = ["C", "O", "W"];
-          isCorrectSolution = false;
-          showMoveToNextButton = false;
-          score = 0;
-        } else {
-          isCorrectSolution = false;
-          showMoveToNextButton = false;
-        }
-      });
-      _scrollToGif(); // Trigger scrolling to wrong.gif
+      print('User ID: $userId');
     }
   }
 
-  // Function to handle scrolling up to the wrong.gif and then back down
-  void _scrollToGif() async {
-    await _scrollController.animateTo(
-      _scrollController.position.minScrollExtent, // Scroll to top
-      duration: const Duration(seconds: 1),
-      curve: Curves.easeInOut,
-    );
+  Future<void> connectToMongoDB() async {
+    db = mongo.Db(
+        'mongodb://moditgrover2003iii:modit1346@cluster0-shard-00-00.eocm8.mongodb.net:27017,cluster0-shard-00-01.eocm8.mongodb.net:27017,cluster0-shard-00-02.eocm8.mongodb.net:27017/mydatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
 
-    // Wait for 2 seconds while showing the wrong.gif
-    await Future.delayed(const Duration(seconds: 1));
+    try {
+      await db.open();
+      userCollection = db.collection('users');
+      print("Connected to MongoDB!");
+    } catch (e) {
+      print("Error connecting to MongoDB: $e");
+    }
+  }
 
-    // Scroll back down
-    _scrollController.animateTo(
-      _scrollController.position.maxScrollExtent,
-      duration: const Duration(seconds: 1),
-      curve: Curves.easeInOut,
-    );
+  void generateRandomQuiz() {
+    selectedQuestions = [...questionsAndSolutions]..shuffle();
+    selectedQuestions = selectedQuestions.sublist(0, 6);
+  }
+
+  void setQuestionAndAnswer() {
+    if (selectedQuestions.isNotEmpty) {
+      var question = selectedQuestions[0];
+      displayedAnswer = random.nextBool() ? question['solution'] : questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]['solution'];
+      videoController = VideoPlayerController.network(question['question'])
+        ..initialize().then((_) {
+          setState(() {});
+          videoController?.play();
+        })
+        ..addListener(() {
+          if (videoController!.value.position == videoController!.value.duration) {
+            setState(() {});
+          }
+        });
+    }
+  }
+
+  void _answerQuestion(bool isTrue) {
+    String correctSolution = selectedQuestions[0]['solution'];
+    bool isCorrect = (displayedAnswer == correctSolution) == isTrue;
+
+    setState(() {
+      if (isCorrect) {
+        score += 100;
+        correctCount++;
+      } else {
+        incorrectCount++;
+        incorrectQuestions.add({
+          'question': selectedQuestions[0]['question'],
+          'correctSolution': correctSolution,
+        });
+      }
+    });
+
+    Future.delayed(const Duration(seconds: 1), () {
+      if (selectedQuestions.length > 1) {
+        selectedQuestions.removeAt(0);
+        videoController?.dispose();
+        setQuestionAndAnswer();
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Quiz_Verb_ResultScreen(
+              score: score,
+              correctcount: correctCount,
+              incorrectcount: incorrectCount,
+              totalQuestions: 6,
+              incorrectQuestions: incorrectQuestions,
+            ),
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    videoController?.removeListener(() {});
+    videoController?.dispose();
+    db.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          controller: _scrollController, // Assign ScrollController to the scroll view
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (isCorrectSolution != null && isCorrectSolution!)
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Image.network(
-                    cloudinaryUrls['correct']!, // Correct gif from Cloudinary
-                    width: 100,
-                    height: 100,
-                  ),
-                ),
-              if (isCorrectSolution != null && !isCorrectSolution!)
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Image.network(
-                    cloudinaryUrls['wrong']!, // Wrong gif from Cloudinary
-                    width: 100,
-                    height: 100,
-                  ),
-                ),
-              Image.network(
-                "https://res.cloudinary.com/dfph32nsq/image/upload/v1727363979/Challenger_1_nmp9hp.png",
-                width: 300,
-                height: 200,
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isSmallScreen = screenWidth < 600;
+
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+      body: selectedQuestions.isNotEmpty
+          ? SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              height: screenHeight * 0.35,
+              padding: const EdgeInsets.all(16),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 252, 133, 37),
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
               ),
-              // First Image with Card
-              Stack(
-                alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Material(
-                    elevation: 4,
-                    borderRadius: BorderRadius.circular(20),
-                    child: Container(
-                      width: 200,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Image.network(
-                        cloudinaryUrls['cow']!,
-                        width: 180,
-                        height: 180,
+                  Padding(
+                    padding: EdgeInsets.only(top: screenHeight * 0.05),
+                    child: Text(
+                      'Quiz Mania',
+                      style: TextStyle(
+                        fontFamily: 'RubikWetPaint',
+                        fontSize: isSmallScreen ? 32 : 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                   ),
+                  SizedBox(height: screenHeight * 0.02),
+                  Text(
+                    "Identify if the answer is correct",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: isSmallScreen ? 18 : 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
                 ],
               ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(3, (index) {
-                  return DragTarget<String>(
-                    builder: (context, accepted, rejected) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (solution[index] != "wooden" &&
-                                solution[index] != null) {
-                              availableLetters.add(solution[index]!);
-                              solution[index] = "wooden"; // Clear letter
-                            }
-                          });
-                        },
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+            ),
+            SizedBox(height: screenHeight * 0.02),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+              child: Card(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                elevation: 8,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Question ${6 - selectedQuestions.length + 1}/6',
+                        style: TextStyle(
+                          fontSize: isSmallScreen ? 16 : 20,
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromARGB(255, 206, 109, 30),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: screenHeight * 0.25,
+                      child: Center(
+                        child: videoController != null && videoController!.value.isInitialized
+                            ? Stack(
                           alignment: Alignment.center,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: solution[index] != null
-                                ? Image.network(
-                                    cloudinaryUrls[solution[index]!]!,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                  )
-                                : const SizedBox(),
+                          children: [
+                            AspectRatio(
+                              aspectRatio: videoController!.value.aspectRatio,
+                              child: VideoPlayer(videoController!),
+                            ),
+                            if (videoController!.value.position == videoController!.value.duration)
+                              IconButton(
+                                icon: Icon(
+                                  Icons.replay,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                                onPressed: () {
+                                  videoController!.seekTo(Duration.zero);
+                                  videoController!.play();
+                                  setState(() {});
+                                },
+                              ),
+                          ],
+                        )
+                            : CircularProgressIndicator(
+                          color: const Color.fromARGB(255, 189, 74, 2),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: screenHeight * 0.02),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        displayedAnswer,
+                        style: TextStyle(
+                          fontSize: isSmallScreen ? 16 : 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: screenHeight * 0.02),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(255, 191, 101, 3),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          onPressed: () => _answerQuestion(true),
+                          child: Text(
+                            'True',
+                            style: TextStyle(
+                              fontSize: isSmallScreen ? 16 : 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      );
-                    },
-                    onWillAccept: (data) => true,
-                    onAccept: (data) {
-                      setState(() {
-                        if (solution[index] != "wooden" &&
-                            solution[index] != null) {
-                          // If the target already has a letter, move it back to availableLetters
-                          availableLetters.add(solution[index]!);
-                        }
-                        solution[index] = data;
-                        availableLetters.remove(data); // Remove the newly placed letter from options
-                      });
-                    },
-                  );
-                }),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: availableLetters.map((letter) {
-                  return Draggable<String>(
-                    data: letter,
-                    child: Image.network(
-                      cloudinaryUrls[letter]!, // Cloudinary URL for the letter
-                      width: 80,
-                      height: 80,
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(255, 191, 101, 3),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          onPressed: () => _answerQuestion(false),
+                          child: Text(
+                            'False',
+                            style: TextStyle(
+                              fontSize: isSmallScreen ? 16 : 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    feedback: Material(
-                      child: Image.network(
-                        cloudinaryUrls[letter]!,
-                        width: 80,
-                        height: 80,
-                      ),
-                    ),
-                    childWhenDragging: Container(),
-                  );
-                }).toList(),
+                    SizedBox(height: screenHeight * 0.02),
+                  ],
+                ),
               ),
-              const SizedBox(height: 20),
-              if (!showMoveToNextButton)
-                ElevatedButton(
-                  onPressed: checkSolution,
-                  child: const Text("Check Now"),
-                ),
-              if (showMoveToNextButton)
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            Challenger2(score: score), // Navigate to next challenge
-                      ),
-                    );
-                  },
-                  child: const Text("Move to Next Challenge"),
-                ),
-            ],
-          ),
+            ),
+          ],
         ),
-        Positioned(
-          top: 50,
-          right: 16,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              "${maxAttempts - attempts} Chance Left",
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 50,
-          left: 16,
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              "Score: $score",
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
+      )
+          : Center(child: CircularProgressIndicator()),
     );
   }
 }

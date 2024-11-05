@@ -164,11 +164,51 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
     super.dispose();
   }
 
+  Widget buildOptionCard(int index) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: selectedOptionIndex == -1
+            ? () => _answerQuestion(
+          currentOptions[index],
+          selectedQuestions[0]['solution'],
+          index,
+        )
+            : null,
+        child: Card(
+          elevation: screenWidth < 600 ? 8 : 12,
+          color: _cardColors[index],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(screenWidth * 0.04),
+          ),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              vertical: screenHeight * 0.03,
+              horizontal: screenWidth * 0.04,
+            ),
+            child: Center(
+              child: Text(
+                currentOptions[index],
+                style: TextStyle(
+                  fontSize: screenWidth < 600 ? 20 : 28,
+                  color: _textColors[index],
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final isSmallScreen = screenWidth < 600;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    bool isSmallScreen = screenWidth < 600;
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
@@ -187,120 +227,143 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: screenHeight * 0.05),
-                    child: Text(
-                      'Quiz Mania',
-                      style: TextStyle(
-                        fontFamily: 'RubikWetPaint',
-                        fontSize: isSmallScreen ? 32 : 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                  Transform.translate(
+                    offset: Offset(0, -screenHeight * 0.02), // Adjusted with MediaQuery
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: screenHeight * 0.059),
+                      child: Text(
+                        'Quiz Mania',
+                        style: TextStyle(
+                          fontFamily: 'RubikWetPaint',
+                          fontSize: isSmallScreen ? 32 : 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.02),
-                  Text(
-                    "Identify the signs for each verb",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: isSmallScreen ? 18 : 24,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(height: screenHeight * 0.001),
+                  Transform.translate(
+                    offset: Offset(0, -screenHeight * 0.059), // Adjusted with MediaQuery
+                    child: Text(
+                      "Identify the signs for each verb",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: isSmallScreen ? 18 : 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             SizedBox(height: screenHeight * 0.02),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: Card(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                elevation: 8,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Question ${6 - selectedQuestions.length + 1}/6',
-                        style: TextStyle(
-                          fontSize: isSmallScreen ? 16 : 20,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 206, 109, 30),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: screenHeight * 0.25,
-                      child: Center(
-                        child: videoController != null && videoController!.value.isInitialized
-                            ? Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            AspectRatio(
-                              aspectRatio: videoController!.value.aspectRatio,
-                              child: VideoPlayer(videoController!),
-                            ),
-                            if (videoController!.value.position == videoController!.value.duration)
-                              IconButton(
-                                icon: Icon(
-                                  Icons.replay,
-                                  color: Colors.white,
-                                  size: 30,
-                                ),
-                                onPressed: () {
-                                  videoController!.seekTo(Duration.zero);
-                                  videoController!.play();
-                                  setState(() {});
-                                },
-                              ),
-                          ],
-                        )
-                            : CircularProgressIndicator(
-                          color: const Color.fromARGB(255, 189, 74, 2),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.01),
-            for (int i = 0; i < currentOptions.length; i++)
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: screenWidth * 0.08,
-                  vertical: screenHeight * 0.01,
-                ),
-                child: GestureDetector(
-                  onTap: selectedOptionIndex == -1
-                      ? () => _answerQuestion(currentOptions[i], selectedQuestions[0]['solution'], i)
-                      : null,
+              child: SingleChildScrollView(
+                child: Transform.translate(
+                  offset: Offset(0, -screenHeight * 0.17), // Adjusted with MediaQuery
                   child: Container(
-                    padding: const EdgeInsets.all(12.0),
-                    decoration: BoxDecoration(
-                      color: _cardColors[i],
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: _cardColors[i],
-                        width: 2,
+                    height: screenHeight * 0.5,
+                    width: screenWidth * 0.8,
+                    child: Card(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                    ),
-                    child: Text(
-                      currentOptions[i],
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: _textColors[i],
-                        fontSize: isSmallScreen ? 16 : 20,
-                        fontWeight: FontWeight.bold,
+                      elevation: 8,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Question ${6 - selectedQuestions.length + 1}/6',
+                              style: TextStyle(
+                                fontSize: isSmallScreen ? 16 : 20,
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromARGB(255, 206, 109, 30),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: screenHeight * 0.43,
+                            child: Center(
+                              child: videoController != null &&
+                                  videoController!.value.isInitialized
+                                  ? Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  AspectRatio(
+                                    aspectRatio: videoController!.value.aspectRatio,
+                                    child: VideoPlayer(videoController!),
+                                  ),
+                                  if (videoController!.value.position ==
+                                      videoController!.value.duration)
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.replay,
+                                        color: Colors.white,
+                                        size: 30,
+                                      ),
+                                      onPressed: () {
+                                        videoController!.seekTo(Duration.zero);
+                                        videoController!.play();
+                                        setState(() {});
+                                      },
+                                    ),
+                                ],
+                              )
+                                  : CircularProgressIndicator(
+                                color: const Color.fromARGB(255, 189, 74, 2),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
+            ),
+            SizedBox(height: screenHeight * 0.0001),
+            for (int rowIndex = 0; rowIndex < (currentOptions.length / 2).ceil(); rowIndex++)
+              Transform.translate(
+                offset: Offset(0, -screenHeight * 0.16), // Adjusted with MediaQuery
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: screenWidth * 0.05,
+                    vertical: screenHeight * 0.003,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      if (rowIndex * 2 < currentOptions.length)
+                        buildOptionCard(rowIndex * 2),
+                      if (rowIndex * 2 + 1 < currentOptions.length)
+                        buildOptionCard(rowIndex * 2 + 1),
+                    ],
+                  ),
+                ),
+              ),
+            Transform.translate(
+              offset: Offset(0, -screenHeight * 0.14),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Container(
+                  height: MediaQuery.of(context).size.width * 0.08,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16.0),
+                    child: LinearProgressIndicator(
+                      value: (6 - selectedQuestions.length) / 6,
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                          Color.fromARGB(255, 189, 74, 2)),
+                      backgroundColor:
+                      const Color.fromARGB(255, 189, 187, 187),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       )
@@ -309,4 +372,5 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
       ),
     );
   }
+
 }

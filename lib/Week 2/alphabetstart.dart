@@ -1,7 +1,7 @@
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%202/learngreeting.dart';
 import 'package:SignEase/greetings_learn.dart';
-import 'package:SignEase/matchmaker_alphabet.dart';
+import 'package:SignEase/Week 2/thirdstep.dart';
 import 'package:SignEase/Week 2/practiceassignment1.dart';
 import 'package:flutter/material.dart';
 
@@ -266,9 +266,8 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                       ),
                       SizedBox(height: screenHeight * 0.015),
                       _buildCard(
-                        onTap: () => _handleCardTap(
-                            2, const Match_maker_alphabet(score: 0)),
-                        imagePath: 'images/match.png',
+                        onTap: () => _handleCardTap(2, PracticeAssignment2()),
+                        imagePath: 'images/true_false.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Guess True or False',
                         description:
