@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:math';
 
-import 'bingo_result_noun.dart';
+import 'bingo_result_verb.dart';
 
 void main() {
   runApp(VideoBingoGame());
@@ -70,7 +70,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Bingo_Noun_ResultScreen(
+            builder: (context) => Bingo_verb_ResultScreen(
               score: score,
               correctcount: correctCount,
               incorrectcount: incorrectCount,

@@ -68,7 +68,7 @@ class _Quiz_Verb_ResultScreenState
       var userDoc = await userCollection.findOne(mongo.where.eq('userId', userId));
 
       // Define the week key
-      String weekKey = 'week1';
+      String weekKey = 'week3';
 
       if (userDoc == null) {
         // If user doesn't exist, insert new document with only Score_verb
