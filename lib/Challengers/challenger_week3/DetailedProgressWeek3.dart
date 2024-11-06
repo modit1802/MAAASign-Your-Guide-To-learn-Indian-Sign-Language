@@ -1,18 +1,18 @@
-import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/Review_Incorrect_challengers.dart';
+import 'package:SignEase/Challengers/challengeralphabets/Review_Incorrect_challengers.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class DetailedProgressWeek1 extends StatefulWidget {
-  const DetailedProgressWeek1({super.key});
+class DetailedProgressWeek3 extends StatefulWidget {
+  const DetailedProgressWeek3({super.key});
 
   @override
-  State<DetailedProgressWeek1> createState() => _DetailedProgressWeek1State();
+  State<DetailedProgressWeek3> createState() => _DetailedProgressWeek3State();
 }
 
-class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
+class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
   late mongo.Db db;
   late mongo.DbCollection userCollection;
   String? score_challenger;
@@ -45,17 +45,17 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
     var result = await userCollection.findOne(mongo.where.eq('userId', userId));
     setState(() {
       if (result != null) {
-        score_challenger = result['week']?['week1']?['Score_Challenger_week1']
+        score_challenger = result['week']?['Week3']?['Score_Challenger_Week3']
                 ?['score_challenger']
             ?.toString();
-        score_alpha = result['week']?['week1']?['Score_alphabet']
+        score_alpha = result['week']?['Week3']?['Score_alphabet']
                 ?['score_alphabet']
             ?.toString();
-        score_number = result['week']?['week1']?['Score_number']
+        score_number = result['week']?['Week3']?['Score_number']
                 ?['score_number']
             ?.toString();
 
-        var data = result['week']?['week1']?['Score_Challenger_week1']
+        var data = result['week']?['Week3']?['Score_Challenger_Week3']
             ?['Incorrect_challenges'];
         
         if (data != null && data is List) {
@@ -96,7 +96,7 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
         child: Column(
           children: [
             const Text(
-              "Quiz Scores of Week 1",
+              "Quiz Scores of Week 3",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -165,9 +165,9 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
                       onTap: () {},
                       iconData: Icons.calendar_month,
                       color: Colors.white,
-                      title: "Week 1 Progress Report",
+                      title: "Week 3 Progress Report",
                       description:
-                          "Scroll Down to check your Detailed progress report of week 1. It includes Challenger Result, Quiz results",
+                          "Scroll Down to check your Detailed progress report of Week 3. It includes Challenger Result, Quiz results",
                       index: 1,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       iconColor: const Color.fromARGB(255, 189, 74, 2),
@@ -199,8 +199,8 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
                       color: percentage > 0.6 ? Colors.green : Colors.red,
                       title: percentage > 0.6 ? "Success" : "Practice Needed",
                       description: percentage > 0.6
-                          ? "Congratulations you have successfully completed week 1. Scroll down to view detailed progress report"
-                          : "Your score is not up to the mark. We recommend you to practice week 1 again. Scroll down to view detailed progress report",
+                          ? "Congratulations you have successfully completed Week 3. Scroll down to view detailed progress report"
+                          : "Your score is not up to the mark. We recommend you to practice Week 3 again. Scroll down to view detailed progress report",
                       index: 1,
                       titleColor: Colors.white,
                       iconColor: percentage > 0.6 ? Colors.green : Colors.red,

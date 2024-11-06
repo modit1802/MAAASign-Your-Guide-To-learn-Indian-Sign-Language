@@ -1,23 +1,23 @@
-import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/DetailedProgressWeek1.dart';
+import 'package:SignEase/Challengers/challenger_week3/DetailedProgressWeek3.dart';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/newscreen.dart';
+import 'package:SignEase/week3_start_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:percent_indicator/percent_indicator.dart';
 
-class Result_Challenger_Week1 extends StatefulWidget {
+class Result_Challenger_Week3 extends StatefulWidget {
   final int score;
   final List<Map<String, dynamic>> incorrectquestions;
-  const Result_Challenger_Week1({Key?key, required this.score, required this.incorrectquestions}): super(key: key);
+  const Result_Challenger_Week3({Key?key, required this.score, required this.incorrectquestions}): super(key: key);
 
 
   @override
-  State<Result_Challenger_Week1> createState() =>
-      _Result_Challenger_Week1State();
+  State<Result_Challenger_Week3> createState() =>
+      _Result_Challenger_Week3State();
 }
 
-class _Result_Challenger_Week1State extends State<Result_Challenger_Week1> {
+class _Result_Challenger_Week3State extends State<Result_Challenger_Week3> {
   int? _selectedCardIndex;
   late mongo.Db db;
   late mongo.DbCollection userCollection;
@@ -58,7 +58,7 @@ class _Result_Challenger_Week1State extends State<Result_Challenger_Week1> {
     var userDoc = await userCollection.findOne(mongo.where.eq('userId', userId));
 
     // Define the week key
-    String weekKey = 'week1';
+    String weekKey = 'week3';
 
     if (userDoc == null) {
       // If user doesn't exist, insert new document with only Score_number
@@ -66,7 +66,7 @@ class _Result_Challenger_Week1State extends State<Result_Challenger_Week1> {
         'userId': userId,
         'week': {
           weekKey: {
-            'Score_Challenger_week1': {
+            'Score_Challenger_week3': {
               'score_challenger': widget.score,
               'Incorrect_challenges':widget.incorrectquestions,
             }
@@ -74,10 +74,10 @@ class _Result_Challenger_Week1State extends State<Result_Challenger_Week1> {
         }
       });
     } else {
-      // If user exists, add or update only the Score_number field inside week1
+      // If user exists, add or update only the Score_number field inside Week3
       await userCollection.update(
         mongo.where.eq('userId', userId),
-        mongo.modify.set('week.$weekKey.Score_Challenger_week1', {
+        mongo.modify.set('week.$weekKey.Score_Challenger_Week3', {
           'score_challenger': widget.score,
           'Incorrect_challenges':widget.incorrectquestions,
         }),
@@ -201,7 +201,7 @@ Widget build(BuildContext context) {
             ),
             const SizedBox(height:10),
             Text(
-              "Score based on Week 1 Challenger Performance", // Footer text
+              "Score based on Week 3 Challenger Performance", // Footer text
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
               textAlign: TextAlign.center,
             ),
@@ -211,25 +211,25 @@ Widget build(BuildContext context) {
                 0,
                 widget.score > 600
                     ? const InitialPage1()
-                    : NewScreen(), // Navigate based on score
+                    : Week3(), // Navigate based on score
               ),
               iconData: Icons.festival,
               color: const Color.fromARGB(255, 255, 255, 255),
               title: widget.score > 600
-                  ? "Go to Week 2"
-                  : "Practice again Week 1",
+                  ? "Go to Week 4"
+                  : "Practice again Week 3",
               description: widget.score > 600
-                  ? "Congratulations! You have completed week 1, now it's time to jump to week 2. Press me to directly go to week 2."
-                  : "Based on your performance in week 1, we recommend you practice again. Press me to restart week 1.",
+                  ? "Congratulations! You have completed week 3, now it's time to jump to week 4. Press me to directly go to week 4."
+                  : "Based on your performance in week 3, we recommend you to practice again. Press me to restart week 3.",
               index: 0,
             ),
             const SizedBox(height: 8), // Added to adjust the space between cards
             _buildCard(
-              onTap: () => _handleCardTap(1, const DetailedProgressWeek1()),
+              onTap: () => _handleCardTap(1, const DetailedProgressWeek3()),
               iconData: Icons.report,
               color: const Color.fromARGB(255, 255, 255, 255),
-              title: 'Week 1 Progress Report',
-              description: "Click me! to check the detailed progress report of week 1",
+              title: 'Week 3 Progress Report',
+              description: "Click me! to check the detailed progress report of week 3",
               index: 1,
             ),
           ],

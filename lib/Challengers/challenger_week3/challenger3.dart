@@ -1,5 +1,5 @@
-import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/Result_Challenger_Week1.dart';
-import 'package:SignEase/Challengers%20For%20Week%201/challengeralphabets/tutorialscreen.dart';
+import 'package:SignEase/Challengers/challengeralphabets/Result_Challenger_Week1.dart';
+import 'package:SignEase/Challengers/challengeralphabets/tutorialscreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:collection/collection.dart';
