@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 // ignore: camel_case_types
-class Tutorial_screen_for_challenger_alphabet extends StatefulWidget {
-  const Tutorial_screen_for_challenger_alphabet({super.key, required Null Function() onBackPressed});
+class Tutorial_screen_for_challenger_week3 extends StatefulWidget {
+  const Tutorial_screen_for_challenger_week3({super.key, required Null Function() onBackPressed});
 
   @override
-  State<Tutorial_screen_for_challenger_alphabet> createState() =>
-      _Tutorial_screen_for_challenger_alphabetState();
+  State<Tutorial_screen_for_challenger_week3> createState() =>
+      _Tutorial_screen_for_challenger_week3State();
 }
 
-class _Tutorial_screen_for_challenger_alphabetState
-    extends State<Tutorial_screen_for_challenger_alphabet> {
+class _Tutorial_screen_for_challenger_week3State
+    extends State<Tutorial_screen_for_challenger_week3> {
   
   late VideoPlayerController _controller;
 

@@ -1,13 +1,13 @@
-import 'package:SignEase/Challengers/challengeralphabets/Result_Challenger_Week1.dart';
-import 'package:SignEase/Challengers/challengeralphabets/tutorialscreen.dart';
+import 'package:SignEase/Challengers/challenger_week3//Result_Challenger_Week3.dart';
+import 'package:SignEase/Challengers/challenger_week3/tutorialscreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:collection/collection.dart';
 
-class Challenger1 extends StatelessWidget {
+class Challenger3 extends StatelessWidget {
   final int score;
 
-  Challenger1({required this.score});
+  Challenger3({required this.score});
 
   @override
   Widget build(BuildContext context) {
@@ -300,7 +300,7 @@ class _ThirdGameState extends State<ThirdGame> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Tutorial_screen_for_challenger_alphabet(
+        builder: (context) => Tutorial_screen_for_challenger_week3(
           onBackPressed: () {
             Navigator.pop(
                 context); // Return to the current screen on back press
@@ -376,7 +376,7 @@ class _ThirdGameState extends State<ThirdGame> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => Result_Challenger_Week1(score: score,incorrectquestions:incorrectQuestions)),
+            builder: (context) => Result_Challenger_Week3(score: score,incorrectquestions:incorrectQuestions)),
       );
     }
   }
@@ -468,7 +468,7 @@ class _ThirdGameState extends State<ThirdGame> {
     );
   }
 
- 
+
   @override
   Widget build(BuildContext context) {
     // Get screen dimensions
@@ -669,7 +669,7 @@ class _ThirdGameState extends State<ThirdGame> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Tutorial_screen_for_challenger_alphabet(
+                  builder: (context) => Tutorial_screen_for_challenger_week3(
                     onBackPressed: () {
                       Navigator.pop(context);
                     },

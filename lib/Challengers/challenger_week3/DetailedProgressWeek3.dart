@@ -1,4 +1,4 @@
-import 'package:SignEase/Challengers/challengeralphabets/Review_Incorrect_challengers.dart';
+import 'package:SignEase/Challengers/challenger_week3/Review_Incorrect_challengers.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
@@ -16,8 +16,9 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
   late mongo.Db db;
   late mongo.DbCollection userCollection;
   String? score_challenger;
-  String? score_alpha;
-  String? score_number;
+  String? score_verb;
+  String? score_noun;
+  String? score_pronoun;
   List<Map<String, dynamic>>? incorrectQuestions;
   bool isLoading = true; // Initial state is loading
 
@@ -45,14 +46,17 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
     var result = await userCollection.findOne(mongo.where.eq('userId', userId));
     setState(() {
       if (result != null) {
-        score_challenger = result['week']?['Week3']?['Score_Challenger_Week3']
+        score_challenger = result['week']?['week3']?['Score_Challenger_Week3']
                 ?['score_challenger']
             ?.toString();
-        score_alpha = result['week']?['Week3']?['Score_alphabet']
-                ?['score_alphabet']
+        score_verb = result['week']?['week3']?['Score_verb']
+                ?['score_verb']
             ?.toString();
-        score_number = result['week']?['Week3']?['Score_number']
-                ?['score_number']
+        score_noun = result['week']?['week3']?['Score_noun']
+                ?['score_noun']
+            ?.toString();
+        score_pronoun = result['week']?['week3']?['Score_pronoun']
+        ?['score_pronoun']
             ?.toString();
 
         var data = result['week']?['Week3']?['Score_Challenger_Week3']
@@ -72,11 +76,13 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
       }
 
         // Set scores to 0 if they are null
-        score_alpha ??= '0';
-        score_number ??= '0';
+        score_verb ??= '0';
+        score_noun ??= '0';
+        score_pronoun ??= '0';
         print(incorrectQuestions);
-        print(score_alpha);
-        print(score_number);
+        print(score_verb);
+        print(score_noun);
+        print(score_pronoun);
       } else {
         score_challenger = 'Please attempt the challenger';
         print('No data found');
@@ -108,7 +114,7 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                   ColumnSeries<ScoreData, String>(
                     dataSource: [
                       ScoreData(
-                          'Alphabets', double.tryParse(score_alpha!) ?? 0),
+                          'Verbs', double.tryParse(score_verb!) ?? 0),
                     ],
                     xValueMapper: (ScoreData data, _) => data.label,
                     yValueMapper: (ScoreData data, _) => data.value,
@@ -117,11 +123,21 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                   ),
                   ColumnSeries<ScoreData, String>(
                     dataSource: [
-                      ScoreData('Numbers', double.tryParse(score_number!) ?? 0),
+                      ScoreData('Nouns', double.tryParse(score_noun!) ?? 0),
                     ],
                     xValueMapper: (ScoreData data, _) => data.label,
                     yValueMapper: (ScoreData data, _) => data.value,
-                    color: Colors.orange,
+                    color: Colors.blue,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                  ColumnSeries<ScoreData, String>(
+                    dataSource: [
+                      ScoreData(
+                          'Pronouns', double.tryParse(score_pronoun!) ?? 0),
+                    ],
+                    xValueMapper: (ScoreData data, _) => data.label,
+                    yValueMapper: (ScoreData data, _) => data.value,
+                    color: Colors.green,
                     dataLabelSettings: const DataLabelSettings(isVisible: true),
                   ),
                 ],
@@ -228,17 +244,17 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                       onTap: () {},
                       iconData: Icons.quiz,
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      title: (score_alpha == null && score_number == null)
+                      title: (score_verb == null && score_noun == null && score_pronoun==null)
                           ? "Quiz Not Attempted"
                           : "Quiz Scores",
-                      description: (score_alpha == null && score_number == null)
-                          ? "You have not attempted the quiz for numbers and alphabets. Please first attempt the quiz then come to check the scores"
-                          : "🔔 Below are your quiz scores presented in both letters and numbers! Red bar represents the Alphabet score and Orange bar represents the Numbers score",
+                      description: (score_verb == null && score_noun == null && score_pronoun==null)
+                          ? "You have not attempted the quiz for verbs, nouns and pronouns. Please first attempt the quiz then come to check the scores"
+                          : "🔔 Below are your quiz scores presented in verbs, nouns and pronouns! Red bar represents the Verbs score, Blue bar represents the Nouns score, and Green bar represents the Pronouns score",
                       index: 1,
                     ),
                   ),
-                  // Show the score card only if both score_alpha and score_number are available
-                  if (score_alpha != null && score_number != null)
+                  // Show the score card only if both score_verb and score_noun are available
+                  if (score_verb != null && score_noun != null)
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: _buildScoreCard(),

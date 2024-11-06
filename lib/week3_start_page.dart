@@ -1,4 +1,4 @@
-import 'package:SignEase/Challengers/challengeralphabets/challenger1.dart';
+import 'package:SignEase/Challengers/challenger_week3/challenger3.dart';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/pronounstart.dart';
 import 'package:SignEase/verbstart.dart';
@@ -76,7 +76,7 @@ class _Week3State extends State<Week3> {
 
                   // Challenger Circle widget - Card 3
                   _buildCard(
-                    onTap: () => _handleCardTap(3, Challenger1(score: 0)),
+                    onTap: () => _handleCardTap(3, Challenger3(score: 0)),
                     imagePath: 'images/challenger.png',
                     color: Colors.white,
                     title: 'Challenger',
