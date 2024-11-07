@@ -438,10 +438,7 @@ class _ThirdGameState extends State<ThirdGame> {
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
-
-    // Add 3 more challenges in similar format
-  ];
-
+];
   late List<String?> solution;
   late List<String> availableLetters;
 
