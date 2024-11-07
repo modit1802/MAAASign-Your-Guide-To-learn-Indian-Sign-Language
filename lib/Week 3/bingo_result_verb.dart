@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%203/play_incorrect_noun.dart';
 import 'package:SignEase/Week%201/review_incorrect_videos.dart';
+import 'package:SignEase/Week%203/play_incorrect_verb.dart';
 import 'package:SignEase/Week%203/verb_quiz.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -336,7 +337,7 @@ class _Bingo_verb_ResultScreenState
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PLay_Incorrect_Nouns(
+                                        PLay_Incorrect_Verbs(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
                                         )));
