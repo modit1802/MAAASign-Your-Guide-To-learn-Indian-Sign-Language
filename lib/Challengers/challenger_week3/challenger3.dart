@@ -3,6 +3,72 @@ import 'package:SignEase/Challengers/challenger_week3/tutorialscreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:collection/collection.dart';
+import 'package:video_player/video_player.dart';
+
+class VideoWidget extends StatefulWidget {
+  final String videoUrl;
+
+  VideoWidget(this.videoUrl);
+
+  @override
+  _VideoWidgetState createState() => _VideoWidgetState();
+}
+
+class _VideoWidgetState extends State<VideoWidget> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(widget.videoUrl)
+      ..initialize().then((_) {
+        setState(() {}); // Refresh the widget once the video is initialized
+      })
+      ..addListener(() {
+        // Listen for changes in playback state to show/hide play button
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _togglePlayPause() {
+    if (_controller.value.isPlaying) {
+      _controller.pause();
+    } else {
+      _controller.play();
+    }
+    setState(() {}); // Update the play button visibility immediately
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _controller.value.isInitialized
+        ? AspectRatio(
+      aspectRatio: 9 / 16, // Maintain 9:16 aspect ratio
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          VideoPlayer(_controller),
+          if (!_controller.value.isPlaying) // Show play button only when paused
+            IconButton(
+              icon: Icon(
+                Icons.play_circle_outline,
+                color: Colors.white,
+                size: 50,
+              ),
+              onPressed: _togglePlayPause,
+            ),
+        ],
+      ),
+    )
+        : Center(child: CircularProgressIndicator()); // Loading indicator until video initializes
+  }
+}
 
 class Challenger3 extends StatelessWidget {
   final int score;
@@ -43,20 +109,27 @@ class _ThirdGameState extends State<ThirdGame> {
 
   final List<Map<String, dynamic>> challengeData = [
     {
-      'question': 'cow',
-      'solution': ['C', 'O', 'W'],
-      'availableLetters': ['O', 'C', 'R', 'W'],
+      'question': 'eat lunch',
+      'solution_vids': ['eat', 'lunch'],
+      'solution':['eat_i','lunch_i'],
+      'availableLetters': ['eat_i', 'cook_i', 'lunch_i', 'dinner_i'],
       'urls': {
-        'O':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png',
-        'C':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
-        'R':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png',
-        'W':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/W_bkgjob.png',
-        'cow':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/cow_acsn7t.png',
+        'eat':
+            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4',
+        'cook':
+            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4',
+        'lunch':
+            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530818/lunch_cbcgwu.mp4',
+        'dinner':
+            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4',
+        'eat_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974723/Eat_vf1awm.png',
+        'cook_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974895/Cook_qmzd54.png',
+        'lunch_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974959/Lunch_lgyo07.png',
+        'dinner_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730975017/Dinner_cistxn.png',
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -67,20 +140,27 @@ class _ThirdGameState extends State<ThirdGame> {
     },
 
     {
-      'question': 'bat',
-      'solution': ['B', 'A', 'T'],
-      'availableLetters': ['B', 'T', 'A', 'R'],
+      'question': 'read book',
+      'solution_vids': ['read', 'book'],
+      'solution':['read_i','book_i'],
+      'availableLetters': ['read_i', 'write_i', 'book_i', 'school_i'],
       'urls': {
-        "B":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/B_nf0pwi.png",
-        "T":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/T_i5ye3w.png",
-        "A":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/A_zlgdfc.png",
-        "R":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
-        'bat':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969908/bat_hhcjp7.png',
+        "read":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/read_w5djtk.mp4",
+        "write":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/write_omxdnp.mp4",
+        "book":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4",
+        "school":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
+        "read_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730977095/Read_q0cq1f.png",
+        "write_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730977048/Write_utov42.png",
+        "book_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730977160/Book_gosph2.png",
+        "school_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730977235/School_cdvg2o.png",
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -357,6 +437,7 @@ class _ThirdGameState extends State<ThirdGame> {
         }
 
       });
+      print(currentChallengeIndex);
       _scrollToGif();
     }
   }
@@ -515,27 +596,36 @@ class _ThirdGameState extends State<ThirdGame> {
                             "Drag the correct yellow color available boxes and drop them in to the wooden boxes as per the spelling of question. For more information press the 'tutorial button' on the top",
                         index: 2,
                       ),
-                      Material(
-                        elevation: screenHeight * 0.01,
-                        borderRadius: BorderRadius.circular(screenWidth * 0.05),
-                        child: Container(
-                          width: screenWidth * 0.7,
-                          height: screenHeight * 0.3,
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(screenWidth * 0.05),
-                            color: Colors.white,
-                          ),
-                          child: Image.network(
-                            challengeData[currentChallengeIndex]['urls'][
-                                challengeData[currentChallengeIndex]
-                                    ['question']],
-                            width: screenWidth * 0.4,
-                            height: screenHeight * 0.2,
-                          ),
-                        ),
-                      ),
-                    ],
+    Material(
+    elevation: screenHeight * 0.01,
+    borderRadius: BorderRadius.circular(screenWidth * 0.05),
+    child: Container(
+    width: screenWidth * 0.7,
+    height: screenHeight * 0.3,
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(screenWidth * 0.05),
+    color: Colors.white,
+    ),
+    child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+    Flexible(
+    child: VideoWidget(
+    challengeData[currentChallengeIndex]['urls']
+    [challengeData[currentChallengeIndex]['solution_vids'][0]],
+    ),
+    ),
+    Flexible(
+    child: VideoWidget(
+    challengeData[currentChallengeIndex]['urls']
+    [challengeData[currentChallengeIndex]['solution_vids'][1]],
+    ),
+    ),
+    ],
+    ),
+    ),
+    ),
+    ],
                   ),
                 ],
               ),
