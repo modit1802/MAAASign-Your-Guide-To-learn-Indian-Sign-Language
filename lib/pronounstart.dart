@@ -1,3 +1,4 @@
+import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/learnpronoun.dart';
 import 'package:SignEase/pronoun_quiz.dart';
 import 'package:flutter/material.dart';
@@ -102,10 +103,128 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
     });
   }
 
+  int _currentIndex = 0; // This keeps track of the selected tab index
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex =index; // Update the current index to highlight the selected tab
+    });
+
+    // You can add navigation or specific actions based on the selected index
+    switch (index) {
+      case 0:
+        // Navigate to the Home screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 0),
+          ),
+        ); // Replace with your actual route
+        break;
+      case 1:
+        // Navigate to the Test screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 1),
+          ),
+        ); // Replace with your actual route
+        break;
+      case 2:
+        // Navigate to the Score screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 2),
+          ),
+        );  // Replace with your actual route
+        break;
+      case 3:
+        // Navigate to the About screen or perform any action
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InitialPage1(index: 3),
+          ),
+        );  // Replace with your actual route
+        break;
+      default:
+        break;
+    }
+  } // Track the selected card index
+
+
   @override
   Widget build(BuildContext context) {
+                final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor:  Color.fromARGB(255, 250, 233, 215),
+       bottomNavigationBar: Container(
+  decoration: const BoxDecoration(
+    color: Color.fromARGB(255, 250, 233, 215),
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(20.0),
+      topRight: Radius.circular(20.0),
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black26,
+        blurRadius: 10.0,
+      ),
+    ],
+  ),
+  child: ClipRRect(
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(20.0),
+      topRight: Radius.circular(20.0),
+    ),
+    child: BottomAppBar(
+      color: Colors.transparent,
+      elevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.home,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here (default is 24)
+              ),
+              onPressed: () => _onItemTapped(0),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.fact_check,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here
+              ),
+              onPressed: () => _onItemTapped(1),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.score,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here
+              ),
+              onPressed: () => _onItemTapped(2),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.info,
+                color: Color.fromARGB(255, 165, 74, 17),
+                size: 30, // Adjust size here
+              ),
+              onPressed: () => _onItemTapped(3),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+),
       body: Stack(
         children: [
           Container(
@@ -124,7 +243,7 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(height: 12),
+                      SizedBox(height: screenHeight*0.14),
                       _buildCard(
                         onTap: () => _handleCardTap(0, const LearnPronouns()),
                         imagePath: 'images/verbs.png',
@@ -194,6 +313,33 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                 ),
               ),
             ),
+                   Positioned(
+            top: screenHeight * 0.065,
+            left: screenWidth * 0.05,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: EdgeInsets.all(screenWidth * 0.02),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Color.fromARGB(255, 165, 74, 17),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

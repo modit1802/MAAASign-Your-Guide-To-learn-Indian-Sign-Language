@@ -19,7 +19,8 @@ class _NewScreenState extends State<NewScreen> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _currentIndex =index; // Update the current index to highlight the selected tab
+      _currentIndex =
+          index; // Update the current index to highlight the selected tab
     });
 
     // You can add navigation or specific actions based on the selected index
@@ -49,7 +50,7 @@ class _NewScreenState extends State<NewScreen> {
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 2),
           ),
-        );  // Replace with your actual route
+        ); // Replace with your actual route
         break;
       case 3:
         // Navigate to the About screen or perform any action
@@ -58,7 +59,7 @@ class _NewScreenState extends State<NewScreen> {
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 3),
           ),
-        );  // Replace with your actual route
+        ); // Replace with your actual route
         break;
       default:
         break;
@@ -75,71 +76,70 @@ class _NewScreenState extends State<NewScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       bottomNavigationBar: Container(
-  decoration: const BoxDecoration(
-    color: Color.fromARGB(255, 250, 233, 215),
-    borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(20.0),
-      topRight: Radius.circular(20.0),
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.black26,
-        blurRadius: 10.0,
-      ),
-    ],
-  ),
-  child: ClipRRect(
-    borderRadius: const BorderRadius.only(
-      topLeft: Radius.circular(20.0),
-      topRight: Radius.circular(20.0),
-    ),
-    child: BottomAppBar(
-      color: Colors.transparent,
-      elevation: 0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(
-                Icons.home,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here (default is 24)
-              ),
-              onPressed: () => _onItemTapped(0),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.fact_check,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
-              ),
-              onPressed: () => _onItemTapped(1),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.score,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
-              ),
-              onPressed: () => _onItemTapped(2),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.info,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
-              ),
-              onPressed: () => _onItemTapped(3),
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 250, 233, 215),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10.0,
             ),
           ],
         ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+          child: BottomAppBar(
+            color: Colors.transparent,
+            elevation: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.home,
+                      color: Color.fromARGB(255, 165, 74, 17),
+                      size: 30, // Adjust size here (default is 24)
+                    ),
+                    onPressed: () => _onItemTapped(0),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.fact_check,
+                      color: Color.fromARGB(255, 165, 74, 17),
+                      size: 30, // Adjust size here
+                    ),
+                    onPressed: () => _onItemTapped(1),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.score,
+                      color: Color.fromARGB(255, 165, 74, 17),
+                      size: 30, // Adjust size here
+                    ),
+                    onPressed: () => _onItemTapped(2),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.info,
+                      color: Color.fromARGB(255, 165, 74, 17),
+                      size: 30, // Adjust size here
+                    ),
+                    onPressed: () => _onItemTapped(3),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
-    ),
-  ),
-),
-
       body: Stack(
         children: [
           _buildBackground(),
@@ -318,72 +318,5 @@ class _NewScreenState extends State<NewScreen> {
         ),
       ),
     ];
-  }
-
-  // Bottom Buttons
-  Widget _buildBottomButtons() {
-    return Positioned(
-      bottom: 20,
-      left: 0,
-      right: 0,
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildBottomButton(
-                icon: Icons.home,
-                onTap: () => _navigateToPage(const InitialPage1(
-                      index: 0,
-                    ))),
-            const SizedBox(width: 20),
-            _buildBottomButton(
-                icon: Icons.fact_check,
-                onTap: () => _navigateToPage(const InitialPage1(
-                      index: 1,
-                    ))),
-            const SizedBox(width: 20),
-            _buildBottomButton(
-                icon: Icons.score,
-                onTap: () => _navigateToPage(const InitialPage1(index: 2))),
-            const SizedBox(width: 20),
-            _buildBottomButton(
-                icon: Icons.info,
-                onTap: () => _navigateToPage(const InitialPage1(index: 3))),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Bottom Button Builder for consistency
-  Widget _buildBottomButton(
-      {required IconData icon, required VoidCallback onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              spreadRadius: 2,
-              blurRadius: 4,
-            ),
-          ],
-        ),
-        child: Icon(
-          icon,
-          size: 30,
-          color: const Color.fromARGB(255, 165, 74, 17),
-        ),
-      ),
-    );
-  }
-
-  // Navigation Helper
-  void _navigateToPage(Widget page) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
   }
 }

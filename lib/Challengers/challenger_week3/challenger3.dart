@@ -126,6 +126,10 @@ class _ThirdGameState extends State<ThirdGame> {
   final ScrollController _scrollController = ScrollController();
 
   final List<Map<String, dynamic>> challengeData = [
+
+
+    // challenger 1
+
     {
       'question': 'eat lunch',
       'solution_vids': ['eat', 'lunch'],
@@ -157,6 +161,8 @@ class _ThirdGameState extends State<ThirdGame> {
       }
     },
 
+    // challenger 2
+
     {
       'question': 'read book',
       'solution_vids': ['read', 'book'],
@@ -187,197 +193,12 @@ class _ThirdGameState extends State<ThirdGame> {
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
-    {
-      'question': 'dog',
-      'solution': ['D', 'O', 'G'],
-      'availableLetters': ['D', 'G', 'O', 'H'],
-      'urls': {
-        "D":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png",
-        "G":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/G_rcvxfs.png",
-        "O":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
-        "H":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/H_hv5qdm.png",
-        'dog':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/dog_rlu4zj.png',
-        'correct':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-        'wrong':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-    {
-      'question': 'box',
-      'solution': ['B', 'O', 'X'],
-      'availableLetters': ['B', 'X', 'O', 'R'],
-      'urls': {
-        "B":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/B_nf0pwi.png",
-        "O":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
-        "X":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/X_kedszo.png",
-        "R":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
-        'box':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/box_madnit.png',
-        'correct':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-        'wrong':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-    {
-      'question': 'car',
-      'solution': ['C', 'A', 'R'],
-      'availableLetters': ['A', 'C', 'R', 'O'],
-      'urls': {
-        "A":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/A_zlgdfc.png",
-        "C":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png",
-        "R":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
-        "O":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
-        'car':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/car_ooxplt.png',
-        'correct':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-        'wrong':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
 
-    {
-      'question': 'pen',
-      'solution': ['P', 'E', 'N'],
-      'availableLetters': ['R', 'E', 'N', 'P'],
-      'urls': {
-        "R":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
-        "E":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png",
-        "N":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727852328/N_rvbtxz.png",
-        "P":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727852327/P_xczbe3.png",
-        'pen':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969908/pen_ibwjeo.png',
-        'correct':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-        'wrong':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
+    
 
-    {
-      'question': 'one',
-      'solution': ['1'],
-      'availableLetters': ['1', '2', '3', '4'],
-      'urls': {
-        '1':
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/1_tlz5st.png",
-        '2':
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-        '3':
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/3_ywml29.png",
-        '4':
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/4_xzh3hq.png",
-        'one':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727718826/one_rfzmob.png',
-        'correct':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-        'wrong':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-
-    {
-      'question': 'nine',
-      'solution': ['9'],
-      'availableLetters': ["6", "9", "2", "4"],
-      'urls': {
-        "9":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/9_gdnhiv.png",
-        "6":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png",
-        "2":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-        "4":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/4_xzh3hq.png",
-        "correct":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
-        "wrong":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-        "nine":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726266/nine_mwshmr.png",
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-
-    {
-      'question': 'six',
-      'solution': ['6'],
-      'availableLetters': ["2", "6", "3", "8"],
-      'urls': {
-        "3":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/3_ywml29.png",
-        "2":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-        "6":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png",
-        "8":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/8_ynuzfh.png",
-        "correct":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
-        "wrong":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-        "six":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726635/six_iy2km3.png",
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-
-    {
-      'question': 'two',
-      'solution': ['2'],
-      'availableLetters': ["9", "7", "1", "2"],
-      'urls': {
-        "2":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-        "1":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/1_tlz5st.png",
-        "9":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/9_gdnhiv.png",
-        "7":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/7_p3h2p5.png",
-        "correct":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
-        "wrong":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-        "two":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726887/two_k1esxb.png",
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-
-    // Add 3 more challenges in similar format
+    // challenger 3
+    
+    
   ];
 
   late List<String?> solution;
