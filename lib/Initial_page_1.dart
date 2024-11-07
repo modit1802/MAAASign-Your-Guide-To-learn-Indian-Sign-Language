@@ -50,7 +50,7 @@ class _InitialPage1State extends State<InitialPage1> {
   }
 
   final List<Widget> _pages = [
-    LearnPage(),
+    LearningZone(),
     HomePage(),
     ScorePage(),
     AboutPage(),

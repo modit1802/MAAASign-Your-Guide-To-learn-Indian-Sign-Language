@@ -92,95 +92,96 @@ class _ScorePageState extends State<ScorePage> {
     await db.close();
   }
 
+  Widget _buildCard({
+    required VoidCallback onTap,
+    required Color color,
+    required String title,
+    required String description,
+    required int index,
+    required int score, // Add score parameter
+  }) {
+    final bool isSelected = _selectedCardIndex == index;
 
-Widget _buildCard({
-  required VoidCallback onTap,
-  required Color color,
-  required String title,
-  required String description,
-  required int index,
-  required int score, // Add score parameter
-}) {
-  final bool isSelected = _selectedCardIndex == index;
-  
-  // Calculate percentage based on score as a value out of 1000
-  double percent = score / 1000.0;
+    // Calculate percentage based on score as a value out of 1000
+    double percent = score / 1000.0;
 
-  return GestureDetector(
-    onTap: onTap,
-    child: Card(
-      elevation: 10,
-      color: isSelected ? Color.fromARGB(255, 252, 133, 37): color,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          height: 100,
-          child: Row(
-            children: [
-              // Container with CircularPercentIndicator
-              Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 10.0,
-                      spreadRadius: 2.0,
-                      offset: Offset(3, 3),
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 10,
+        color: isSelected ? Color.fromARGB(255, 252, 133, 37) : color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            height: 100,
+            child: Row(
+              children: [
+                // Container with CircularPercentIndicator
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 10.0,
+                        spreadRadius: 2.0,
+                        offset: Offset(3, 3),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: CircularPercentIndicator(
+                      radius: 40.0,
+                      lineWidth: 8.0,
+                      percent: percent.clamp(
+                          0.0, 1.0), // Ensures percent is within 0-1 range
+                      center: Text(
+                        "${(percent * 100).toStringAsFixed(1)}%", // Display as percentage
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      progressColor: Color.fromARGB(255, 252, 133, 37),
+                      backgroundColor: Colors.grey.shade300,
+                      circularStrokeCap: CircularStrokeCap.round,
                     ),
-                  ],
-                ),
-                child: Center(
-                  child: CircularPercentIndicator(
-                    radius: 40.0,
-                    lineWidth: 8.0,
-                    percent: percent.clamp(0.0, 1.0), // Ensures percent is within 0-1 range
-                    center: Text(
-                      "${(percent * 100).toStringAsFixed(1)}%", // Display as percentage
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                    progressColor: Color.fromARGB(255, 252, 133, 37),
-                    backgroundColor: Colors.grey.shade300,
-                    circularStrokeCap: CircularStrokeCap.round,
                   ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: isSelected ? Colors.white : Colors.black,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      description,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: isSelected ? Colors.white : Colors.black,
+                      const SizedBox(height: 8),
+                      Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   void _handleCardTap(int index, Widget nextPage) {
     setState(() {
@@ -264,11 +265,13 @@ Widget _buildCard({
                           ),
                         ),
                         Container(
-                          height: 120,  // Keep the height for the card fixed
-                          width: 120,  // Keep the width for the card fixed
+                          height: 120, // Keep the height for the card fixed
+                          width: 120, // Keep the width for the card fixed
                           decoration: BoxDecoration(
-                            color: Colors.white,  // White color for the inner card
-                            borderRadius: BorderRadius.circular(15),  // Circular boundaries for the white card
+                            color:
+                                Colors.white, // White color for the inner card
+                            borderRadius: BorderRadius.circular(
+                                15), // Circular boundaries for the white card
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.2),
@@ -281,8 +284,8 @@ Widget _buildCard({
                             alignment: Alignment.center,
                             child: Image.asset(
                               'images/scoreisl.png',
-                              width: 300,  // Increase the image size
-                              height: 300,  // Increase the image size
+                              width: 300, // Increase the image size
+                              height: 300, // Increase the image size
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -294,18 +297,22 @@ Widget _buildCard({
               ),
               SizedBox(height: 20),
               if (score_challenger != null)
-                              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Score Board...",style: TextStyle(fontSize: 18 ,color: const Color.fromARGB(255, 113, 113, 113),fontWeight: FontWeight.bold),),
-              ),
-
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Score Board...",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: const Color.fromARGB(255, 113, 113, 113),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
               if (score_challenger != null)
                 _buildCard(
                   onTap: () => _handleCardTap(1, const DetailedProgressWeek1()),
                   color: Colors.white,
                   title: 'Week 1',
-                  description:
-                      'Click me ! To see the detailed score of week 1',
+                  description: 'Click me ! To see the detailed score of week 1',
                   index: 1,
                   score: int.parse(score_challenger!),
                 ),
