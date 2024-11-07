@@ -221,7 +221,7 @@ class _ThirdGameState extends State<ThirdGame> {
       'question': 'drink tea',
       'solution_vids': ['drink', 'tea'],
       'solution':['drink_i','tea_i'],
-      'availableLetters': ['drink_i','eat_i','breakfast','tea_i',],
+      'availableLetters': ['drink_i','eat_i','breakfast_i','tea_i',],
       'urls': {
         "drink":
             "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4",
