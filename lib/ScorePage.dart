@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:SignEase/Challengers_All_Weeks/challenger_week3/DetailedProgressWeek3.dart';
 
 class ScorePage extends StatefulWidget {
   const ScorePage({super.key});
@@ -18,6 +19,7 @@ class _ScorePageState extends State<ScorePage> {
   late mongo.Db db;
   late mongo.DbCollection userCollection;
   String? score_challenger;
+  String? score_challenger_week3;
 
   @override
   void initState() {
@@ -84,8 +86,13 @@ class _ScorePageState extends State<ScorePage> {
                 ?['score_challenger']
             ?.toString();
         print(score_challenger);
+        score_challenger_week3=result['week']?['week3']?['Score_Challenger_Week3']
+        ?['score_challenger']
+            ?.toString();
+        print(score_challenger_week3);
       } else {
         score_challenger = null;
+        score_challenger_week3=null;
         print('No data found');
       }
     });
@@ -293,7 +300,7 @@ Widget _buildCard({
                 ),
               ),
               SizedBox(height: 20),
-              if (score_challenger != null)
+              if (score_challenger != null || score_challenger_week3!=null)
                               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text("Score Board...",style: TextStyle(fontSize: 18 ,color: const Color.fromARGB(255, 113, 113, 113),fontWeight: FontWeight.bold),),
@@ -301,13 +308,23 @@ Widget _buildCard({
 
               if (score_challenger != null)
                 _buildCard(
-                  onTap: () => _handleCardTap(1, const DetailedProgressWeek1()),
+                  onTap: () => _handleCardTap(2, const DetailedProgressWeek1()),
                   color: Colors.white,
                   title: 'Week 1',
                   description:
                       'Click me ! To see the detailed score of week 1',
-                  index: 1,
+                  index: 2,
                   score: int.parse(score_challenger!),
+                ),
+              if (score_challenger_week3 != null)
+                _buildCard(
+                  onTap: () => _handleCardTap(1, const DetailedProgressWeek3()),
+                  color: Colors.white,
+                  title: 'Week 3',
+                  description:
+                  'Click me ! To see the detailed score of week 3',
+                  index: 1,
+                  score: int.parse(score_challenger_week3!),
                 ),
             ],
           ),
