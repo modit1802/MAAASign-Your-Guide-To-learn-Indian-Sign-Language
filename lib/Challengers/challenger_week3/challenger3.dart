@@ -20,13 +20,26 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(widget.videoUrl)
+    _initializeController(widget.videoUrl);
+  }
+
+   @override
+  void didUpdateWidget(covariant VideoWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Check if the video URL has changed
+    if (widget.videoUrl != oldWidget.videoUrl) {
+      _controller.dispose(); // Dispose of the old controller
+      _initializeController(widget.videoUrl); // Initialize new controller
+    }
+  }
+
+  void _initializeController(String videoUrl) {
+    _controller = VideoPlayerController.network(videoUrl)
       ..initialize().then((_) {
         setState(() {}); // Refresh the widget once the video is initialized
       })
       ..addListener(() {
-        // Listen for changes in playback state to show/hide play button
-        setState(() {});
+        setState(() {}); // Listen for changes in playback state
       });
   }
 
@@ -35,6 +48,7 @@ class _VideoWidgetState extends State<VideoWidget> {
     _controller.dispose();
     super.dispose();
   }
+
 
   void _togglePlayPause() {
     if (_controller.value.isPlaying) {
@@ -49,24 +63,27 @@ class _VideoWidgetState extends State<VideoWidget> {
   Widget build(BuildContext context) {
     return _controller.value.isInitialized
         ? AspectRatio(
-      aspectRatio: 9 / 16, // Maintain 9:16 aspect ratio
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          VideoPlayer(_controller),
-          if (!_controller.value.isPlaying) // Show play button only when paused
-            IconButton(
-              icon: Icon(
-                Icons.play_circle_outline,
-                color: Colors.white,
-                size: 50,
-              ),
-              onPressed: _togglePlayPause,
+            aspectRatio: 9 / 16, // Maintain 9:16 aspect ratio
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                VideoPlayer(_controller),
+                if (!_controller
+                    .value.isPlaying) // Show play button only when paused
+                  IconButton(
+                    icon: Icon(
+                      Icons.play_circle_outline,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                    onPressed: _togglePlayPause,
+                  ),
+              ],
             ),
-        ],
-      ),
-    )
-        : Center(child: CircularProgressIndicator()); // Loading indicator until video initializes
+          )
+        : Center(
+            child:
+                CircularProgressIndicator()); // Loading indicator until video initializes
   }
 }
 
@@ -100,6 +117,7 @@ class ThirdGame extends StatefulWidget {
 class _ThirdGameState extends State<ThirdGame> {
   late int score;
   bool? isCorrectSolution;
+  late VideoPlayerController _controller;
   List<Map<String, dynamic>> incorrectQuestions = [];
   int attempts = 0;
   int maxAttempts = 3;
@@ -111,7 +129,7 @@ class _ThirdGameState extends State<ThirdGame> {
     {
       'question': 'eat lunch',
       'solution_vids': ['eat', 'lunch'],
-      'solution':['eat_i','lunch_i'],
+      'solution': ['eat_i', 'lunch_i'],
       'availableLetters': ['eat_i', 'cook_i', 'lunch_i', 'dinner_i'],
       'urls': {
         'eat':
@@ -142,7 +160,7 @@ class _ThirdGameState extends State<ThirdGame> {
     {
       'question': 'read book',
       'solution_vids': ['read', 'book'],
-      'solution':['read_i','book_i'],
+      'solution': ['read_i', 'book_i'],
       'availableLetters': ['read_i', 'write_i', 'book_i', 'school_i'],
       'urls': {
         "read":
@@ -390,14 +408,7 @@ class _ThirdGameState extends State<ThirdGame> {
     );
   }
 
-  void _initializeChallenge() {
-    // Load the current challenge data based on the currentChallengeIndex
-    solution = List.filled(
-        challengeData[currentChallengeIndex]['solution'].length, "wooden");
-    availableLetters = List.from(
-      challengeData[currentChallengeIndex]['availableLetters'],
-    );
-  }
+
 
   void checkSolution() {
     if (const ListEquality()
@@ -425,41 +436,61 @@ class _ThirdGameState extends State<ThirdGame> {
               List.from(challengeData[currentChallengeIndex]['solution']);
           isCorrectSolution = false;
           showMoveToNextButton = false;
-        incorrectQuestions.add({
-          'question':challengeData[currentChallengeIndex]['question'],
-          'solution':challengeData[currentChallengeIndex]['solution'],
-          'available_letters':challengeData[currentChallengeIndex]['availableLetters'],
-          'urls':challengeData[currentChallengeIndex]['urls']
-        });
+          incorrectQuestions.add({
+            'question': challengeData[currentChallengeIndex]['question'],
+            'solution': challengeData[currentChallengeIndex]['solution'],
+            'available_letters': challengeData[currentChallengeIndex]
+                ['availableLetters'],
+            'urls': challengeData[currentChallengeIndex]['urls']
+          });
         } else {
           isCorrectSolution = false;
           showMoveToNextButton = false;
         }
-
       });
       print(currentChallengeIndex);
       _scrollToGif();
     }
   }
 
-  void _moveToNextChallenge() {
-    if (currentChallengeIndex < challengeData.length - 1) {
-      setState(() {
-        currentChallengeIndex++;
-        attempts = 0;
-        isCorrectSolution = null;
-        showMoveToNextButton = false;
-        _initializeChallenge();
-      });
-    } else {
-      // Once all challenges are completed, navigate to Challenger2
-      print("Navigating to Challenger2 with score: $score");
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Result_Challenger_Week3(score: score,incorrectquestions:incorrectQuestions)),
-      );
-    }
+ void _moveToNextChallenge() {
+  if (currentChallengeIndex < challengeData.length - 1) {
+    setState(() {
+      currentChallengeIndex++;  // Update the current challenge index
+      attempts = 0;
+      isCorrectSolution = null;
+      showMoveToNextButton = false;
+      _initializeChallenge();  // Re-initialize the challenge data
+    });
+  } else {
+    // Once all challenges are completed, navigate to the next screen
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Result_Challenger_Week3(
+          score: score, 
+          incorrectquestions: incorrectQuestions
+        ),
+      ),
+    );
+  }
+}
+
+void _initializeChallenge() {
+  // Ensure that the new challenge data is being loaded based on the updated index
+  setState(() {
+    solution = List.filled(
+        challengeData[currentChallengeIndex]['solution'].length, "wooden");
+    availableLetters = List.from(
+      challengeData[currentChallengeIndex]['availableLetters'],
+    );
+  });
+}
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   void _scrollToGif() async {
@@ -549,7 +580,6 @@ class _ThirdGameState extends State<ThirdGame> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     // Get screen dimensions
@@ -596,36 +626,37 @@ class _ThirdGameState extends State<ThirdGame> {
                             "Drag the correct yellow color available boxes and drop them in to the wooden boxes as per the spelling of question. For more information press the 'tutorial button' on the top",
                         index: 2,
                       ),
-    Material(
-    elevation: screenHeight * 0.01,
-    borderRadius: BorderRadius.circular(screenWidth * 0.05),
-    child: Container(
-    width: screenWidth * 0.7,
-    height: screenHeight * 0.3,
-    decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(screenWidth * 0.05),
-    color: Colors.white,
-    ),
-    child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-    Flexible(
-    child: VideoWidget(
-    challengeData[currentChallengeIndex]['urls']
-    [challengeData[currentChallengeIndex]['solution_vids'][0]],
-    ),
-    ),
-    Flexible(
-    child: VideoWidget(
-    challengeData[currentChallengeIndex]['urls']
-    [challengeData[currentChallengeIndex]['solution_vids'][1]],
-    ),
-    ),
-    ],
-    ),
-    ),
-    ),
-    ],
+                      Material(
+                        elevation: screenHeight * 0.01,
+                        borderRadius: BorderRadius.circular(screenWidth * 0.05),
+                        child: Container(
+                          width: screenWidth * 0.7,
+                          height: screenHeight * 0.3,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(screenWidth * 0.05),
+                            color: Colors.white,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                             Flexible(
+  child: VideoWidget(
+    challengeData[currentChallengeIndex]['urls'][
+        challengeData[currentChallengeIndex]['solution_vids'][0]],
+  ),
+),
+Flexible(
+  child: VideoWidget(
+    challengeData[currentChallengeIndex]['urls'][
+        challengeData[currentChallengeIndex]['solution_vids'][1]],
+  ),
+),
+          ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
