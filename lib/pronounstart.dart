@@ -4,6 +4,7 @@ import 'package:SignEase/pronoun_quiz.dart';
 import 'package:flutter/material.dart';
 
 import 'pronoun_practice2.dart';
+
 class PronounStartScreen extends StatefulWidget {
   const PronounStartScreen({super.key});
 
@@ -20,74 +21,79 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
   }
 
   // Method to check if the GIF has been shown before
- Widget _buildCard({
-  required VoidCallback onTap,
-  required String imagePath,
-  required Color color,
-  required String title,
-  required String description,
-  required int index,
-}) {
-  final bool isSelected = _selectedCardIndex == index;
-  // Get the screen width and height
-  final mediaQuery = MediaQuery.of(context);
-  final screenWidth = mediaQuery.size.width;
+  Widget _buildCard({
+    required VoidCallback onTap,
+    required String imagePath,
+    required Color color,
+    required String title,
+    required String description,
+    required int index,
+  }) {
+    final bool isSelected = _selectedCardIndex == index;
+    // Get the screen width and height
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
 
-  return GestureDetector(
-    onTap: onTap,
-    child: Card(
-      elevation: 10,
-      color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          // Set height based on screen height
-          height: screenWidth < 600 ? 120 : 140, // Adjust height for smaller screens
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  imagePath,
-                  // Adjust image size for smaller screens
-                  width: screenWidth < 600 ? 60 : 80,
-                  height: screenWidth < 600 ? 60 : 80,
-                  fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 10,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            // Set height based on screen height
+            height: screenWidth < 600
+                ? 120
+                : 140, // Adjust height for smaller screens
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    imagePath,
+                    // Adjust image size for smaller screens
+                    width: screenWidth < 600 ? 60 : 80,
+                    height: screenWidth < 600 ? 60 : 80,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: screenWidth < 600 ? 16 : 18, // Adjust title size
-                        fontWeight: FontWeight.bold,
-                        color: isSelected ? Colors.white : Colors.black,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize:
+                              screenWidth < 600 ? 16 : 18, // Adjust title size
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      description,
-                      style: TextStyle(
-                        fontSize: screenWidth < 600 ? 12 : 14, // Adjust description size
-                        color: isSelected ? Colors.white : Colors.black,
+                      const SizedBox(height: 8),
+                      Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: screenWidth < 600
+                              ? 12
+                              : 14, // Adjust description size
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   void _handleCardTap(int index, Widget nextPage) {
     setState(() {
@@ -98,8 +104,8 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
         context,
         MaterialPageRoute(builder: (context) => nextPage),
       ).then((_) => setState(() {
-        _selectedCardIndex = null; // Reset after navigation
-      }));
+            _selectedCardIndex = null; // Reset after navigation
+          }));
     });
   }
 
@@ -107,7 +113,8 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _currentIndex =index; // Update the current index to highlight the selected tab
+      _currentIndex =
+          index; // Update the current index to highlight the selected tab
     });
 
     // You can add navigation or specific actions based on the selected index
@@ -137,7 +144,7 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 2),
           ),
-        );  // Replace with your actual route
+        ); // Replace with your actual route
         break;
       case 3:
         // Navigate to the About screen or perform any action
@@ -146,85 +153,84 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 3),
           ),
-        );  // Replace with your actual route
+        ); // Replace with your actual route
         break;
       default:
         break;
     }
   } // Track the selected card index
 
-
   @override
   Widget build(BuildContext context) {
-                final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor:  Color.fromARGB(255, 250, 233, 215),
-       bottomNavigationBar: Container(
-  decoration: const BoxDecoration(
-    color: Color.fromARGB(255, 250, 233, 215),
-    borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(20.0),
-      topRight: Radius.circular(20.0),
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.black26,
-        blurRadius: 10.0,
-      ),
-    ],
-  ),
-  child: ClipRRect(
-    borderRadius: const BorderRadius.only(
-      topLeft: Radius.circular(20.0),
-      topRight: Radius.circular(20.0),
-    ),
-    child: BottomAppBar(
-      color: Colors.transparent,
-      elevation: 0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(
-                Icons.home,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here (default is 24)
-              ),
-              onPressed: () => _onItemTapped(0),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.fact_check,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
-              ),
-              onPressed: () => _onItemTapped(1),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.score,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
-              ),
-              onPressed: () => _onItemTapped(2),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.info,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
-              ),
-              onPressed: () => _onItemTapped(3),
+      backgroundColor: Color.fromARGB(255, 250, 233, 215),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 250, 233, 215),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10.0,
             ),
           ],
         ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+          child: BottomAppBar(
+            color: Colors.transparent,
+            elevation: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.home,
+                      color: Color.fromARGB(255, 165, 74, 17),
+                      size: 30, // Adjust size here (default is 24)
+                    ),
+                    onPressed: () => _onItemTapped(0),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.fact_check,
+                      color: Color.fromARGB(255, 165, 74, 17),
+                      size: 30, // Adjust size here
+                    ),
+                    onPressed: () => _onItemTapped(1),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.score,
+                      color: Color.fromARGB(255, 165, 74, 17),
+                      size: 30, // Adjust size here
+                    ),
+                    onPressed: () => _onItemTapped(2),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.info,
+                      color: Color.fromARGB(255, 165, 74, 17),
+                      size: 30, // Adjust size here
+                    ),
+                    onPressed: () => _onItemTapped(3),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
-    ),
-  ),
-),
       body: Stack(
         children: [
           Container(
@@ -243,13 +249,14 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(height: screenHeight*0.14),
+                      SizedBox(height: screenHeight * 0.14),
                       _buildCard(
                         onTap: () => _handleCardTap(0, const LearnPronouns()),
                         imagePath: 'images/verbs.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Learn Pronouns',
-                        description: 'Learn Pronouns with the help of interactive learning material!',
+                        description:
+                            'Learn Pronouns with the help of interactive learning material!',
                         index: 0,
                       ),
                       const SizedBox(height: 12), // Space between the cards
@@ -258,7 +265,8 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                         imagePath: 'images/quiz.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Play Quiz',
-                        description: "Let's Play a simple Quiz consisting of one image question with 4 options Test your knowledge of pronouns!",
+                        description:
+                            "Let's Play a simple Quiz consisting of one image question with 4 options Test your knowledge of pronouns!",
                         index: 1,
                       ),
                       const SizedBox(height: 12),
@@ -267,7 +275,8 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                         imagePath: 'images/bingo.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Bingo Bonanza!',
-                        description: "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card. It's a visual feast of fun and a test of your word-guessing skills.",
+                        description:
+                            "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card. It's a visual feast of fun and a test of your word-guessing skills.",
                         index: 2,
                       ),
                       const SizedBox(height: 12),
@@ -286,7 +295,6 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
           if (_showGif)
             Center(
               child: Positioned(
-
                 child: Center(
                   child: Image.asset(
                     'images/week1screenbeg.gif', // Update the image path here
@@ -303,7 +311,8 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    _showGif = false; // Hide the GIF when the close button is pressed
+                    _showGif =
+                        false; // Hide the GIF when the close button is pressed
                   });
                 },
                 child: const Icon(
@@ -313,7 +322,7 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                 ),
               ),
             ),
-                   Positioned(
+          Positioned(
             top: screenHeight * 0.065,
             left: screenWidth * 0.05,
             child: GestureDetector(
