@@ -115,9 +115,9 @@ class _LearnPageState extends State<LearnPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Color.fromARGB(255, 250, 233, 215),
       body: Stack(
         children: [
-          _buildBackground(),
           SafeArea(
             child: RefreshIndicator(
               // Add RefreshIndicator
@@ -141,6 +141,23 @@ class _LearnPageState extends State<LearnPage> {
                                 children: <Widget>[
                                   FadeInUp(
                                     duration:
+                                        const Duration(milliseconds: 1300),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: _currentUser != null
+                                          ? Text(
+                                              "Hi $username !",
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                  color: Color.fromARGB(255, 0, 0, 0),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),
+                                            )
+                                          : const SizedBox(),
+                                    ),
+                                  ),
+                                  FadeInUp(
+                                    duration:
                                         const Duration(milliseconds: 1000),
                                     child: const Row(
                                       mainAxisAlignment:
@@ -149,32 +166,13 @@ class _LearnPageState extends State<LearnPage> {
                                         Text(
                                           "Learning Zone",
                                           style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  221, 255, 255, 255),
+                                              color: Color.fromARGB(221, 0, 0, 0),
                                               fontSize: 40),
                                         ),
                                       ],
                                     ),
                                   ),
                                   const SizedBox(height: 10),
-                                  FadeInUp(
-                                    duration:
-                                        const Duration(milliseconds: 1300),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: _currentUser != null
-                                          ? Text(
-                                              "Hi $username ! Learn ISL by clicking on the card",
-                                              textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 231, 240, 255),
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18),
-                                            )
-                                          : const SizedBox(),
-                                    ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -216,19 +214,7 @@ class _LearnPageState extends State<LearnPage> {
     );
   }
 
-  Widget _buildBackground() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          colors: [
-            Color.fromARGB(255, 219, 69, 249),
-            Color.fromARGB(255, 135, 205, 238),
-          ],
-        ),
-      ),
-    );
-  }
+
 
   Widget _buildLoadingOverlay() {
     return Container(

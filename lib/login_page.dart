@@ -201,20 +201,20 @@ class _LoginPageState extends State<LoginPage> {
                       focusNode: _emailFocusNode,
                       style: TextStyle(
                         color: _isEmailFocused
-                            ? const Color.fromARGB(255, 252, 133, 37)
+                            ? const Color.fromARGB(255, 183, 83, 2)
                             : Colors.black,
                       ),
                       decoration: InputDecoration(
                         labelText: 'Email',
                         labelStyle: TextStyle(
                           color: _isEmailFocused
-                              ? const Color.fromARGB(255, 252, 133, 37)
+                              ? const Color.fromARGB(255, 183, 83, 2)
                               : Colors.black,
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 252, 133, 37),
+                            color: const Color.fromARGB(255, 183, 83, 2),
                             width:
                                 2.0, // Optional: Increase width for a clearer effect
                           ),
@@ -226,7 +226,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      cursorColor: const Color.fromARGB(255, 252, 133, 37),
+                      cursorColor: const Color.fromARGB(255, 183, 83, 2),
                     ),
                     const SizedBox(height: 16),
           
@@ -237,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                       obscureText: !_isPasswordVisible,
                       style: TextStyle(
                         color: _isPasswordFocused
-                            ? const Color.fromARGB(255, 252, 133, 37)
+                            ? const Color.fromARGB(255, 183, 83, 2)
                             : Colors.black,
                       ),
                       decoration: InputDecoration(
@@ -258,13 +258,13 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         labelStyle: TextStyle(
                           color: _isPasswordFocused
-                              ? const Color.fromARGB(255, 252, 133, 37)
+                              ? const Color.fromARGB(255, 183, 83, 2)
                               : Colors.black,
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 252, 133, 37),
+                            color: const Color.fromARGB(255, 183, 83, 2),
                             width:
                                 2.0, // Optional: Increase width for a clearer effect
                           ),
@@ -276,7 +276,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      cursorColor: const Color.fromARGB(255, 252, 133, 37),
+                      cursorColor: const Color.fromARGB(255, 183, 83, 2),
                     ),
           
                     const SizedBox(height: 10),
@@ -294,7 +294,7 @@ class _LoginPageState extends State<LoginPage> {
                                   rememberMe = value!;
                                 });
                               },
-                              activeColor: const Color.fromARGB(255, 252, 133, 37),
+                              activeColor: const Color.fromARGB(255, 183, 83, 2),
                             ),
                             const Text('Remember me'),
                           ],
@@ -306,7 +306,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text(
                             'Forgot Password?',
                             style:
-                                TextStyle(color: Color.fromARGB(255, 252, 133, 37)),
+                                TextStyle(color: const Color.fromARGB(255, 183, 83, 2)),
                           ),
                         ),
                       ],
