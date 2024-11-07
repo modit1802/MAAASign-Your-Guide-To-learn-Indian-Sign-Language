@@ -31,7 +31,7 @@ class _SignupPageState extends State<SignupPage> {
   bool _showAnimation = false;
   final ImagePicker _picker = ImagePicker();
   File? _selectedImage;
-  String _defaultPhotoUrl = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fen%2Fsearch%3Fq%3Duser&psig=AOvVaw2IGcEKZdbXWfsFoujjWQIR&ust=1730987813929000&source=images&cd=vfe&opi=89978449&ved=0CBgQ3YkBahcKEwjYj72d7seJAxUAAAAAHQAAAAAQCQ';
+  final String _defaultPhotoUrl = 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730905633/person.256x242_h6w7hk.png';
   final FocusNode _nameFocusNode = FocusNode();
     final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
@@ -260,20 +260,20 @@ print('Download URL: $downloadUrl');
                       focusNode: _nameFocusNode,
                       style: TextStyle(
                         color: _isnameFocused
-                            ? const Color.fromARGB(255, 252, 133, 37)
+                            ? const Color.fromARGB(255, 183, 83, 2)
                             : Colors.black,
                       ),
                       decoration: InputDecoration(
                         labelText: 'Name',
                         labelStyle: TextStyle(
                           color: _isnameFocused
-                              ? const Color.fromARGB(255, 252, 133, 37)
+                              ? const Color.fromARGB(255, 183, 83, 2)
                               : Colors.black,
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 252, 133, 37),
+                            color: const Color.fromARGB(255, 183, 83, 2),
                             width:
                                 2.0, // Optional: Increase width for a clearer effect
                           ),
@@ -285,7 +285,7 @@ print('Download URL: $downloadUrl');
                           ),
                         ),
                       ),
-                      cursorColor: const Color.fromARGB(255, 252, 133, 37),
+                      cursorColor: const Color.fromARGB(255, 183, 83, 2),
                     ),
                     const SizedBox(height: 16),
                     TextField(
@@ -293,20 +293,20 @@ print('Download URL: $downloadUrl');
                       focusNode: _emailFocusNode,
                       style: TextStyle(
                         color: _isEmailFocused
-                            ? const Color.fromARGB(255, 252, 133, 37)
+                            ? const Color.fromARGB(255, 183, 83, 2)
                             : Colors.black,
                       ),
                       decoration: InputDecoration(
                         labelText: 'Email',
                         labelStyle: TextStyle(
                           color: _isEmailFocused
-                              ? const Color.fromARGB(255, 252, 133, 37)
+                              ? const Color.fromARGB(255, 183, 83, 2)
                               : Colors.black,
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 252, 133, 37),
+                            color: const Color.fromARGB(255, 183, 83, 2),
                             width:
                                 2.0, // Optional: Increase width for a clearer effect
                           ),
@@ -318,7 +318,7 @@ print('Download URL: $downloadUrl');
                           ),
                         ),
                       ),
-                      cursorColor: const Color.fromARGB(255, 252, 133, 37),
+                      cursorColor: const Color.fromARGB(255, 183, 83, 2),
                     ),
                     const SizedBox(height: 16),
                     TextField(
@@ -327,7 +327,7 @@ print('Download URL: $downloadUrl');
                       focusNode: _passwordFocusNode,
                       style: TextStyle(
                         color: _isPasswordFocused
-                            ? const Color.fromARGB(255, 252, 133, 37)
+                            ? const Color.fromARGB(255, 183, 83, 2)
                             : Colors.black,
                       ),
                       decoration: InputDecoration(
@@ -348,13 +348,13 @@ print('Download URL: $downloadUrl');
                         ),
                         labelStyle: TextStyle(
                           color: _isPasswordFocused
-                              ? const Color.fromARGB(255, 252, 133, 37)
+                              ? const Color.fromARGB(255, 183, 83, 2)
                               : Colors.black,
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
                           borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 252, 133, 37),
+                            color: const Color.fromARGB(255, 183, 83, 2),
                             width:
                                 2.0, // Optional: Increase width for a clearer effect
                           ),
@@ -366,7 +366,7 @@ print('Download URL: $downloadUrl');
                           ),
                         ),
                       ),
-                      cursorColor: const Color.fromARGB(255, 252, 133, 37),
+                      cursorColor: const Color.fromARGB(255, 183, 83, 2),
                     ),
                     const SizedBox(height: 20),
                     SizedBox(
@@ -378,9 +378,7 @@ print('Download URL: $downloadUrl');
                           padding: const EdgeInsets.all(16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16.0),
-                            side: const BorderSide(
-                                color: Color.fromARGB(
-                                    255, 255, 255, 255)), // Optional: border color
+                            // Optional: border color
                           ),
                         ),
                         child: const Text(
@@ -405,9 +403,7 @@ print('Download URL: $downloadUrl');
                           padding: const EdgeInsets.all(16),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16.0),
-                            side: const BorderSide(
-                                color: Color.fromARGB(
-                                    255, 255, 255, 255)), // Optional: border color
+                             // Optional: border color
                           ),
                         ),
                       ),
