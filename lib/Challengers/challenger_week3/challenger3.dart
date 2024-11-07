@@ -126,6 +126,10 @@ class _ThirdGameState extends State<ThirdGame> {
   final ScrollController _scrollController = ScrollController();
 
   final List<Map<String, dynamic>> challengeData = [
+
+
+    // challenger 1
+
     {
       'question': 'eat lunch',
       'solution_vids': ['eat', 'lunch'],
@@ -157,6 +161,8 @@ class _ThirdGameState extends State<ThirdGame> {
       }
     },
 
+    // challenger 2
+
     {
       'question': 'read book',
       'solution_vids': ['read', 'book'],
@@ -187,6 +193,14 @@ class _ThirdGameState extends State<ThirdGame> {
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
+<<<<<<< HEAD
+
+    
+
+    // challenger 3
+    
+    
+=======
     {
       'question': 'finish work',
       'solution_vids': ['finish', 'work'],
@@ -434,6 +448,7 @@ class _ThirdGameState extends State<ThirdGame> {
     },
 
     // Add 3 more challenges in similar format
+>>>>>>> 0f645bd3e84aef155917d22a19277c0baaa2fb07
   ];
 
   late List<String?> solution;
