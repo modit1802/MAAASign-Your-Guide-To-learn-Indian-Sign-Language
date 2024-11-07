@@ -188,20 +188,27 @@ class _ThirdGameState extends State<ThirdGame> {
       }
     },
     {
-      'question': 'dog',
-      'solution': ['D', 'O', 'G'],
-      'availableLetters': ['D', 'G', 'O', 'H'],
+      'question': 'finish work',
+      'solution_vids': ['finish', 'work'],
+      'solution':['finish_i','work_i'],
+      'availableLetters': ['finish_i','use_i','office_i','work_i'],
       'urls': {
-        "D":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png",
-        "G":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/G_rcvxfs.png",
-        "O":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
-        "H":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/H_hv5qdm.png",
-        'dog':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/dog_rlu4zj.png',
+        "finish":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530660/finish_abglyx.mp4",
+        "work":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/work_ejax98.mp4",
+        "use":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/use_gzlhmv.mp4",
+        "office":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4",
+        'finish_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730984383/Finish_a88xkj.png',
+        'use_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730984473/Use_q4y2oo.png',
+        'work_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730984542/Work_eanznr.png',
+        'office_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730984598/Office_jhay8v.png',
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -211,20 +218,27 @@ class _ThirdGameState extends State<ThirdGame> {
       }
     },
     {
-      'question': 'box',
-      'solution': ['B', 'O', 'X'],
-      'availableLetters': ['B', 'X', 'O', 'R'],
+      'question': 'drink tea',
+      'solution_vids': ['drink', 'tea'],
+      'solution':['drink_i','tea_i'],
+      'availableLetters': ['drink_i','eat_i','breakfast','tea_i',],
       'urls': {
-        "B":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/B_nf0pwi.png",
-        "O":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
-        "X":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/X_kedszo.png",
-        "R":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
-        'box':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/box_madnit.png',
+        "drink":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4",
+        "eat":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4",
+        "breakfast":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/breakfast_hb90fq.mp4",
+        "tea":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/tea_i6mkyc.mp4",
+        'drink_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730985321/Drink_wofu27.png',
+        'eat_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974723/Eat_vf1awm.png',
+        'breakfast_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730985448/Breakfast_sc6ruy.png',
+        'tea_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730985530/Tea_gzhp4z.png',
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -234,68 +248,27 @@ class _ThirdGameState extends State<ThirdGame> {
       }
     },
     {
-      'question': 'car',
-      'solution': ['C', 'A', 'R'],
-      'availableLetters': ['A', 'C', 'R', 'O'],
+      'question': 'come office',
+      'solution_vids': ['come', 'office'],
+      'solution':['come_i','office_i'],
+      'availableLetters': ['go_i','come_i','school_i','office_i'],
       'urls': {
-        "A":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/A_zlgdfc.png",
-        "C":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png",
-        "R":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
-        "O":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png",
-        'car':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/car_ooxplt.png',
-        'correct':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-        'wrong':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-
-    {
-      'question': 'pen',
-      'solution': ['P', 'E', 'N'],
-      'availableLetters': ['R', 'E', 'N', 'P'],
-      'urls': {
-        "R":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/R_blypku.png",
-        "E":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png",
-        "N":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727852328/N_rvbtxz.png",
-        "P":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727852327/P_xczbe3.png",
-        'pen':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969908/pen_ibwjeo.png',
-        'correct':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-        'wrong':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-
-    {
-      'question': 'one',
-      'solution': ['1'],
-      'availableLetters': ['1', '2', '3', '4'],
-      'urls': {
-        '1':
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/1_tlz5st.png",
-        '2':
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-        '3':
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/3_ywml29.png",
-        '4':
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/4_xzh3hq.png",
-        'one':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727718826/one_rfzmob.png',
+        "go":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4",
+        "office":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4",
+        "come":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4",
+        "school":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
+        'go_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986208/Go_kmooei.png',
+        'office_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730984598/Office_jhay8v.png',
+        'come_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986339/Come_b2f00f.png',
+        'school_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730977235/School_cdvg2o.png',
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -306,72 +279,155 @@ class _ThirdGameState extends State<ThirdGame> {
     },
 
     {
-      'question': 'nine',
-      'solution': ['9'],
-      'availableLetters': ["6", "9", "2", "4"],
+      'question': 'wake up morning',
+      'solution_vids': ['wake up', 'morning'],
+      'solution':['wake up_i', 'morning_i'],
+      'availableLetters': ['wake up_i', 'sleep_i', 'morning_i', 'house_i'],
       'urls': {
-        "9":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/9_gdnhiv.png",
-        "6":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png",
-        "2":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-        "4":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/4_xzh3hq.png",
+        "wake up":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/wake_up_c6pbs5.mp4",
+        "sleep":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/sleep_vwyvtz.mp4",
+        "morning":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/morning_pvtuty.mp4",
+        "house":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4",
+        'wake up_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986852/Wake_up_eo3jud.png',
+        'sleep_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986852/Sleep_c8ersf.png',
+        'morning_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986851/Morning_qvqdfu.png',
+        'house_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986851/House_mt8ywx.png',
+        'correct':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
+        'wrong':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
+        'wooden':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
+      }
+    },
+
+    {
+      'question': 'birds fly',
+      'solution_vids': ['birds', 'fly'],
+      'solution':['birds_i', 'fly_i'],
+      'availableLetters': ['fish_i', 'fly_i', 'birds_i', 'swim_i'],
+      'urls': {
+        'birds':
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        'fish':
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        'fly':
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        'swim':
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        'birds_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Birds_zhgyzl.png',
+        'fly_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987715/Fly_j9jtn9.png',
+        'swim_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987715/Swim_ea5apc.png',
+        'fish_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Fish_ukkxsz.png',
+        'correct':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
+        'wrong':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
+        'wooden':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
+      }
+    },
+
+    {
+      'question': 'fish swim',
+      'solution_vids': ['fish','swim'],
+      'solution': ['fish_i', 'swim_i'],
+      'availableLetters': ['birds_i', 'fish_i', 'swim_i', 'fly_i'],
+      'urls': {
+        'birds':
+        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        'fish':
+        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        'fly':
+        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        'swim':
+        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        'birds_i':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Birds_zhgyzl.png',
+        'fly_i':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987715/Fly_j9jtn9.png',
+        'swim_i':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987715/Swim_ea5apc.png',
+        'fish_i':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Fish_ukkxsz.png',
+        'correct':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
+        'wrong':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
+        'wooden':
+        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
+      }
+    },
+
+    {
+      'question': 'I deaf',
+      'solution_vids': ['I','deaf'],
+      'solution':["I_i","deaf_i"],
+      'availableLetters': ["we_i", "deaf_i", "I_i", "teacher_i"],
+      'urls': {
+        "I":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/I_jcee6z.mp4",
+        "deaf":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/deaf_ezkwye.mp4",
+        "we":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/we_duowgj.mp4",
+        "teacher":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4",
         "correct":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
         "wrong":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-        "nine":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726266/nine_mwshmr.png",
+        "I_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730988758/I_reqpgr.png",
+        'we_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730988758/We_d4trpx.png',
+        'teacher_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730988758/Teacher_ygovmv.png',
+        'deaf_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730988759/Deaf_lqqlfz.png',
         'wooden':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
 
     {
-      'question': 'six',
-      'solution': ['6'],
-      'availableLetters': ["2", "6", "3", "8"],
+      'question': 'live India',
+      'solution_vids': ['live', 'India'],
+      'solution': ["live_i", "India_i"],
+      'availableLetters': ["walk_i", "live_i", "house_i", "India_i"],
       'urls': {
-        "3":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/3_ywml29.png",
-        "2":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-        "6":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png",
-        "8":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/8_ynuzfh.png",
+        "live":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4",
+        "India":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
+        "walk":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4",
+        "house":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
         "correct":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
         "wrong":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-        "six":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726635/six_iy2km3.png",
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-
-    {
-      'question': 'two',
-      'solution': ['2'],
-      'availableLetters': ["9", "7", "1", "2"],
-      'urls': {
-        "2":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png",
-        "1":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/1_tlz5st.png",
-        "9":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/9_gdnhiv.png",
-        "7":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/7_p3h2p5.png",
-        "correct":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
-        "wrong":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-        "two":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727726887/two_k1esxb.png",
+        "live_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730989201/Live_hbudpg.png",
+        "India_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730989201/India_mdg3uj.png",
+        "house_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730986851/House_mt8ywx.png",
+        "walk_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730989202/Walk_ucjkq9.png",
         'wooden':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
