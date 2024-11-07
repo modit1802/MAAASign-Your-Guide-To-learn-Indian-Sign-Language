@@ -1,27 +1,29 @@
 import 'dart:math';
-import 'package:SignEase/Week%203/Verbs_Result.dart';
+import 'package:SignEase/Week%203/Nouns_Result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:video_player/video_player.dart';
 
-class PracticeAssignment2 extends StatefulWidget {
+class NounQuiz extends StatefulWidget {
   @override
-  _PracticeAssignment2State createState() => _PracticeAssignment2State();
+  _NounQuizState createState() => _NounQuizState();
 }
 
-class _PracticeAssignment2State extends State<PracticeAssignment2> {
+class _NounQuizState extends State<NounQuiz> {
   List<Map<String, dynamic>> questionsAndSolutions = [
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266842/baby_u_p1lbqp.mp4', 'solution': 'baby'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/mother_u_tkkg10.mp4', 'solution': 'mother'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266839/father_u_jdbajr.mp4', 'solution': 'father'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4}', 'solution': 'brother',},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266838/sister_u_wpybjz.mp4', 'solution': 'sister'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/people_u_t4403p.mp4', 'solution': 'people'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266835/friend_u_nfctlk.mp4', 'solution': 'friend'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/man_u_llmdsh.mp4', 'solution': 'man'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/girl_child_u_qnjmxl.mp4', 'solution': 'girl child'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266844/female_person_u_cgv3es.mp4', 'solution': 'female person'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4', 'solution': 'School'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/market_vfh9vj.mp4', 'solution': 'Market'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530818/lunch_cbcgwu.mp4', 'solution': 'Lunch'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/tea_i6mkyc.mp4', 'solution': 'Tea'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4', 'solution': 'Office'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/morning_pvtuty.mp4', 'solution': 'Morning'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/breakfast_hb90fq.mp4', 'solution': 'Breakfast'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4', 'solution': 'Hands'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/deaf_ezkwye.mp4', 'solution': 'Deaf'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4', 'solution': 'Dinner'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4', 'solution': 'Book'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/work_zjfapw.mp4', 'solution': 'Work'},
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];
@@ -143,7 +145,7 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Quiz_Verb_ResultScreen(
+            builder: (context) => Quiz_Noun_ResultScreen(
               score: score,
               correctcount: correctCount,
               incorrectcount: incorrectCount,
@@ -246,7 +248,7 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
                   Transform.translate(
                     offset: Offset(0, -screenHeight * 0.059), // Adjusted with MediaQuery
                     child: Text(
-                      "Identify the signs for each verb",
+                      "Identify the signs for each noun",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: isSmallScreen ? 18 : 24,

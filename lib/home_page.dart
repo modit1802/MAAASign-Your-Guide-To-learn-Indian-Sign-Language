@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:SignEase/Week 2/week2_entry.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:SignEase/newscreen.dart';
+import 'package:SignEase/Week%201/week1_entry.dart';
 import 'package:lottie/lottie.dart';
 // Assuming this is the file for LoginPage
-import 'package:SignEase/week3_start_page.dart';
+import 'package:SignEase/Week%203/week3_entry.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -257,14 +257,14 @@ class GridDashboard extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             if (data.title == "Week 1") {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => NewScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Week1Entry()));
 
             }
             else if (data.title == "Week 2") {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Week2NewScreen()));
             }
             else if (data.title == "Week 3") {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Week3()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Week3Entry()));
             }
           },
           child: Container(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:SignEase/greetings_learn.dart'; // Import the SentenceStartscreen file
+import 'package:SignEase/Week%202/greetings_learn.dart'; // Import the SentenceStartscreen file
 
 void main() {
   runApp(const MyApp());

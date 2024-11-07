@@ -5,23 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:video_player/video_player.dart';
 
-class PracticeAssignment2 extends StatefulWidget {
+class True_False_Challenge extends StatefulWidget {
   @override
-  _PracticeAssignment2State createState() => _PracticeAssignment2State();
+  _True_False_ChallengeState createState() => _True_False_ChallengeState();
 }
 
-class _PracticeAssignment2State extends State<PracticeAssignment2> {
+class _True_False_ChallengeState extends State<True_False_Challenge> {
   List<Map<String, dynamic>> questionsAndSolutions = [
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/hello_u_hmbf7y.mp4', 'solution': 'Hello'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266605/good_bye_u_hz6peg.mp4', 'solution': 'GoodBye'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/welcome_u_np7ibt.mp4', 'solution': 'Welcome'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/namaste_u_iptdsn.mp4', 'solution': 'Namaste'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/hy_u_dfsvt4.mp4', 'solution': 'Hy'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266607/good_morning_u_ug5jxg.mp4', 'solution': 'Good Morning'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/good_afternoon_u_wwhvia.mp4', 'solution': 'Good Afternoon'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/good_night_u_sgogpu.mp4', 'solution': 'Good Night'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266603/see_you_again_u_jfm6yv.mp4', 'solution': 'See You Again'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/see_you_tomorrow_u_wqcfwu.mp4', 'solution': 'See You Tomorrow'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266842/baby_u_p1lbqp.mp4', 'solution': 'baby'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/mother_u_tkkg10.mp4', 'solution': 'mother'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266839/father_u_jdbajr.mp4', 'solution': 'father'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4}', 'solution': 'brother',},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266838/sister_u_wpybjz.mp4', 'solution': 'sister'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/people_u_t4403p.mp4', 'solution': 'people'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266835/friend_u_nfctlk.mp4', 'solution': 'friend'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/man_u_llmdsh.mp4', 'solution': 'man'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/girl_child_u_qnjmxl.mp4', 'solution': 'girl child'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266844/female_person_u_cgv3es.mp4', 'solution': 'female person'},
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];

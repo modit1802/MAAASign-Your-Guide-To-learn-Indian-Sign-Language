@@ -1,4 +1,4 @@
-import 'package:SignEase/Challengers/challengeralphabets/DetailedProgressWeek1.dart';
+import 'package:SignEase/Challengers_All_Weeks/challenger_week1/DetailedProgressWeek1.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

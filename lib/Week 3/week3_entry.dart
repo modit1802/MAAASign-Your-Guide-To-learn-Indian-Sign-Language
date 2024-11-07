@@ -1,20 +1,24 @@
-import 'package:SignEase/Challengers_All_Weeks/challenger_week1/challenger1.dart';
+import 'package:SignEase/Challengers_All_Weeks/challenger_week3/challenger3.dart';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/Week%202/greetingstartscreen.dart';
-import 'package:SignEase/Week%202/relationstartscreen.dart';
+import 'package:SignEase/Week%203/pronounstart.dart';
+import 'package:SignEase/Week%203/verbstart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:SignEase/Week%203/nounstart.dart';
 
-class Week2NewScreen extends StatefulWidget {
-  const Week2NewScreen({super.key});
+
+
+class Week3Entry extends StatefulWidget {
+  const Week3Entry({super.key});
 
   @override
-  _Week2NewScreenState createState() => _Week2NewScreenState();
+  _Week3EntryState createState() => _Week3EntryState();
 }
 
-class _Week2NewScreenState extends State<Week2NewScreen> {
+class _Week3EntryState extends State<Week3Entry> {
   bool _showGif = true;
   int? _selectedCardIndex;
+  
   int _currentIndex = 0; // This keeps track of the selected tab index
 
   void _onItemTapped(int index) {
@@ -63,12 +67,11 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
       default:
         break;
     }
-  }
-  // Track the selected card index
+  } // Track the selected card index
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+        final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color.fromARGB(0, 0, 0, 0),
@@ -144,7 +147,8 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
 
       body: Stack(
         children: [
-          _buildBackground(),
+   
+
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -152,49 +156,59 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: screenHeight*0.14),
-                  
 
-                  // Greeting Circle widget - Card 1
+                  // Alphabet Circle widget - Card 1
                   _buildCard(
-                    onTap: () => _handleCardTap(0, const GreetingStartscreen()),
-                    imagePath: 'images/greetings.png',
+                    onTap: () => _handleCardTap(0, const VerbStartScreen()),
+                    imagePath: 'images/verbs_init.png',
                     color: const Color.fromARGB(255, 255, 255, 255),
-                    title: 'Greetings',
-                    description:
-                        'Learn Greetings with the help of interactive learning material, quizes and exciting true false games!',
+                    title: 'Verbs',
+                    description: 'Learn common verbs with the help of interactive learning material, quizes and exciting match games!',
                     index: 0,
                   ),
 
                   const SizedBox(height: 10),
 
-                  // Relation Circle widget - Card 2
+                  // Number Circle widget - Card 2
                   _buildCard(
-                    onTap: () => _handleCardTap(1, const RelationStartscreen()),
-                    imagePath: 'images/Relation.png',
+                    onTap: () => _handleCardTap(1, const NounStartScreen()),
+                    imagePath: 'images/nouns.png',
                     color: Colors.white,
-                    title: 'Relations',
-                    description:
-                        'Learn Relations with the help of interactive learning material, quizes and exciting true false games!',
+                    title: 'Nouns',
+                    description: 'Learn Nouns with the help of interactive learning material, quizes and exciting match games!',
                     index: 1,
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Number Circle widget - Card 2
+                  _buildCard(
+                    onTap: () => _handleCardTap(2, const PronounStartScreen()),
+                    imagePath: 'images/pronouns.png',
+                    color: Colors.white,
+                    title: 'Pronouns',
+                    description: 'Learn pronouns with the help of interactive learning material, quizes and exciting match games!',
+                    index: 2,
                   ),
 
                   const SizedBox(height: 10),
 
                   // Challenger Circle widget - Card 3
                   _buildCard(
-                    onTap: () => _handleCardTap(2, Challenger1(score: 0)),
+                    onTap: () => _handleCardTap(3, Challenger3(score: 0)),
                     imagePath: 'images/challenger.png',
                     color: Colors.white,
                     title: 'Challenger',
-                    description:
-                        'Take on challenges and test your skills if you are master with greetings and relations to Pass Week 2 Challenge!',
-                    index: 2,
+                    description: 'Take on challenges and test your skills if you are master with verbs, nouns and pronouns to pass Week 3 Challenge!',
+                    index: 3,
                   ),
                 ],
               ),
             ),
           ),
-          Positioned(
+          if (_showGif)
+            ..._buildGifOverlay(context),
+                 Positioned(
             top: screenHeight * 0.065,
             left: screenWidth * 0.05,
             child: GestureDetector(
@@ -236,8 +250,8 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
         context,
         MaterialPageRoute(builder: (context) => nextPage),
       ).then((_) => setState(() {
-            _selectedCardIndex = null; // Reset after navigation
-          }));
+        _selectedCardIndex = null; // Reset after navigation
+      }));
     });
   }
 
@@ -268,7 +282,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
       onTap: onTap,
       child: Card(
         elevation: 10,
-        color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77): color,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -324,7 +338,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
       Container(color: Colors.black.withOpacity(0.92)),
       Center(
         child: Image.asset(
-          'images/teacher_week.gif',
+          'images/week3_start_teacher.gif',
           height: 350,
           fit: BoxFit.contain,
         ),
@@ -348,69 +362,6 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
     ];
   }
 
-  // Bottom Buttons
-  Widget _buildBottomButtons() {
-    return Positioned(
-      bottom: 20,
-      left: 0,
-      right: 0,
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildBottomButton(
-                icon: Icons.home,
-                onTap: () => _navigateToPage(const InitialPage1(
-                      index: 0,
-                    ))),
-            const SizedBox(width: 20),
-            _buildBottomButton(
-                icon: Icons.fact_check,
-                onTap: () => _navigateToPage(const InitialPage1(
-                      index: 1,
-                    ))),
-            const SizedBox(width: 20),
-            _buildBottomButton(
-                icon: Icons.score,
-                onTap: () => _navigateToPage(const InitialPage1(index: 2))),
-            const SizedBox(width: 20),
-            _buildBottomButton(
-                icon: Icons.info,
-                onTap: () => _navigateToPage(const InitialPage1(index: 3))),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Bottom Button Builder for consistency
-  Widget _buildBottomButton(
-      {required IconData icon, required VoidCallback onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              spreadRadius: 2,
-              blurRadius: 4,
-            ),
-          ],
-        ),
-        child: Icon(
-          icon,
-          size: 30,
-          color: const Color.fromARGB(255, 165, 74, 17),
-        ),
-      ),
-    );
-  }
-
-  // Navigation Helper
   void _navigateToPage(Widget page) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => page));
   }
