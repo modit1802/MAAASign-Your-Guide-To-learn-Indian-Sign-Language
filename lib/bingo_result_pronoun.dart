@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/play_incorrect_noun.dart';
+import 'package:SignEase/play_incorrect_pronoun.dart';
 import 'package:SignEase/review_incorrect_videos.dart';
 import 'package:SignEase/pronoun_quiz.dart';
 import 'package:flutter/material.dart';
@@ -336,7 +336,7 @@ class _Bingo_pronoun_ResultScreenState
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PLay_Incorrect_Nouns(
+                                        PLay_Incorrect_Pronouns(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
                                         )));
