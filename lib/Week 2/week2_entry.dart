@@ -1,4 +1,4 @@
-import 'package:SignEase/Challengers_All_Weeks/challenger_week1/challenger1.dart';
+import 'package:SignEase/Challengers_All_Weeks/challenger_week2/challenger3.dart';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%202/greetingstartscreen.dart';
 import 'package:SignEase/Week%202/relationstartscreen.dart';
@@ -182,7 +182,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
 
                   // Challenger Circle widget - Card 3
                   _buildCard(
-                    onTap: () => _handleCardTap(2, Challenger1(score: 0)),
+                    onTap: () => _handleCardTap(2, Challenger3(score: 0)),
                     imagePath: 'images/challenger.png',
                     color: Colors.white,
                     title: 'Challenger',
