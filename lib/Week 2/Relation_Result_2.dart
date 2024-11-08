@@ -76,7 +76,7 @@ class _Quiz_Verb_ResultScreenState
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_relation': {
+              'Score_relation2': {
                 'score_relation_2': widget.score,
                 'incorrectQuestions_relation_2': widget.incorrectQuestions,
               }
@@ -87,7 +87,7 @@ class _Quiz_Verb_ResultScreenState
         // If user exists, add or update only the Score_verb field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_relation', {
+          mongo.modify.set('week.$weekKey.Score_relation2', {
             'score_relation_2': widget.score,
             'incorrectQuestions_relation_2': widget.incorrectQuestions,
           }),
