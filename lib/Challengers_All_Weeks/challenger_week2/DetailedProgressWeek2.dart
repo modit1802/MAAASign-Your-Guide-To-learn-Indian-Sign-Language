@@ -5,20 +5,19 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class DetailedProgressWeek3 extends StatefulWidget {
-  const DetailedProgressWeek3({super.key});
+class DetailedProgressWeek2 extends StatefulWidget {
+  const DetailedProgressWeek2({super.key});
 
   @override
-  State<DetailedProgressWeek3> createState() => _DetailedProgressWeek3State();
+  State<DetailedProgressWeek2> createState() => _DetailedProgressWeek2State();
 }
 
-class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
+class _DetailedProgressWeek2State extends State<DetailedProgressWeek2> {
   late mongo.Db db;
   late mongo.DbCollection userCollection;
   String? score_challenger;
-  String? score_verb;
-  String? score_noun;
-  String? score_pronoun;
+  String? score_greetings;
+  String? score_relations;
   List<Map<String, dynamic>>? incorrectQuestions;
   bool isLoading = true; // Initial state is loading
 
@@ -46,20 +45,17 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
     var result = await userCollection.findOne(mongo.where.eq('userId', userId));
     setState(() {
       if (result != null) {
-        score_challenger = result['week']?['week3']?['Score_Challenger_Week3']
+        score_challenger = result['week']?['week2']?['Score_Challenger_Week2']
                 ?['score_challenger']
             ?.toString();
-        score_verb = result['week']?['week3']?['Score_verb']
-                ?['score_verb']
+        score_greetings = result['week']?['week2']?['Score_greeting']
+                ?['score_greeting']
             ?.toString();
-        score_noun = result['week']?['week3']?['Score_noun']
-                ?['score_noun']
-            ?.toString();
-        score_pronoun = result['week']?['week3']?['Score_pronoun']
-        ?['score_pronoun']
+        score_relations = result['week']?['week2']?['Score_relation']
+                ?['score_relation']
             ?.toString();
 
-        var data = result['week']?['Week3']?['Score_Challenger_Week3']
+        var data = result['week']?['Week2']?['Score_Challenger_Week2']
             ?['Incorrect_challenges'];
         
         if (data != null && data is List) {
@@ -76,13 +72,10 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
       }
 
         // Set scores to 0 if they are null
-        score_verb ??= '0';
-        score_noun ??= '0';
-        score_pronoun ??= '0';
+        score_greetings ??= '0';
+        score_relations ??= '0';
         print(incorrectQuestions);
-        print(score_verb);
-        print(score_noun);
-        print(score_pronoun);
+        
       } else {
         score_challenger = 'Please attempt the challenger';
         print('No data found');
@@ -102,7 +95,7 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
         child: Column(
           children: [
             const Text(
-              "Quiz Scores of Week 3",
+              "Quiz Scores of Week 2",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -114,7 +107,7 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                   ColumnSeries<ScoreData, String>(
                     dataSource: [
                       ScoreData(
-                          'Verbs', double.tryParse(score_verb!) ?? 0),
+                          'Greetings', double.tryParse(score_greetings!) ?? 0),
                     ],
                     xValueMapper: (ScoreData data, _) => data.label,
                     yValueMapper: (ScoreData data, _) => data.value,
@@ -123,23 +116,14 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                   ),
                   ColumnSeries<ScoreData, String>(
                     dataSource: [
-                      ScoreData('Nouns', double.tryParse(score_noun!) ?? 0),
+                      ScoreData('Relations', double.tryParse(score_relations!) ?? 0),
                     ],
                     xValueMapper: (ScoreData data, _) => data.label,
                     yValueMapper: (ScoreData data, _) => data.value,
                     color: Colors.blue,
                     dataLabelSettings: const DataLabelSettings(isVisible: true),
                   ),
-                  ColumnSeries<ScoreData, String>(
-                    dataSource: [
-                      ScoreData(
-                          'Pronouns', double.tryParse(score_pronoun!) ?? 0),
-                    ],
-                    xValueMapper: (ScoreData data, _) => data.label,
-                    yValueMapper: (ScoreData data, _) => data.value,
-                    color: Colors.green,
-                    dataLabelSettings: const DataLabelSettings(isVisible: true),
-                  ),
+                  
                 ],
               ),
             ),
@@ -181,9 +165,9 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                       onTap: () {},
                       iconData: Icons.calendar_month,
                       color: Colors.white,
-                      title: "Week 3 Progress Report",
+                      title: "Week 2 Progress Report",
                       description:
-                          "Scroll Down to check your Detailed progress report of Week 3. It includes Challenger Result, Quiz results",
+                          "Scroll Down to check your Detailed progress report of Week 2. It includes Challenger Result, Quiz results",
                       index: 1,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       iconColor: const Color.fromARGB(255, 189, 74, 2),
@@ -215,8 +199,8 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                       color: percentage > 0.6 ? Colors.green : Colors.red,
                       title: percentage > 0.6 ? "Success" : "Practice Needed",
                       description: percentage > 0.6
-                          ? "Congratulations you have successfully completed Week 3. Scroll down to view detailed progress report"
-                          : "Your score is not up to the mark. We recommend you to practice Week 3 again. Scroll down to view detailed progress report",
+                          ? "Congratulations you have successfully completed Week 2. Scroll down to view detailed progress report"
+                          : "Your score is not up to the mark. We recommend you to practice Week 2 again. Scroll down to view detailed progress report",
                       index: 1,
                       titleColor: Colors.white,
                       iconColor: percentage > 0.6 ? Colors.green : Colors.red,
@@ -244,17 +228,17 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                       onTap: () {},
                       iconData: Icons.quiz,
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      title: (score_verb == null && score_noun == null && score_pronoun==null)
+                      title: (score_greetings == null && score_relations == null)
                           ? "Quiz Not Attempted"
                           : "Quiz Scores",
-                      description: (score_verb == null && score_noun == null && score_pronoun==null)
-                          ? "You have not attempted the quiz for verbs, nouns and pronouns. Please first attempt the quiz then come to check the scores"
-                          : "🔔 Below are your quiz scores presented in verbs, nouns and pronouns! Red bar represents the Verbs score, Blue bar represents the Nouns score, and Green bar represents the Pronouns score",
+                      description: (score_greetings == null && score_relations == null)
+                          ? "You have not attempted the quiz for greetings and relations. Please first attempt the quiz then come to check the scores"
+                          : "🔔 Below are your quiz scores presented in greetings and relations! Red bar represents the Greetings score, Blue bar represents the Relations score",
                       index: 1,
                     ),
                   ),
                   // Show the score card only if both score_verb and score_noun are available
-                  if (score_verb != null && score_noun != null)
+                  if (score_greetings != null && score_relations != null)
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: _buildScoreCard(),

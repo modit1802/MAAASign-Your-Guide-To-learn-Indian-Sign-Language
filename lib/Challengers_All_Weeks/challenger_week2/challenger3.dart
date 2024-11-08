@@ -1,4 +1,4 @@
-import 'package:SignEase/Challengers_All_Weeks/challenger_week2/Result_Challenger_Week3.dart';
+import 'package:SignEase/Challengers_All_Weeks/challenger_week2/Result_Challenger_Week2.dart';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week2/tutorialscreen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -526,7 +526,7 @@ class _ThirdGameState extends State<ThirdGame> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => Result_Challenger_Week3(
+        builder: (context) => Result_Challenger_Week2(
           score: score, 
           incorrectquestions: incorrectQuestions
         ),

@@ -176,8 +176,8 @@ class _HomePageState extends State<HomePage> {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           colors: [
-            Color.fromARGB(255, 219, 69, 249),
-            Color.fromARGB(255, 135, 205, 238),
+            Color.fromARGB(255, 165, 74, 17),
+            Color.fromARGB(201, 250, 180, 1),
           ],
         ),
       ),
