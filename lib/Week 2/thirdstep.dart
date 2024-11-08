@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:SignEase/Week%203/Verbs_Result.dart';
+import 'package:SignEase/Week%202/Greeting_Result_2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
