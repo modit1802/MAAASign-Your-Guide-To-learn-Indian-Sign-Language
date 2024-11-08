@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:SignEase/Week%203/Verbs_Result.dart';
+import 'package:SignEase/Week%202/Greetings_Result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
@@ -21,7 +21,7 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
     {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/good_afternoon_u_wwhvia.mp4', 'solution': 'Good Afternoon'},
     {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/good_night_u_sgogpu.mp4', 'solution': 'Good Night'},
     {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266603/see_you_again_u_jfm6yv.mp4', 'solution': 'See You Again'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v173053https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/see_you_tomorrow_u_wqcfwu.mp4', 'solution': 'See You Tomorrow'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/see_you_tomorrow_u_wqcfwu.mp4', 'solution': 'See You Tomorrow'},
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];
