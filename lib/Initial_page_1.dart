@@ -32,6 +32,12 @@ class _InitialPage1State extends State<InitialPage1> {
     _currentIndex = widget.index;
     _pageController = PageController(initialPage: _currentIndex);
     _fetchUserPhoto();
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.black, // Set desired color here
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+    );
   }
 
   Future<void> _fetchUserPhoto() async {
@@ -166,7 +172,8 @@ class _InitialPage1State extends State<InitialPage1> {
       onWillPop: _onWillPop, // Add this line to handle back button press
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('SignEase'),
+          title: const Text('MAAA Your ISL Guide'),
+          automaticallyImplyLeading: false,
           backgroundColor: Color.fromARGB(255, 250, 233, 215),
           actions: <Widget>[
             if (_photoUrl != null)
@@ -182,48 +189,6 @@ class _InitialPage1State extends State<InitialPage1> {
                 ),
               ),
           ],
-        ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              Container(
-                height: 300,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 165, 74, 17),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (_photoUrl != null)
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(_photoUrl!),
-                          radius: 60,
-                          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                        ),
-                      ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'Welcome Back!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text('Logout'),
-                onTap: () {
-                  _logout();
-                },
-              ),
-            ],
-          ),
         ),
         body: Stack(
           children: [

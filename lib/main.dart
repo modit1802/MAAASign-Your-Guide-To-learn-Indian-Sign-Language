@@ -12,7 +12,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
+  // Set system bottom navigation bar color and orientation
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: const Color.fromARGB(255, 224, 79, 79), // Change this to the color you want
+      systemNavigationBarIconBrightness: Brightness.light, // Set to light if the color is dark
+    ),
+  );
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
@@ -20,11 +27,22 @@ void main() async {
   });
 }
 
+
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.black, // Choose your desired color
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Firebase Auth',
