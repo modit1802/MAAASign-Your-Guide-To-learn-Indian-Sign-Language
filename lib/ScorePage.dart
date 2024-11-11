@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week3/DetailedProgressWeek3.dart';
+import 'package:SignEase/Challengers_All_Weeks/challenger_week2/DetailedProgressWeek2.dart';
+
 
 class ScorePage extends StatefulWidget {
   const ScorePage({super.key});
@@ -20,6 +22,7 @@ class _ScorePageState extends State<ScorePage> {
   late mongo.DbCollection userCollection;
   String? score_challenger;
   String? score_challenger_week3;
+  String? score_challenger_week2;
 
   @override
   void initState() {
@@ -90,9 +93,14 @@ class _ScorePageState extends State<ScorePage> {
         ?['score_challenger']
             ?.toString();
         print(score_challenger_week3);
+        score_challenger_week2=result['week']?['week2']?['Score_Challenger_Week2']
+        ?['score_challenger']
+            ?.toString();
+        print(score_challenger_week2);
       } else {
         score_challenger = null;
         score_challenger_week3=null;
+        score_challenger_week2=null;
         print('No data found');
       }
     });
@@ -324,31 +332,40 @@ Widget build(BuildContext context) {
                 ),
               ),
 
-            // Week 1 Score Card
-            if (score_challenger != null)
-              _buildCard(
-                onTap: () => _handleCardTap(2, const DetailedProgressWeek1()),
-                color: Colors.white,
-                title: 'Week 1',
-                description: 'Click me! To see the detailed score of week 1',
-                index: 2,
-                score: int.parse(score_challenger!),
-              ),
-
-            // Week 3 Score Card
-            if (score_challenger_week3 != null)
-              _buildCard(
-                onTap: () => _handleCardTap(1, const DetailedProgressWeek3()),
-                color: Colors.white,
-                title: 'Week 3',
-                description: 'Click me! To see the detailed score of week 3',
-                index: 1,
-                score: int.parse(score_challenger_week3!),
-              ),
-          ],
+              if (score_challenger != null)
+                _buildCard(
+                  onTap: () => _handleCardTap(2, const DetailedProgressWeek1()),
+                  color: Colors.white,
+                  title: 'Week 1',
+                  description:
+                      'Click me ! To see the detailed score of week 1',
+                  index: 2,
+                  score: int.parse(score_challenger!),
+                ),
+              if (score_challenger_week2 != null)
+                _buildCard(
+                  onTap: () => _handleCardTap(3, const DetailedProgressWeek2()),
+                  color: Colors.white,
+                  title: 'Week 2',
+                  description:
+                  'Click me ! To see the detailed score of week 2',
+                  index: 3,
+                  score: int.parse(score_challenger_week2!),
+                ),
+              if (score_challenger_week3 != null)
+                _buildCard(
+                  onTap: () => _handleCardTap(1, const DetailedProgressWeek3()),
+                  color: Colors.white,
+                  title: 'Week 3',
+                  description:
+                  'Click me ! To see the detailed score of week 3',
+                  index: 1,
+                  score: int.parse(score_challenger_week3!),
+                ),
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
