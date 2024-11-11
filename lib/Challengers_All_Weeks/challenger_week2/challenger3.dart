@@ -500,7 +500,8 @@ class _ThirdGameState extends State<ThirdGame> {
             'solution': challengeData[currentChallengeIndex]['solution'],
             'available_letters': challengeData[currentChallengeIndex]
                 ['availableLetters'],
-            'urls': challengeData[currentChallengeIndex]['urls']
+            'urls': challengeData[currentChallengeIndex]['urls'],
+            'solution_vids':challengeData[currentChallengeIndex]['solution_vids'],
           });
         } else {
           isCorrectSolution = false;

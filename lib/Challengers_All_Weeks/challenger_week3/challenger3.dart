@@ -178,7 +178,7 @@ class _ThirdGameState extends State<ThirdGame> {
         "school":
             "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
         "read_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730977095/Read_q0cq1f.png",
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1731349370/Read_image_dayuwe.png",
         "write_i":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1730977048/Write_utov42.png",
         "book_i":
@@ -500,7 +500,8 @@ class _ThirdGameState extends State<ThirdGame> {
             'solution': challengeData[currentChallengeIndex]['solution'],
             'available_letters': challengeData[currentChallengeIndex]
                 ['availableLetters'],
-            'urls': challengeData[currentChallengeIndex]['urls']
+            'urls': challengeData[currentChallengeIndex]['urls'],
+            'solution_vids':challengeData[currentChallengeIndex]['solution_vids'],
           });
         } else {
           isCorrectSolution = false;

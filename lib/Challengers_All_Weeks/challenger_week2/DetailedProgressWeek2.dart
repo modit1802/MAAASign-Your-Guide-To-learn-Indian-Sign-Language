@@ -55,7 +55,7 @@ class _DetailedProgressWeek2State extends State<DetailedProgressWeek2> {
                 ?['score_relation']
             ?.toString();
 
-        var data = result['week']?['Week2']?['Score_Challenger_Week2']
+        var data = result['week']?['week2']?['Score_Challenger_Week2']
             ?['Incorrect_challenges'];
         
         if (data != null && data is List) {
@@ -65,6 +65,7 @@ class _DetailedProgressWeek2State extends State<DetailedProgressWeek2> {
             'solution': List<String>.from(item['solution'] ?? []),
             'availableLetters': List<String>.from(item['available_letters'] ?? []),
             'urls': Map<String, String>.from(item['urls'] ?? {}),
+            'solution_vids': List<String>.from(item['solution_vids'] ?? []),
           };
         }).toList();
       } else {
