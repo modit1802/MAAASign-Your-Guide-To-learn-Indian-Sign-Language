@@ -22,9 +22,10 @@ class _Review_Incorrect_ChallengersState
   @override
   void initState() {
     super.initState();
-    print(widget.incorrectChallenger);
     challengeData = widget.incorrectChallenger ?? [];
-    _initializeChallenge();
+    if (challengeData.isNotEmpty) {
+      _initializeChallenge();
+    }
   }
 
   void _initializeChallenge() {
@@ -42,7 +43,7 @@ class _Review_Incorrect_ChallengersState
         _initializeChallenge();
       });
     } else {
-      // All challenges completed; handle navigation or completion here
+      Navigator.pop(context); // All challenges completed; go back
     }
   }
 
@@ -123,7 +124,6 @@ class _Review_Incorrect_ChallengersState
 
   @override
   Widget build(BuildContext context) {
-    // Get screen dimensions
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -139,107 +139,119 @@ class _Review_Incorrect_ChallengersState
           },
         ),
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: challengeData.isEmpty
+          ? Center(
+              child: Text(
+                "Wohoo! There are no incorrect challengers !!",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          : Stack(
               children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        _buildCard(
-                          onTap: () {},
-                          imagePath: '${currentChallengeIndex + 1}',
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          title: 'Review Your Mistakes In Challenger Round',
-                          description:
-                              "Tap Next to see your mistakes one by one",
-                          index: 2,
-                        ),
-                        Material(
-                          elevation: screenHeight * 0.01,
-                          borderRadius:
-                              BorderRadius.circular(screenWidth * 0.05),
-                          child: Container(
-                            width: screenWidth * 0.7,
-                            height: screenHeight * 0.3,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(screenWidth * 0.05),
-                              color: Colors.white,
-                            ),
-                            child: Image.network(
-                              challengeData[currentChallengeIndex]['urls'][
-                                  challengeData[currentChallengeIndex]
-                                      ['question']],
-                              width: screenWidth * 0.4,
-                              height: screenHeight * 0.2,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: screenHeight * 0.03),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(solution.length, (index) {
-                    return Container(
-                      width: screenWidth * 0.2,
-                      height: screenHeight * 0.1,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(screenWidth * 0.03),
-                      ),
-                      alignment: Alignment.center,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(screenWidth * 0.03),
-                        child: solution[index] != null
-                            ? Image.network(
-                                solution[index]!,
-                                width: double.infinity,
-                                height: double.infinity,
-                                fit: BoxFit.cover,
-                              )
-                            : const SizedBox(), // Empty if no solution
-                      ),
-                    );
-                  }),
-                ),
-                SizedBox(height: screenHeight * 0.06),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color.fromARGB(255, 252, 133, 37),
-                  ),
-                  onPressed: () {
-                    if (currentChallengeIndex < challengeData.length - 1) {
-                      _moveToNextChallenge();
-                    } else {
-                      Navigator.pop(
-                          context); // Pops the current screen when "Finish" is clicked
-                    }
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(currentChallengeIndex < challengeData.length - 1
-                          ? "Next"
-                          : "Finish"),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.arrow_forward),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              _buildCard(
+                                onTap: () {},
+                                imagePath: '${currentChallengeIndex + 1}',
+                                color:
+                                    const Color.fromARGB(255, 255, 255, 255),
+                                title: 'Review Your Mistakes In Challenger Round',
+                                description:
+                                    "Tap Next to see your mistakes one by one",
+                                index: 2,
+                              ),
+                              Material(
+                                elevation: screenHeight * 0.01,
+                                borderRadius:
+                                    BorderRadius.circular(screenWidth * 0.05),
+                                child: Container(
+                                  width: screenWidth * 0.7,
+                                  height: screenHeight * 0.3,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(screenWidth * 0.05),
+                                    color: Colors.white,
+                                  ),
+                                  child: Image.network(
+                                    challengeData[currentChallengeIndex]['urls'][
+                                        challengeData[currentChallengeIndex]
+                                            ['question']],
+                                    width: screenWidth * 0.4,
+                                    height: screenHeight * 0.2,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: screenHeight * 0.03),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: List.generate(solution.length, (index) {
+                          return Container(
+                            width: screenWidth * 0.2,
+                            height: screenHeight * 0.1,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(screenWidth * 0.03),
+                            ),
+                            alignment: Alignment.center,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(screenWidth * 0.03),
+                              child: solution[index] != null
+                                  ? Image.network(
+                                      solution[index]!,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : const SizedBox(),
+                            ),
+                          );
+                        }),
+                      ),
+                      SizedBox(height: screenHeight * 0.06),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor: const Color.fromARGB(255, 252, 133, 37),
+                        ),
+                        onPressed: () {
+                          if (currentChallengeIndex < challengeData.length - 1) {
+                            _moveToNextChallenge();
+                          } else {
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(currentChallengeIndex < challengeData.length - 1
+                                ? "Next"
+                                : "Finish"),
+                            const SizedBox(width: 8),
+                            const Icon(Icons.arrow_forward),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
