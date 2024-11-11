@@ -107,107 +107,109 @@ class _Sabse_Jyada_Main_pageState extends State<Sabse_Jyada_Main_page> {
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       body: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.all(width * 0.04),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    'images/femaleteacherisl.png',
-                    width: width * 0.8,
-                    height: width * 0.8,
-                    fit: BoxFit.cover,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Hello!',
-                    style: TextStyle(
-                      fontSize: width * 0.06,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(width * 0.04),
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      'images/femaleteacherisl.png',
+                      width: width * 0.8,
+                      height: width * 0.8,
+                      fit: BoxFit.cover,
                     ),
-                  ),
-                  const SizedBox(height: 3),
-                  Padding(
-                    padding: EdgeInsets.all(width * 0.04),
-                    child: Text(
-                      'Welcome to Interactive Indian Sign Language Learning app. Explore the new way of learning sign language with interactive games and quizzes.',
+                    const SizedBox(height: 16),
+                    Text(
+                      'Hello!',
                       style: TextStyle(
-                        fontSize: width * 0.04,
+                        fontSize: width * 0.06,
+                        fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
-                      textAlign: TextAlign.justify,
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Column(
-                    children: [
-                      SizedBox(
-                        width: width * 0.7,
-                        height: height * 0.06,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 252, 133, 37),
-                            foregroundColor: Colors.white,
-                            textStyle: TextStyle(fontSize: width * 0.045),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => LoginPage()),
-                            );
-                          },
-                          child: const Text('Login'),
+                    const SizedBox(height: 3),
+                    Padding(
+                      padding: EdgeInsets.all(width * 0.04),
+                      child: Text(
+                        'Welcome to Interactive Indian Sign Language Learning app. Explore the new way of learning sign language with interactive games and quizzes.',
+                        style: TextStyle(
+                          fontSize: width * 0.04,
+                          color: Colors.black,
                         ),
+                        textAlign: TextAlign.justify,
                       ),
-                      const SizedBox(height: 10),
-                      SizedBox(
-                        width: width * 0.7,
-                        height: height * 0.06,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignupPage()),
-                            );
-                          },
-                          child: const Text('Signup'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 252, 133, 37),
-                            foregroundColor: Colors.white,
-                            textStyle: TextStyle(fontSize: width * 0.045),
+                    ),
+                    const SizedBox(height: 10),
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: width * 0.7,
+                          height: height * 0.06,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 252, 133, 37),
+                              foregroundColor: Colors.white,
+                              textStyle: TextStyle(fontSize: width * 0.045),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => LoginPage()),
+                              );
+                            },
+                            child: const Text('Login'),
                           ),
                         ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          width: width * 0.7,
+                          height: height * 0.06,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => SignupPage()),
+                              );
+                            },
+                            child: const Text('Signup'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 252, 133, 37),
+                              foregroundColor: Colors.white,
+                              textStyle: TextStyle(fontSize: width * 0.045),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'or continue with',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'or continue with',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: EdgeInsets.all(width * 0.02),
-                    child: IconButton(
-                      onPressed: _googleLogin,
-                      icon: Image.asset(
-                        'images/google_icon.png',
-                        width: 44,
-                        height: 44,
+                    const SizedBox(height: 8),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      iconSize: 24,
+                      padding: EdgeInsets.all(width * 0.02),
+                      child: IconButton(
+                        onPressed: _googleLogin,
+                        icon: Image.asset(
+                          'images/google_icon.png',
+                          width: 44,
+                          height: 44,
+                        ),
+                        iconSize: 24,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

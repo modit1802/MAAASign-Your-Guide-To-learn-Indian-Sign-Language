@@ -100,96 +100,92 @@ class _ScorePageState extends State<ScorePage> {
   }
 
   Widget _buildCard({
-    required VoidCallback onTap,
-    required Color color,
-    required String title,
-    required String description,
-    required int index,
-    required int score, // Add score parameter
-  }) {
-    final bool isSelected = _selectedCardIndex == index;
+  required VoidCallback onTap,
+  required Color color,
+  required String title,
+  required String description,
+  required int index,
+  required int score,
+}) {
+  final bool isSelected = _selectedCardIndex == index;
+  double percent = score / 1000.0;
+    double screenWidth = MediaQuery.of(context).size.width;
 
-    // Calculate percentage based on score as a value out of 1000
-    double percent = score / 1000.0;
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        elevation: 10,
-        color: isSelected ? Color.fromARGB(255, 252, 133, 37) : color,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: SizedBox(
-            height: 100,
-            child: Row(
-              children: [
-                // Container with CircularPercentIndicator
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 10.0,
-                        spreadRadius: 2.0,
-                        offset: Offset(3, 3),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: CircularPercentIndicator(
-                      radius: 40.0,
-                      lineWidth: 8.0,
-                      percent: percent.clamp(
-                          0.0, 1.0), // Ensures percent is within 0-1 range
-                      center: Text(
-                        "${(percent * 100).toStringAsFixed(1)}%", // Display as percentage
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold),
-                      ),
-                      progressColor: Color.fromARGB(255, 252, 133, 37),
-                      backgroundColor: Colors.grey.shade300,
-                      circularStrokeCap: CircularStrokeCap.round,
+  return GestureDetector(
+    onTap: onTap,
+    child: Card(
+      elevation: 10,
+      color: isSelected ? Color.fromARGB(255, 223, 123, 42) : color,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SizedBox(
+          height: 100, // Fixed height
+          child: Row(
+            children: [
+              Container(
+                width: 100, // Fixed width for the circle
+                height: 100, // Fixed height for the circle
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 10.0,
+                      spreadRadius: 2.0,
+                      offset: Offset(3, 3),
                     ),
+                  ],
+                ),
+                child: Center(
+                  child: CircularPercentIndicator(
+                    radius: 40.0,
+                    lineWidth: 8.0,
+                    percent: percent.clamp(0.0, 1.0),
+                    center: Text(
+                      "${(percent * 100).toStringAsFixed(1)}%",
+                      style: TextStyle(
+                          fontSize: screenWidth * 0.04, fontWeight: FontWeight.bold),
+                    ),
+                    progressColor: Color.fromARGB(255, 252, 133, 37),
+                    backgroundColor: Colors.grey.shade300,
+                    circularStrokeCap: CircularStrokeCap.round,
                   ),
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: isSelected ? Colors.white : Colors.black,
-                        ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.bold,
+                        color: isSelected ? Colors.white : Colors.black,
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        description,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: isSelected ? Colors.white : Colors.black,
-                        ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.04,
+                        color: isSelected ? Colors.white : Colors.black,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
-
+    ),
+  );
+}
   void _handleCardTap(int index, Widget nextPage) {
     setState(() {
       _selectedCardIndex = index;
@@ -204,49 +200,58 @@ class _ScorePageState extends State<ScorePage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 250, 233, 215),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(fontSize: 24, color: Colors.black),
-                  children: <TextSpan>[
-                    TextSpan(text: "Hi "),
-                    TextSpan(
-                      text: "$username",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(text: " !"),
-                  ],
+@override
+Widget build(BuildContext context) {
+  // Get the screen size using MediaQuery
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+
+  return Scaffold(
+    backgroundColor: Color.fromARGB(255, 250, 233, 215),
+    body: SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.04,  // 4% padding from left and right
+          vertical: screenHeight * 0.02,   // 2% padding from top and bottom
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Greeting Text
+            RichText(
+              text: TextSpan(
+                style: TextStyle(
+                  fontSize: screenHeight * 0.03,  // Responsive font size
+                  color: Colors.black,
                 ),
-              ),
-              SizedBox(height: 20),
-              Center(
-                child: Container(
-                  height: 180,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 252, 133, 37),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        blurRadius: 10,
-                        offset: Offset(0, 5),
-                      ),
-                    ],
+                children: <TextSpan>[
+                  TextSpan(text: "Hi "),
+                  TextSpan(
+                    text: "$username",
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                  TextSpan(text: " !"),
+                ],
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.02), // Responsive spacing
+
+            // Score Zone Container
+            Center(
+              child: Container(
+                height: screenHeight * 0.2, // Adjusted height based on screen size
+                width: screenWidth * 0.9,  // 90% of screen width
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 238, 126, 34),
+                  borderRadius: BorderRadius.circular(screenWidth * 0.01), // Responsive borderRadius
+                  
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(screenWidth * 0.04), // Responsive padding
+                  child: IntrinsicHeight(
                     child: Row(
                       children: [
+                        // Score Zone Text
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,34 +260,33 @@ class _ScorePageState extends State<ScorePage> {
                               Text(
                                 'Score Zone',
                                 style: TextStyle(
-                                  fontSize: 22,
+                                  fontSize: screenHeight * 0.025, // Responsive font size
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(height: 8),
+                              SizedBox(height: screenHeight * 0.01), // Responsive spacing
                               Text(
-                                'Click on the weeks to check your scores',
+                                'Tap on the week number to view the progress report',
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: screenHeight * 0.02, // Responsive font size
                                   color: Colors.white,
                                 ),
                               ),
                             ],
                           ),
                         ),
+                        // Score Image Container
                         Container(
-                          height: 120, // Keep the height for the card fixed
-                          width: 120, // Keep the width for the card fixed
+                          height: screenHeight * 0.15, // Fixed height for image container
+                          width: screenHeight * 0.15, // Square container based on screen height
                           decoration: BoxDecoration(
-                            color:
-                                Colors.white, // White color for the inner card
-                            borderRadius: BorderRadius.circular(
-                                15), // Circular boundaries for the white card
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(screenWidth * 0.05), // Responsive borderRadius
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.2),
-                                blurRadius: 5,
+                                blurRadius: screenWidth * 0.05, // Responsive blur radius for shadow
                                 offset: Offset(0, 2),
                               ),
                             ],
@@ -291,8 +295,8 @@ class _ScorePageState extends State<ScorePage> {
                             alignment: Alignment.center,
                             child: Image.asset(
                               'images/scoreisl.png',
-                              width: 300, // Increase the image size
-                              height: 300, // Increase the image size
+                              width: screenWidth * 0.25, // Scaled image size
+                              height: screenWidth * 0.25, // Scaled image size
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -302,37 +306,49 @@ class _ScorePageState extends State<ScorePage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              if (score_challenger != null || score_challenger_week3!=null)
-                              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Score Board...",style: TextStyle(fontSize: 18 ,color: const Color.fromARGB(255, 113, 113, 113),fontWeight: FontWeight.bold),),
+            ),
+
+            SizedBox(height: screenHeight * 0.02), // Responsive spacing
+
+            // Score Board Section
+            if (score_challenger != null || score_challenger_week3 != null)
+              Padding(
+                padding: EdgeInsets.all(screenWidth * 0.04),
+                child: Text(
+                  "Score Board...",
+                  style: TextStyle(
+                    fontSize: screenHeight * 0.02, // Responsive font size
+                    color: Color.fromARGB(255, 113, 113, 113),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
 
-              if (score_challenger != null)
-                _buildCard(
-                  onTap: () => _handleCardTap(2, const DetailedProgressWeek1()),
-                  color: Colors.white,
-                  title: 'Week 1',
-                  description:
-                      'Click me ! To see the detailed score of week 1',
-                  index: 2,
-                  score: int.parse(score_challenger!),
-                ),
-              if (score_challenger_week3 != null)
-                _buildCard(
-                  onTap: () => _handleCardTap(1, const DetailedProgressWeek3()),
-                  color: Colors.white,
-                  title: 'Week 3',
-                  description:
-                  'Click me ! To see the detailed score of week 3',
-                  index: 1,
-                  score: int.parse(score_challenger_week3!),
-                ),
-            ],
-          ),
+            // Week 1 Score Card
+            if (score_challenger != null)
+              _buildCard(
+                onTap: () => _handleCardTap(2, const DetailedProgressWeek1()),
+                color: Colors.white,
+                title: 'Week 1',
+                description: 'Click me! To see the detailed score of week 1',
+                index: 2,
+                score: int.parse(score_challenger!),
+              ),
+
+            // Week 3 Score Card
+            if (score_challenger_week3 != null)
+              _buildCard(
+                onTap: () => _handleCardTap(1, const DetailedProgressWeek3()),
+                color: Colors.white,
+                title: 'Week 3',
+                description: 'Click me! To see the detailed score of week 3',
+                index: 1,
+                score: int.parse(score_challenger_week3!),
+              ),
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

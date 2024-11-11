@@ -1,29 +1,83 @@
-import 'package:SignEase/Week%201/learnalphabet.dart';
-import 'package:SignEase/Week%201/learnnumbers.dart';
-import 'package:SignEase/Week%202/learngreeting.dart';
-import 'package:SignEase/Week%202/learnrelations.dart';
-import 'package:SignEase/Week%203/learnnoun.dart';
-import 'package:SignEase/Week%203/learnpronoun.dart';
-import 'package:SignEase/Week%203/learnverbs.dart';
+
+import 'package:SignEase/Week%201/week1_entry.dart';
+import 'package:SignEase/Week%202/week2_entry.dart';
+import 'package:SignEase/Week%203/week3_entry.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
-class LearningZone extends StatefulWidget {
-  const LearningZone({super.key});
+class ChallengePage extends StatefulWidget {
+  const ChallengePage({super.key});
 
   @override
-  State<LearningZone> createState() => _LearningZoneState();
+  State<ChallengePage> createState() => _ChallengePageState();
 }
 
-class _LearningZoneState extends State<LearningZone> {
+class _ChallengePageState extends State<ChallengePage> {
   String username = 'Loading...';
+  String? score_challenger_week1 = '0';
+  String? score_challenger_week2 = '0';
+   String? score_challenger_week3 = '0';
+   String? score_challenger_week4 = '0';
+     late mongo.Db db;
+  late mongo.DbCollection userCollection;
 
   @override
   void initState() {
     super.initState();
+    connectToMongoDB();
     _getUsername();
   }
+
+  Future<void> connectToMongoDB() async {
+    db = mongo.Db(
+        'mongodb://moditgrover2003iii:modit1346@cluster0-shard-00-00.eocm8.mongodb.net:27017,cluster0-shard-00-01.eocm8.mongodb.net:27017,cluster0-shard-00-02.eocm8.mongodb.net:27017/mydatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
+    try {
+      await db.open();
+      userCollection = db.collection('users');
+      await fetchResultsFromMongoDB();
+      print("Connected to MongoDB and result fetched!");
+    } catch (e) {
+      print("Error connecting to MongoDB: $e");
+    }
+  }
+
+  Future<String?> getUserId() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    return user?.uid;
+  }
+
+  Future<void> fetchResultsFromMongoDB() async {
+    String? userId = await getUserId();
+    var result = await userCollection.findOne(mongo.where.eq('userId', userId));
+    setState(() {
+      if (result != null) {
+        score_challenger_week1 = result['week']?['week1']?['Score_Challenger_week1']
+                ?['score_challenger']
+            ?.toString()??'0';
+        print(score_challenger_week1);
+        score_challenger_week2 = result['week']?['week2']?['Score_Challenger_week2']
+                ?['score_challenger']
+            ?.toString()??'0';
+        score_challenger_week3=result['week']?['week3']?['Score_Challenger_Week3']
+        ?['score_challenger']
+            ?.toString()??'0';
+        print(score_challenger_week3);
+        score_challenger_week4 = result['week']?['week4']?['Score_Challenger_week4']
+                ?['score_challenger']
+            ?.toString()??'0';
+      } else {
+        score_challenger_week1 = '0';
+        score_challenger_week2='0';
+        score_challenger_week3='0';
+        score_challenger_week4='0';
+        print('No data found');
+      }
+    });
+    await db.close();
+  }
+
 
   Future<void> _getUsername() async {
     User? user = FirebaseAuth.instance.currentUser;
@@ -61,21 +115,24 @@ class _LearningZoneState extends State<LearningZone> {
   required String title,
   required String description,
   required VoidCallback onTap,
+  required int scoreChallengerWeek1, // Add this parameter for score
 }) {
   return LayoutBuilder(
     builder: (context, constraints) {
       double screenWidth = MediaQuery.of(context).size.width;
 
+      // Check if the score is greater than 650
+      bool isScoreAbove650 = scoreChallengerWeek1 > 650;
+
       return GestureDetector(
         onTap: onTap,
         child: IntrinsicHeight(
-          // Wrap with IntrinsicHeight to adjust height based on content
           child: Container(
             width: screenWidth * 0.8, // Adjust width based on screen size
             padding: EdgeInsets.all(screenWidth * 0.03), // Responsive padding
             margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02), // Responsive margin
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: isScoreAbove650 ? const Color.fromARGB(255, 255, 151, 87) : Colors.white, // Background color change based on score
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
@@ -86,46 +143,37 @@ class _LearningZoneState extends State<LearningZone> {
                 ),
               ],
             ),
-            child: IntrinsicHeight(
-              child: Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: screenWidth * 0.6, // Responsive height for the image
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          image: image,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: screenWidth * 0.6, // Responsive height for the image
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: image,
+                      fit: BoxFit.cover,
                     ),
-                    SizedBox(height: screenWidth * 0.02), // Responsive spacing
-                    IntrinsicHeight(
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: screenWidth * 0.05, // Responsive font size
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: screenWidth * 0.01), // Responsive spacing
-                    Flexible(
-                      child: IntrinsicHeight(
-                        child: Text(
-                          description,
-                          style: TextStyle(
-                            fontSize: screenWidth * 0.04, // Responsive font size for description
-                            color: Colors.black87,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                SizedBox(height: screenWidth * 0.02), // Responsive spacing
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: screenWidth * 0.05, // Responsive font size
+                    fontWeight: FontWeight.bold,
+                    color: isScoreAbove650 ? Colors.white : Colors.black, // Text color change based on score
+                  ),
+                ),
+                SizedBox(height: screenWidth * 0.01), // Responsive spacing
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: screenWidth * 0.04, // Responsive font size for description
+                    color: isScoreAbove650 ? Colors.white : Colors.black87, // Text color change based on score
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -133,6 +181,7 @@ class _LearningZoneState extends State<LearningZone> {
     },
   );
 }
+
 
 @override
 Widget build(BuildContext context) {
@@ -189,7 +238,7 @@ Widget build(BuildContext context) {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Learning Zone',
+                                  'Challenge Zone',
                                   style: TextStyle(
                                     fontSize: screenWidth * 0.06,
                                     fontWeight: FontWeight.bold,
@@ -198,7 +247,7 @@ Widget build(BuildContext context) {
                                 ),
                                 SizedBox(height: screenHeight * 0.01),
                                 Text(
-                                  'Learn to sign in Indian Sign Language with MAAA...',
+                                  'Test your knowledge of Indian Sign language with MAAA...',
                                   style: TextStyle(
                                     fontSize: screenWidth * 0.045,
                                     color: Colors.white,
@@ -227,7 +276,7 @@ Widget build(BuildContext context) {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Image.asset(
-                                  'images/childisl.png',
+                                  'images/challengechild.png',
                                   width: screenWidth * 0.4,
                                   height: screenWidth * 0.4,
                                   fit: BoxFit.cover,
@@ -248,95 +297,62 @@ Widget build(BuildContext context) {
                 child: PageView(
                   children: [
                     buildCustomCard(
-                      image: AssetImage('images/alphabetcardforlearn.jpg'),
-                      title: 'Learn Signing Alphabets',
+                      image: AssetImage('images/chapter1.png'),
+                      title: 'Week 1',
                       description:
-                          'Tap me to Start learning the Signs of Alphabets in Indian Sign Language.',
+                          'Tap me to Start the test based upon the Signs of Alphabets & Numbers in Indian Sign Language.',
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LearnAlphabet()),
+                              builder: (context) => Week1Entry()),
                         );
                       },
+                      scoreChallengerWeek1: int.parse(score_challenger_week1??'0')
+                    ),
+                    
+                    buildCustomCard(
+                      image: AssetImage('images/chapter2.png'),
+                      title: 'Week 2',
+                      description:
+                          'Tap me to Start the test based upon the Signs of Greetings  & Relation in Indian Sign Language.',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Week2NewScreen()),
+                        );
+                      },
+                      scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
+                    ),
+                    
+                    buildCustomCard(
+                      image: AssetImage('images/chapter3.png'),
+                      title: 'Week 3',
+                      description:
+                          'Tap me to Start the test based upon the Signs of Verbs,Nouns & Pronouns in Indian Sign Language.',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Week3Entry()),
+                        );
+                      },
+                      scoreChallengerWeek1: int.parse(score_challenger_week3??'0')
                     ),
                     buildCustomCard(
-                      image: AssetImage('images/numbers.jpg'),
-                      title: 'Learn Signing Numbers',
+                      image: AssetImage('images/chapter4.png'),
+                      title: 'Week 4',
                       description:
-                          'Tap me to Start learning the Signs of Numbers in Indian Sign Language',
+                          'Tap me to Start the test based upon the Simple Sentence formatation in Indian Sign Language.',
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LearnNumbers()),
-                        );
+                        //Navigator.push(
+                          //context,
+                          //MaterialPageRoute(
+                            //  builder: (context) => LearnPronouns()),
+                        //);
                       },
-                    ),
-                    buildCustomCard(
-                      image: AssetImage('images/greetings.png'),
-                      title: 'Learn Signing Greeting',
-                      description:
-                          'Tap me to Start learning the Signs of Greetings in Indian Sign Language',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LearnGreetings()),
-                        );
-                      },
-                    ),
-                    buildCustomCard(
-                      image: AssetImage('images/Relation.jpg'),
-                      title: 'Learn Signing Relation',
-                      description:
-                          'Tap me to Start learning the Signs of Relations in Indian Sign Language',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LearnRelations()),
-                        );
-                      },
-                    ),
-                    buildCustomCard(
-                      image: AssetImage('images/verbs.png'),
-                      title: 'Learn Signing Verbs',
-                      description:
-                          'Tap me to Start learning the Signs of Verbs in Indian Sign Language',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LearnVerbs()),
-                        );
-                      },
-                    ),
-                    buildCustomCard(
-                      image: AssetImage('images/nouns.png'),
-                      title: 'Learn Signing Nouns',
-                      description:
-                          'Tap me to Start learning the Signs of Nouns in Indian Sign Language',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LearnNouns()),
-                        );
-                      },
-                    ),
-                    buildCustomCard(
-                      image: AssetImage('images/pronouns.png'),
-                      title: 'Learn Signing Pronouns',
-                      description:
-                          'Tap me to Start learning the Signs of Pronouns in Indian Sign Language',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LearnPronouns()),
-                        );
-                      },
+                      scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
                     ),
                   ],
                 ),

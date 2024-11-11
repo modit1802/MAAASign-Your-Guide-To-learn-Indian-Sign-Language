@@ -1,11 +1,10 @@
 import 'package:SignEase/Learning_zone.dart';
 import 'package:SignEase/ScorePage.dart';
+import 'package:SignEase/about_page.dart';
 import 'package:SignEase/sabse_jyada_main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:SignEase/LearnPage.dart';
-import 'package:SignEase/home_page.dart';
-import 'package:SignEase/about_page.dart';
+import 'package:SignEase/challenge_page.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
@@ -51,7 +50,7 @@ class _InitialPage1State extends State<InitialPage1> {
 
   final List<Widget> _pages = [
     LearningZone(),
-    HomePage(),
+    ChallengePage(),
     ScorePage(),
     AboutPage(),
   ];
