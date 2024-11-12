@@ -17,6 +17,10 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   void initState() {
     super.initState();
+    _initializeVideoController();
+  }
+
+  void _initializeVideoController() {
     _controller = VideoPlayerController.network(widget.videoUrl)
       ..initialize().then((_) {
         setState(() {}); // Update UI when the video is initialized
@@ -25,10 +29,9 @@ class _VideoWidgetState extends State<VideoWidget> {
   }
 
   void _videoListener() {
-    // Check if the video has reached the end
     if (_controller.value.position >= _controller.value.duration) {
       setState(() {
-        _showOverlay = true; // Show overlay when the video completes
+        _showOverlay = true;
       });
     }
   }
@@ -46,12 +49,11 @@ class _VideoWidgetState extends State<VideoWidget> {
         _controller.pause();
         _showOverlay = true;
       } else {
-        // Reset the overlay every time the video starts playing
         if (_controller.value.position >= _controller.value.duration) {
-          _controller.seekTo(Duration.zero); // Restart from beginning if ended
+          _controller.seekTo(Duration.zero);
         }
         _controller.play();
-        _showOverlay = false; // Hide overlay on play
+        _showOverlay = false;
       }
     });
   }
@@ -71,7 +73,7 @@ class _VideoWidgetState extends State<VideoWidget> {
             child: GestureDetector(
               onTap: _togglePlayPause,
               child: Container(
-                color: Colors.black.withOpacity(0.3), // Overlay color
+                color: Colors.black.withOpacity(0.3),
                 child: Center(
                   child: Icon(
                     _controller.value.isPlaying
@@ -90,7 +92,6 @@ class _VideoWidgetState extends State<VideoWidget> {
   }
 }
 
-
 class Review_Incorrect_Challengers extends StatefulWidget {
   final List<Map<String, dynamic>>? incorrectChallenger;
 
@@ -106,9 +107,10 @@ class Review_Incorrect_Challengers extends StatefulWidget {
 
 class _Review_Incorrect_ChallengersState extends State<Review_Incorrect_Challengers> {
   int currentChallengeIndex = 0;
-  late List<String?> solutionImages;
-  late List<String?> solutionVideos;
+  List<String?> solutionImages = [];
+  List<String?> solutionVideos = [];
   late List<Map<String, dynamic>> challengeData;
+  VideoPlayerController? _controller;
 
   @override
   void initState() {
@@ -120,80 +122,31 @@ class _Review_Incorrect_ChallengersState extends State<Review_Incorrect_Challeng
   }
 
   void _initializeChallenge() {
-    setState(() {
-      var currentChallenge = challengeData[currentChallengeIndex];
+    var currentChallenge = challengeData[currentChallengeIndex];
 
-      var solutionList = currentChallenge['solution'] as List<dynamic>? ?? [];
-      var solutionVidsList = currentChallenge['solution_vids'] as List<dynamic>? ?? [];
-      var urlsMap = currentChallenge['urls'] as Map<String, String>? ?? {};
+    var solutionList = currentChallenge['solution'] as List<dynamic>? ?? [];
+    var solutionVidsList = currentChallenge['solution_vids'] as List<dynamic>? ?? [];
+    var urlsMap = currentChallenge['urls'] as Map<String, String>? ?? {};
 
-      // Update solution images and videos
-      solutionImages = solutionList.map<String?>((s) => urlsMap[s as String]).toList();
-      solutionVideos = solutionVidsList.map<String?>((s) => urlsMap[s as String]).toList();
+    solutionImages = solutionList.map<String?>((s) => urlsMap[s as String]).toList();
+    solutionVideos = solutionVidsList.map<String?>((s) => urlsMap[s as String]).toList();
 
-      // Log to check if the correct videos are loaded
-      print('Updated solution videos for challenge $currentChallengeIndex: $solutionVideos');
-    });
+    // Dispose the existing controller before creating a new one
+    _controller?.dispose();
+
+    if (solutionVideos.isNotEmpty && solutionVideos[0] != null) {
+      _controller = VideoPlayerController.network(solutionVideos[0]!);
+      _controller!
+        ..initialize().then((_) {
+          setState(() {});
+        });
+    }
   }
 
-
-
-  Widget _buildChallengeContent(double screenWidth, double screenHeight) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Displaying solution videos
-        Wrap(
-          spacing: screenWidth * 0.05,
-          runSpacing: screenHeight * 0.02,
-          alignment: WrapAlignment.center,
-          children: solutionVideos
-              .map((videoUrl) =>
-              SizedBox(
-                width: screenWidth * 0.4,
-                height: screenHeight * 0.25,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: videoUrl != null
-                      ? VideoWidget(
-                      videoUrl: videoUrl) // Custom widget for video
-                      : const SizedBox(),
-                ),
-              ))
-              .toList(),
-        ),
-        SizedBox(height: screenHeight * 0.03),
-        // Spacing between videos and images
-        // Displaying solution images
-        Wrap(
-          spacing: screenWidth * 0.05,
-          runSpacing: screenHeight * 0.02,
-          alignment: WrapAlignment.center,
-          children: solutionImages
-              .map((imageUrl) =>
-              Container(
-                width: screenWidth * 0.4,
-                height: screenHeight * 0.2,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Colors.grey[300],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: imageUrl != null
-                      ? Image.network(
-                    imageUrl,
-                    width: double.infinity,
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                  )
-                      : const SizedBox(),
-                ),
-              ))
-              .toList(),
-        ),
-      ],
-    );
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
   }
 
   void _moveToNextChallenge() {
@@ -207,6 +160,57 @@ class _Review_Incorrect_ChallengersState extends State<Review_Incorrect_Challeng
     }
   }
 
+  Widget _buildChallengeContent(double screenWidth, double screenHeight) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Wrap(
+          spacing: screenWidth * 0.05,
+          runSpacing: screenHeight * 0.02,
+          alignment: WrapAlignment.center,
+          children: solutionVideos
+              .map((videoUrl) => SizedBox(
+            width: screenWidth * 0.4,
+            height: screenHeight * 0.25,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: videoUrl != null
+                  ? VideoWidget(videoUrl: videoUrl)
+                  : const SizedBox(),
+            ),
+          ))
+              .toList(),
+        ),
+        SizedBox(height: screenHeight * 0.03),
+        Wrap(
+          spacing: screenWidth * 0.05,
+          runSpacing: screenHeight * 0.02,
+          alignment: WrapAlignment.center,
+          children: solutionImages
+              .map((imageUrl) => Container(
+            width: screenWidth * 0.4,
+            height: screenHeight * 0.2,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.grey[300],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: imageUrl != null
+                  ? Image.network(
+                imageUrl,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.cover,
+              )
+                  : const SizedBox(),
+            ),
+          ))
+              .toList(),
+        ),
+      ],
+    );
+  }
 
   Widget _buildCard({
     required VoidCallback onTap,
@@ -223,8 +227,7 @@ class _Review_Incorrect_ChallengersState extends State<Review_Incorrect_Challeng
         child: Card(
           elevation: 10,
           color: Colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: SizedBox(
@@ -241,9 +244,7 @@ class _Review_Incorrect_ChallengersState extends State<Review_Incorrect_Challeng
                         child: Text(
                           imagePath,
                           style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                              fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -283,30 +284,10 @@ class _Review_Incorrect_ChallengersState extends State<Review_Incorrect_Challeng
     );
   }
 
-  Widget _buildMediaItem(String? url) {
-    if (url == null) return const SizedBox();
-    if (url.endsWith(".mp4")) {
-      return VideoPlayerWidget(videoUrl: url);
-    } else {
-      return Image.network(
-        url,
-        width: double.infinity,
-        height: 100,
-        fit: BoxFit.cover,
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
-    final screenHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
@@ -352,13 +333,7 @@ class _Review_Incorrect_ChallengersState extends State<Review_Incorrect_Challeng
                 backgroundColor: Colors.white,
                 foregroundColor: const Color.fromARGB(255, 252, 133, 37),
               ),
-              onPressed: () {
-                if (currentChallengeIndex < challengeData.length - 1) {
-                  _moveToNextChallenge();
-                } else {
-                  Navigator.pop(context);
-                }
-              },
+              onPressed: _moveToNextChallenge,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -374,43 +349,5 @@ class _Review_Incorrect_ChallengersState extends State<Review_Incorrect_Challeng
         ),
       ),
     );
-  }
-}
-    class VideoPlayerWidget extends StatefulWidget {
-  final String videoUrl;
-
-  const VideoPlayerWidget({Key? key, required this.videoUrl}) : super(key: key);
-
-  @override
-  _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
-}
-
-class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  late VideoPlayerController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.network(widget.videoUrl)
-      ..initialize().then((_) {
-        setState(() {});
-        _controller.play();
-      });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _controller.value.isInitialized
-        ? AspectRatio(
-      aspectRatio: _controller.value.aspectRatio,
-      child: VideoPlayer(_controller),
-    )
-        : const CircularProgressIndicator();
   }
 }

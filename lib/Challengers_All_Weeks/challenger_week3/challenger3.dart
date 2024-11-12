@@ -260,7 +260,7 @@ class _ThirdGameState extends State<ThirdGame> {
       'availableLetters': ['go_i','come_i','school_i','office_i'],
       'urls': {
         "go":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410721/go_idycp2.mp4",
         "office":
             "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4",
         "come":
@@ -297,7 +297,7 @@ class _ThirdGameState extends State<ThirdGame> {
         "morning":
             "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/morning_pvtuty.mp4",
         "house":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/home_ocdazz.mp4",
         'wake up_i':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986852/Wake_up_eo3jud.png',
         'sleep_i':
@@ -322,13 +322,13 @@ class _ThirdGameState extends State<ThirdGame> {
       'availableLetters': ['fish_i', 'fly_i', 'birds_i', 'swim_i'],
       'urls': {
         'birds':
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/birds_ict0au.mp4",
         'fish':
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410468/fish_kkyqvv.mp4",
         'fly':
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410727/fly_wuvwnz.mp4",
         'swim':
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410735/swim_omqssn.mp4",
         'birds_i':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Birds_zhgyzl.png',
         'fly_i':
@@ -353,13 +353,13 @@ class _ThirdGameState extends State<ThirdGame> {
       'availableLetters': ['birds_i', 'fish_i', 'swim_i', 'fly_i'],
       'urls': {
         'birds':
-        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/birds_ict0au.mp4",
         'fish':
-        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410468/fish_kkyqvv.mp4",
         'fly':
-        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410727/fly_wuvwnz.mp4",
         'swim':
-        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
+        "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410735/swim_omqssn.mp4",
         'birds_i':
         'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Birds_zhgyzl.png',
         'fly_i':
@@ -390,7 +390,7 @@ class _ThirdGameState extends State<ThirdGame> {
         "we":
             "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/we_duowgj.mp4",
         "teacher":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/teacher_tqdyrt.mp4",
         "correct":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
         "wrong":
@@ -415,13 +415,13 @@ class _ThirdGameState extends State<ThirdGame> {
       'availableLetters': ["walk_i", "live_i", "house_i", "India_i"],
       'urls': {
         "live":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410726/live_ge7jys.mp4",
         "India":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/india_ludfnp.mp4",
         "walk":
             "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4",
         "house":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/home_ocdazz.mp4",
         "correct":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
         "wrong":

@@ -70,6 +70,16 @@ class _GreetingGifsState extends State<GreetingGifs> {
     'Finish': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/finish_l_vl1692.mp4',
     'Use': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/use_l_nwwifk.mp4',
     'Cook': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730559387/cook_l_tao1wz.mp4',
+    'Wash':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409737/Wash_labelled_jvhgir.mp4',
+    'Fly':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409737/Fly_labelled_swrtnf.mp4',
+    'Give':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409738/Give_labelled_n99bii.mp4',
+    'Teach':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409737/Teach_labelled_urxibn.mp4',
+    'Swim':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409738/Swim_labelled_uuemob.mp4',
+    'Live':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409740/Live_labelled_im0cj3.mp4',
+    'Love':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409740/Love_labelled_flwjac.mp4',
+    'See':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409740/See_labelled_vbmmjz.mp4',
+    'Go':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409740/Go_labelled_crsq3i.mp4',
+    'Look':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409741/Look_labelled_xp94zn.mp4',
   };
 
   int _currentIndex = 0;

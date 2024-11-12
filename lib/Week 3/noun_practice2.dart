@@ -41,6 +41,15 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
     'Dinner': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4',
     'Market': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/market_vfh9vj.mp4',
     'Work': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/work_zjfapw.mp4',
+    'Student' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/student_ohmjwi.mp4',
+    'Birds' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/birds_ict0au.mp4',
+    'Fish' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410468/fish_kkyqvv.mp4',
+    'Aeroplane' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410469/aeroplane_qpzztg.mp4',
+    'Teacher' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/teacher_tqdyrt.mp4',
+    'Home' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/home_ocdazz.mp4',
+    'India' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/india_ludfnp.mp4',
+    'My Name Is' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/my_name_is_w54hkc.mp4',
+
   };
 
   late String targetNoun;

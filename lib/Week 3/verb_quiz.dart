@@ -25,6 +25,17 @@ class _VerbQuizState extends State<VerbQuiz> {
     {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/write_omxdnp.mp4', 'solution': 'Write'},
     {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4', 'solution': 'Drink'},
     {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4', 'solution': 'Come'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410721/go_idycp2.mp4', 'solution': 'Go'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410725/wash_cstfkb.mp4', 'solution': 'Wash'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410726/live_ge7jys.mp4', 'solution': 'Live'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410727/love_d6fjxt.mp4', 'solution': 'Love'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410727/fly_wuvwnz.mp4', 'solution': 'Fly'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410729/look_qm9e55.mp4', 'solution': 'Look'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410730/teach_bzjkbw.mp4', 'solution': 'Teach'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410730/see_hdv0qq.mp4', 'solution': 'See'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410731/give_lminrz.mp4', 'solution': 'Give'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410735/swim_omqssn.mp4', 'solution': 'Swim'},
+
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];

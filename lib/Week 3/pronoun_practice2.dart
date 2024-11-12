@@ -35,7 +35,8 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
     'She': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/she_xhozgj.mp4',
     'It': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/It_ws1bwe.mp4',
     'We': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/we_duowgj.mp4',
-    'They': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530908/they_wmmoxf.mp4'
+    'They': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530908/they_wmmoxf.mp4',
+    'My':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410651/my_qnnkja.mp4',
   };
 
   late String targetNoun;

@@ -23,7 +23,15 @@ class _NounQuizState extends State<NounQuiz> {
     {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/deaf_ezkwye.mp4', 'solution': 'Deaf'},
     {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4', 'solution': 'Dinner'},
     {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4', 'solution': 'Book'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/work_zjfapw.mp4', 'solution': 'Work'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/student_ohmjwi.mp4', 'solution': 'Student'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410468/fish_kkyqvv.mp4', 'solution': 'Fish'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/birds_ict0au.mp4', 'solution': 'Birds'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410469/aeroplane_qpzztg.mp4', 'solution': 'Aeroplane'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/teacher_tqdyrt.mp4', 'solution': 'Teacher'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/home_ocdazz.mp4', 'solution': 'Home'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/india_ludfnp.mp4', 'solution': 'India'},
+    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/my_name_is_w54hkc.mp4', 'solution': 'My Name Is'},
+
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];

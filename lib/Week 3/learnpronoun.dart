@@ -64,6 +64,7 @@ class _GreetingGifsState extends State<GreetingGifs> {
     'It': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558956/it_l_qc8pzw.mp4',
     'We': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558969/we_l_wbytyb.mp4',
     'They': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558957/they_l_hgsvu0.mp4',
+    'My':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410342/My_labelled_a5i37x.mp4',
   };
 
   int _currentIndex = 0;

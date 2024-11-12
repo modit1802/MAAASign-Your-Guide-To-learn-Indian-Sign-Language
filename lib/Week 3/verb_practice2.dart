@@ -41,7 +41,19 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
     'Cook' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4',
     'Write' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/write_omxdnp.mp4',
     'Drink' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4',
-    'Come' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4', };
+    'Come' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4',
+    'Go' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410721/go_idycp2.mp4',
+    'Wash' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410725/wash_cstfkb.mp4',
+    'Live' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410726/live_ge7jys.mp4',
+    'Love' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410727/love_d6fjxt.mp4',
+    'Fly' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410727/fly_wuvwnz.mp4',
+    'Look' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410729/look_qm9e55.mp4',
+    'Teach' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410730/teach_bzjkbw.mp4',
+    'See' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410730/see_hdv0qq.mp4',
+    'Give' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410731/give_lminrz.mp4',
+    'Swim' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410735/swim_omqssn.mp4',
+
+  };
 
   late String targetNoun;
   late List<String> currentOptions;
