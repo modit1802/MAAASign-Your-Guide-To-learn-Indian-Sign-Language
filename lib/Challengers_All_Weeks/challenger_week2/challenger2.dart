@@ -87,10 +87,10 @@ class _VideoWidgetState extends State<VideoWidget> {
   }
 }
 
-class Challenger3 extends StatelessWidget {
+class Challenger2 extends StatelessWidget {
   final int score;
 
-  Challenger3({required this.score});
+  Challenger2({required this.score});
 
   @override
   Widget build(BuildContext context) {

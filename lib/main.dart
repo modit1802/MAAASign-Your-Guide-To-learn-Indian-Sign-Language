@@ -16,7 +16,7 @@ void main() async {
   // Set system bottom navigation bar color and orientation
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      systemNavigationBarColor: const Color.fromARGB(255, 224, 79, 79), // Change this to the color you want
+      systemNavigationBarColor: const Color.fromARGB(255, 250, 233, 215), // Change this to the color you want
       systemNavigationBarIconBrightness: Brightness.light, // Set to light if the color is dark
     ),
   );
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.black, // Choose your desired color
+        systemNavigationBarColor: const Color.fromARGB(255, 250, 233, 215), // Choose your desired color
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );

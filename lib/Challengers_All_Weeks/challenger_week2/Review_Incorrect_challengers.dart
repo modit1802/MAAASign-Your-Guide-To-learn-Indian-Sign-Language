@@ -1,4 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+
+class VideoWidget extends StatefulWidget {
+  final String videoUrl;
+
+  VideoWidget(this.videoUrl);
+
+  @override
+  _VideoWidgetState createState() => _VideoWidgetState();
+}
+
+class _VideoWidgetState extends State<VideoWidget> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeController();
+  }
+
+  @override
+  void didUpdateWidget(covariant VideoWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.videoUrl != oldWidget.videoUrl) {
+      _controller.dispose();
+      _initializeController();
+    }
+  }
+
+  void _initializeController() {
+    _controller = VideoPlayerController.network(widget.videoUrl)
+      ..initialize().then((_) {
+        setState(() {}); // Update UI after initialization
+      }).catchError((error) {
+        print("Video initialization error: $error");
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _togglePlayPause() {
+    setState(() {
+      _controller.value.isPlaying ? _controller.pause() : _controller.play();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _controller.value.isInitialized
+        ? AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                VideoPlayer(_controller),
+                if (!_controller.value.isPlaying)
+                  IconButton(
+                    icon: Icon(
+                      Icons.play_circle_outline,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                    onPressed: _togglePlayPause,
+                  ),
+              ],
+            ),
+          )
+        : Center(child: CircularProgressIndicator());
+  }
+}
 
 class Review_Incorrect_Challengers extends StatefulWidget {
   final List<Map<String, dynamic>>? incorrectChallenger;
@@ -22,7 +96,6 @@ class _Review_Incorrect_ChallengersState
   @override
   void initState() {
     super.initState();
-    print(widget.incorrectChallenger);
     challengeData = widget.incorrectChallenger ?? [];
     _initializeChallenge();
   }
@@ -123,7 +196,6 @@ class _Review_Incorrect_ChallengersState
 
   @override
   Widget build(BuildContext context) {
-    // Get screen dimensions
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -171,12 +243,32 @@ class _Review_Incorrect_ChallengersState
                                   BorderRadius.circular(screenWidth * 0.05),
                               color: Colors.white,
                             ),
-                            child: Image.network(
-                              challengeData[currentChallengeIndex]['urls'][
-                                  challengeData[currentChallengeIndex]
-                                      ['question']],
-                              width: screenWidth * 0.4,
-                              height: screenHeight * 0.2,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Image.network(
+                                  challengeData[currentChallengeIndex]['urls'][
+                                      'Solution_Box.PNG'], // Your solution box image
+                                  width: screenWidth * 0.4,
+                                  height: screenHeight * 0.2,
+                                  fit: BoxFit.cover,
+                                ),
+                                Column(
+                                  children: List.generate(
+                                    challengeData[currentChallengeIndex]
+                                            ['solution_vids']
+                                        .length,
+                                    (index) => Flexible(
+                                      child: VideoWidget(
+                                        challengeData[currentChallengeIndex]
+                                                ['urls']
+                                            [challengeData[currentChallengeIndex]
+                                                ['solution_vids'][index]],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -205,7 +297,7 @@ class _Review_Incorrect_ChallengersState
                                 height: double.infinity,
                                 fit: BoxFit.cover,
                               )
-                            : const SizedBox(), // Empty if no solution
+                            : const SizedBox(),
                       ),
                     );
                   }),
@@ -227,11 +319,19 @@ class _Review_Incorrect_ChallengersState
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(currentChallengeIndex < challengeData.length - 1
-                          ? "Next"
-                          : "Finish"),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.arrow_forward),
+                      const Text(
+                        'Next',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 252, 133, 37),
+                        ),
+                      ),
+                      Icon(
+                        currentChallengeIndex < challengeData.length - 1
+                            ? Icons.arrow_forward
+                            : Icons.check,
+                      ),
                     ],
                   ),
                 ),

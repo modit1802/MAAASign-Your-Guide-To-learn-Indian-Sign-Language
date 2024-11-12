@@ -225,6 +225,7 @@ class _AlphabetLearnState extends State<AlphabetLearn>
   final ScrollController _scrollController = ScrollController();
   late AnimationController _controller;
   late Animation<double> _animation;
+  
 
   @override
   void initState() {
@@ -232,7 +233,7 @@ class _AlphabetLearnState extends State<AlphabetLearn>
     _scrollController.addListener(_onScroll);
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 500),
     );
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
@@ -258,9 +259,11 @@ class _AlphabetLearnState extends State<AlphabetLearn>
     );
   }
 
-
-@override
+  @override
 Widget build(BuildContext context) {
+  // Initialize _pageController
+  final PageController _pageController = PageController();
+
   // Get the screen size
   final screenWidth = MediaQuery.of(context).size.width;
   final screenHeight = MediaQuery.of(context).size.height;
@@ -268,26 +271,30 @@ Widget build(BuildContext context) {
   return Scrollbar(
     thumbVisibility: true,
     controller: _scrollController,
-    child: SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      controller: _scrollController,
-      child: Center(
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: AnimatedBuilder(
-            animation: _animation,
-            builder: (context, child) {
-              return Opacity(
-                opacity: _animation.value,
-                child: Transform.translate(
-                  offset: Offset(0.0, screenHeight * 0.05 * (1 - _animation.value)), // Adjust offset based on screen height
-                  child: SingleChildScrollView(
-                    child: Row(
+    child: PageView.builder(
+      controller: _pageController,
+      itemCount: alphabetImages.length,
+      itemBuilder: (context, index) {
+        final imageName = alphabetImages[index];
+        return Center(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: _animation.value,
+                  child: Transform.translate(
+                    offset: Offset(
+                      0.0,
+                      screenHeight * 0.05 * (1 - _animation.value),
+                    ), // Adjust offset based on screen height
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: alphabetImages.map((imageName) {
-                        return Padding(
+                      children: [
+                        Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth * 0.02, // Adjust horizontal padding
+                            horizontal: screenWidth * 0.02, // Adjust padding
                           ),
                           child: Column(
                             children: [
@@ -296,44 +303,40 @@ Widget build(BuildContext context) {
                                 elevation: screenHeight * 0.01, // Adjust elevation
                                 color: Colors.white,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                  borderRadius: BorderRadius.circular(
+                                    screenWidth * 0.04,
+                                  ), // Adjust border radius
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                  borderRadius: BorderRadius.circular(
+                                    screenWidth * 0.04,
+                                  ), // Adjust border radius
                                   child: SizedBox(
-                                    width: screenWidth * 0.8, // Adjust width dynamically
-                                    height: screenHeight * 0.4, // Adjust height dynamically
+                                    width: screenWidth * 0.8, // Adjust width
+                                    height: screenHeight * 0.4, // Adjust height
                                     child: Image.network(
                                       alphabetGifs[imageName]!,
-                                      loadingBuilder: (context, child, loadingProgress) {
-                                        if (loadingProgress == null) {
-                                          return child;
-                                        } else {
-                                          return Center(
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: screenWidth * 0.01,
-                                              color: Color.fromARGB(255, 189, 74, 2), // Adjust loader size
-                                            ),
-                                          );
-                                        }
-                                      },
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: screenHeight * 0.01), // Adjust vertical spacing
+                              SizedBox(height: screenHeight * 0.01), // Adjust spacing
                               // Display PNG of the same size
                               Card(
                                 elevation: screenHeight * 0.01, // Adjust elevation
                                 color: Colors.white,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                  borderRadius: BorderRadius.circular(
+                                    screenWidth * 0.04,
+                                  ), // Adjust border radius
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(screenWidth * 0.04), // Adjust border radius
+                                  borderRadius: BorderRadius.circular(
+                                    screenWidth * 0.04,
+                                  ), // Adjust border radius
                                   child: SizedBox(
-                                    width: screenWidth * 0.8, // Adjust width dynamically
-                                    height: screenHeight * 0.4, // Adjust height dynamically
+                                    width: screenWidth * 0.8, // Adjust width
+                                    height: screenHeight * 0.4, // Adjust height
                                     child: Image.network(
                                       alphabetPngs[imageName]!,
                                       loadingBuilder: (context, child, loadingProgress) {
@@ -343,7 +346,7 @@ Widget build(BuildContext context) {
                                           return Center(
                                             child: CircularProgressIndicator(
                                               strokeWidth: screenWidth * 0.01,
-                                              color: Color.fromARGB(255, 189, 74, 2), // Adjust loader size
+                                              color: Color.fromARGB(255, 189, 74, 2),
                                             ),
                                           );
                                         }
@@ -352,21 +355,20 @@ Widget build(BuildContext context) {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: screenHeight * 0.02), // Adjust vertical spacing
+                              SizedBox(height: screenHeight * 0.02), // Adjust spacing
                             ],
                           ),
-                        );
-                      }).toList(),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
-      ),
+        );
+      },
     ),
   );
 }
-
 }
