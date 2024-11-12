@@ -21,16 +21,25 @@ class AboutPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Text(
-                'This app is designed to help the deaf community learn and practice Indian Sign Language (ISL) through interactive lessons and fun games. It’s a four-week course, with each week introducing new signs and assignments to enhance learning.',
+                'Learn Indian Sign Language',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[700],
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Unlock communication with our structured and interactive sign language learning app, designed for all skill levels! Start from basics and progress to conversational fluency with engaging, culturally-rich lessons that fit your schedule.',
                 style: TextStyle(fontSize: 16, color: Colors.grey[700]),
               ),
               SizedBox(height: 24),
               Divider(),
               SizedBox(height: 16),
 
-              // Features Section
+              // Key Features Section
               Text(
-                'Features',
+                'Key Features',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -49,11 +58,11 @@ class AboutPage extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(Icons.school, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
-                    'Learn the Basics',
+                    'Step-by-Step Lessons',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    'Alphabet finger-spelling and basic number signs in Week 1, greetings and relations in Week 2, and more.',
+                    'Begin with the alphabet and basic words, and advance to full conversations.',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -70,11 +79,11 @@ class AboutPage extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(Icons.assignment, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
-                    'Practice Assignments',
+                    'Interactive Practice',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    'Weekly assignments to reinforce learning and build confidence in communication.',
+                    'Solidify your learning with quizzes, exercises, and real-life scenarios.',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -89,13 +98,13 @@ class AboutPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  leading: Icon(Icons.emoji_events, color: Color.fromARGB(255, 165, 74, 17)),
+                  leading: Icon(Icons.trending_up, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
-                    'Challenger Mode',
+                    'Progress Tracking',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    'Test your skills with weekly challenges and track your progress.',
+                    'Monitor your achievements with personalized progress reports.',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -110,13 +119,13 @@ class AboutPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  leading: Icon(Icons.video_library, color: Color.fromARGB(255, 165, 74, 17)),
+                  leading: Icon(Icons.public, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
-                    'Engaging Media',
+                    'Cultural Insights',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    'Colorful images and videos for signs, greetings, and sentence structures.',
+                    'Understand the culture behind the signs for a deeper connection.',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
@@ -131,33 +140,46 @@ class AboutPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  leading: Icon(Icons.translate, color: Color.fromARGB(255, 165, 74, 17)),
+                  leading: Icon(Icons.access_time, color: Color.fromARGB(255, 165, 74, 17)),
                   title: Text(
-                    'Topic-Comment Structure',
+                    'Flexible Learning',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    'Learn ISL grammar with topic-comment structure examples.',
+                    'Enjoy bite-sized lessons that adapt to your available time.',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+              SizedBox(height: 12),
+
+              // Feature 6 Card
+              Card(
+                elevation: 4,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: ListTile(
+                  leading: Icon(Icons.group, color: Color.fromARGB(255, 165, 74, 17)),
+                  title: Text(
+                    'For All Ages',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    'Perfect for families, students, and professionals.',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
               ),
               SizedBox(height: 24),
 
-              // Closing Statement
-              // Text(
-              //   'Get started on your journey to learning Indian Sign Language with our app. Practice, take on challenges, and immerse yourself in a new way to communicate!',
-              //   style: TextStyle(
-              //     fontSize: 16,
-              //     fontWeight: FontWeight.bold,
-              //     color: Color.fromARGB(255, 165, 74, 17),
-              //   ),
-              // ),
-              // SizedBox(height: 24),
+              Divider(),
+              SizedBox(height: 16),
 
-              // Developer Section
+              // Why Learn Section
               Text(
-                'Meet the Developers',
+                'Why Learn Sign Language?',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -165,63 +187,9 @@ class AboutPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 12),
-
-              // Developer Pictures and Names
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage('images/modit.png'), // Replace with actual path
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Modit', // Replace with actual name
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 165, 74, 17),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage('images/ansh.jpg'), // Replace with actual path
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Ansh', // Replace with actual name
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 165, 74, 17),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage('images/amogh.png'), // Replace with actual path
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Amogh', // Replace with actual name
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 165, 74, 17),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+              Text(
+                'Sign language builds bridges. Whether you\'re connecting with the deaf and hard-of-hearing community, adding a valuable skill to your resume, or simply learning something new, this app makes your journey easy and enjoyable. Start learning today and experience the impact of sign language in your life and the lives of those around you!',
+                style: TextStyle(fontSize: 16, color: Colors.grey[700]),
               ),
               SizedBox(height: 24),
             ],
