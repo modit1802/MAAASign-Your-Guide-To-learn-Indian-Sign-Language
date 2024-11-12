@@ -276,7 +276,7 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Bingo Bonanza!',
                         description:
-                            "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card. It's a visual feast of fun and a test of your word-guessing skills.",
+                            "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card.",
                         index: 2,
                       ),
                       const SizedBox(height: 12),

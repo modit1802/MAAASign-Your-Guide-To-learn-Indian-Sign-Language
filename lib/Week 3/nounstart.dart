@@ -257,7 +257,7 @@ class _NounStartScreenState extends State<NounStartScreen> {
                         imagePath: 'images/quiz.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Play Quiz',
-                        description: "Let's Play a simple Quiz consisting of one image question with 4 options Test your knowledge of nouns!",
+                        description: "Let's Play a simple Quiz consisting of one image question with 4 options. Test your knowledge of nouns!",
                         index: 1,
                       ),
                       const SizedBox(height: 12), // Space between the cards
@@ -266,7 +266,7 @@ class _NounStartScreenState extends State<NounStartScreen> {
                         imagePath: 'images/bingo.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Bingo Bonanza!',
-                        description: "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card. It's a visual feast of fun and a test of your word-guessing skills.",
+                        description: "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card.",
                         index: 2,
                       ),
                       const SizedBox(height: 12),

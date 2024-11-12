@@ -20,6 +20,9 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
   String? score_verb;
   String? score_noun;
   String? score_pronoun;
+  String? score_verb2;
+  String? score_noun2;
+  String? score_pronoun2;
   List<Map<String, dynamic>>? incorrectQuestions;
   bool isLoading = true; // Initial state is loading
 
@@ -59,7 +62,15 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
         score_pronoun = result['week']?['week3']?['Score_pronoun']
         ?['score_pronoun']
             ?.toString();
-
+        score_verb2 = result['week']?['week3']?['Score_verb2']
+        ?['score_verb2']
+            ?.toString();
+        score_noun2 = result['week']?['week3']?['Score_noun2']
+        ?['score_noun2']
+            ?.toString();
+        score_pronoun2 = result['week']?['week3']?['Score_pronoun2']
+        ?['score_pronoun2']
+            ?.toString();
         var data = result['week']?['week3']?['Score_Challenger_Week3']
             ?['Incorrect_challenges'];
         
@@ -81,10 +92,16 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
         score_verb ??= '0';
         score_noun ??= '0';
         score_pronoun ??= '0';
+        score_verb2 ??= '0';
+        score_noun2 ??= '0';
+        score_pronoun2 ??= '0';
         print(incorrectQuestions);
         print(score_verb);
         print(score_noun);
         print(score_pronoun);
+        print(score_verb2);
+        print(score_noun2);
+        print(score_pronoun2);
       } else {
         score_challenger = 'Please attempt the challenger';
         print('No data found');
@@ -150,7 +167,62 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
       ),
     );
   }
-
+  Widget _buildScoreCard2() {
+    return Card(
+      elevation: 10,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            const Text(
+              "Bingo Scores of Week 3",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: SfCartesianChart(
+                primaryXAxis: CategoryAxis(),
+                series: <CartesianSeries<ScoreData, String>>[
+                  ColumnSeries<ScoreData, String>(
+                    dataSource: [
+                      ScoreData(
+                          'Verbs', double.tryParse(score_verb2!) ?? 0),
+                    ],
+                    xValueMapper: (ScoreData data, _) => data.label,
+                    yValueMapper: (ScoreData data, _) => data.value,
+                    color: Colors.red,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                  ColumnSeries<ScoreData, String>(
+                    dataSource: [
+                      ScoreData('Nouns', double.tryParse(score_noun2!) ?? 0),
+                    ],
+                    xValueMapper: (ScoreData data, _) => data.label,
+                    yValueMapper: (ScoreData data, _) => data.value,
+                    color: Colors.blue,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                  ColumnSeries<ScoreData, String>(
+                    dataSource: [
+                      ScoreData(
+                          'Pronouns', double.tryParse(score_pronoun2!) ?? 0),
+                    ],
+                    xValueMapper: (ScoreData data, _) => data.label,
+                    yValueMapper: (ScoreData data, _) => data.value,
+                    color: Colors.green,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
   Future<String?> getUserId() async {
     User? user = FirebaseAuth.instance.currentUser;
     return user?.uid;
@@ -260,6 +332,27 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: _buildScoreCard(),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: _buildCard(
+                      onTap: () {},
+                      iconData: Icons.quiz,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      title: (score_verb2 == null && score_noun2 == null && score_pronoun2==null)
+                          ? "Bingo Not Attempted"
+                          : "Bingo Scores",
+                      description: (score_verb2 == null && score_noun2 == null && score_pronoun2==null)
+                          ? "You have not attempted the Bingo for verbs, nouns and pronouns. Please first attempt the Bingo and then come to check the scores"
+                          : "🔔 Below are your Bingo scores presented in verbs, nouns and pronouns! Red bar represents the Verbs score, Blue bar represents the Nouns score, and Green bar represents the Pronouns score",
+                      index: 1,
+                    ),
+                  ),
+                  // Show the score card only if both score_verb and score_noun are available
+                  if (score_verb2 != null && score_noun2 != null && score_pronoun2!=null)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: _buildScoreCard2(),
                     ),
                 ],
               ),
