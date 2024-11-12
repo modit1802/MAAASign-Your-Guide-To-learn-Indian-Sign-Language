@@ -229,7 +229,7 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                     padding: const EdgeInsets.all(8.0),
                     child: _buildCard2(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Review_Incorrect_Challengers(incorrectChallenger:incorrectQuestions)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Review_Incorrect_Challengers(incorrectChallenger:incorrectQuestions,)));
                       },
                       iconData: Icons.remove_red_eye,
                       color: Colors.white,

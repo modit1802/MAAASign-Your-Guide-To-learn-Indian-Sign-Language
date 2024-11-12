@@ -295,64 +295,78 @@ Widget build(BuildContext context) {
               SizedBox(
                 height: screenHeight * 0.5, // Adjust the height as needed
                 child: PageView(
+                  scrollDirection: Axis.vertical,
+
                   children: [
-                    buildCustomCard(
-                      image: AssetImage('images/chapter1.png'),
-                      title: 'Week 1',
-                      description:
-                          'Tap me to Start the test based upon the Signs of Alphabets & Numbers in Indian Sign Language.',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Week1Entry()),
-                        );
-                      },
-                      scoreChallengerWeek1: int.parse(score_challenger_week1??'0')
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/chapter1.png'),
+                        title: 'Week 1',
+                        description:
+                            'Tap me to Start the test based upon the Signs of Alphabets & Numbers in Indian Sign Language.',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Week1Entry()),
+                          );
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week1??'0')
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/chapter2.png'),
+                        title: 'Week 2',
+                        description:
+                            'Tap me to Start the test based upon the Signs of Greetings  & Relation in Indian Sign Language.',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Week2NewScreen()),
+                          );
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
+                      ),
                     ),
                     
-                    buildCustomCard(
-                      image: AssetImage('images/chapter2.png'),
-                      title: 'Week 2',
-                      description:
-                          'Tap me to Start the test based upon the Signs of Greetings  & Relation in Indian Sign Language.',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Week2NewScreen()),
-                        );
-                      },
-                      scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/chapter3.png'),
+                        title: 'Week 3',
+                        description:
+                            'Tap me to Start the test based upon the Signs of Verbs,Nouns & Pronouns in Indian Sign Language.',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Week3Entry()),
+                          );
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week3??'0')
+                      ),
                     ),
-                    
-                    buildCustomCard(
-                      image: AssetImage('images/chapter3.png'),
-                      title: 'Week 3',
-                      description:
-                          'Tap me to Start the test based upon the Signs of Verbs,Nouns & Pronouns in Indian Sign Language.',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Week3Entry()),
-                        );
-                      },
-                      scoreChallengerWeek1: int.parse(score_challenger_week3??'0')
-                    ),
-                    buildCustomCard(
-                      image: AssetImage('images/chapter4.png'),
-                      title: 'Week 4',
-                      description:
-                          'Tap me to Start the test based upon the Simple Sentence formatation in Indian Sign Language.',
-                      onTap: () {
-                        //Navigator.push(
-                          //context,
-                          //MaterialPageRoute(
-                            //  builder: (context) => LearnPronouns()),
-                        //);
-                      },
-                      scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/chapter4.png'),
+                        title: 'Week 4',
+                        description:
+                            'Tap me to Start the test based upon the Simple Sentence formatation in Indian Sign Language.',
+                        onTap: () {
+                          //Navigator.push(
+                            //context,
+                            //MaterialPageRoute(
+                              //  builder: (context) => LearnPronouns()),
+                          //);
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                      ),
                     ),
                   ],
                 ),

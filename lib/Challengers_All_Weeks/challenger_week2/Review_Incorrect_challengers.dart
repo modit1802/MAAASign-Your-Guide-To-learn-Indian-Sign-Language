@@ -16,24 +16,26 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   void initState() {
     super.initState();
-    _initializeController();
+    _initializeController(widget.videoUrl);
   }
 
   @override
   void didUpdateWidget(covariant VideoWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
+    // Check if the video URL has changed
     if (widget.videoUrl != oldWidget.videoUrl) {
-      _controller.dispose();
-      _initializeController();
+      _controller.dispose(); // Dispose of the old controller
+      _initializeController(widget.videoUrl); // Initialize new controller
     }
   }
 
-  void _initializeController() {
-    _controller = VideoPlayerController.network(widget.videoUrl)
+  void _initializeController(String videoUrl) {
+    _controller = VideoPlayerController.network(videoUrl)
       ..initialize().then((_) {
-        setState(() {}); // Update UI after initialization
-      }).catchError((error) {
-        print("Video initialization error: $error");
+        setState(() {}); // Refresh the widget once the video is initialized
+      })
+      ..addListener(() {
+        setState(() {}); // Listen for changes in playback state
       });
   }
 
@@ -44,21 +46,25 @@ class _VideoWidgetState extends State<VideoWidget> {
   }
 
   void _togglePlayPause() {
-    setState(() {
-      _controller.value.isPlaying ? _controller.pause() : _controller.play();
-    });
+    if (_controller.value.isPlaying) {
+      _controller.pause();
+    } else {
+      _controller.play();
+    }
+    setState(() {}); // Update the play button visibility immediately
   }
 
   @override
   Widget build(BuildContext context) {
     return _controller.value.isInitialized
         ? AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
+            aspectRatio: 9 / 16, // Maintain 9:16 aspect ratio
             child: Stack(
               alignment: Alignment.center,
               children: [
                 VideoPlayer(_controller),
-                if (!_controller.value.isPlaying)
+                if (!_controller
+                    .value.isPlaying) // Show play button only when paused
                   IconButton(
                     icon: Icon(
                       Icons.play_circle_outline,
@@ -70,7 +76,9 @@ class _VideoWidgetState extends State<VideoWidget> {
               ],
             ),
           )
-        : Center(child: CircularProgressIndicator());
+        : Center(
+            child:
+                CircularProgressIndicator()); // Loading indicator until video initializes
   }
 }
 
@@ -97,7 +105,9 @@ class _Review_Incorrect_ChallengersState
   void initState() {
     super.initState();
     challengeData = widget.incorrectChallenger ?? [];
-    _initializeChallenge();
+    if (challengeData.isNotEmpty) {
+      _initializeChallenge();
+    }
   }
 
   void _initializeChallenge() {
@@ -115,7 +125,7 @@ class _Review_Incorrect_ChallengersState
         _initializeChallenge();
       });
     } else {
-      // All challenges completed; handle navigation or completion here
+      Navigator.pop(context); // All challenges completed; go back
     }
   }
 
@@ -211,135 +221,139 @@ class _Review_Incorrect_ChallengersState
           },
         ),
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: challengeData.isEmpty
+          ? Center(
+              child: Text(
+                "Wohoo! There are no incorrect challengers !!",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          : Stack(
               children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        _buildCard(
-                          onTap: () {},
-                          imagePath: '${currentChallengeIndex + 1}',
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          title: 'Review Your Mistakes In Challenger Round',
-                          description:
-                              "Tap Next to see your mistakes one by one",
-                          index: 2,
-                        ),
-                        Material(
-                          elevation: screenHeight * 0.01,
-                          borderRadius:
-                              BorderRadius.circular(screenWidth * 0.05),
-                          child: Container(
-                            width: screenWidth * 0.7,
-                            height: screenHeight * 0.3,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(screenWidth * 0.05),
-                              color: Colors.white,
-                            ),
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.network(
-                                  challengeData[currentChallengeIndex]['urls'][
-                                      'Solution_Box.PNG'], // Your solution box image
-                                  width: screenWidth * 0.4,
-                                  height: screenHeight * 0.2,
-                                  fit: BoxFit.cover,
-                                ),
-                                Column(
-                                  children: List.generate(
-                                    challengeData[currentChallengeIndex]
-                                            ['solution_vids']
-                                        .length,
-                                    (index) => Flexible(
-                                      child: VideoWidget(
-                                        challengeData[currentChallengeIndex]
-                                                ['urls']
-                                            [challengeData[currentChallengeIndex]
-                                                ['solution_vids'][index]],
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              _buildCard(
+                                onTap: () {},
+                                imagePath: '${currentChallengeIndex + 1}',
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                title:
+                                    'Review Your Mistakes In Challenger Round',
+                                description:
+                                    "Tap Next to see your mistakes one by one",
+                                index: 2,
+                              ),
+                              Material(
+                                elevation: screenHeight * 0.01,
+                                borderRadius:
+                                    BorderRadius.circular(screenWidth * 0.05),
+                                child: Container(
+                                  width: screenWidth * 0.7,
+                                  height: screenHeight * 0.3,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        screenWidth * 0.05),
+                                    color: Colors.white,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Flexible(
+                                        child: VideoWidget(
+                                          challengeData[currentChallengeIndex]
+                                              ['urls'][challengeData[
+                                                  currentChallengeIndex]
+                                              ['solution_vids'][0]],
+                                        ),
                                       ),
-                                    ),
+                                      Flexible(
+                                        child: VideoWidget(
+                                          challengeData[currentChallengeIndex]
+                                              ['urls'][challengeData[
+                                                  currentChallengeIndex]
+                                              ['solution_vids'][1]],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
+                        ],
+                      ),
+                      SizedBox(height: screenHeight * 0.03),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: List.generate(solution.length, (index) {
+                          return Container(
+                            width: screenWidth * 0.2,
+                            height: screenHeight * 0.1,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius:
+                                  BorderRadius.circular(screenWidth * 0.03),
+                            ),
+                            alignment: Alignment.center,
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.circular(screenWidth * 0.03),
+                              child: solution[index] != null
+                                  ? Image.network(
+                                      solution[index]!,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : const SizedBox(),
+                            ),
+                          );
+                        }),
+                      ),
+                      SizedBox(height: screenHeight * 0.06),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          foregroundColor:
+                              const Color.fromARGB(255, 252, 133, 37),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: screenHeight * 0.03),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(solution.length, (index) {
-                    return Container(
-                      width: screenWidth * 0.2,
-                      height: screenHeight * 0.1,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(screenWidth * 0.03),
-                      ),
-                      alignment: Alignment.center,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(screenWidth * 0.03),
-                        child: solution[index] != null
-                            ? Image.network(
-                                solution[index]!,
-                                width: double.infinity,
-                                height: double.infinity,
-                                fit: BoxFit.cover,
-                              )
-                            : const SizedBox(),
-                      ),
-                    );
-                  }),
-                ),
-                SizedBox(height: screenHeight * 0.06),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color.fromARGB(255, 252, 133, 37),
-                  ),
-                  onPressed: () {
-                    if (currentChallengeIndex < challengeData.length - 1) {
-                      _moveToNextChallenge();
-                    } else {
-                      Navigator.pop(
-                          context); // Pops the current screen when "Finish" is clicked
-                    }
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Text(
-                        'Next',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 252, 133, 37),
+                        onPressed: () {
+                          if (currentChallengeIndex <
+                              challengeData.length - 1) {
+                            _moveToNextChallenge();
+                          } else {
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                                currentChallengeIndex < challengeData.length - 1
+                                    ? "Next"
+                                    : "Finish"),
+                            const SizedBox(width: 8),
+                            const Icon(Icons.arrow_forward),
+                          ],
                         ),
-                      ),
-                      Icon(
-                        currentChallengeIndex < challengeData.length - 1
-                            ? Icons.arrow_forward
-                            : Icons.check,
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
