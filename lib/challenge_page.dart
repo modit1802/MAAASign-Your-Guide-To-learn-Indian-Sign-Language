@@ -2,6 +2,7 @@
 import 'package:SignEase/Week%201/week1_entry.dart';
 import 'package:SignEase/Week%202/week2_entry.dart';
 import 'package:SignEase/Week%203/week3_entry.dart';
+import 'package:SignEase/Week%204/week4_entry.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -295,7 +296,7 @@ Widget build(BuildContext context) {
               SizedBox(
                 height: screenHeight * 0.5, // Adjust the height as needed
                 child: PageView(
-                  scrollDirection: Axis.vertical,
+                  scrollDirection: Axis.horizontal,
 
                   children: [
                     Padding(
@@ -359,11 +360,11 @@ Widget build(BuildContext context) {
                         description:
                             'Tap me to Start the test based upon the Simple Sentence formatation in Indian Sign Language.',
                         onTap: () {
-                          //Navigator.push(
-                            //context,
-                            //MaterialPageRoute(
-                              //  builder: (context) => LearnPronouns()),
-                          //);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                               builder: (context) => Week4Entry()),
+                          );
                         },
                         scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
                       ),
