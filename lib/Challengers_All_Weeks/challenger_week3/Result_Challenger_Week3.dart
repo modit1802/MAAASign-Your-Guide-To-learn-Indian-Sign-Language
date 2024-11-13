@@ -1,6 +1,7 @@
 import 'package:SignEase/Challengers_All_Weeks/challenger_week3/DetailedProgressWeek3.dart';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%203/week3_entry.dart';
+import 'package:SignEase/Week%204/week4_entry.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
@@ -210,7 +211,7 @@ Widget build(BuildContext context) {
               onTap: () => _handleCardTap(
                 0,
                 widget.score > 600
-                    ? const InitialPage1()
+                    ? Week4Entry()
                     : Week3Entry(), // Navigate based on score
               ),
               iconData: Icons.festival,
