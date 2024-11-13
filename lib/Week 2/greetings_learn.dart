@@ -47,7 +47,7 @@ class _SentenceStartscreenState extends State<SentenceStartscreen> {
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              "Simple Greetings",
+                              "Simple Signs",
                               style: TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),
@@ -70,7 +70,7 @@ class _SentenceStartscreenState extends State<SentenceStartscreen> {
                           child: Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(
-                              "Compound Greetings",
+                              "Compound Signs",
                               style: TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),

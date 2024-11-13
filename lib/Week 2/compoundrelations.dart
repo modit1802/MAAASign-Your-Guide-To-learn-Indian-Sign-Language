@@ -33,7 +33,7 @@ class CompoundRelations extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Compound Greetings",
+          "Let's Learn Compound Signs",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

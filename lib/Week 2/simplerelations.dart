@@ -33,7 +33,7 @@ class SimpleRelations extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Simple Relations",
+          "Let's Learn Simple Signs",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
