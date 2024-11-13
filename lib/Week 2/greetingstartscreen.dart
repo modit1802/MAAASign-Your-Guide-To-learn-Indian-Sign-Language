@@ -248,9 +248,9 @@ class _GreetingStartscreenState extends State<GreetingStartscreen> {
                         onTap: () => _handleCardTap(0, const LearnGreetings()),
                         imagePath: 'images/greetings.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Learn Greetings',
+                        title: 'Review Signing Greetings',
                         description:
-                            'Learn greetings with the help of interactive learning material!',
+                            'Learn Signing Greetings with the help of interactive learning material!',
                         index: 0,
                       ),
                       SizedBox(height: screenHeight * 0.015),

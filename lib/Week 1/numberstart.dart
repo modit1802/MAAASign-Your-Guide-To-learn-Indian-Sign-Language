@@ -246,9 +246,9 @@ class _NumberStartscreenState extends State<NumberStartscreen> {
                         onTap: () => _handleCardTap(0, const LearnNumbers()),
                         imagePath: 'images/numbersicon.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Learn Numbers',
+                        title: 'Review Signing Numbers',
                         description:
-                            'Learn Numbers with the help of interactive learning material!',
+                            'Review Signing Numbers with the help of interactive learning material!',
                         index: 0,
                       ),
                       SizedBox(

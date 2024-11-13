@@ -254,9 +254,9 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                         onTap: () => _handleCardTap(0, const LearnPronouns()),
                         imagePath: 'images/verbs.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Learn Pronouns',
+                        title: 'Review Signing Pronouns',
                         description:
-                            'Learn Pronouns with the help of interactive learning material!',
+                            'Review Signing Pronouns with the help of interactive learning material!',
                         index: 0,
                       ),
                       const SizedBox(height: 12), // Space between the cards

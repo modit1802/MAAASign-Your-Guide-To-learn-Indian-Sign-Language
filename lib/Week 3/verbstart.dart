@@ -246,8 +246,8 @@ class _VerbStartScreenState extends State<VerbStartScreen> {
                         onTap: () => _handleCardTap(0, const LearnVerbs()),
                         imagePath: 'images/verbs.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Learn Verbs',
-                        description: 'Learn Common Verbs with the help of interactive learning material!',
+                        title: 'Review Signing Verbs',
+                        description: 'Review Signing Verbs with the help of interactive learning material!',
                         index: 0,
                       ),
                       const SizedBox(height: 12), // Space between the cards

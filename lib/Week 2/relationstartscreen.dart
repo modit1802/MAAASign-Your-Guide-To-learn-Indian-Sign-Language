@@ -243,8 +243,8 @@ Widget build(BuildContext context) {
                       onTap: () => _handleCardTap(0, const SentenceStartscreen()),
                       imagePath: 'images/Relation.png',
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      title: 'Learn Relation',
-                      description: 'Learn Relations with the help of interactive learning material!',
+                      title: 'Review Signing Relation',
+                      description: 'Review Signing Relations with the help of interactive learning material!',
                       index: 0,
                     ),
                     SizedBox(height: screenHeight * 0.02), // Adjust space between widgets

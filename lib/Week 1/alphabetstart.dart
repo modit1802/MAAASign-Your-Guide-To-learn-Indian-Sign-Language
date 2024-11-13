@@ -248,9 +248,9 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                         onTap: () => _handleCardTap(0, const LearnAlphabet()),
                         imagePath: 'images/alphabetsicon.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Learn Alphabets',
+                        title: 'Review Signing Alphabets',
                         description:
-                            'Learn alphabets with the help of interactive learning material!',
+                            'Review Signing Alphabets with the help of interactive learning material!',
                         index: 0,
                       ),
                       SizedBox(height: screenHeight * 0.015),
