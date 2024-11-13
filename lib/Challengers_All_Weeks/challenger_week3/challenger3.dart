@@ -739,8 +739,8 @@ Flexible(
                           });
                         },
                         child: Container(
-                          width: screenWidth * 0.2,
-                          height: screenHeight * 0.1,
+                          width: screenWidth * 0.3,
+                          height: screenHeight * 0.12,
                           decoration: BoxDecoration(
                             color: Colors.grey,
                             borderRadius:

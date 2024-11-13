@@ -21,9 +21,10 @@ class _VideoWidgetState extends State<VideoWidget> {
   void initState() {
     super.initState();
     _initializeController(widget.videoUrl);
+    
   }
 
-   @override
+  @override
   void didUpdateWidget(covariant VideoWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     // Check if the video URL has changed
@@ -36,6 +37,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   void _initializeController(String videoUrl) {
     _controller = VideoPlayerController.network(videoUrl)
       ..initialize().then((_) {
+        _controller.setVolume(0.0);
         setState(() {}); // Refresh the widget once the video is initialized
       })
       ..addListener(() {
@@ -48,7 +50,6 @@ class _VideoWidgetState extends State<VideoWidget> {
     _controller.dispose();
     super.dispose();
   }
-
 
   void _togglePlayPause() {
     if (_controller.value.isPlaying) {
@@ -126,8 +127,6 @@ class _ThirdGameState extends State<ThirdGame> {
   final ScrollController _scrollController = ScrollController();
 
   final List<Map<String, dynamic>> challengeData = [
-
-
     // challenger 1
 
     {
@@ -196,8 +195,13 @@ class _ThirdGameState extends State<ThirdGame> {
     {
       'question': 'goodbye sister',
       'solution_vids': ['goodbye', 'sister'],
-      'solution':['goodbye_i','sister_i'],
-      'availableLetters': ['goodbye_i','see_you_again_i','sister_i','brother_i'],
+      'solution': ['goodbye_i', 'sister_i'],
+      'availableLetters': [
+        'goodbye_i',
+        'see_you_again_i',
+        'sister_i',
+        'brother_i'
+      ],
       'urls': {
         "goodbye":
             'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266605/good_bye_u_hz6peg.mp4',
@@ -224,57 +228,28 @@ class _ThirdGameState extends State<ThirdGame> {
       }
     },
     {
-      'question': 'drink tea',
-      'solution_vids': ['drink', 'tea'],
-      'solution':['drink_i','tea_i'],
-      'availableLetters': ['drink_i','eat_i','breakfast_i','tea_i',],
+      'question': 'good_after_noon people',
+      'solution_vids': ['good_after_noon', 'people'],
+      'solution': ['good_after_noon_i', 'people_i'],
+      'availableLetters': [
+        'people_i',
+        'good_morning_i',
+        'good_after_noon_i',
+        'sister_i',
+      ],
       'urls': {
-        "drink":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4",
-        "eat":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4",
-        "breakfast":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/breakfast_hb90fq.mp4",
-        "tea":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/tea_i6mkyc.mp4",
-        'drink_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730985321/Drink_wofu27.png',
-        'eat_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974723/Eat_vf1awm.png',
-        'breakfast_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730985448/Breakfast_sc6ruy.png',
-        'tea_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730985530/Tea_gzhp4z.png',
-        'correct':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-        'wrong':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
-    {
-      'question': 'come office',
-      'solution_vids': ['come', 'office'],
-      'solution':['come_i','office_i'],
-      'availableLetters': ['go_i','come_i','school_i','office_i'],
-      'urls': {
-        "go":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4",
-        "office":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4",
-        "come":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4",
-        "school":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
-        'go_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986208/Go_kmooei.png',
-        'office_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730984598/Office_jhay8v.png',
-        'come_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986339/Come_b2f00f.png',
-        'school_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730977235/School_cdvg2o.png',
+        "good_after_noon":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/good_afternoon_u_wwhvia.mp4",
+        "people":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/people_u_t4403p.mp4",
+        'people_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056773/PEOPLE_hvebii.png',
+        'good_morning_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056082/GOOD_MORNING_qspsu3.png',
+        'good_after_noon_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056082/GOOD_AFTERNOON_bfewat.png',
+        'sister_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056773/SISTER_cokk0l.png',
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -285,27 +260,23 @@ class _ThirdGameState extends State<ThirdGame> {
     },
 
     {
-      'question': 'wake up morning',
-      'solution_vids': ['wake up', 'morning'],
-      'solution':['wake up_i', 'morning_i'],
-      'availableLetters': ['wake up_i', 'sleep_i', 'morning_i', 'house_i'],
+      'question': 'welcome brother',
+      'solution_vids': ['welcome', 'brother'],
+      'solution': ['welcome_i', 'brother_i'],
+      'availableLetters': ['sister_i', 'welcome_i', 'goodbye_i', 'brother_i'],
       'urls': {
-        "wake up":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/wake_up_c6pbs5.mp4",
-        "sleep":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/sleep_vwyvtz.mp4",
-        "morning":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/morning_pvtuty.mp4",
-        "house":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4",
-        'wake up_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986852/Wake_up_eo3jud.png',
-        'sleep_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986852/Sleep_c8ersf.png',
-        'morning_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986851/Morning_qvqdfu.png',
-        'house_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986851/House_mt8ywx.png',
+        "welcome":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/welcome_u_np7ibt.mp4",
+        "brother":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4",
+        'welcome_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056082/WELCOME_id8mnm.png',
+        'brother_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731057134/Brother_zp3vvl.png',
+        'sister_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056773/SISTER_cokk0l.png',
+        'goodbye_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056081/GOODBYE_hek6ie.png',
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -316,27 +287,23 @@ class _ThirdGameState extends State<ThirdGame> {
     },
 
     {
-      'question': 'birds fly',
-      'solution_vids': ['birds', 'fly'],
-      'solution':['birds_i', 'fly_i'],
-      'availableLetters': ['fish_i', 'fly_i', 'birds_i', 'swim_i'],
+      'question': 'hello baby',
+      'solution_vids': ['hello', 'baby'],
+      'solution': ['hello_i', 'baby_i'],
+      'availableLetters': ['hello_i', 'sister_i', 'female_person_i', 'baby_i'],
       'urls': {
-        'birds':
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
-        'fish':
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
-        'fly':
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
-        'swim':
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
-        'birds_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Birds_zhgyzl.png',
-        'fly_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987715/Fly_j9jtn9.png',
-        'swim_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987715/Swim_ea5apc.png',
-        'fish_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Fish_ukkxsz.png',
+        "hello":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/hello_u_hmbf7y.mp4",
+        "baby":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266842/baby_u_p1lbqp.mp4",
+        'hello_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056081/HELLO_akjme2.png',
+        'sister_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056773/SISTER_cokk0l.png',
+        'female_person_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056772/FEMALE_PERSON_l0xwzc.png',
+        'baby_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056771/BABY_fgb8sl.png',
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -347,98 +314,118 @@ class _ThirdGameState extends State<ThirdGame> {
     },
 
     {
-      'question': 'fish swim',
-      'solution_vids': ['fish','swim'],
-      'solution': ['fish_i', 'swim_i'],
-      'availableLetters': ['birds_i', 'fish_i', 'swim_i', 'fly_i'],
+      'question': 'good_night sister',
+      'solution_vids': ['good_night', 'sister'],
+      'solution': ['good_night_i', 'sister_i'],
+      'availableLetters': ['good_night_i', 'hello_i', 'sister_i', 'baby_i'],
       'urls': {
-        'birds':
-        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
-        'fish':
-        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
-        'fly':
-        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
-        'swim':
-        "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4",
-        'birds_i':
-        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Birds_zhgyzl.png',
-        'fly_i':
-        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987715/Fly_j9jtn9.png',
-        'swim_i':
-        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987715/Swim_ea5apc.png',
-        'fish_i':
-        'https://res.cloudinary.com/dfph32nsq/image/upload/v1730987716/Fish_ukkxsz.png',
+        'good_night':
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/good_night_u_sgogpu.mp4",
+        'sister':
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266838/sister_u_wpybjz.mp4",
+        'good_night_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056081/GOOD_NIGHT_teyx2m.png',
+        'hello_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056081/HELLO_akjme2.png',
+        'sister_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056773/SISTER_cokk0l.png',
+        'baby_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056771/BABY_fgb8sl.png',
         'correct':
-        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
-        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
         'wooden':
-        'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
 
     {
-      'question': 'I deaf',
-      'solution_vids': ['I','deaf'],
-      'solution':["I_i","deaf_i"],
-      'availableLetters': ["we_i", "deaf_i", "I_i", "teacher_i"],
+      'question': 'see_you_again man',
+      'solution_vids': ['see_you_again', 'man'],
+      'solution': ['see_you_again_i', 'man_i'],
+      'availableLetters': ['see_you_again_i', 'mother_i', 'man_i', 'friend_i'],
       'urls': {
-        "I":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/I_jcee6z.mp4",
-        "deaf":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/deaf_ezkwye.mp4",
-        "we":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/we_duowgj.mp4",
-        "teacher":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4",
+        'see_you_again':
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266603/see_you_again_u_jfm6yv.mp4",
+        'man':
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/man_u_llmdsh.mp4",
+        'see_you_again_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056082/SEE_YOU_AGAIN_pc2591.png',
+        'mother_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056772/MOTHER_g4daxq.png',
+        'man_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056772/MAN_htw6r1.png',
+        'friend_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056772/FRIEND_twuacv.png',
+        'correct':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
+        'wrong':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
+        'wooden':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
+      }
+    },
+
+    {
+      'question': 'see_you_tomorrow friend',
+      'solution_vids': ['see_you_tomorrow', 'friend'],
+      'solution': ["see_you_tomorrow_i", "friend_i"],
+      'availableLetters': [
+        "see_you_tomorrow_i",
+        "see_you_again_i",
+        "friend_i",
+        "father_i"
+      ],
+      'urls': {
+        "see_you_tomorrow":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/see_you_tomorrow_u_wqcfwu.mp4",
+        "friend":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266835/friend_u_nfctlk.mp4",
         "correct":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
         "wrong":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-        "I_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730988758/I_reqpgr.png",
-        'we_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730988758/We_d4trpx.png',
-        'teacher_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730988758/Teacher_ygovmv.png',
-        'deaf_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730988759/Deaf_lqqlfz.png',
+        "see_you_tomorrow_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1731056082/SEE_YOU_TOMORROW_iwubay.png",
+        'see_you_again_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056082/SEE_YOU_AGAIN_pc2591.png',
+        'friend_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056772/FRIEND_twuacv.png',
+        'father_i':
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056771/Father_evq902.png',
         'wooden':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
 
     {
-      'question': 'live India',
-      'solution_vids': ['live', 'India'],
-      'solution': ["live_i", "India_i"],
-      'availableLetters': ["walk_i", "live_i", "house_i", "India_i"],
+      'question': 'welcome baby',
+      'solution_vids': ['welcome', 'baby'],
+      'solution': ["welcome_i", "baby_i"],
+      'availableLetters': ["baby_i", "hello_i", "welcome_i", "father_i"],
       'urls': {
-        "live":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4",
-        "India":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
-        "walk":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4",
-        "house":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4",
+        "welcome":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/welcome_u_np7ibt.mp4",
+        "baby":
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266842/baby_u_p1lbqp.mp4",
         "correct":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
         "wrong":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-        "live_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730989201/Live_hbudpg.png",
-        "India_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730989201/India_mdg3uj.png",
-        "house_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730986851/House_mt8ywx.png",
-        "walk_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730989202/Walk_ucjkq9.png",
+        "welcome_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1731056082/WELCOME_id8mnm.png",
+        "baby_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1731056771/BABY_fgb8sl.png",
+        "father_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1731056771/Father_evq902.png",
+        "hello_i":
+            "https://res.cloudinary.com/dfph32nsq/image/upload/v1731056081/HELLO_akjme2.png",
         'wooden':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
-];
+  ];
   late List<String?> solution;
   late List<String> availableLetters;
 
@@ -466,8 +453,6 @@ class _ThirdGameState extends State<ThirdGame> {
       ),
     );
   }
-
-
 
   void checkSolution() {
     if (const ListEquality()
@@ -501,7 +486,8 @@ class _ThirdGameState extends State<ThirdGame> {
             'available_letters': challengeData[currentChallengeIndex]
                 ['availableLetters'],
             'urls': challengeData[currentChallengeIndex]['urls'],
-            'solution_vids':challengeData[currentChallengeIndex]['solution_vids'],
+            'solution_vids': challengeData[currentChallengeIndex]
+                ['solution_vids'],
           });
         } else {
           isCorrectSolution = false;
@@ -513,39 +499,37 @@ class _ThirdGameState extends State<ThirdGame> {
     }
   }
 
- void _moveToNextChallenge() {
-  if (currentChallengeIndex < challengeData.length - 1) {
-    setState(() {
-      currentChallengeIndex++;  // Update the current challenge index
-      attempts = 0;
-      isCorrectSolution = null;
-      showMoveToNextButton = false;
-      _initializeChallenge();  // Re-initialize the challenge data
-    });
-  } else {
-    // Once all challenges are completed, navigate to the next screen
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Result_Challenger_Week2(
-          score: score, 
-          incorrectquestions: incorrectQuestions
+  void _moveToNextChallenge() {
+    if (currentChallengeIndex < challengeData.length - 1) {
+      setState(() {
+        currentChallengeIndex++; // Update the current challenge index
+        attempts = 0;
+        isCorrectSolution = null;
+        showMoveToNextButton = false;
+        _initializeChallenge(); // Re-initialize the challenge data
+      });
+    } else {
+      // Once all challenges are completed, navigate to the next screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Result_Challenger_Week2(
+              score: score, incorrectquestions: incorrectQuestions),
         ),
-      ),
-    );
+      );
+    }
   }
-}
 
-void _initializeChallenge() {
-  // Ensure that the new challenge data is being loaded based on the updated index
-  setState(() {
-    solution = List.filled(
-        challengeData[currentChallengeIndex]['solution'].length, "wooden");
-    availableLetters = List.from(
-      challengeData[currentChallengeIndex]['availableLetters'],
-    );
-  });
-}
+  void _initializeChallenge() {
+    // Ensure that the new challenge data is being loaded based on the updated index
+    setState(() {
+      solution = List.filled(
+          challengeData[currentChallengeIndex]['solution'].length, "wooden");
+      availableLetters = List.from(
+        challengeData[currentChallengeIndex]['availableLetters'],
+      );
+    });
+  }
 
   @override
   void dispose() {
@@ -700,19 +684,21 @@ void _initializeChallenge() {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                             Flexible(
-  child: VideoWidget(
-    challengeData[currentChallengeIndex]['urls'][
-        challengeData[currentChallengeIndex]['solution_vids'][0]],
-  ),
-),
-Flexible(
-  child: VideoWidget(
-    challengeData[currentChallengeIndex]['urls'][
-        challengeData[currentChallengeIndex]['solution_vids'][1]],
-  ),
-),
-          ],
+                              Flexible(
+                                child: VideoWidget(
+                                  challengeData[currentChallengeIndex]['urls'][
+                                      challengeData[currentChallengeIndex]
+                                          ['solution_vids'][0]],
+                                ),
+                              ),
+                              Flexible(
+                                child: VideoWidget(
+                                  challengeData[currentChallengeIndex]['urls'][
+                                      challengeData[currentChallengeIndex]
+                                          ['solution_vids'][1]],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -739,8 +725,8 @@ Flexible(
                           });
                         },
                         child: Container(
-                          width: screenWidth * 0.2,
-                          height: screenHeight * 0.1,
+                          width: screenWidth * 0.3,
+                          height: screenHeight * 0.12,
                           decoration: BoxDecoration(
                             color: Colors.grey,
                             borderRadius:
