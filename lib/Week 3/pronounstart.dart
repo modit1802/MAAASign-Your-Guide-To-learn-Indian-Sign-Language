@@ -13,7 +13,7 @@ class PronounStartScreen extends StatefulWidget {
 }
 
 class _PronounStartScreenState extends State<PronounStartScreen> {
-  bool _showGif = true; // State variable to control GIF visibility
+  bool _showGif = false; // State variable to control GIF visibility
   int? _selectedCardIndex;
   @override
   void initState() {

@@ -135,10 +135,10 @@ class _Week4EntryState extends State<Week4Entry> {
                   // Verb Card
                   _buildCard(
                     onTap: () => _handleCardTap(0, const VerbStartScreen()),
-                    imagePath: 'images/verbs_init.png',
+                    imagePath: 'images/sentence_struct.png',
                     color: const Color.fromARGB(255, 255, 255, 255),
-                    title: 'Verbs',
-                    description: 'Learn common verbs with interactive learning, quizzes, and bingo games!',
+                    title: 'Basic Sentence Structure',
+                    description: 'Learn Basic Sentence Structure in ISL with interactive learning, quizzes, and sequencing games!',
                     index: 0,
                   ),
 
@@ -147,23 +147,11 @@ class _Week4EntryState extends State<Week4Entry> {
                   // Noun Card
                   _buildCard(
                     onTap: () => _handleCardTap(1, const NounStartScreen()),
-                    imagePath: 'images/nouns.png',
+                    imagePath: 'images/sentence_formation.jpg',
                     color: Colors.white,
-                    title: 'Nouns',
-                    description: 'Learn nouns with interactive learning, quizzes, and bingo games!',
+                    title: 'Simple Sentence Formation',
+                    description: 'Learn Simple Sentence Formation in ISL with interactive learning, quizzes, and sequencing games!',
                     index: 1,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // Pronoun Card
-                  _buildCard(
-                    onTap: () => _handleCardTap(2, const PronounStartScreen()),
-                    imagePath: 'images/pronouns.png',
-                    color: Colors.white,
-                    title: 'Pronouns',
-                    description: 'Learn pronouns with interactive learning, quizzes, and bingo games!',
-                    index: 2,
                   ),
 
                   const SizedBox(height: 10),
@@ -174,7 +162,7 @@ class _Week4EntryState extends State<Week4Entry> {
                     imagePath: 'images/challenger.png',
                     color: Colors.white,
                     title: 'Challenger',
-                    description: 'Challenge yourself with verbs, nouns, and pronouns to pass Week 3 Challenge!',
+                    description: 'Challenge yourself to pass Week 4 Challenge!',
                     index: 3,
                   ),
                 ],

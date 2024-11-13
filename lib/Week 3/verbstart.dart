@@ -12,7 +12,7 @@ class VerbStartScreen extends StatefulWidget {
 }
 
 class _VerbStartScreenState extends State<VerbStartScreen> {
-  bool _showGif = true; // State variable to control GIF visibility
+  bool _showGif = false; // State variable to control GIF visibility
   int? _selectedCardIndex;
   @override
   void initState() {

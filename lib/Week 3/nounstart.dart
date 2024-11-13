@@ -11,7 +11,7 @@ class NounStartScreen extends StatefulWidget {
 }
 
 class _NounStartScreenState extends State<NounStartScreen> {
-  bool _showGif = true; // State variable to control GIF visibility
+  bool _showGif = false; // State variable to control GIF visibility
   int? _selectedCardIndex;
   @override
   void initState() {
