@@ -57,7 +57,7 @@ class _ChallengePageState extends State<ChallengePage> {
                 ?['score_challenger']
             ?.toString()??'0';
         print(score_challenger_week1);
-        score_challenger_week2 = result['week']?['week2']?['Score_Challenger_week2']
+        score_challenger_week2 = result['week']?['week2']?['Score_Challenger_Week2']
                 ?['score_challenger']
             ?.toString()??'0';
         score_challenger_week3=result['week']?['week3']?['Score_Challenger_Week3']
@@ -295,8 +295,7 @@ Widget build(BuildContext context) {
               SizedBox(
                 height: screenHeight * 0.5, // Adjust the height as needed
                 child: PageView(
-                  scrollDirection: Axis.vertical,
-
+                  scrollDirection: Axis.horizontal,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),

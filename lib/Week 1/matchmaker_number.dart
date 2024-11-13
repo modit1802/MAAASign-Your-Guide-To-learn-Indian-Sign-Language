@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 class Match_maker_numbers extends StatelessWidget {
   final int score;
 
-  const Match_maker_numbers({super.key, required this.score});
+  const Match_maker_numbers({Key? key, required this.score}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 250, 233, 215),
       body: Container(
-        decoration: const BoxDecoration(
-        ),
+        decoration: const BoxDecoration(),
         child: Stack(
           children: [
             AlphabetFruitMatch(score: score), // Pass the score to the widget
@@ -47,9 +46,15 @@ class AlphabetFruitMatch extends StatefulWidget {
   _AlphabetFruitMatchState createState() => _AlphabetFruitMatchState();
 }
 
-class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
-    with SingleTickerProviderStateMixin {
-    List<String> alphabetList = ['1', '2', '4', '5', '6'];
+class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTickerProviderStateMixin {
+  late int score;
+  late AnimationController _controller;
+  late Timer _ribbonTimer;
+  late Timer _buttonTimer;
+  bool showRibbon = false;
+  bool showNextStepButton = false;
+  bool showMagicEffect = false;
+ List<String> alphabetList = ['1', '2', '4', '5', '6'];
 
   // Matching logic for each number and object
   Map<String, String> matches = {
@@ -76,50 +81,62 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
     '4': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717830/icecream_ceyf4o.png',
     '5': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717826/five_a64ptj.png',
     '6': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717828/boys_ghv7pn.png',
+  };  // A map to track which images have been matched
+  Map<String, bool> matchedItems = {
+    '1': false,
+    '2': false,
+    '4': false,
+    '5': false,
+    '6': false,
   };
-  late int score;
-  bool showRibbon = false;
-  bool showNextStepButton = false;
-  late AnimationController _controller;
-  late Timer _ribbonTimer;
-  late Timer _buttonTimer;
-  bool showMagicEffect = false;
 
- @override
-void initState() {
-  super.initState();
-  _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(seconds: 2), // Set your desired duration
-  );
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    _showtutorialscreen();
-  });
-  score = widget.score;
-}
-  void _showtutorialscreen() {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => Tutorial_screen_for_challenger_matchmaker(
-        onBackPressed: () {
-          Navigator.pop(context); // Return to the current screen on back press
-        },
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize the score first
+    score = widget.score;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showtutorialscreen();
+    });
+    // Initialize the AnimationController
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2), // Set your desired duration
+    );
+
+    // Initialize the timers
+    //_ribbonTimer = Timer(Duration.zero, () {});
+    //_buttonTimer = Timer(Duration.zero, () {});
+
+    // Example of how to show ribbons (you can set the time according to your need)
+    
+  }
+
+    void _showtutorialscreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Tutorial_screen_for_challenger_matchmaker(
+          onBackPressed: () {
+            Navigator.pop(
+                context); // Return to the current screen on back press
+          },
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
+
 
   @override
   void dispose() {
     _controller.dispose();
-    _ribbonTimer.cancel();
+    _ribbonTimer.cancel(); // Ensure timer is canceled
     _buttonTimer.cancel();
     super.dispose();
   }
 
-  @override
-  @override
+ @override
 Widget build(BuildContext context) {
   return Stack(
     children: [
@@ -128,25 +145,21 @@ Widget build(BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 50),
-          Positioned(
-          top: 50,
-          left: 16,
-          child: Container(
-            height: 60,
-            width: 150,
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                "Score: $score",
-                style: const TextStyle(color: Colors.white,fontSize: 24),
+            Container(
+              height: 60,
+              width: 150,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  "Score: $score",
+                  style: const TextStyle(color: Colors.white, fontSize: 24),
+                ),
               ),
             ),
-          ),
-        ),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -155,31 +168,34 @@ Widget build(BuildContext context) {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: alphabetList
-                          .map((alphabet) => Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8.0), // Space between images
-                                child: Draggable<String>(
-                                  data: alphabet,
-                                  feedback: Image.network(
-                                    images[alphabet]!,
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
+                          .map(
+                            (alphabet) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Draggable<String>(
+                                data: alphabet,
+                                feedback: Image.network(
+                                  images[alphabet]!,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                                childWhenDragging: Container(),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 7,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
                                   ),
-                                  childWhenDragging: Container(),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 2,
-                                          blurRadius: 7,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Visibility(
+                                      visible: !matchedItems[alphabet]!,
                                       child: Image.network(
                                         images[alphabet]!,
                                         width: 90,
@@ -188,7 +204,9 @@ Widget build(BuildContext context) {
                                     ),
                                   ),
                                 ),
-                              ))
+                              ),
+                            ),
+                          )
                           .toList(),
                     ),
                   ),
@@ -208,7 +226,7 @@ Widget build(BuildContext context) {
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(color: const Color.fromARGB(255, 255, 255, 255)), // Border for card effect
+                                        border: Border.all(color: const Color.fromARGB(255, 255, 255, 255)),
                                         boxShadow: [
                                           BoxShadow(
                                             color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.5),
@@ -230,9 +248,7 @@ Widget build(BuildContext context) {
                                   ],
                                 );
                               },
-                              onWillAccept: (data) {
-                                return data == entry.key;
-                              },
+                              onWillAccept: (data) => data == entry.key,
                               onAccept: (data) {
                                 if (data == entry.key) {
                                   setState(() {
@@ -259,33 +275,23 @@ Widget build(BuildContext context) {
       ),
       if (showRibbon) const RibbonWidget(),
       if (showNextStepButton)
-        Center(
-          child: Positioned(
-            bottom: 20,
-            child: Padding(
-              padding: const EdgeInsets.all(108.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 252, 133, 37),
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.pop(context); // Back button with icon
-                },
-                child: const Icon(Icons.arrow_back), // Back icon
+        Padding(
+          padding: const EdgeInsets.all(108.0),
+          child: Center(
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 252, 133, 37),
+                foregroundColor: Colors.white,
               ),
+              onPressed: () {
+                Navigator.pop(context); // Back button with icon
+              },
+              child: const Icon(Icons.arrow_back), // Back icon
             ),
           ),
         ),
-      if (showMagicEffect)
-        Positioned.fill(
-          child: Image.network(
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727345820/star_cpjyys.gif', // Replace with your star effect URL
-            fit: BoxFit.cover,
-          ),
-        ),
       Positioned(
-        bottom: 20,
+        bottom: 10,
         left: 20,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -299,7 +305,7 @@ Widget build(BuildContext context) {
     ],
   );
 }
-
+ 
   void _skipAllAnimations() {
     // Simulate dropping all items one by one without increasing score
     Future.forEach(alphabetList.toList(), (alphabet) async {
@@ -315,17 +321,19 @@ Widget build(BuildContext context) {
   }
 
   void _completeGame() {
-    setState(() {
-      showRibbon = true;
-      showNextStepButton = true;
-    });
+    if (mounted) {
+  setState(() {
+    showRibbon = true;
+    showNextStepButton = true;
+  });
+}
     _controller.forward();
-    _ribbonTimer = Timer(const Duration(seconds: 3), () {
+    _ribbonTimer = Timer(const Duration(seconds: 2), () {
       setState(() {
         showRibbon = false;
       });
     });
-    _buttonTimer = Timer(const Duration(seconds: 5), () {
+    _buttonTimer = Timer(const Duration(seconds: 4), () {
       setState(() {
         showNextStepButton = false;
         Navigator.pop(context); // Automatically navigate back after completing the game
