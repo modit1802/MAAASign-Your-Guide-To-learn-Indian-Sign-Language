@@ -105,14 +105,14 @@ class _LearningZoneState extends State<LearningZone> {
                   ),
                 ),
                 SizedBox(height: screenWidth * 0.01),
-                Flexible(
-                  child: Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: screenWidth * 0.04,
-                      color: Colors.black87,
-                    ),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: screenWidth * 0.04,
+                    color: Colors.black87,
                   ),
+                    maxLines: 2,
+  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
