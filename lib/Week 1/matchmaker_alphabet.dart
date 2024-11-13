@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Match_maker_alphabet extends StatelessWidget {
   final int score;
-
+  
   const Match_maker_alphabet({super.key, required this.score});
 
   @override
@@ -88,8 +88,8 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch>
   bool showRibbon = false;
   bool showNextStepButton = false;
   late AnimationController _controller;
-  late Timer _ribbonTimer;
-  late Timer _buttonTimer;
+late Timer? _ribbonTimer;
+late Timer? _buttonTimer;
   bool showMagicEffect = false;
 
  @override
@@ -121,8 +121,8 @@ void initState() {
   @override
   void dispose() {
     _controller.dispose();
-    _ribbonTimer.cancel();
-    _buttonTimer.cancel();
+  _ribbonTimer?.cancel(); // Use null-aware operator to cancel only if initialized
+  _buttonTimer?.cancel();
     super.dispose();
   }
 

@@ -289,14 +289,10 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
             ),
           if (_showGif)
             Center(
-              child: Positioned(
-                child: Center(
-                  child: Image.asset(
-                    'images/week1screenbeg.gif',
-                    height: screenHeight * 0.45, // Responsive height for GIF
-                    fit: BoxFit.contain,
-                  ),
-                ),
+              child: Image.asset(
+                'images/week1screenbeg.gif',
+                height: screenHeight * 0.45, // Responsive height for GIF
+                fit: BoxFit.contain,
               ),
             ),
           if (_showGif)

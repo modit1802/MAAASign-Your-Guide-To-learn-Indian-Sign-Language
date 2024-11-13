@@ -8,7 +8,6 @@ import 'package:SignEase/Week%203/learnverbs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 class LearningZone extends StatefulWidget {
   const LearningZone({super.key});
 
@@ -56,137 +55,123 @@ class _LearningZoneState extends State<LearningZone> {
     }
   }
 
- Widget buildCustomCard({
-  required ImageProvider image,
-  required String title,
-  required String description,
-  required VoidCallback onTap,
-}) {
-  return LayoutBuilder(
-    builder: (context, constraints) {
-      double screenWidth = MediaQuery.of(context).size.width;
+  Widget buildCustomCard({
+    required ImageProvider image,
+    required String title,
+    required String description,
+    required VoidCallback onTap,
+  }) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double screenWidth = MediaQuery.of(context).size.width;
 
-      return GestureDetector(
-        onTap: onTap,
-        child: IntrinsicHeight(
-          // Wrap with IntrinsicHeight to adjust height based on content
+        return GestureDetector(
+          onTap: onTap,
           child: Container(
-            width: screenWidth * 0.8, // Adjust width based on screen size
-            padding: EdgeInsets.all(screenWidth * 0.03), // Responsive padding
-            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02), // Responsive margin
+            width: screenWidth * 0.8,
+            padding: EdgeInsets.all(screenWidth * 0.03),
+            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
               boxShadow: [
                 BoxShadow(
-                  color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.3),
+                  color: Colors.black.withOpacity(0.3),
                   spreadRadius: 2,
                   blurRadius: 5,
                   offset: Offset(0, 3),
                 ),
               ],
             ),
-            child: IntrinsicHeight(
-              child: Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: screenWidth * 0.6, // Responsive height for the image
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          image: image,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: screenWidth * 0.6,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: image,
+                      fit: BoxFit.cover,
                     ),
-                    SizedBox(height: screenWidth * 0.02), // Responsive spacing
-                    IntrinsicHeight(
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          fontSize: screenWidth * 0.05, // Responsive font size
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: screenWidth * 0.01), // Responsive spacing
-                    Flexible(
-                      child: IntrinsicHeight(
-                        child: Text(
-                          description,
-                          style: TextStyle(
-                            fontSize: screenWidth * 0.04, // Responsive font size for description
-                            color: Colors.black87,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                SizedBox(height: screenWidth * 0.02),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: screenWidth * 0.05,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: screenWidth * 0.01),
+                Flexible(
+                  child: Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.04,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 
-@override
-Widget build(BuildContext context) {
-  double screenWidth = MediaQuery.of(context).size.width;
-  double screenHeight = MediaQuery.of(context).size.height;
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
-  return Scaffold(
-    backgroundColor: const Color.fromARGB(255, 250, 233, 215),
-    body: Scrollbar(
-      thumbVisibility: true,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: screenWidth * 0.04,
-            vertical: screenHeight * 0.02,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                      fontSize: screenWidth * 0.06, color: Colors.black),
-                  children: <TextSpan>[
-                    const TextSpan(text: "Hi "),
-                    TextSpan(
-                      text: "$username",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth * 0.06,
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+      body: Scrollbar(
+        thumbVisibility: true,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: screenWidth * 0.04,
+              vertical: screenHeight * 0.02,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.06, color: Colors.black),
+                    children: <TextSpan>[
+                      const TextSpan(text: "Hi "),
+                      TextSpan(
+                        text: "$username",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: screenWidth * 0.06,
+                        ),
                       ),
-                    ),
-                    const TextSpan(text: " !"),
-                  ],
-                ),
-              ),
-              SizedBox(height: screenHeight * 0.02),
-              Center(
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 238, 126, 34),
-                    borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                      const TextSpan(text: " !"),
+                    ],
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.all(screenWidth * 0.04),
-                    child: IntrinsicHeight(
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                Center(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 238, 126, 34),
+                      borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(screenWidth * 0.04),
                       child: Row(
                         children: [
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   'Learning Zone',
@@ -207,29 +192,25 @@ Widget build(BuildContext context) {
                               ],
                             ),
                           ),
-                          Container(
-                            height: screenHeight * 0.16,
+                          SizedBox(
                             width: screenHeight * 0.16,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.circular(screenWidth * 0.04),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: screenWidth * 0.02,
-                                  offset: Offset(0, screenHeight * 0.01),
-                                ),
-                              ],
-                            ),
-                            child: Transform.translate(
-                              offset: Offset(0, -screenHeight * 0.03),
+                            height: screenHeight * 0.16,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(screenWidth * 0.04),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    blurRadius: screenWidth * 0.02,
+                                    offset: Offset(0, screenHeight * 0.01),
+                                  ),
+                                ],
+                              ),
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Image.asset(
                                   'images/childisl.png',
-                                  width: screenWidth * 0.4,
-                                  height: screenWidth * 0.4,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -240,40 +221,38 @@ Widget build(BuildContext context) {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: screenHeight * 0.02),
-              // PageView implementation
-              SizedBox(
-                height: screenHeight * 0.5, // Adjust the height as needed
-                child: PageView(
-                  children: [
-                    buildCustomCard(
-                      image: AssetImage('images/alphabetcardforlearn.jpg'),
-                      title: 'Learn Signing Alphabets',
-                      description:
-                          'Tap me to Start learning the Signs of Alphabets in Indian Sign Language.',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LearnAlphabet()),
-                        );
-                      },
-                    ),
-                    buildCustomCard(
-                      image: AssetImage('images/numbers.jpg'),
-                      title: 'Learn Signing Numbers',
-                      description:
-                          'Tap me to Start learning the Signs of Numbers in Indian Sign Language',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LearnNumbers()),
-                        );
-                      },
-                    ),
-                    buildCustomCard(
+                SizedBox(height: screenHeight * 0.02),
+                SizedBox(
+                  height: screenHeight * 0.5,
+                  child: PageView(
+                    children: [
+                      buildCustomCard(
+                        image: AssetImage('images/alphabetcardforlearn.jpg'),
+                        title: 'Learn Signing Alphabets',
+                        description:
+                            'Tap me to Start learning the Signs of Alphabets in Indian Sign Language.',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LearnAlphabet()),
+                          );
+                        },
+                      ),
+                      buildCustomCard(
+                        image: AssetImage('images/numbers.jpg'),
+                        title: 'Learn Signing Numbers',
+                        description:
+                            'Tap me to Start learning the Signs of Numbers in Indian Sign Language',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LearnNumbers()),
+                          );
+                        },
+                      ),
+                      buildCustomCard(
                       image: AssetImage('images/greetings.png'),
                       title: 'Learn Signing Greeting',
                       description:
@@ -286,7 +265,7 @@ Widget build(BuildContext context) {
                         );
                       },
                     ),
-                    buildCustomCard(
+                                         buildCustomCard(
                       image: AssetImage('images/Relation.jpg'),
                       title: 'Learn Signing Relation',
                       description:
@@ -299,7 +278,7 @@ Widget build(BuildContext context) {
                         );
                       },
                     ),
-                    buildCustomCard(
+                                          buildCustomCard(
                       image: AssetImage('images/verbs.png'),
                       title: 'Learn Signing Verbs',
                       description:
@@ -312,7 +291,7 @@ Widget build(BuildContext context) {
                         );
                       },
                     ),
-                    buildCustomCard(
+                                         buildCustomCard(
                       image: AssetImage('images/nouns.png'),
                       title: 'Learn Signing Nouns',
                       description:
@@ -325,7 +304,7 @@ Widget build(BuildContext context) {
                         );
                       },
                     ),
-                    buildCustomCard(
+                      buildCustomCard(
                       image: AssetImage('images/pronouns.png'),
                       title: 'Learn Signing Pronouns',
                       description:
@@ -338,14 +317,15 @@ Widget build(BuildContext context) {
                         );
                       },
                     ),
-                  ],
+                      // Add other cards similarly...
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }

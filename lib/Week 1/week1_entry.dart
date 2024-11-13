@@ -144,7 +144,6 @@ class _Week1EntryState extends State<Week1Entry> {
       ),
       body: Stack(
         children: [
-          _buildBackground(),
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -240,19 +239,6 @@ class _Week1EntryState extends State<Week1Entry> {
             _selectedCardIndex = null; // Reset after navigation
           }));
     });
-  }
-
-  // Background Builder
-  Widget _buildBackground() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.white],
-        ),
-      ),
-    );
   }
 
   // Card Builder for consistency
