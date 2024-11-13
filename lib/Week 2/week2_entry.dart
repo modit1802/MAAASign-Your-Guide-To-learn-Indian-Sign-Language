@@ -144,7 +144,6 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
 
       body: Stack(
         children: [
-          _buildBackground(),
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -241,18 +240,6 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
     });
   }
 
-  // Background Builder
-  Widget _buildBackground() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.white],
-        ),
-      ),
-    );
-  }
 
   // Card Builder for consistency
   Widget _buildCard({

@@ -1,6 +1,5 @@
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%202/learngreeting.dart';
-import 'package:SignEase/Week%202/greetings_learn.dart';
 import 'package:SignEase/Week 2/thirdstep.dart';
 import 'package:SignEase/Week 2/practiceassignment1.dart';
 import 'package:flutter/material.dart';
@@ -289,14 +288,10 @@ class _GreetingStartscreenState extends State<GreetingStartscreen> {
             ),
           if (_showGif)
             Center(
-              child: Positioned(
-                child: Center(
-                  child: Image.asset(
-                    'images/week1screenbeg.gif',
-                    height: screenHeight * 0.45, // Responsive height for GIF
-                    fit: BoxFit.contain,
-                  ),
-                ),
+              child: Image.asset(
+                'images/week1screenbeg.gif',
+                height: screenHeight * 0.45, // Responsive height for GIF
+                fit: BoxFit.contain,
               ),
             ),
           if (_showGif)

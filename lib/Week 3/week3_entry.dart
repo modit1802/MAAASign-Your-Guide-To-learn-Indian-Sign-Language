@@ -148,7 +148,6 @@ class _Week3EntryState extends State<Week3Entry> {
       body: Stack(
         children: [
    
-
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),

@@ -283,15 +283,10 @@ class _VerbStartScreenState extends State<VerbStartScreen> {
             ),
           if (_showGif)
             Center(
-              child: Positioned(
-
-                child: Center(
-                  child: Image.asset(
-                    'images/week1screenbeg.gif', // Update the image path here
-                    height: 350, // Set the height of the GIF
-                    fit: BoxFit.contain, // Adjust how the GIF is displayed
-                  ),
-                ),
+              child: Image.asset(
+                'images/week1screenbeg.gif', // Update the image path here
+                height: 350, // Set the height of the GIF
+                fit: BoxFit.contain, // Adjust how the GIF is displayed
               ),
             ),
           if (_showGif)
