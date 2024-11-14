@@ -16,7 +16,7 @@ class Week3Entry extends StatefulWidget {
 }
 
 class _Week3EntryState extends State<Week3Entry> {
-  bool _showGif = true;
+  bool _showGif = false;
   int? _selectedCardIndex;
   
   int _currentIndex = 0; // This keeps track of the selected tab index
@@ -162,7 +162,7 @@ class _Week3EntryState extends State<Week3Entry> {
                     imagePath: 'images/verbs_init.png',
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Verbs',
-                    description: 'Learn common verbs with the help of interactive learning material, quizzes and exciting bingo games!',
+                    description: 'Learn verbs with learning material, quizzes & bingo games!',
                     index: 0,
                   ),
 
@@ -174,7 +174,7 @@ class _Week3EntryState extends State<Week3Entry> {
                     imagePath: 'images/nouns.png',
                     color: Colors.white,
                     title: 'Nouns',
-                    description: 'Learn nouns with the help of interactive learning material, quizzes and exciting bingo games!',
+                    description: 'Learn nouns with learning material, quizzes & bingo games!',
                     index: 1,
                   ),
 
@@ -186,7 +186,7 @@ class _Week3EntryState extends State<Week3Entry> {
                     imagePath: 'images/pronouns.png',
                     color: Colors.white,
                     title: 'Pronouns',
-                    description: 'Learn pronouns with the help of interactive learning material, quizzes and exciting bingo games!',
+                    description: 'Learn pronouns with learning material, quizzes & bingo games!',
                     index: 2,
                   ),
 
@@ -198,7 +198,7 @@ class _Week3EntryState extends State<Week3Entry> {
                     imagePath: 'images/challenger.png',
                     color: Colors.white,
                     title: 'Challenger',
-                    description: 'Take on challenges and test your skills if you are confident with verbs, nouns and pronouns to pass Week 3 Challenge!',
+                    description: 'Challenge yourself to Pass Week 3 and Go to Week 4!',
                     index: 3,
                   ),
                 ],

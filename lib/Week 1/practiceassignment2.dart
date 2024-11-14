@@ -199,7 +199,7 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
                             height: screenHeight * 0.03,
                           ),
                           Text(
-                            "Identify the below signs of numbers",
+                            "Identify the correct number",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: isSmallScreen ? 18 : 24,

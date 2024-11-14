@@ -114,7 +114,6 @@ class _ChallengePageState extends State<ChallengePage> {
  Widget buildCustomCard({
   required ImageProvider image,
   required String title,
-  required String description,
   required VoidCallback onTap,
   required int scoreChallengerWeek1, // Add this parameter for score
 }) {
@@ -164,14 +163,6 @@ class _ChallengePageState extends State<ChallengePage> {
                     fontSize: screenWidth * 0.05, // Responsive font size
                     fontWeight: FontWeight.bold,
                     color: isScoreAbove650 ? Colors.white : Colors.black, // Text color change based on score
-                  ),
-                ),
-                SizedBox(height: screenWidth * 0.01), // Responsive spacing
-                Text(
-                  description,
-                  style: TextStyle(
-                    fontSize: screenWidth * 0.04, // Responsive font size for description
-                    color: isScoreAbove650 ? Colors.white : Colors.black87, // Text color change based on score
                   ),
                 ),
               ],
@@ -305,7 +296,7 @@ Widget build(BuildContext context) {
               ),
               // PageView implementation
               SizedBox(
-                height: screenHeight * 0.5, // Adjust the height as needed
+                height: screenHeight * 0.36, // Adjust the height as needed
                 child: PageView(
                   scrollDirection: Axis.horizontal,
 
@@ -315,8 +306,6 @@ Widget build(BuildContext context) {
                       child: buildCustomCard(
                         image: AssetImage('images/chapter1.png'),
                         title: 'Alphabets & Numbers',
-                        description:
-                            'Start practicing signing of alphabets and numbers in ISL',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -333,8 +322,6 @@ Widget build(BuildContext context) {
                       child: buildCustomCard(
                         image: AssetImage('images/chapter2.png'),
                         title: 'Greetings & Relations',
-                        description:
-                            'Start practicing signing of Greetings and Relations in ISL',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -351,8 +338,6 @@ Widget build(BuildContext context) {
                       child: buildCustomCard(
                         image: AssetImage('images/chapter3.png'),
                         title: 'Nouns,Verbs & Pronouns ',
-                        description:
-                            'Start practicing signing of Nouns , Verbs and Pronouns in ISL',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -367,9 +352,7 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/chapter4.png'),
-                        title: 'Simple Sentence Formation in ISL',
-                        description:
-                            'Start practicing signing of Simple sentences in ISL',
+                        title: 'Simple Sentence Formation',
                         onTap: () {
                           Navigator.push(
                             context,

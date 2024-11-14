@@ -58,69 +58,57 @@ class _LearningZoneState extends State<LearningZone> {
   Widget buildCustomCard({
     required ImageProvider image,
     required String title,
-    required String description,
     required VoidCallback onTap,
   }) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        double screenWidth = MediaQuery.of(context).size.width;
-
-        return GestureDetector(
-          onTap: onTap,
-          child: Container(
-            width: screenWidth * 0.8,
-            padding: EdgeInsets.all(screenWidth * 0.03),
-            margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
+    return GestureDetector(
+      onTap: onTap,
+    child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: screenWidth * 0.6,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: image,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Image section
+            Expanded(
+              flex: 3,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                child: Image(
+                  image: image,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-                SizedBox(height: screenWidth * 0.02),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: screenWidth * 0.05,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: screenWidth * 0.01),
-                Text(
-                  description,
-                  style: TextStyle(
-                    fontSize: screenWidth * 0.04,
-                    color: Colors.black87,
-                  ),
-                    maxLines: 2,
-  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+              ),
             ),
-          ),
-        );
-      },
+            // Title section
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -174,18 +162,10 @@ class _LearningZoneState extends State<LearningZone> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Learning Zone',
+                                  'Reviewing Zone',
                                   style: TextStyle(
                                     fontSize: screenWidth * 0.06,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(height: screenHeight * 0.01),
-                                Text(
-                                  'Learn to sign in Indian Sign Language with MAAA...',
-                                  style: TextStyle(
-                                    fontSize: screenWidth * 0.045,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -234,14 +214,12 @@ class _LearningZoneState extends State<LearningZone> {
                 ),
               ),
                 SizedBox(
-                  height: screenHeight * 0.5,
+                  height: 300,
                   child: PageView(
                     children: [
                       buildCustomCard(
                         image: AssetImage('images/alphabetcardforlearn.jpg'),
-                        title: 'Learn Signing Alphabets',
-                        description:
-                            'Tap me to Start learning the Signs of Alphabets in Indian Sign Language.',
+                        title: 'Review Signing Alphabets',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -252,9 +230,7 @@ class _LearningZoneState extends State<LearningZone> {
                       ),
                       buildCustomCard(
                         image: AssetImage('images/numbers.jpg'),
-                        title: 'Learn Signing Numbers',
-                        description:
-                            'Tap me to Start learning the Signs of Numbers in Indian Sign Language',
+                        title: 'Review Signing Numbers',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -265,9 +241,7 @@ class _LearningZoneState extends State<LearningZone> {
                       ),
                       buildCustomCard(
                       image: AssetImage('images/greetings.png'),
-                      title: 'Learn Signing Greeting',
-                      description:
-                          'Tap me to Start learning the Signs of Greetings in Indian Sign Language',
+                      title: 'Review Signing Greetings',
                       onTap: () {
                         Navigator.push(
                           context,
@@ -278,9 +252,7 @@ class _LearningZoneState extends State<LearningZone> {
                     ),
                                          buildCustomCard(
                       image: AssetImage('images/Relation.jpg'),
-                      title: 'Learn Signing Relation',
-                      description:
-                          'Tap me to Start learning the Signs of Relations in Indian Sign Language',
+                      title: 'Review Signing Relations',
                       onTap: () {
                         Navigator.push(
                           context,
@@ -291,9 +263,7 @@ class _LearningZoneState extends State<LearningZone> {
                     ),
                                           buildCustomCard(
                       image: AssetImage('images/verbs.png'),
-                      title: 'Learn Signing Verbs',
-                      description:
-                          'Tap me to Start learning the Signs of Verbs in Indian Sign Language',
+                      title: 'Review Signing Verbs',
                       onTap: () {
                         Navigator.push(
                           context,
@@ -304,9 +274,7 @@ class _LearningZoneState extends State<LearningZone> {
                     ),
                                          buildCustomCard(
                       image: AssetImage('images/nouns.png'),
-                      title: 'Learn Signing Nouns',
-                      description:
-                          'Tap me to Start learning the Signs of Nouns in Indian Sign Language',
+                      title: 'Review Signing Nouns',
                       onTap: () {
                         Navigator.push(
                           context,
@@ -317,9 +285,7 @@ class _LearningZoneState extends State<LearningZone> {
                     ),
                       buildCustomCard(
                       image: AssetImage('images/pronouns.png'),
-                      title: 'Learn Signing Pronouns',
-                      description:
-                          'Tap me to Start learning the Signs of Pronouns in Indian Sign Language',
+                      title: 'Review Signing Pronouns',
                       onTap: () {
                         Navigator.push(
                           context,

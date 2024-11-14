@@ -11,7 +11,7 @@ class RelationStartscreen extends StatefulWidget {
 }
 
 class _RelationStartscreenState extends State<RelationStartscreen> {
-  bool _showGif = true; // State variable to control GIF visibility
+  bool _showGif = false; // State variable to control GIF visibility
   int? _selectedCardIndex;
   int _currentIndex = 0;
   @override
@@ -252,8 +252,8 @@ Widget build(BuildContext context) {
                       onTap: () => _handleCardTap(1, PracticeAssignment2()),
                       imagePath: 'images/quiz.png',
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      title: 'Play Quiz',
-                      description: "Let's Play a simple Quiz consisting of one image question with 4 options. Test your knowledge of alphabets!",
+                      title: 'Pop Quiz !',
+                      description: "Identify the correct relation!",
                       index: 1,
                     ),
                     SizedBox(height: screenHeight * 0.02),
@@ -261,8 +261,8 @@ Widget build(BuildContext context) {
                       onTap: () => _handleCardTap(2, True_False_Challenge()),
                       imagePath: 'images/true_false.png',
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      title: 'Guess whether True or False',
-                      description: "True/False Challenge: Test your memory by guessing true false in this fun and engaging game!",
+                      title: 'Guess Right !',
+                      description: "Identify if it is the correct sign",
                       index: 2,
                     ),
                     SizedBox(height: screenHeight * 0.02),

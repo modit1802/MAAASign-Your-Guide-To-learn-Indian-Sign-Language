@@ -12,7 +12,7 @@ class GreetingStartscreen extends StatefulWidget {
 }
 
 class _GreetingStartscreenState extends State<GreetingStartscreen> {
-  bool _showGif = true; // State variable to control GIF visibility
+  bool _showGif = false; // State variable to control GIF visibility
   int? _selectedCardIndex;
   @override
   void initState() {
@@ -258,9 +258,9 @@ class _GreetingStartscreenState extends State<GreetingStartscreen> {
                         onTap: () => _handleCardTap(1, PracticeAssignment1()),
                         imagePath: 'images/quiz.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Play Quiz',
+                        title: 'Pop Quiz !',
                         description:
-                            "Let's Play a simple Quiz consist of one image question with 4 options Test your knowledge of greetings!",
+                            "Identify the correct greeting!",
                         index: 1,
                       ),
                       SizedBox(height: screenHeight * 0.015),
@@ -270,7 +270,7 @@ class _GreetingStartscreenState extends State<GreetingStartscreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Guess True or False',
                         description:
-                            "Guess whether True or False!",
+                            "Guess Right !!",
                         index: 2,
                       ),
                       SizedBox(height: screenHeight * 0.015),

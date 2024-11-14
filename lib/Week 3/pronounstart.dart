@@ -264,7 +264,7 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                         onTap: () => _handleCardTap(1, PronounQuiz()),
                         imagePath: 'images/quiz.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Play Quiz',
+                        title: 'Pop Quiz !',
                         description:
                             "Let's Play a simple Quiz consisting of one image question with 4 options Test your knowledge of pronouns!",
                         index: 1,

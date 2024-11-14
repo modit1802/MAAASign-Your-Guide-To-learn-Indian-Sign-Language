@@ -48,8 +48,6 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
     'Teacher' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/teacher_tqdyrt.mp4',
     'Home' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/home_ocdazz.mp4',
     'India' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/india_ludfnp.mp4',
-    'My Name Is' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/my_name_is_w54hkc.mp4',
-
   };
 
   late String targetNoun;

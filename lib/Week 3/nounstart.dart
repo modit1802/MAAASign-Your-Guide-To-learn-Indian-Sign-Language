@@ -256,8 +256,8 @@ class _NounStartScreenState extends State<NounStartScreen> {
                         onTap: () => _handleCardTap(1, NounQuiz()),
                         imagePath: 'images/quiz.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Play Quiz',
-                        description: "Let's Play a simple Quiz consisting of one image question with 4 options. Test your knowledge of nouns!",
+                        title: 'Pop Quiz !',
+                        description: "Identify the correct noun!",
                         index: 1,
                       ),
                       const SizedBox(height: 12), // Space between the cards

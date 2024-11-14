@@ -13,7 +13,7 @@ class Week2NewScreen extends StatefulWidget {
 }
 
 class _Week2NewScreenState extends State<Week2NewScreen> {
-  bool _showGif = true;
+  bool _showGif = false;
   int? _selectedCardIndex;
   int _currentIndex = 0; // This keeps track of the selected tab index
 
@@ -160,7 +160,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Greetings',
                     description:
-                        'Learn Greetings with the help of interactive learning material, quizes and exciting true false games!',
+                        'Learn Greetings with learning material, quizzes & guess games!',
                     index: 0,
                   ),
 
@@ -173,7 +173,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                     color: Colors.white,
                     title: 'Relations',
                     description:
-                        'Learn Relations with the help of interactive learning material, quizes and exciting true false games!',
+                        'Learn Relations with learning material, quizzes & guess games!',
                     index: 1,
                   ),
 
@@ -186,7 +186,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                     color: Colors.white,
                     title: 'Challenger',
                     description:
-                        'Take on challenges and test your skills if you are master with greetings and relations to Pass Week 2 Challenge!',
+                        'Challenge yourself to Pass Week 2 and Go to Week 3!',
                     index: 2,
                   ),
                 ],

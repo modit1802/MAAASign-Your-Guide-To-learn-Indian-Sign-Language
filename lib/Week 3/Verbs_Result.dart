@@ -208,7 +208,7 @@ class _Quiz_Verb_ResultScreenState
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Text(
-                                  "Your Score",
+                                  "Score",
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -216,7 +216,7 @@ class _Quiz_Verb_ResultScreenState
                                   ),
                                 ),
                                 Text(
-                                  "${widget.score} pts",
+                                  "${widget.score}",
                                   style: const TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
@@ -305,7 +305,7 @@ class _Quiz_Verb_ResultScreenState
                                         )));
                           },
                           child: _buildCircularButton(Icons.visibility,
-                              "Review Answer", Colors.brown),
+                              "Review Mistakes", Colors.brown),
                         ),
                         GestureDetector(
                           onTap: _shareScore,
@@ -339,7 +339,7 @@ class _Quiz_Verb_ResultScreenState
                                         )));
                           },
                           child: _buildCircularButton(Icons.assessment_outlined,
-                              "Incorrect Questions", Colors.grey),
+                              "Mistake Reattempt", Colors.grey),
                         ),
                       ],
                     ),

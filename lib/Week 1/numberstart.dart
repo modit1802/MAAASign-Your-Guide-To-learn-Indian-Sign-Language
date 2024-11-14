@@ -12,7 +12,7 @@ class NumberStartscreen extends StatefulWidget {
 }
 
 class _NumberStartscreenState extends State<NumberStartscreen> {
-  bool _showGif = true; // State variable to control GIF visibility
+  bool _showGif = false; // State variable to control GIF visibility
   int? _selectedCardIndex;
   @override
   void initState() {
@@ -258,9 +258,9 @@ class _NumberStartscreenState extends State<NumberStartscreen> {
                         onTap: () => _handleCardTap(1, PracticeAssignment2()),
                         imagePath: 'images/quiz.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Play Quiz',
+                        title: 'Pop Quiz !',
                         description:
-                            "Let's Play a simple Quiz consisting of one image question with 4 options. Test your knowledge of alphabets!",
+                            "Identify the correct number!",
                         index: 1,
                       ),
                       SizedBox(height: screenHeight * 0.02),
@@ -269,7 +269,7 @@ class _NumberStartscreenState extends State<NumberStartscreen> {
                             2, const Match_maker_numbers(score: 0)),
                         imagePath: 'images/match.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Guess the Perfect Pairs',
+                        title: 'Match It Up !',
                         description:
                             "Matchmaker's Challenge: Test your memory by pairing items before time runs out in this fun and engaging game!",
                         index: 2,

@@ -159,7 +159,7 @@ class _Week1EntryState extends State<Week1Entry> {
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Alphabets',
                     description:
-                        'Learn alphabets with the help of interactive learning material, quizes and exciting match games!',
+                        'Learn alphabets with learning material, quizzes & match games!',
                     index: 0,
                   ),
 
@@ -172,7 +172,7 @@ class _Week1EntryState extends State<Week1Entry> {
                     color: Colors.white,
                     title: 'Numbers',
                     description:
-                        'Learn Numbers with the help of interactive learning material, quizes and exciting match games!',
+                        'Learn Numbers with learning material, quizzes & match games!',
                     index: 1,
                   ),
 
@@ -185,7 +185,7 @@ class _Week1EntryState extends State<Week1Entry> {
                     color: Colors.white,
                     title: 'Challenger',
                     description:
-                        'Take on challenges and test your skills if you are master with alphabets and numbers to Pass Week 1 Challenge!',
+                        'Challenge yourself to Pass Week 1 and Go to Week 2!',
                     index: 2,
                   ),
                 ],

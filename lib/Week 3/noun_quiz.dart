@@ -102,11 +102,6 @@ class _NounQuizState extends State<NounQuiz> {
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/india_ludfnp.mp4',
       'solution': 'India'
     },
-    {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/my_name_is_w54hkc.mp4',
-      'solution': 'My Name Is'
-    },
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];

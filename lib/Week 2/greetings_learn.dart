@@ -10,7 +10,7 @@ class SentenceStartscreen extends StatefulWidget {
 }
 
 class _SentenceStartscreenState extends State<SentenceStartscreen> {
-  bool _showGif = true; // State variable to control GIF visibility
+  bool _showGif = false; // State variable to control GIF visibility
 
   @override
   void initState() {
