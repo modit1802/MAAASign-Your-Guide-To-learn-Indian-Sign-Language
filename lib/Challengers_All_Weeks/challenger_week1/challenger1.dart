@@ -38,7 +38,7 @@ class _ThirdGameState extends State<ThirdGame> {
   int attempts = 0;
   int maxAttempts = 3;
   int currentChallengeIndex = 0; // Track the current challenge index
-  bool showMoveToNextButton = false;
+  
   final ScrollController _scrollController = ScrollController();
 
   final List<Map<String, dynamic>> challengeData = [
@@ -103,7 +103,7 @@ class _ThirdGameState extends State<ThirdGame> {
         "H":
             "https://res.cloudinary.com/dfph32nsq/image/upload/v1727340551/H_hv5qdm.png",
         'dog':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/dog_rlu4zj.png',
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731558765/DOG_d7izah.png',
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -324,7 +324,7 @@ class _ThirdGameState extends State<ThirdGame> {
         .equals(solution, challengeData[currentChallengeIndex]['solution'])) {
       setState(() {
         isCorrectSolution = true;
-        showMoveToNextButton = true;
+     
         if (attempts == 0) {
           score += 100;
         } else if (attempts == 1) {
@@ -344,7 +344,7 @@ class _ThirdGameState extends State<ThirdGame> {
           solution =
               List.from(challengeData[currentChallengeIndex]['solution']);
           isCorrectSolution = false;
-          showMoveToNextButton = false;
+          
         incorrectQuestions.add({
           'question':challengeData[currentChallengeIndex]['question'],
           'solution':challengeData[currentChallengeIndex]['solution'],
@@ -353,7 +353,7 @@ class _ThirdGameState extends State<ThirdGame> {
         });
         } else {
           isCorrectSolution = false;
-          showMoveToNextButton = false;
+ 
         }
 
       });
@@ -367,7 +367,7 @@ class _ThirdGameState extends State<ThirdGame> {
         currentChallengeIndex++;
         attempts = 0;
         isCorrectSolution = null;
-        showMoveToNextButton = false;
+  
         _initializeChallenge();
       });
     } else {
@@ -500,12 +500,13 @@ class _ThirdGameState extends State<ThirdGame> {
                     height: screenHeight * 0.3,
                   ),
                 ),
-              SizedBox(height: screenHeight * 0.13),
+              SizedBox(height: screenHeight * 0.08),
               Stack(
                 alignment: Alignment.center,
                 children: [
                   Column(
                     children: [
+                      
                       _buildCard(
                         onTap: () {},
                         imagePath: '${currentChallengeIndex + 1}',
@@ -618,8 +619,7 @@ class _ThirdGameState extends State<ThirdGame> {
                   );
                 }).toList(),
               ),
-              SizedBox(height: screenHeight * 0.007),
-              if (!showMoveToNextButton)
+              
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -627,15 +627,6 @@ class _ThirdGameState extends State<ThirdGame> {
                   ),
                   onPressed: checkSolution,
                   child: const Text("Check Now"),
-                ),
-              if (showMoveToNextButton)
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: const Color.fromARGB(255, 252, 133, 37),
-                  ),
-                  onPressed: _moveToNextChallenge,
-                  child: const Text("Move to Next Challenge"),
                 ),
             ],
           ),

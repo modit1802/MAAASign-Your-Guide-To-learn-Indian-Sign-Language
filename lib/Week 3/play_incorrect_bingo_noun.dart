@@ -41,6 +41,7 @@ class _PLay_Incorrect_BingoState
   void _initializeVideo(String videoUrl) {
     _controller = VideoPlayerController.network(videoUrl)
       ..initialize().then((_) {
+        _controller.setVolume(0.0);
         setState(() {}); // Update the UI after initializing
       })
       ..setLooping(true)

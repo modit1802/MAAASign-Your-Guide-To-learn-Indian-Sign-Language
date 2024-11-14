@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:SignEase/Week%201/Tutorial_screen_for_challenger_matchmaker.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class Match_maker_numbers extends StatelessWidget {
   final int score;
@@ -93,13 +94,16 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
   @override
   void initState() {
     super.initState();
-
-    // Initialize the score first
     score = widget.score;
         WidgetsBinding.instance.addPostFrameCallback((_) {
       _showtutorialscreen();
     });
     // Initialize the AnimationController
+    alphabetList.shuffle(Random());
+
+    // Shuffle the right side (matches keys)
+    var shuffledKeys = matches.keys.toList()..shuffle(Random());
+    matches = Map.fromEntries(shuffledKeys.map((key) => MapEntry(key, matches[key]!)));
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2), // Set your desired duration

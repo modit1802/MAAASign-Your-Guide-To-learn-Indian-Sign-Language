@@ -32,6 +32,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   void _initializeController(String videoUrl) {
     _controller = VideoPlayerController.network(videoUrl)
       ..initialize().then((_) {
+        _controller.setVolume(0.0);
         setState(() {}); // Refresh the widget once the video is initialized
       })
       ..addListener(() {
@@ -299,8 +300,8 @@ class _Review_Incorrect_ChallengersState
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: List.generate(solution.length, (index) {
                           return Container(
-                            width: screenWidth * 0.2,
-                            height: screenHeight * 0.1,
+                            width: screenWidth * 0.3,
+                            height: screenHeight * 0.12,
                             decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius:

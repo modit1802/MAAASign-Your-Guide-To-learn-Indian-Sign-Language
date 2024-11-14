@@ -12,14 +12,46 @@ class PronounQuiz extends StatefulWidget {
 
 class _PronounQuizState extends State<PronounQuiz> {
   List<Map<String, dynamic>> questionsAndSolutions = [
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/I_jcee6z.mp4', 'solution': 'I'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/you_eyvdmd.mp4', 'solution': 'You'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/he_kldbgn.mp4', 'solution': 'He'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/she_xhozgj.mp4', 'solution': 'She'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/It_ws1bwe.mp4', 'solution': 'It'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/we_duowgj.mp4', 'solution': 'We'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530908/they_wmmoxf.mp4', 'solution': 'They'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410651/my_qnnkja.mp4', 'solution': 'My'},
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/I_jcee6z.mp4',
+      'solution': 'I'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/you_eyvdmd.mp4',
+      'solution': 'You'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/he_kldbgn.mp4',
+      'solution': 'He'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530905/she_xhozgj.mp4',
+      'solution': 'She'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530903/It_ws1bwe.mp4',
+      'solution': 'It'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530904/we_duowgj.mp4',
+      'solution': 'We'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530908/they_wmmoxf.mp4',
+      'solution': 'They'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410651/my_qnnkja.mp4',
+      'solution': 'My'
+    },
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];
@@ -76,16 +108,19 @@ class _PronounQuizState extends State<PronounQuiz> {
   void setOptionsForQuestion() {
     if (selectedQuestions.isNotEmpty) {
       currentOptions = generateOptions(selectedQuestions[0]['solution']);
-      videoController = VideoPlayerController.network(selectedQuestions[0]['question'])
-        ..initialize().then((_) {
-          setState(() {});
-          videoController?.play();
-        })
-        ..addListener(() {
-          if (videoController!.value.position == videoController!.value.duration) {
-            setState(() {});
-          }
-        });
+      videoController =
+          VideoPlayerController.network(selectedQuestions[0]['question'])
+            ..initialize().then((_) {
+              videoController?.setVolume(0.0);
+              setState(() {});
+              videoController?.play();
+            })
+            ..addListener(() {
+              if (videoController!.value.position ==
+                  videoController!.value.duration) {
+                setState(() {});
+              }
+            });
     }
   }
 
@@ -94,7 +129,9 @@ class _PronounQuizState extends State<PronounQuiz> {
     options.add(correctSolution);
 
     while (options.length < 4) {
-      String randomOption = questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]['solution'];
+      String randomOption =
+          questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]
+              ['solution'];
       if (!options.contains(randomOption)) {
         options.add(randomOption);
       }
@@ -107,7 +144,8 @@ class _PronounQuizState extends State<PronounQuiz> {
   List<Color> _cardColors = List.filled(4, Colors.white);
   List<Color> _textColors = List.filled(4, Colors.black);
 
-  void _answerQuestion(String selectedOption, String correctSolution, int index) {
+  void _answerQuestion(
+      String selectedOption, String correctSolution, int index) {
     setState(() {
       selectedOptionIndex = index;
       if (selectedOption == correctSolution) {
@@ -220,15 +258,18 @@ class _PronounQuizState extends State<PronounQuiz> {
                     padding: const EdgeInsets.all(16),
                     decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 252, 133, 37),
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(20)),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Transform.translate(
-                          offset: Offset(0, -screenHeight * 0.02), // Adjusted with MediaQuery
+                          offset: Offset(0,
+                              -screenHeight * 0.02), // Adjusted with MediaQuery
                           child: Padding(
-                            padding: EdgeInsets.only(bottom: screenHeight * 0.059),
+                            padding:
+                                EdgeInsets.only(bottom: screenHeight * 0.059),
                             child: Text(
                               'Quiz Mania',
                               style: TextStyle(
@@ -242,7 +283,10 @@ class _PronounQuizState extends State<PronounQuiz> {
                         ),
                         SizedBox(height: screenHeight * 0.001),
                         Transform.translate(
-                          offset: Offset(0, -screenHeight * 0.059), // Adjusted with MediaQuery
+                          offset: Offset(
+                              0,
+                              -screenHeight *
+                                  0.059), // Adjusted with MediaQuery
                           child: Text(
                             "Identify the signs for each pronoun",
                             style: TextStyle(
@@ -257,10 +301,12 @@ class _PronounQuizState extends State<PronounQuiz> {
                   ),
                   SizedBox(height: screenHeight * 0.02),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                     child: SingleChildScrollView(
                       child: Transform.translate(
-                        offset: Offset(0, -screenHeight * 0.17), // Adjusted with MediaQuery
+                        offset: Offset(0,
+                            -screenHeight * 0.17), // Adjusted with MediaQuery
                         child: Container(
                           height: screenHeight * 0.5,
                           width: screenWidth * 0.8,
@@ -279,7 +325,8 @@ class _PronounQuizState extends State<PronounQuiz> {
                                     style: TextStyle(
                                       fontSize: isSmallScreen ? 16 : 20,
                                       fontWeight: FontWeight.bold,
-                                      color: const Color.fromARGB(255, 206, 109, 30),
+                                      color: const Color.fromARGB(
+                                          255, 206, 109, 30),
                                     ),
                                   ),
                                 ),
@@ -292,11 +339,15 @@ class _PronounQuizState extends State<PronounQuiz> {
                                             alignment: Alignment.center,
                                             children: [
                                               AspectRatio(
-                                                aspectRatio: videoController!.value.aspectRatio,
-                                                child: VideoPlayer(videoController!),
+                                                aspectRatio: videoController!
+                                                    .value.aspectRatio,
+                                                child: VideoPlayer(
+                                                    videoController!),
                                               ),
-                                              if (videoController!.value.position ==
-                                                  videoController!.value.duration)
+                                              if (videoController!
+                                                      .value.position ==
+                                                  videoController!
+                                                      .value.duration)
                                                 IconButton(
                                                   icon: Icon(
                                                     Icons.replay,
@@ -304,7 +355,8 @@ class _PronounQuizState extends State<PronounQuiz> {
                                                     size: 30,
                                                   ),
                                                   onPressed: () {
-                                                    videoController!.seekTo(Duration.zero);
+                                                    videoController!
+                                                        .seekTo(Duration.zero);
                                                     videoController!.play();
                                                     setState(() {});
                                                   },
@@ -312,7 +364,8 @@ class _PronounQuizState extends State<PronounQuiz> {
                                             ],
                                           )
                                         : CircularProgressIndicator(
-                                            color: const Color.fromARGB(255, 189, 74, 2),
+                                            color: const Color.fromARGB(
+                                                255, 189, 74, 2),
                                           ),
                                   ),
                                 ),
@@ -324,9 +377,12 @@ class _PronounQuizState extends State<PronounQuiz> {
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.0001),
-                  for (int rowIndex = 0; rowIndex < (currentOptions.length / 2).ceil(); rowIndex++)
+                  for (int rowIndex = 0;
+                      rowIndex < (currentOptions.length / 2).ceil();
+                      rowIndex++)
                     Transform.translate(
-                      offset: Offset(0, -screenHeight * 0.16), // Adjusted with MediaQuery
+                      offset: Offset(
+                          0, -screenHeight * 0.16), // Adjusted with MediaQuery
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: screenWidth * 0.05,
@@ -343,7 +399,7 @@ class _PronounQuizState extends State<PronounQuiz> {
                         ),
                       ),
                     ),
-                    Transform.translate(
+                  Transform.translate(
                     offset: Offset(0, -screenHeight * 0.14),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -370,5 +426,4 @@ class _PronounQuizState extends State<PronounQuiz> {
             ),
     );
   }
-
-   }
+}

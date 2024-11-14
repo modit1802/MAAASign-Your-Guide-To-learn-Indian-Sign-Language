@@ -12,16 +12,56 @@ class PracticeAssignment2 extends StatefulWidget {
 
 class _PracticeAssignment2State extends State<PracticeAssignment2> {
   List<Map<String, dynamic>> questionsAndSolutions = [
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266842/baby_u_p1lbqp.mp4', 'solution': 'baby'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/mother_u_tkkg10.mp4', 'solution': 'mother'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266839/father_u_jdbajr.mp4', 'solution': 'father'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4}', 'solution': 'brother',},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266838/sister_u_wpybjz.mp4', 'solution': 'sister'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/people_u_t4403p.mp4', 'solution': 'people'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266835/friend_u_nfctlk.mp4', 'solution': 'friend'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/man_u_llmdsh.mp4', 'solution': 'man'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/girl_child_u_qnjmxl.mp4', 'solution': 'girl child'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266844/female_person_u_cgv3es.mp4', 'solution': 'female person'},
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266842/baby_u_p1lbqp.mp4',
+      'solution': 'baby'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/mother_u_tkkg10.mp4',
+      'solution': 'mother'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266839/father_u_jdbajr.mp4',
+      'solution': 'father'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4}',
+      'solution': 'brother',
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266838/sister_u_wpybjz.mp4',
+      'solution': 'sister'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/people_u_t4403p.mp4',
+      'solution': 'people'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266835/friend_u_nfctlk.mp4',
+      'solution': 'friend'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/man_u_llmdsh.mp4',
+      'solution': 'man'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/girl_child_u_qnjmxl.mp4',
+      'solution': 'girl child'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266844/female_person_u_cgv3es.mp4',
+      'solution': 'female person'
+    },
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];
@@ -78,16 +118,19 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
   void setOptionsForQuestion() {
     if (selectedQuestions.isNotEmpty) {
       currentOptions = generateOptions(selectedQuestions[0]['solution']);
-      videoController = VideoPlayerController.network(selectedQuestions[0]['question'])
-        ..initialize().then((_) {
-          setState(() {});
-          videoController?.play();
-        })
-        ..addListener(() {
-          if (videoController!.value.position == videoController!.value.duration) {
-            setState(() {});
-          }
-        });
+      videoController =
+          VideoPlayerController.network(selectedQuestions[0]['question'])
+            ..initialize().then((_) {
+              videoController?.setVolume(0.0);
+              setState(() {});
+              videoController?.play();
+            })
+            ..addListener(() {
+              if (videoController!.value.position ==
+                  videoController!.value.duration) {
+                setState(() {});
+              }
+            });
     }
   }
 
@@ -96,7 +139,9 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
     options.add(correctSolution);
 
     while (options.length < 4) {
-      String randomOption = questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]['solution'];
+      String randomOption =
+          questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]
+              ['solution'];
       if (!options.contains(randomOption)) {
         options.add(randomOption);
       }
@@ -109,7 +154,8 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
   List<Color> _cardColors = List.filled(4, Colors.white);
   List<Color> _textColors = List.filled(4, Colors.black);
 
-  void _answerQuestion(String selectedOption, String correctSolution, int index) {
+  void _answerQuestion(
+      String selectedOption, String correctSolution, int index) {
     setState(() {
       selectedOptionIndex = index;
       if (selectedOption == correctSolution) {
@@ -172,10 +218,10 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
       child: GestureDetector(
         onTap: selectedOptionIndex == -1
             ? () => _answerQuestion(
-          currentOptions[index],
-          selectedQuestions[0]['solution'],
-          index,
-        )
+                  currentOptions[index],
+                  selectedQuestions[0]['solution'],
+                  index,
+                )
             : null,
         child: Card(
           elevation: screenWidth < 600 ? 8 : 12,
@@ -214,163 +260,180 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       body: selectedQuestions.isNotEmpty
           ? SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: screenHeight * 0.35,
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 252, 133, 37),
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-              ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Transform.translate(
-                    offset: Offset(0, -screenHeight * 0.02), // Adjusted with MediaQuery
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: screenHeight * 0.059),
-                      child: Text(
-                        'Quiz Mania',
-                        style: TextStyle(
-                          fontFamily: 'RubikWetPaint',
-                          fontSize: isSmallScreen ? 32 : 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                  Container(
+                    height: screenHeight * 0.35,
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 252, 133, 37),
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(20)),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Transform.translate(
+                          offset: Offset(0,
+                              -screenHeight * 0.02), // Adjusted with MediaQuery
+                          child: Padding(
+                            padding:
+                                EdgeInsets.only(bottom: screenHeight * 0.059),
+                            child: Text(
+                              'Quiz Mania',
+                              style: TextStyle(
+                                fontFamily: 'RubikWetPaint',
+                                fontSize: isSmallScreen ? 32 : 40,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.001),
+                        Transform.translate(
+                          offset: Offset(
+                              0,
+                              -screenHeight *
+                                  0.059), // Adjusted with MediaQuery
+                          child: Text(
+                            "Identify the signs for each verb",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: isSmallScreen ? 18 : 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.02),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                    child: SingleChildScrollView(
+                      child: Transform.translate(
+                        offset: Offset(0,
+                            -screenHeight * 0.17), // Adjusted with MediaQuery
+                        child: Container(
+                          height: screenHeight * 0.5,
+                          width: screenWidth * 0.8,
+                          child: Card(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            elevation: 8,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Question ${6 - selectedQuestions.length + 1}/6',
+                                    style: TextStyle(
+                                      fontSize: isSmallScreen ? 16 : 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color.fromARGB(
+                                          255, 206, 109, 30),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: screenHeight * 0.43,
+                                  child: Center(
+                                    child: videoController != null &&
+                                            videoController!.value.isInitialized
+                                        ? Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              AspectRatio(
+                                                aspectRatio: videoController!
+                                                    .value.aspectRatio,
+                                                child: VideoPlayer(
+                                                    videoController!),
+                                              ),
+                                              if (videoController!
+                                                      .value.position ==
+                                                  videoController!
+                                                      .value.duration)
+                                                IconButton(
+                                                  icon: Icon(
+                                                    Icons.replay,
+                                                    color: Colors.white,
+                                                    size: 30,
+                                                  ),
+                                                  onPressed: () {
+                                                    videoController!
+                                                        .seekTo(Duration.zero);
+                                                    videoController!.play();
+                                                    setState(() {});
+                                                  },
+                                                ),
+                                            ],
+                                          )
+                                        : CircularProgressIndicator(
+                                            color: const Color.fromARGB(
+                                                255, 189, 74, 2),
+                                          ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.001),
+                  SizedBox(height: screenHeight * 0.0001),
+                  for (int rowIndex = 0;
+                      rowIndex < (currentOptions.length / 2).ceil();
+                      rowIndex++)
+                    Transform.translate(
+                      offset: Offset(
+                          0, -screenHeight * 0.16), // Adjusted with MediaQuery
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 0.05,
+                          vertical: screenHeight * 0.003,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            if (rowIndex * 2 < currentOptions.length)
+                              buildOptionCard(rowIndex * 2),
+                            if (rowIndex * 2 + 1 < currentOptions.length)
+                              buildOptionCard(rowIndex * 2 + 1),
+                          ],
+                        ),
+                      ),
+                    ),
                   Transform.translate(
-                    offset: Offset(0, -screenHeight * 0.059), // Adjusted with MediaQuery
-                    child: Text(
-                      "Identify the signs for each verb",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: isSmallScreen ? 18 : 24,
-                        fontWeight: FontWeight.bold,
+                    offset: Offset(0, -screenHeight * 0.14),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Container(
+                        height: MediaQuery.of(context).size.width * 0.08,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16.0),
+                          child: LinearProgressIndicator(
+                            value: (6 - selectedQuestions.length) / 6,
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                                Color.fromARGB(255, 189, 74, 2)),
+                            backgroundColor:
+                                const Color.fromARGB(255, 189, 187, 187),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
-            SizedBox(height: screenHeight * 0.02),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: SingleChildScrollView(
-                child: Transform.translate(
-                  offset: Offset(0, -screenHeight * 0.17), // Adjusted with MediaQuery
-                  child: Container(
-                    height: screenHeight * 0.5,
-                    width: screenWidth * 0.8,
-                    child: Card(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      elevation: 8,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Question ${6 - selectedQuestions.length + 1}/6',
-                              style: TextStyle(
-                                fontSize: isSmallScreen ? 16 : 20,
-                                fontWeight: FontWeight.bold,
-                                color: const Color.fromARGB(255, 206, 109, 30),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: screenHeight * 0.43,
-                            child: Center(
-                              child: videoController != null &&
-                                  videoController!.value.isInitialized
-                                  ? Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  AspectRatio(
-                                    aspectRatio: videoController!.value.aspectRatio,
-                                    child: VideoPlayer(videoController!),
-                                  ),
-                                  if (videoController!.value.position ==
-                                      videoController!.value.duration)
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.replay,
-                                        color: Colors.white,
-                                        size: 30,
-                                      ),
-                                      onPressed: () {
-                                        videoController!.seekTo(Duration.zero);
-                                        videoController!.play();
-                                        setState(() {});
-                                      },
-                                    ),
-                                ],
-                              )
-                                  : CircularProgressIndicator(
-                                color: const Color.fromARGB(255, 189, 74, 2),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.0001),
-            for (int rowIndex = 0; rowIndex < (currentOptions.length / 2).ceil(); rowIndex++)
-              Transform.translate(
-                offset: Offset(0, -screenHeight * 0.16), // Adjusted with MediaQuery
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * 0.05,
-                    vertical: screenHeight * 0.003,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      if (rowIndex * 2 < currentOptions.length)
-                        buildOptionCard(rowIndex * 2),
-                      if (rowIndex * 2 + 1 < currentOptions.length)
-                        buildOptionCard(rowIndex * 2 + 1),
-                    ],
-                  ),
-                ),
-              ),
-            Transform.translate(
-              offset: Offset(0, -screenHeight * 0.14),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.width * 0.08,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16.0),
-                    child: LinearProgressIndicator(
-                      value: (6 - selectedQuestions.length) / 6,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                          Color.fromARGB(255, 189, 74, 2)),
-                      backgroundColor:
-                      const Color.fromARGB(255, 189, 187, 187),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      )
+            )
           : const Center(
-        child: CircularProgressIndicator(),
-      ),
+              child: CircularProgressIndicator(),
+            ),
     );
   }
-
 }

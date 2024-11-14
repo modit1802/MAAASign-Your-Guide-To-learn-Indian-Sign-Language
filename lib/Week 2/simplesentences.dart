@@ -142,6 +142,7 @@ class _VideoWidgetState extends State<VideoWidget> {
     super.initState();
     _controller = VideoPlayerController.network(widget.videoUrl);
     _controller.initialize().then((_) {
+      _controller.setVolume(0.0);
       setState(() {
         _isInitialized = true;
       });

@@ -12,16 +12,56 @@ class True_False_Challenge extends StatefulWidget {
 
 class _True_False_ChallengeState extends State<True_False_Challenge> {
   List<Map<String, dynamic>> questionsAndSolutions = [
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266842/baby_u_p1lbqp.mp4', 'solution': 'baby'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/mother_u_tkkg10.mp4', 'solution': 'mother'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266839/father_u_jdbajr.mp4', 'solution': 'father'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4}', 'solution': 'brother',},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266838/sister_u_wpybjz.mp4', 'solution': 'sister'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/people_u_t4403p.mp4', 'solution': 'people'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266835/friend_u_nfctlk.mp4', 'solution': 'friend'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/man_u_llmdsh.mp4', 'solution': 'man'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/girl_child_u_qnjmxl.mp4', 'solution': 'girl child'},
-    {'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266844/female_person_u_cgv3es.mp4', 'solution': 'female person'},
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266842/baby_u_p1lbqp.mp4',
+      'solution': 'baby'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/mother_u_tkkg10.mp4',
+      'solution': 'mother'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266839/father_u_jdbajr.mp4',
+      'solution': 'father'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4}',
+      'solution': 'brother',
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266838/sister_u_wpybjz.mp4',
+      'solution': 'sister'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/people_u_t4403p.mp4',
+      'solution': 'people'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266835/friend_u_nfctlk.mp4',
+      'solution': 'friend'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/man_u_llmdsh.mp4',
+      'solution': 'man'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/girl_child_u_qnjmxl.mp4',
+      'solution': 'girl child'
+    },
+    {
+      'question':
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266844/female_person_u_cgv3es.mp4',
+      'solution': 'female person'
+    },
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];
@@ -76,14 +116,19 @@ class _True_False_ChallengeState extends State<True_False_Challenge> {
   void setQuestionAndAnswer() {
     if (selectedQuestions.isNotEmpty) {
       var question = selectedQuestions[0];
-      displayedAnswer = random.nextBool() ? question['solution'] : questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]['solution'];
+      displayedAnswer = random.nextBool()
+          ? question['solution']
+          : questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]
+              ['solution'];
       videoController = VideoPlayerController.network(question['question'])
         ..initialize().then((_) {
+          videoController?.setVolume(0.0);
           setState(() {});
           videoController?.play();
         })
         ..addListener(() {
-          if (videoController!.value.position == videoController!.value.duration) {
+          if (videoController!.value.position ==
+              videoController!.value.duration) {
             setState(() {});
           }
         });
@@ -147,154 +192,163 @@ class _True_False_ChallengeState extends State<True_False_Challenge> {
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       body: selectedQuestions.isNotEmpty
           ? SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: screenHeight * 0.35,
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 252, 133, 37),
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-              ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: screenHeight * 0.05),
-                    child: Text(
-                      'Quiz Mania',
-                      style: TextStyle(
-                        fontFamily: 'RubikWetPaint',
-                        fontSize: isSmallScreen ? 32 : 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                  Container(
+                    height: screenHeight * 0.35,
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 252, 133, 37),
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(20)),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: screenHeight * 0.05),
+                          child: Text(
+                            'Quiz Mania',
+                            style: TextStyle(
+                              fontFamily: 'RubikWetPaint',
+                              fontSize: isSmallScreen ? 32 : 40,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.02),
+                        Text(
+                          "Identify if the answer is correct",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: isSmallScreen ? 18 : 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  Text(
-                    "Identify if the answer is correct",
-                    style: TextStyle(
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                    child: Card(
                       color: Colors.white,
-                      fontSize: isSmallScreen ? 18 : 24,
-                      fontWeight: FontWeight.bold,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      elevation: 8,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Question ${6 - selectedQuestions.length + 1}/6',
+                              style: TextStyle(
+                                fontSize: isSmallScreen ? 16 : 20,
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromARGB(255, 206, 109, 30),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            height: screenHeight * 0.25,
+                            child: Center(
+                              child: videoController != null &&
+                                      videoController!.value.isInitialized
+                                  ? Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        AspectRatio(
+                                          aspectRatio: videoController!
+                                              .value.aspectRatio,
+                                          child: VideoPlayer(videoController!),
+                                        ),
+                                        if (videoController!.value.position ==
+                                            videoController!.value.duration)
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.replay,
+                                              color: Colors.white,
+                                              size: 30,
+                                            ),
+                                            onPressed: () {
+                                              videoController!
+                                                  .seekTo(Duration.zero);
+                                              videoController!.play();
+                                              setState(() {});
+                                            },
+                                          ),
+                                      ],
+                                    )
+                                  : CircularProgressIndicator(
+                                      color:
+                                          const Color.fromARGB(255, 189, 74, 2),
+                                    ),
+                            ),
+                          ),
+                          SizedBox(height: screenHeight * 0.02),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              displayedAnswer,
+                              style: TextStyle(
+                                fontSize: isSmallScreen ? 16 : 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: screenHeight * 0.02),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 191, 101, 3),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                onPressed: () => _answerQuestion(true),
+                                child: Text(
+                                  'True',
+                                  style: TextStyle(
+                                    fontSize: isSmallScreen ? 16 : 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 191, 101, 3),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                onPressed: () => _answerQuestion(false),
+                                child: Text(
+                                  'False',
+                                  style: TextStyle(
+                                    fontSize: isSmallScreen ? 16 : 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: screenHeight * 0.02),
+                        ],
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
-            ),
-            SizedBox(height: screenHeight * 0.02),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: Card(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                elevation: 8,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Question ${6 - selectedQuestions.length + 1}/6',
-                        style: TextStyle(
-                          fontSize: isSmallScreen ? 16 : 20,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 206, 109, 30),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: screenHeight * 0.25,
-                      child: Center(
-                        child: videoController != null && videoController!.value.isInitialized
-                            ? Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            AspectRatio(
-                              aspectRatio: videoController!.value.aspectRatio,
-                              child: VideoPlayer(videoController!),
-                            ),
-                            if (videoController!.value.position == videoController!.value.duration)
-                              IconButton(
-                                icon: Icon(
-                                  Icons.replay,
-                                  color: Colors.white,
-                                  size: 30,
-                                ),
-                                onPressed: () {
-                                  videoController!.seekTo(Duration.zero);
-                                  videoController!.play();
-                                  setState(() {});
-                                },
-                              ),
-                          ],
-                        )
-                            : CircularProgressIndicator(
-                          color: const Color.fromARGB(255, 189, 74, 2),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: screenHeight * 0.02),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        displayedAnswer,
-                        style: TextStyle(
-                          fontSize: isSmallScreen ? 16 : 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: screenHeight * 0.02),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 191, 101, 3),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          onPressed: () => _answerQuestion(true),
-                          child: Text(
-                            'True',
-                            style: TextStyle(
-                              fontSize: isSmallScreen ? 16 : 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 191, 101, 3),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          onPressed: () => _answerQuestion(false),
-                          child: Text(
-                            'False',
-                            style: TextStyle(
-                              fontSize: isSmallScreen ? 16 : 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: screenHeight * 0.02),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      )
+            )
           : Center(child: CircularProgressIndicator()),
     );
   }

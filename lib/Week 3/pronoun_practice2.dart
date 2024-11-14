@@ -262,6 +262,7 @@ class _VideoTileState extends State<VideoTile> {
   void _initializeController() {
     _controller = VideoPlayerController.network(widget.url)
       ..initialize().then((_) {
+        _controller.setVolume(0.0);
         setState(() {});
       });
 
