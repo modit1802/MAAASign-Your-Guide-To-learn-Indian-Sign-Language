@@ -248,7 +248,7 @@ Widget build(BuildContext context) {
                                 ),
                                 SizedBox(height: screenHeight * 0.01),
                                 Text(
-                                  'Test your knowledge of Indian Sign language with MAAA...',
+                                  'Test your knowledge of Indian Sign language (ISL) with MAAA...',
                                   style: TextStyle(
                                     fontSize: screenWidth * 0.045,
                                     color: Colors.white,
@@ -292,6 +292,17 @@ Widget build(BuildContext context) {
                 ),
               ),
               SizedBox(height: screenHeight * 0.02),
+              Padding(
+                padding: EdgeInsets.all(screenWidth * 0.04),
+                child: Text(
+                  "scroll horizontally ➡️ ...",
+                  style: TextStyle(
+                    fontSize: screenHeight * 0.02, // Responsive font size
+                    color: Color.fromARGB(255, 113, 113, 113),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
               // PageView implementation
               SizedBox(
                 height: screenHeight * 0.5, // Adjust the height as needed
@@ -303,9 +314,9 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/chapter1.png'),
-                        title: 'Week 1',
+                        title: 'Alphabets & Numbers',
                         description:
-                            'Tap me to Start the test based upon the Signs of Alphabets & Numbers in Indian Sign Language.',
+                            'Start practicing signing of alphabets and numbers in ISL',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -321,9 +332,9 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/chapter2.png'),
-                        title: 'Week 2',
+                        title: 'Greetings & Relations',
                         description:
-                            'Tap me to Start the test based upon the Signs of Greetings  & Relation in Indian Sign Language.',
+                            'Start practicing signing of Greetings and Relations in ISL',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -339,9 +350,9 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/chapter3.png'),
-                        title: 'Week 3',
+                        title: 'Nouns,Verbs & Pronouns ',
                         description:
-                            'Tap me to Start the test based upon the Signs of Verbs,Nouns & Pronouns in Indian Sign Language.',
+                            'Start practicing signing of Nouns , Verbs and Pronouns in ISL',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -356,9 +367,9 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/chapter4.png'),
-                        title: 'Week 4',
+                        title: 'Simple Sentence Formation in ISL',
                         description:
-                            'Tap me to Start the test based upon the Simple Sentence formatation in Indian Sign Language.',
+                            'Start practicing signing of Simple sentences in ISL',
                         onTap: () {
                           Navigator.push(
                             context,

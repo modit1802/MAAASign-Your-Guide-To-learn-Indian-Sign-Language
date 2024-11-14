@@ -222,6 +222,17 @@ class _LearningZoneState extends State<LearningZone> {
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.02),
+                Padding(
+                padding: EdgeInsets.all(screenWidth * 0.04),
+                child: Text(
+                  "scroll horizontally ➡️ ...",
+                  style: TextStyle(
+                    fontSize: screenHeight * 0.02, // Responsive font size
+                    color: Color.fromARGB(255, 113, 113, 113),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
                 SizedBox(
                   height: screenHeight * 0.5,
                   child: PageView(
