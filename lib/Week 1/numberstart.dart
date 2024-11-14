@@ -248,7 +248,7 @@ class _NumberStartscreenState extends State<NumberStartscreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Review Signing Numbers',
                         description:
-                            'Review Signing Numbers with the help of interactive learning material!',
+                            'With interactive learning material!',
                         index: 0,
                       ),
                       SizedBox(
@@ -271,7 +271,7 @@ class _NumberStartscreenState extends State<NumberStartscreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Match It Up !',
                         description:
-                            "Matchmaker's Challenge: Test your memory by pairing items before time runs out in this fun and engaging game!",
+                            "Pair the alphabets with items",
                         index: 2,
                       ),
                       SizedBox(height: screenHeight * 0.02),

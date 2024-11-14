@@ -237,14 +237,6 @@ Widget build(BuildContext context) {
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(height: screenHeight * 0.01),
-                                Text(
-                                  'Test your knowledge of Indian Sign language (ISL) with MAAA...',
-                                  style: TextStyle(
-                                    fontSize: screenWidth * 0.045,
-                                    color: Colors.white,
-                                  ),
-                                ),
                               ],
                             ),
                           ),

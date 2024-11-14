@@ -247,7 +247,7 @@ class _VerbStartScreenState extends State<VerbStartScreen> {
                         imagePath: 'images/verbs.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Review Signing Verbs',
-                        description: 'Review Signing Verbs with the help of interactive learning material!',
+                        description: 'With interactive learning material!',
                         index: 0,
                       ),
                       const SizedBox(height: 12), // Space between the cards

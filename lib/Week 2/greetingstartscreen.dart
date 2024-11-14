@@ -250,7 +250,7 @@ class _GreetingStartscreenState extends State<GreetingStartscreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Review Signing Greetings',
                         description:
-                            'Learn Signing Greetings with the help of interactive learning material!',
+                            'With interactive learning material!',
                         index: 0,
                       ),
                       SizedBox(height: screenHeight * 0.015),
@@ -268,9 +268,9 @@ class _GreetingStartscreenState extends State<GreetingStartscreen> {
                         onTap: () => _handleCardTap(2, PracticeAssignment2()),
                         imagePath: 'images/true_false.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Guess True or False',
+                        title: 'Guess Right !',
                         description:
-                            "Guess Right !!",
+                            "Identify if it is the correct sign",
                         index: 2,
                       ),
                       SizedBox(height: screenHeight * 0.015),

@@ -58,7 +58,7 @@ class GreetingGifs extends StatefulWidget {
 class _GreetingGifsState extends State<GreetingGifs> {
   final Map<String, String> relationGifs = const {
     'girl_child': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730267226/girl_child_size_reduced_ai2wft.mp4',
-    'female_person': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730267229/female_person_size_reduced_egcwvc.mp4',
+    'female_person': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731604294/Female_Person_Compound_eosq00.mp4',
   };
 
   int _currentIndex = 0;

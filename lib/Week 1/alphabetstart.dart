@@ -250,7 +250,7 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Review Signing Alphabets',
                         description:
-                            'Review Signing Alphabets with the help of interactive learning material!',
+                            'With interactive learning material!',
                         index: 0,
                       ),
                       SizedBox(height: screenHeight * 0.015),
@@ -271,7 +271,7 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Match It Up !',
                         description:
-                            "Matchmaker's Challenge: Test your memory by pairing items before time runs out in this fun and engaging game!",
+                            "Pair the alphabets with items",
                         index: 2,
                       ),
                       SizedBox(height: screenHeight * 0.015),

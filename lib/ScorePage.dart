@@ -273,14 +273,6 @@ Widget build(BuildContext context) {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(height: screenHeight * 0.01), // Responsive spacing
-                              Text(
-                                'Tap on the week number to view the progress report',
-                                style: TextStyle(
-                                  fontSize: screenHeight * 0.02, // Responsive font size
-                                  color: Colors.white,
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -338,7 +330,7 @@ Widget build(BuildContext context) {
                   color: Colors.white,
                   title: 'Week 1',
                   description:
-                      'Click me ! To see the detailed score of week 1',
+                      'See the detailed score!',
                   index: 2,
                   score: int.parse(score_challenger!),
                 ),
@@ -348,7 +340,7 @@ Widget build(BuildContext context) {
                   color: Colors.white,
                   title: 'Week 2',
                   description:
-                  'Click me ! To see the detailed score of week 2',
+                  'See the detailed score!',
                   index: 3,
                   score: int.parse(score_challenger_week2!),
                 ),
@@ -358,7 +350,7 @@ Widget build(BuildContext context) {
                   color: Colors.white,
                   title: 'Week 3',
                   description:
-                  'Click me ! To see the detailed score of week 3',
+                  'See the detailed score!',
                   index: 1,
                   score: int.parse(score_challenger_week3!),
                 ),

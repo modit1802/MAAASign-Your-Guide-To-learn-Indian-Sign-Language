@@ -248,7 +248,7 @@ class _NounStartScreenState extends State<NounStartScreen> {
                         imagePath: 'images/verbs.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Review Signing Nouns',
-                        description: 'Review Signing Nouns with the help of interactive learning material!',
+                        description: 'With interactive learning material!',
                         index: 0,
                       ),
                       const SizedBox(height: 12), // Space between the cards
@@ -266,7 +266,7 @@ class _NounStartScreenState extends State<NounStartScreen> {
                         imagePath: 'images/bingo.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Bingo Bonanza!',
-                        description: "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card.",
+                        description: "Watch the clips, guess the word, and mark your card.",
                         index: 2,
                       ),
                       const SizedBox(height: 12),

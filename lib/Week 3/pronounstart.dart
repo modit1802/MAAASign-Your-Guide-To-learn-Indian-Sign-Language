@@ -256,7 +256,7 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Review Signing Pronouns',
                         description:
-                            'Review Signing Pronouns with the help of interactive learning material!',
+                            'With interactive learning material!',
                         index: 0,
                       ),
                       const SizedBox(height: 12), // Space between the cards
@@ -266,7 +266,7 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Pop Quiz !',
                         description:
-                            "Let's Play a simple Quiz consisting of one image question with 4 options Test your knowledge of pronouns!",
+                            "Identify the correct pronoun!",
                         index: 1,
                       ),
                       const SizedBox(height: 12),
@@ -276,7 +276,7 @@ class _PronounStartScreenState extends State<PronounStartScreen> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Bingo Bonanza!',
                         description:
-                            "Get ready for a video-packed bingo adventure! Watch the clips, guess the word, and mark your card.",
+                            "Watch the clips, guess the word, and mark your card.",
                         index: 2,
                       ),
                       const SizedBox(height: 12),

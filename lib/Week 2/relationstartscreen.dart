@@ -244,7 +244,7 @@ Widget build(BuildContext context) {
                       imagePath: 'images/Relation.png',
                       color: const Color.fromARGB(255, 255, 255, 255),
                       title: 'Review Signing Relation',
-                      description: 'Review Signing Relations with the help of interactive learning material!',
+                      description: 'With interactive learning material!',
                       index: 0,
                     ),
                     SizedBox(height: screenHeight * 0.02), // Adjust space between widgets
