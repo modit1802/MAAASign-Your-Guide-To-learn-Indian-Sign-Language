@@ -275,19 +275,38 @@ Widget build(BuildContext context) {
               ),
               SizedBox(height: screenHeight * 0.02),
               Padding(
-                padding: EdgeInsets.all(screenWidth * 0.04),
-                child: Text(
-                  "scroll horizontally ➡️ ...",
-                  style: TextStyle(
-                    fontSize: screenHeight * 0.02, // Responsive font size
-                    color: Color.fromARGB(255, 113, 113, 113),
-                    fontWeight: FontWeight.bold,
-                  ),
+                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Add an arrow icon
+                    Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.grey,
+                      size: screenWidth * 0.04, // Responsive icon size
+                    ),
+                    SizedBox(width: screenWidth * 0.02), // Add spacing between text and icons
+                    Text(
+                      "Scroll horizontally",
+                      style: TextStyle(
+                        fontSize: screenHeight * 0.02, // Responsive font size
+                        color: Color.fromARGB(255, 113, 113, 113),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(width: screenWidth * 0.02), // Add spacing
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.grey,
+                      size: screenWidth * 0.04, // Responsive icon size
+                    ),
+                  ],
                 ),
               ),
+
               // PageView implementation
               SizedBox(
-                height: screenHeight * 0.36, // Adjust the height as needed
+                height: screenHeight * 0.4, // Adjust the height as needed
                 child: PageView(
                   scrollDirection: Axis.horizontal,
 

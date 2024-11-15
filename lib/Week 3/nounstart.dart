@@ -19,74 +19,123 @@ class _NounStartScreenState extends State<NounStartScreen> {
   }
 
   // Method to check if the GIF has been shown before
- Widget _buildCard({
-  required VoidCallback onTap,
-  required String imagePath,
-  required Color color,
-  required String title,
-  required String description,
-  required int index,
-}) {
-  final bool isSelected = _selectedCardIndex == index;
-  // Get the screen width and height
-  final mediaQuery = MediaQuery.of(context);
-  final screenWidth = mediaQuery.size.width;
+  Widget _buildCard({
+    required VoidCallback onTap,
+    required String imagePath,
+    required Color color,
+    required String title,
+    required String description,
+    required int index,
+  }) {
+    final bool isSelected = _selectedCardIndex == index;
 
-  return GestureDetector(
-    onTap: onTap,
-    child: Card(
-      elevation: 10,
-      color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          // Set height based on screen height
-          height: screenWidth < 600 ? 120 : 140, // Adjust height for smaller screens
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  imagePath,
-                  // Adjust image size for smaller screens
-                  width: screenWidth < 600 ? 60 : 80,
-                  height: screenWidth < 600 ? 60 : 80,
-                  fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 10,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77): color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            height: 140,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    imagePath,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: screenWidth < 600 ? 16 : 18, // Adjust title size
-                        fontWeight: FontWeight.bold,
-                        color: isSelected ? Colors.white : Colors.black,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      description,
-                      style: TextStyle(
-                        fontSize: screenWidth < 600 ? 12 : 14, // Adjust description size
-                        color: isSelected ? Colors.white : Colors.black,
+                      const SizedBox(height: 8),
+                      Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
+  Widget _buildCard2({
+    required VoidCallback onTap,
+    required String imagePath,
+    required Color color,
+    required String title,
+    required int index,
+  }) {
+    final bool isSelected = _selectedCardIndex == index;
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 10,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            height: 140,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    imagePath,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   void _handleCardTap(int index, Widget nextPage) {
     setState(() {
@@ -243,12 +292,11 @@ class _NounStartScreenState extends State<NounStartScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(height: screenHeight*0.14),
-                      _buildCard(
+                      _buildCard2(
                         onTap: () => _handleCardTap(0, const LearnNouns()),
                         imagePath: 'images/verbs.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Review Signing Nouns',
-                        description: 'With interactive learning material!',
                         index: 0,
                       ),
                       const SizedBox(height: 12), // Space between the cards

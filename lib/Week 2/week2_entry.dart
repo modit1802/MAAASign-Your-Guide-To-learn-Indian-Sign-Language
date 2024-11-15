@@ -160,7 +160,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Greetings',
                     description:
-                        'Learn Greetings with learning material, quizzes & guess games!',
+                        'Learn and practice signing greetings',
                     index: 0,
                   ),
 
@@ -173,7 +173,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                     color: Colors.white,
                     title: 'Relations',
                     description:
-                        'Learn Relations with learning material, quizzes & guess games!',
+                        'Learn and practice signing relations',
                     index: 1,
                   ),
 

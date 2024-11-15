@@ -138,7 +138,7 @@ class _Week4EntryState extends State<Week4Entry> {
                     imagePath: 'images/sentence_struct.png',
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Basic Sentence Structure',
-                    description: 'Learn Basic Sentence Structure in ISL with interactive learning, quizzes, and sequencing games!',
+                    description: 'Learn and practice Basic Sentence Structure in ISL',
                     index: 0,
                   ),
 
@@ -150,7 +150,7 @@ class _Week4EntryState extends State<Week4Entry> {
                     imagePath: 'images/sentence_formation.jpg',
                     color: Colors.white,
                     title: 'Simple Sentence Formation',
-                    description: 'Learn Simple Sentence Formation in ISL with interactive learning, quizzes, and sequencing games!',
+                    description: 'Learn and practice Simple Sentence Formation in ISL',
                     index: 1,
                   ),
 

@@ -72,7 +72,7 @@ class _RelationStartscreenState extends State<RelationStartscreen> {
                           fontSize: 14,
                           color: isSelected ? Colors.white : Colors.black,
                         ),
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.left,
                       ),
                     ],
                   ),
@@ -84,6 +84,60 @@ class _RelationStartscreenState extends State<RelationStartscreen> {
       ),
     );
   }
+  Widget _buildCard2({
+    required VoidCallback onTap,
+    required String imagePath,
+    required Color color,
+    required String title,
+    required int index,
+  }) {
+    final bool isSelected = _selectedCardIndex == index;
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 10,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            height: 140,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    imagePath,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   void _handleCardTap(int index, Widget nextPage) {
     setState(() {
       _selectedCardIndex = index;
@@ -239,12 +293,11 @@ Widget build(BuildContext context) {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(height: screenHeight * 0.14), // Adjust space between widges
-                    _buildCard(
+                    _buildCard2(
                       onTap: () => _handleCardTap(0, const SentenceStartscreen()),
                       imagePath: 'images/Relation.png',
                       color: const Color.fromARGB(255, 255, 255, 255),
                       title: 'Review Signing Relation',
-                      description: 'With interactive learning material!',
                       index: 0,
                     ),
                     SizedBox(height: screenHeight * 0.02), // Adjust space between widgets

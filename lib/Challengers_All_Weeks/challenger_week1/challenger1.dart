@@ -654,7 +654,7 @@ class _ThirdGameState extends State<ThirdGame> {
         Positioned(
           top: screenHeight * 0.06,
           left:
-              screenWidth * 0.4, // Adjust this to align properly in the center
+              screenWidth * 0.35, // Adjust this to align properly in the center
           child: GestureDetector(
             onTap: () {
               Navigator.push(

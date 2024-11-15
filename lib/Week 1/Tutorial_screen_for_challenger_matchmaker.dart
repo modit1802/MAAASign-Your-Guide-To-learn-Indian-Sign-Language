@@ -86,7 +86,7 @@ void initState() {
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
-                          textAlign: TextAlign.justify,
+                          textAlign: TextAlign.left,
                         ),
                         const SizedBox(height: 8),
                         Text(
@@ -95,7 +95,7 @@ void initState() {
                             fontSize: 12,
                             color: Colors.black,
                           ),
-                          textAlign: TextAlign.justify,
+                          textAlign: TextAlign.left,
                         ),
                       ],
                     ),
@@ -158,7 +158,7 @@ Widget _buildCard2({
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.left,
                       ),
                       const SizedBox(height: 8),
                       ...descriptionPoints.map((point) {
@@ -168,7 +168,7 @@ Widget _buildCard2({
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 4.0),
                           child: RichText(
-                            textAlign: TextAlign.justify,
+                            textAlign: TextAlign.left,
                             text: TextSpan(
                               children: [
                                 TextSpan(

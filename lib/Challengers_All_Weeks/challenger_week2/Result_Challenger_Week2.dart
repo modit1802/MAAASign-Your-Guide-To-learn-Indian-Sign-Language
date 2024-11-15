@@ -146,7 +146,7 @@ class _Result_Challenger_Week2State extends State<Result_Challenger_Week2> {
                           fontSize: 12,
                           color: isSelected ? Colors.white : Colors.black,
                         ),
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.left,
                       ),
                     ],
                   ),

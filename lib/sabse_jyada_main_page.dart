@@ -138,7 +138,7 @@ class _Sabse_Jyada_Main_pageState extends State<Sabse_Jyada_Main_page> {
                           fontSize: width * 0.04,
                           color: Colors.black,
                         ),
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.left,
                       ),
                     ),
                     const SizedBox(height: 10),

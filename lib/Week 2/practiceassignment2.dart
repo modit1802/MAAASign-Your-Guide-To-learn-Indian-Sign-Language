@@ -281,7 +281,7 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
                             padding:
                                 EdgeInsets.only(bottom: screenHeight * 0.059),
                             child: Text(
-                              'Quiz Mania',
+                              'Fact or Fiction',
                               style: TextStyle(
                                 fontFamily: 'RubikWetPaint',
                                 fontSize: isSmallScreen ? 32 : 40,

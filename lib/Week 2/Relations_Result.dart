@@ -3,6 +3,7 @@ import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%202/play_incorrect_relation.dart';
 import 'package:SignEase/Week%201/review_incorrect_videos.dart';
 import 'package:SignEase/Week%202/practiceassignment2.dart';
+import 'package:SignEase/Week%202/week2_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -284,16 +285,6 @@ class _Quiz_Verb_ResultScreenState
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          PracticeAssignment2()));
-                            },
-                            child: _buildCircularButton(
-                                Icons.refresh, "Play Again", Colors.teal)),
-                        GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
@@ -308,26 +299,6 @@ class _Quiz_Verb_ResultScreenState
                               "Review Mistakes", Colors.brown),
                         ),
                         GestureDetector(
-                          onTap: _shareScore,
-                          child: _buildCircularButton(
-                              Icons.share, "Share Score", Colors.blue),
-                        ),
-                        GestureDetector(
-                          onTap: _generateAndSharePDF,
-                          child: _buildCircularButton(Icons.picture_as_pdf,
-                              "Generate PDF", Colors.green),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const InitialPage1()));
-                          },
-                          child: _buildCircularButton(
-                              Icons.home, "Home", Colors.purple),
-                        ),
-                        GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
@@ -339,13 +310,47 @@ class _Quiz_Verb_ResultScreenState
                                         )));
                           },
                           child: _buildCircularButton(Icons.assessment_outlined,
-                              "Mistake Reattempt", Colors.grey),
+                              "Retry Mistakes", Colors.grey),
+                        ),
+                        GestureDetector(
+                          onTap: _shareScore,
+                          child: _buildCircularButton(
+                              Icons.share, "Share Score", Colors.blue),
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          PracticeAssignment2()));
+                            },
+                            child: _buildCircularButton(
+                                Icons.refresh, "Play Again", Colors.teal)),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Week2NewScreen()));
+                          },
+                          child: _buildCircularButton(
+                              Icons.arrow_back, "Week 2", Colors.pink),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => InitialPage1()));
+                          },
+                          child: _buildCircularButton(
+                              Icons.home, "Home", Colors.purple),
                         ),
                       ],
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
@@ -377,7 +382,6 @@ class _Quiz_Verb_ResultScreenState
 Widget _buildStatItem(String value, String label, Color color) {
   return Row(
     children: [
-      Icon(Icons.circle, color: color, size: 12),
       const SizedBox(width: 6),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,

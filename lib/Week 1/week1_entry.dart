@@ -13,7 +13,7 @@ class Week1Entry extends StatefulWidget {
 }
 
 class _Week1EntryState extends State<Week1Entry> {
-  bool _showGif = true;
+  bool _showGif = false;
   int? _selectedCardIndex;
   int _currentIndex = 0; // This keeps track of the selected tab index
 
@@ -159,7 +159,7 @@ class _Week1EntryState extends State<Week1Entry> {
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Alphabets',
                     description:
-                        'Learn alphabets with learning material, quizzes & match games!',
+                        'Learn and practice signing alphabets',
                     index: 0,
                   ),
 
@@ -172,7 +172,7 @@ class _Week1EntryState extends State<Week1Entry> {
                     color: Colors.white,
                     title: 'Numbers',
                     description:
-                        'Learn Numbers with learning material, quizzes & match games!',
+                        'Learn and practice signing numbers',
                     index: 1,
                   ),
 

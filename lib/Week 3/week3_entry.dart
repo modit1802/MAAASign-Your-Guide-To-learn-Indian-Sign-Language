@@ -162,7 +162,7 @@ class _Week3EntryState extends State<Week3Entry> {
                     imagePath: 'images/verbs_init.png',
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Verbs',
-                    description: 'Learn verbs with learning material, quizzes & bingo games!',
+                    description: 'Learn and practice signing verbs',
                     index: 0,
                   ),
 
@@ -174,7 +174,7 @@ class _Week3EntryState extends State<Week3Entry> {
                     imagePath: 'images/nouns.png',
                     color: Colors.white,
                     title: 'Nouns',
-                    description: 'Learn nouns with learning material, quizzes & bingo games!',
+                    description: 'Learn and practice signing nouns',
                     index: 1,
                   ),
 
@@ -186,7 +186,7 @@ class _Week3EntryState extends State<Week3Entry> {
                     imagePath: 'images/pronouns.png',
                     color: Colors.white,
                     title: 'Pronouns',
-                    description: 'Learn pronouns with learning material, quizzes & bingo games!',
+                    description: 'Learn and practice signing pronouns',
                     index: 2,
                   ),
 
