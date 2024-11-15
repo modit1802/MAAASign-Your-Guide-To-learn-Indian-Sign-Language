@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.flutter_login_signup">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="SignEase"
+        android:label="MAAA"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
