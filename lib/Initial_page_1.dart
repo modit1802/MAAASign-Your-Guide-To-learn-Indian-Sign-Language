@@ -172,9 +172,18 @@ class _InitialPage1State extends State<InitialPage1> {
       onWillPop: _onWillPop, // Add this line to handle back button press
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('MAAA Your ISL Guide'),
+          title: Flexible(
+            child: Text(
+              'MAAA: Your guide to Learning Indian Sign Language',
+              softWrap: true,
+              overflow: TextOverflow.visible,
+              style: const TextStyle(
+                fontSize: 18, // Adjust font size to fit well
+              ),
+            ),
+          ),
           automaticallyImplyLeading: false,
-          backgroundColor: Color.fromARGB(255, 250, 233, 215),
+          backgroundColor: const Color.fromARGB(255, 250, 233, 215),
           actions: <Widget>[
             if (_photoUrl != null)
               GestureDetector(
@@ -190,6 +199,7 @@ class _InitialPage1State extends State<InitialPage1> {
               ),
           ],
         ),
+
         body: Stack(
           children: [
             PageView(

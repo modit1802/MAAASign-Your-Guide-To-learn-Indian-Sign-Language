@@ -213,26 +213,28 @@ Widget build(BuildContext context) {
               SizedBox(height: screenHeight * 0.02),
               Center(
                 child: Container(
-                  width: double.infinity,
+                  height: screenHeight * 0.2, // Adjusted height based on screen size
+                  width: screenWidth * 0.9,  // 90% of screen width
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 238, 126, 34),
-                    borderRadius: BorderRadius.circular(screenWidth * 0.01),
+                    borderRadius: BorderRadius.circular(screenWidth * 0.01), // Responsive borderRadius
+
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(screenWidth * 0.04),
+                    padding: EdgeInsets.all(screenWidth * 0.04), // Responsive padding
                     child: IntrinsicHeight(
                       child: Row(
                         children: [
+                          // Score Zone Text
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Challenge Zone',
+                                  'Challenger Zone',
                                   style: TextStyle(
-                                    fontSize: screenWidth * 0.06,
+                                    fontSize: screenHeight * 0.025, // Responsive font size
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -240,31 +242,28 @@ Widget build(BuildContext context) {
                               ],
                             ),
                           ),
+                          // Score Image Container
                           Container(
-                            height: screenHeight * 0.16,
-                            width: screenHeight * 0.16,
+                            height: screenHeight * 0.15, // Fixed height for image container
+                            width: screenHeight * 0.15, // Square container based on screen height
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.circular(screenWidth * 0.04),
+                              borderRadius: BorderRadius.circular(screenWidth * 0.05), // Responsive borderRadius
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.2),
-                                  blurRadius: screenWidth * 0.02,
-                                  offset: Offset(0, screenHeight * 0.01),
+                                  blurRadius: screenWidth * 0.05, // Responsive blur radius for shadow
+                                  offset: Offset(0, 2),
                                 ),
                               ],
                             ),
-                            child: Transform.translate(
-                              offset: Offset(0, -screenHeight * 0.03),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Image.asset(
-                                  'images/challengechild.png',
-                                  width: screenWidth * 0.4,
-                                  height: screenWidth * 0.4,
-                                  fit: BoxFit.cover,
-                                ),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Image.asset(
+                                'images/challenger_girl.jpeg',
+                                width: screenWidth * 0.25, // Scaled image size
+                                height: screenWidth * 0.25, // Scaled image size
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),

@@ -64,7 +64,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
   List<Map<String, dynamic>> incorrectQuestions = [];
   Random random = Random();
   late AnimationController _controller;
-  int chancesLeft = 3;
+  int chancesLeft = 2;
   bool showAnswer = false;
   String selectedNoun = ''; // Track the selected noun
   Map<String, bool> selectionStatus = {}; // Track the selection status of each option
@@ -102,7 +102,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
       currentOptions.shuffle();
 
       questionCount++;
-      chancesLeft = 3;
+      chancesLeft = 2;
       showAnswer = false;
       selectedNoun = ''; // Reset selected noun for the new round
       selectionStatus = {}; // Reset selection status for the new round
@@ -114,7 +114,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
     setState(() {
       selectedNoun = noun; // Update the selected noun
       if (noun == targetNoun) {
-        int points = chancesLeft == 3 ? 100 : chancesLeft == 2 ? 50 : chancesLeft == 1 ? 25 : 0;
+        int points = chancesLeft == 2 ? 100 : chancesLeft == 1 ? 50 : 0;
         score += points;
         correctCount++;
         ScaffoldMessenger.of(context).showSnackBar(

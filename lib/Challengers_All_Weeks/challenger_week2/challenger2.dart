@@ -121,7 +121,7 @@ class _ThirdGameState extends State<ThirdGame> {
   late VideoPlayerController _controller;
   List<Map<String, dynamic>> incorrectQuestions = [];
   int attempts = 0;
-  int maxAttempts = 3;
+  int maxAttempts = 2;
   int currentChallengeIndex = 0; // Track the current challenge index
   bool showMoveToNextButton = false;
   final ScrollController _scrollController = ScrollController();
