@@ -232,8 +232,8 @@ Widget _buildCard2({
               onTap: () {},
               iconData: Icons.play_arrow_rounded,
               color: const Color.fromARGB(255, 255, 255, 255),
-              title: 'Tutorial for perfect pairs!',
-              description: "Please carefully watch the below tutorial to solve the Perfect pairs round. If you want to skip press the '❌' button present on the top of screen",
+              title: 'Tutorial for Match It Up!',
+              description: "Please carefully watch the below video and read the intructions to solve this round.",
               index: 2,
             ),
             Padding(
@@ -290,11 +290,9 @@ Widget _buildCard2({
   title: 'General Instructions to Solve Perfect Pairs',
   descriptionPoints: [
     "1: Please watch the video carefully.",
-    "2: Drag the yellow box on the left hand side and drop them with the matching images on right hand side",
-    "3: As you can see Sign of 'O' has been dragged and match with the 'Orange' because orange also starts with 'O'",
-    "4: Similary repeat the steps with remaining signs on the left hand side.",
-    "5: If you don't know or skip this perfect pairs press the 'Skip' button on the bottom of the screen.",
-    "6: When you complete the tutorial to make exit press the '❌' button on the top of the screen."
+    "2: Drag the white boxes on the left hand side and drop them with the matching images on right hand side",
+    "3: If you don't know or want to skip this round press the 'Skip' button on the bottom of the screen.",
+    "4: When you have completed the tutorial press the '❌' button on the top of the screen."
   ],
   index: 2,
 ),
