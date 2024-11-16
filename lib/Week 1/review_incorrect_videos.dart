@@ -19,20 +19,22 @@ class _ReviewIncorrectSolutionState extends State<ReviewIncorrectSolution> {
   void initState() {
     super.initState();
     // Initialize VideoPlayerControllers for each video in the incorrect questions list
-    _controllers = widget.incorrectQuestions.map<VideoPlayerController>((question) {
-      final controller = VideoPlayerController.network(question['question']);
-      controller.initialize().then((_) {
-        setState(() {}); // Refresh UI after video initialization
-        controller.play(); // Autoplay on initialization
-      });
-      // Listen for video end to update the UI
-      controller.addListener(() {
-        if (controller.value.position == controller.value.duration) {
-          setState(() {}); // Update UI to show play icon
-        }
-      });
-      return controller;
-    }).toList();
+    _controllers =
+        widget.incorrectQuestions.map<VideoPlayerController>((question) {
+          final controller = VideoPlayerController.network(
+              question['question']);
+          controller.initialize().then((_) {
+            setState(() {}); // Refresh UI after video initialization
+            controller.play(); // Autoplay on initialization
+          });
+          // Listen for video end to update the UI
+          controller.addListener(() {
+            if (controller.value.position == controller.value.duration) {
+              setState(() {}); // Update UI to show play icon
+            }
+          });
+          return controller;
+        }).toList();
   }
 
   @override
@@ -61,60 +63,90 @@ class _ReviewIncorrectSolutionState extends State<ReviewIncorrectSolution> {
         ),
       ),
       backgroundColor: const Color.fromARGB(255, 252, 133, 37),
-      body: Column(
+      body: widget.incorrectQuestions.isNotEmpty
+          ? Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (widget.incorrectQuestions.isNotEmpty)
-            Expanded(
-              child: ListView.builder(
-                itemCount: widget.incorrectQuestions.length,
-                itemBuilder: (context, index) {
-                  final controller = _controllers[index];
-                  return Card(
-                    elevation: 8,
-                    color: const Color.fromARGB(255, 250, 233, 215),
-                    child: ListTile(
-                      title: Column(
-                        children: [
-                          if (controller.value.isInitialized)
-                            AspectRatio(
-                              aspectRatio: controller.value.aspectRatio,
-                              child: VideoPlayer(controller),
-                            ),
-                          const SizedBox(height: 10),
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                if (controller.value.isPlaying) {
-                                  controller.pause();
-                                } else {
-                                  controller.play();
-                                }
-                              });
-                            },
-                            child: Icon(
-                              controller.value.isPlaying
-                                  ? Icons.pause
-                                  : Icons.play_arrow,
-                            ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: widget.incorrectQuestions.length,
+              itemBuilder: (context, index) {
+                final controller = _controllers[index];
+                return Card(
+                  elevation: 8,
+                  color: const Color.fromARGB(255, 250, 233, 215),
+                  child: ListTile(
+                    title: Column(
+                      children: [
+                        if (controller.value.isInitialized)
+                          AspectRatio(
+                            aspectRatio: controller.value.aspectRatio,
+                            child: VideoPlayer(controller),
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "Correct Solution: ${widget.incorrectQuestions[index]['correctSolution']}",
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                        const SizedBox(height: 10),
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              if (controller.value.isPlaying) {
+                                controller.pause();
+                              } else {
+                                controller.play();
+                              }
+                            });
+                          },
+                          child: Icon(
+                            controller.value.isPlaying
+                                ? Icons.pause
+                                : Icons.play_arrow,
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          "Correct Solution: ${widget
+                              .incorrectQuestions[index]['correctSolution']}",
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
                     ),
-                  );
-                },
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      )
+          : Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'images/celebrate-cat.gif', // Replace with your GIF path
+              height: 200,
+              width: 200,
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "Congratulations! 🎉",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
-        ],
+            const SizedBox(height: 10),
+            const Text(
+              "You got all the answers correct!",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
