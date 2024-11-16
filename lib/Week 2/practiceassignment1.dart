@@ -234,6 +234,7 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
               vertical: screenHeight * 0.03,
               horizontal: screenWidth * 0.04,
             ),
+            height: screenHeight * 0.12,
             child: Center(
               child: Text(
                 currentOptions[index],
