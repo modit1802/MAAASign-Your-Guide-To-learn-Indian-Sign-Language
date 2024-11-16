@@ -5,9 +5,12 @@ import 'package:SignEase/Week%202/learnrelations.dart';
 import 'package:SignEase/Week%203/learnnoun.dart';
 import 'package:SignEase/Week%203/learnpronoun.dart';
 import 'package:SignEase/Week%203/learnverbs.dart';
+import 'package:SignEase/Week%204/Basic_Sentence_Structure.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'Week 4/learn_basic_sentence_structure.dart';
 class LearningZone extends StatefulWidget {
   const LearningZone({super.key});
 
@@ -237,7 +240,7 @@ class _LearningZoneState extends State<LearningZone> {
                   child: PageView(
                     children: [
                       buildCustomCard(
-                        image: AssetImage('images/alphabetcardforlearn.jpg'),
+                        image: AssetImage('images/alphabet.jpg'),
                         title: 'Review Signing Alphabets',
                         onTap: () {
                           Navigator.push(
@@ -313,7 +316,17 @@ class _LearningZoneState extends State<LearningZone> {
                         );
                       },
                     ),
-                      // Add other cards similarly...
+                      buildCustomCard(
+                        image: AssetImage('images/sentence_struct.png'),
+                        title: 'Review Basic Sentence Structure',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Learn_Basic_Sentence_Structure()),
+                          );
+                        },
+                      ), // Add other cards similarly...
                     ],
                   ),
                 ),

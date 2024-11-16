@@ -172,13 +172,12 @@ class _InitialPage1State extends State<InitialPage1> {
       onWillPop: _onWillPop, // Add this line to handle back button press
       child: Scaffold(
         appBar: AppBar(
-          title: Flexible(
+          title: FittedBox(
+            fit: BoxFit.scaleDown,
             child: Text(
-              'MAAA: Your ISL Guide',
-              softWrap: true,
-              overflow: TextOverflow.visible,
+              'MAAA: Your Guide to Learning ISL',
               style: const TextStyle(
-                fontSize: 18, // Adjust font size to fit well
+                fontSize: 18, // Adjust as necessary
               ),
             ),
           ),
@@ -199,6 +198,7 @@ class _InitialPage1State extends State<InitialPage1> {
               ),
           ],
         ),
+
 
         body: Stack(
           children: [
