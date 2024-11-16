@@ -5,7 +5,9 @@ import 'package:video_player/video_player.dart';
 class Retry_Mistakes extends StatefulWidget {
   final List<Map<String, dynamic>> incorrectQuestions;
 
-  Retry_Mistakes({Key? key, required this.incorrectQuestions})
+  var score1;
+
+  Retry_Mistakes({Key? key, required this.incorrectQuestions, required this.score1})
       : super(key: key);
 
   @override
@@ -27,14 +29,17 @@ class _Retry_MistakesState
   int correctcount = 0;
   int incorrectcount = 0;
   int selectedOptionIndex = -1;
+  int score1=0;
 
   @override
   void initState() {
     super.initState();
     incorrectQuestions = widget.incorrectQuestions;
     selectedQuestions = List.from(incorrectQuestions);
-    setOptionsForQuestion();
-    _initializeVideo(selectedQuestions[0]['question']);
+    score1=widget.score1;// Copy the questions list
+    if (selectedQuestions.isNotEmpty) {
+      setOptionsForQuestion();
+    }
   }
 
   // Initialize video player controller
@@ -89,11 +94,14 @@ class _Retry_MistakesState
     if (selectedQuestions.isNotEmpty) {
       currentOptions = generateOptions(selectedQuestions[0]['correctSolution']);
       _initializeVideo(selectedQuestions[0]['question']); // Load video for the question
+    } else {
+      // Handle end of quiz scenario, show results or navigate out
+      Navigator.pop(context); // Go back if no questions are left
     }
   }
 
-  void _answerQuestion(
-      String selectedOption, String correctSolution, int index) {
+
+  void _answerQuestion(String selectedOption, String correctSolution, int index) {
     setState(() {
       selectedOptionIndex = index;
       if (selectedOption == correctSolution) {
@@ -115,11 +123,14 @@ class _Retry_MistakesState
         selectedOptionIndex = -1;
       });
 
-      if (selectedQuestions.length > 1) {
-        selectedQuestions.removeAt(0);
-        setOptionsForQuestion();
-      } else {
-        Navigator.pop(context);
+      if (selectedQuestions.isNotEmpty) {
+        selectedQuestions.removeAt(0); // Remove the answered question
+        if (selectedQuestions.isNotEmpty) {
+          setOptionsForQuestion(); // Load next question if available
+        } else {
+          // If no questions are left, end the quiz
+          Navigator.pop(context); // You can navigate to a results screen here
+        }
       }
     });
   }
@@ -328,7 +339,7 @@ class _Retry_MistakesState
                   child: Column(
                     children: [
                       Text(
-                        'Quiz Completed!',
+                        'All Correct!',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -336,7 +347,7 @@ class _Retry_MistakesState
                       ),
                       SizedBox(height: 16),
                       Text(
-                        'Your Score: $score',
+                        'Your Score: $score1',
                         style: TextStyle(fontSize: 18),
                       ),
                     ],

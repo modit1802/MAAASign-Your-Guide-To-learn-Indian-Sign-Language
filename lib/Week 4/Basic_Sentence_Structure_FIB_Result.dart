@@ -308,6 +308,7 @@ class _Basic_Sentence_Structure_FIB_ResultState
                                         Retry_Mistakes(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
+                                          score1: widget.score,
                                         )));
                           },
                           child: _buildCircularButton(Icons.assessment_outlined,

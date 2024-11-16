@@ -310,6 +310,7 @@ class _Quiz_Noun_ResultScreenState
                                         PLay_Incorrect_Nouns(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
+                                          score1: widget.score,
                                         )));
                           },
                           child: _buildCircularButton(Icons.assessment_outlined,

@@ -5,7 +5,9 @@ import 'package:video_player/video_player.dart';
 class PLay_Incorrect_Bingo extends StatefulWidget {
   final List<Map<String, dynamic>> incorrectQuestions;
 
-  PLay_Incorrect_Bingo({Key? key, required this.incorrectQuestions})
+  var score1;
+
+  PLay_Incorrect_Bingo({Key? key, required this.incorrectQuestions, required this.score1})
       : super(key: key);
 
   @override
@@ -27,14 +29,17 @@ class _PLay_Incorrect_BingoState
   int correctcount = 0;
   int incorrectcount = 0;
   int selectedOptionIndex = -1;
+  int score1=0;
 
   @override
   void initState() {
     super.initState();
     incorrectQuestions = widget.incorrectQuestions;
     selectedQuestions = List.from(incorrectQuestions);
-    setOptionsForQuestion();
-    _initializeVideo(selectedQuestions[0]['question']);
+    score1=widget.score1;// Copy the questions list
+    if (selectedQuestions.isNotEmpty) {
+      setOptionsForQuestion();
+    }
   }
 
   // Initialize video player controller
@@ -328,7 +333,7 @@ class _PLay_Incorrect_BingoState
                   child: Column(
                     children: [
                       Text(
-                        'Quiz Completed!',
+                        'All Correct!',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

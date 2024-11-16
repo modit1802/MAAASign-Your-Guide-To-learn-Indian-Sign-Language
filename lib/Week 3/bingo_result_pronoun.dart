@@ -311,6 +311,7 @@ class _Bingo_pronoun_ResultScreenState
                                         PLay_Incorrect_Pronouns(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
+                                          score1: widget.score,
                                         )));
                           },
                           child: _buildCircularButton(Icons.assessment_outlined,

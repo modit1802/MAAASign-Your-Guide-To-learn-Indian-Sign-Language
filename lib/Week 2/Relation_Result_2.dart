@@ -336,6 +336,7 @@ class _Quiz_Verb_ResultScreenState
                                         PLay_Incorrect_Verbs(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
+                                          score1: widget.score,
                                         )));
                           },
                           child: _buildCircularButton(Icons.assessment_outlined,
