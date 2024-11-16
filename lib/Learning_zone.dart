@@ -240,7 +240,7 @@ class _LearningZoneState extends State<LearningZone> {
                   child: PageView(
                     children: [
                       buildCustomCard(
-                        image: AssetImage('images/alphabet.jpg'),
+                        image: AssetImage('images/alphabets.jpg'),
                         title: 'Review Signing Alphabets',
                         onTap: () {
                           Navigator.push(
