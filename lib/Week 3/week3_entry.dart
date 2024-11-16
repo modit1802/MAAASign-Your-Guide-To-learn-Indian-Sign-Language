@@ -198,7 +198,7 @@ class _Week3EntryState extends State<Week3Entry> {
                     imagePath: 'images/challenger.png',
                     color: Colors.white,
                     title: 'Challenger',
-                    description: 'Challenge yourself to Pass Week 3 and Go to Week 4!',
+                    description: 'Challenge yourself to unlock Week 4 !',
                     index: 3,
                   ),
                 ],

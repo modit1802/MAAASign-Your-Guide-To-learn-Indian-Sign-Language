@@ -186,7 +186,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                     color: Colors.white,
                     title: 'Challenger',
                     description:
-                        'Challenge yourself to Pass Week 2 and Go to Week 3!',
+                        'Challenge yourself to unlock Week 3 !',
                     index: 2,
                   ),
                 ],

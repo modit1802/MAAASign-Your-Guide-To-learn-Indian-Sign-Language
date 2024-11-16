@@ -667,7 +667,7 @@ class _ThirdGameState extends State<ThirdGame> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Challenger Round',
                         description:
-                            "Drag the correct yellow color available boxes and drop them in to the wooden boxes as per the spelling of question. For more information press the 'tutorial button' on the top",
+                            "Drag the greetings/relations signs into the correct boxes to spell the object shown. For more information press the 'tutorial button' on the top",
                         index: 2,
                       ),
                       Material(

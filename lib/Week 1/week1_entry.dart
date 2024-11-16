@@ -185,7 +185,7 @@ class _Week1EntryState extends State<Week1Entry> {
                     color: Colors.white,
                     title: 'Challenger',
                     description:
-                        'Challenge yourself to Pass Week 1 and Go to Week 2!',
+                        'Challenge yourself to unlock Week 2 !',
                     index: 2,
                   ),
                 ],
