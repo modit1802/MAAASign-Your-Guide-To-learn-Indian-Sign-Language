@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:SignEase/Week%203/nounstart.dart';
 
+import 'Basic_Sentence_Structure.dart';
+
 class Week4Entry extends StatefulWidget {
   const Week4Entry({super.key});
 
@@ -134,7 +136,7 @@ class _Week4EntryState extends State<Week4Entry> {
 
                   // Verb Card
                   _buildCard(
-                    onTap: () => _handleCardTap(0, const VerbStartScreen()),
+                    onTap: () => _handleCardTap(0, const Basic_Sentence_Structure()),
                     imagePath: 'images/sentence_struct.png',
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Basic Sentence Structure',

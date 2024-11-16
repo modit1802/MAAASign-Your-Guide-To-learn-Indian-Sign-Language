@@ -174,7 +174,7 @@ class _InitialPage1State extends State<InitialPage1> {
         appBar: AppBar(
           title: Flexible(
             child: Text(
-              'MAAA: Your guide to Learning ISL',
+              'MAAA: Your ISL Guide',
               softWrap: true,
               overflow: TextOverflow.visible,
               style: const TextStyle(
