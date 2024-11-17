@@ -91,8 +91,8 @@ class _Quiz_Simple_Sentence_ResultScreenState
         // If user exists, add or update only the Score_noun field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_noun', {
-            'score_noun': widget.score,
+          mongo.modify.set('week.$weekKey.Score_Simple_Sentence', {
+            'score_simple_sentence': widget.score,
             'incorrectQuestions_Simple_Sentence': widget.incorrectQuestions,
           }),
         );
