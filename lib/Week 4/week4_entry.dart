@@ -1,13 +1,10 @@
 import 'package:SignEase/Challengers_All_Weeks/challenger_week3/challenger3.dart';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/Week%203/pronounstart.dart';
-import 'package:SignEase/Week%203/verbstart.dart';
+import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/simple_sentence_start_page.dart';
 import 'package:SignEase/Week%204/tutorial_screen_week4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:SignEase/Week%203/nounstart.dart';
 
-import 'Basic_Sentence_Structure.dart';
 
 class Week4Entry extends StatefulWidget {
   const Week4Entry({super.key});
@@ -136,7 +133,7 @@ class _Week4EntryState extends State<Week4Entry> {
 
                   // Verb Card
                   _buildCard(
-                    onTap: () => _handleCardTap(0, const Basic_Sentence_Structure()),
+                    onTap: () => _handleCardTap(0, const Simple_Sentence_Start_Page()),
                     imagePath: 'images/sentence_struct.png',
                     color: const Color.fromARGB(255, 255, 255, 255),
                     title: 'Basic Sentence Structure',
@@ -148,7 +145,7 @@ class _Week4EntryState extends State<Week4Entry> {
 
                   // Noun Card
                   _buildCard(
-                    onTap: () => _handleCardTap(1, const NounStartScreen()),
+                    onTap: () => _handleCardTap(1, const Simple_Sentence_Start_Page()),
                     imagePath: 'images/sentence_formation.jpg',
                     color: Colors.white,
                     title: 'Simple Sentence Formation',

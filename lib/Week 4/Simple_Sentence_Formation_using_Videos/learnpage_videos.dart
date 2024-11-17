@@ -22,13 +22,13 @@ class MyApp extends StatelessWidget {
           color: Colors.transparent,
         ),
       ),
-      home: const CompoundRelations(),
+      home: const Learn_Simple_Sentence(),
     );
   }
 }
 
-class CompoundRelations extends StatelessWidget {
-  const CompoundRelations({super.key});
+class Learn_Simple_Sentence extends StatelessWidget {
+  const Learn_Simple_Sentence({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class CompoundRelations extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       appBar: AppBar(
         title: const Text(
-          "Let's Learn Signing Compound Relations",
+          "Let's Learn Signing Simple Sentence",
           style: TextStyle(
             color: Color.fromARGB(255, 0, 0, 0),
             fontWeight: FontWeight.bold,
@@ -46,11 +46,10 @@ class CompoundRelations extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 250, 233, 215),
         elevation: 0,
       ),
-      body: const Compund_Relations_links(),
+      body: const Simple_sentence_videos_links(),
     );
   }
 }
-
 
 class VideoWidget extends StatefulWidget {
   final String videoUrl;
@@ -177,19 +176,37 @@ class _VideoWidgetState extends State<VideoWidget> {
   }
 }
 
-
-
-class Compund_Relations_links extends StatefulWidget {
-  const Compund_Relations_links({super.key});
+class Simple_sentence_videos_links extends StatefulWidget {
+  const Simple_sentence_videos_links({super.key});
 
   @override
-  _Compund_Relations_linksState createState() => _Compund_Relations_linksState();
+  _Simple_sentence_videos_linksState createState() =>
+      _Simple_sentence_videos_linksState();
 }
 
-class _Compund_Relations_linksState extends State<Compund_Relations_links> {
-  final Map<String, String> relationGifs = const {
-    'girl_child': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730267226/girl_child_size_reduced_ai2wft.mp4',
-    'female_person': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731604294/Female_Person_Compound_eosq00.mp4',
+class _Simple_sentence_videos_linksState
+    extends State<Simple_sentence_videos_links> {
+  final Map<String, String> Simple_sentence_videos = const {
+    'Mother_is_cooking_dinner':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839165/5_nvihuh.mp4',
+    'We_are_drinking_tea':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839166/12_f6ehlr.mp4',
+    'Brother_is_talking_with_sister':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839167/7_frbowk.mp4',
+    'Father_has_come_to_house':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839167/6_ceztqd.mp4',
+    'We_go_to_market':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839168/2_ruo2xg.mp4',
+    'I_write_book':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839168/1_yo1wdo.mp4',
+    'They_work_in_office':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839158/3_imckgt.mp4',
+    'I_talk_to_friends':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839159/24_rgdnba.mp4',
+    'I_Live_in_a_house':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839165/17_giamsf.mp4',
+    'They_look_at_birds':
+        'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839165/20_logbq8.mp4',
   };
 
   int _currentIndex = 0;
@@ -200,7 +217,13 @@ class _Compund_Relations_linksState extends State<Compund_Relations_links> {
     super.dispose();
   }
 
-    Future<void> _clearCache() async {
+  void _onPageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  Future<void> _clearCache() async {
     final directory = await getTemporaryDirectory();
     final files = directory.listSync();
     for (var file in files) {
@@ -210,13 +233,6 @@ class _Compund_Relations_linksState extends State<Compund_Relations_links> {
     }
   }
 
-
-  void _onPageChanged(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -224,9 +240,9 @@ class _Compund_Relations_linksState extends State<Compund_Relations_links> {
     return Center(
       child: PageView.builder(
         onPageChanged: _onPageChanged,
-        itemCount: relationGifs.length,
+        itemCount: Simple_sentence_videos.length,
         itemBuilder: (context, index) {
-          final url = relationGifs.values.elementAt(index);
+          final url = Simple_sentence_videos.values.elementAt(index);
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
@@ -244,7 +260,8 @@ class _Compund_Relations_linksState extends State<Compund_Relations_links> {
                       height: screenWidth * (16 / 9),
                       child: VideoWidget(
                         videoUrl: url,
-                        isActive: index == _currentIndex, // Play only active video
+                        isActive:
+                            index == _currentIndex, // Play only active video
                       ),
                     ),
                   ),
