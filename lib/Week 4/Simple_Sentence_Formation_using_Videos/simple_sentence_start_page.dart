@@ -1,6 +1,6 @@
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/Week%203/noun_practice2.dart';
 import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/Quiz_Simple_Sentence_Quiz.dart';
+import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/bingo_video_game.dart';
 import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/learnpage_videos.dart';
 
 import 'package:flutter/material.dart';
@@ -313,7 +313,7 @@ class _Simple_Sentence_Start_PageState extends State<Simple_Sentence_Start_Page>
                       ),
                       const SizedBox(height: 12),
                       _buildCard(
-                        onTap: () => _handleCardTap(2, VideoBingoGame()),
+                        onTap: () => _handleCardTap(2, Bingo_game_simple_Sentences()),
                         imagePath: 'images/bingo.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Bingo Bonanza!',
