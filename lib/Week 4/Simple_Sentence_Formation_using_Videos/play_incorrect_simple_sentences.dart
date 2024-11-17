@@ -1,170 +1,83 @@
 import 'dart:math';
-import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/Result_Quiz_Simple_Sentence.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:video_player/video_player.dart';
 
-class Quiz_Simple_Sentence extends StatefulWidget {
+class Play_incorrect_simple_sentences extends StatefulWidget {
+  final List<Map<String, dynamic>> incorrectQuestions;
+
+  var score1;
+
+  Play_incorrect_simple_sentences({Key? key, required this.incorrectQuestions, required this.score1})
+      : super(key: key);
+
   @override
-  _Quiz_Simple_SentenceState createState() => _Quiz_Simple_SentenceState();
+  State<Play_incorrect_simple_sentences> createState() =>
+      _Play_incorrect_simple_sentencesState();
 }
 
-class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
-  List<Map<String, dynamic>> questionsAndSolutions = [
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848348/16U_bymgr3.mp4',
-      'solution': 'I live in a house'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848409/7U_hptmcj.mp4',
-      'solution': 'People are living in India'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848409/18U_wxgpxh.mp4',
-      'solution': 'Airplane fly over India'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848345/25U_rnebn0.mp4',
-      'solution': 'Student sees the teacher'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848348/23U_uswf0h.mp4',
-      'solution': 'I talk to friends'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848347/22U_rjer3p.mp4',
-      'solution': 'I wake up in the morning to work'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848414/21U_dod2n7.mp4',
-      'solution': 'You go to school in the morning'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848347/20U_arbdma.mp4',
-      'solution': 'You read the school book'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848350/19U_iqqd8d.mp4',
-      'solution': 'They look at the birds'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848347/17U_jtctya.mp4',
-      'solution': 'I drink tea in morning'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848411/13U_wsa3c2.mp4',
-      'solution': 'Teacher loves my work'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848413/12U_ba1dhd.mp4',
-      'solution': 'Mother drank tea at office'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848411/10U_sui6l1.mp4',
-      'solution': 'Girl child is washing her hands'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848414/11U_dpakc3.mp4',
-      'solution': 'We are drinking tea'
-    },
-    
-  ];
+class _Play_incorrect_simple_sentencesState
+    extends State<Play_incorrect_simple_sentences> {
+  late VideoPlayerController _controller;
 
-  List<Map<String, dynamic>> selectedQuestions = [];
   List<Map<String, dynamic>> incorrectQuestions = [];
-  Random random = Random();
-  int score = 0;
-  int selectedOptionIndex = -1;
-  List<String> currentOptions = [];
-  bool isLoading = true;
-  int correctCount = 0;
-  int incorrectCount = 0;
-  late mongo.Db db;
-  late mongo.DbCollection userCollection;
-  String? userId;
+  List<Map<String, dynamic>> selectedQuestions = [];
   VideoPlayerController? videoController;
+  List<String> currentOptions = [];
+  List<Color> _cardColors = List.filled(4, Colors.white);
+  List<Color> _textColors = List.filled(4, Colors.black);
+
+  int score = 0;
+  int correctcount = 0;
+  int incorrectcount = 0;
+  int selectedOptionIndex = -1;
+  int score1=0;
 
   @override
   void initState() {
     super.initState();
-    generateRandomQuiz();
-    _fetchUserId();
-    connectToMongoDB();
-    setOptionsForQuestion();
-  }
-
-  Future<void> _fetchUserId() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      setState(() {
-        userId = user.uid;
-      });
-      print('User ID: $userId');
-    }
-  }
-
-  Future<void> connectToMongoDB() async {
-    db = mongo.Db(
-        'mongodb://moditgrover2003iii:modit1346@cluster0-shard-00-00.eocm8.mongodb.net:27017,cluster0-shard-00-01.eocm8.mongodb.net:27017,cluster0-shard-00-02.eocm8.mongodb.net:27017/mydatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
-
-    try {
-      await db.open();
-      userCollection = db.collection('users');
-      print("Connected to MongoDB!");
-    } catch (e) {
-      print("Error connecting to MongoDB: $e");
-    }
-  }
-
-  void generateRandomQuiz() {
-    selectedQuestions = [...questionsAndSolutions]..shuffle();
-    selectedQuestions = selectedQuestions.sublist(0, 10);
-  }
-
-  void setOptionsForQuestion() {
+    incorrectQuestions = widget.incorrectQuestions;
+    selectedQuestions = List.from(incorrectQuestions);
+    score1=widget.score1;// Copy the questions list
     if (selectedQuestions.isNotEmpty) {
-      currentOptions = generateOptions(selectedQuestions[0]['solution']);
-      videoController =
-          VideoPlayerController.network(selectedQuestions[0]['question'])
-            ..initialize().then((_) {
-              videoController?.setVolume(0.0);
-              setState(() {});
-              videoController?.play();
-            })
-            ..addListener(() {
-              if (videoController!.value.position ==
-                  videoController!.value.duration) {
-                setState(() {});
-              }
-            });
+      setOptionsForQuestion();
     }
+  }
+
+  // Initialize video player controller
+  void _initializeVideo(String videoUrl) {
+    _controller = VideoPlayerController.network(videoUrl)
+      ..initialize().then((_) {
+        _controller.setVolume(0.0);
+        setState(() {}); // Update the UI after initializing
+      })
+      ..setLooping(true)
+      ..play(); // Auto-play the video if needed
+  }
+
+  @override
+  void dispose() {
+    videoController?.removeListener(() {});
+    videoController?.dispose();
+    _controller.dispose();
+    super.dispose();
   }
 
   List<String> generateOptions(String correctSolution) {
+    List<String> Simple_sentences = ['I live in a house', 'People are living in India', 'Airplane fly over India', 'Student sees the teacher', 'I talk to friends', 'I wake up in the morning to work', 'You go to school in the morning', 'You read the school book', 'They look at the birds', 'I drink tea in morning', 'Teacher loves my work', 'Mother drank tea at office','Girl child is washing her hands','We are drinking tea'];
     List<String> options = [];
-    options.add(correctSolution);
+
+    options.add(correctSolution); // Add the correct answer
+
+    // Remove the correct solution from the Simple_sentences list to avoid duplication
+    Simple_sentences.remove(correctSolution);
+
+    Random random = Random();
 
     while (options.length < 4) {
-      String randomOption =
-          questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]
-              ['solution'];
-      if (!options.contains(randomOption)) {
-        options.add(randomOption);
+      // Select a random pronoun from the remaining options
+      String randomPronoun = Simple_sentences[random.nextInt(Simple_sentences.length)];
+      if (!options.contains(randomPronoun)) {
+        options.add(randomPronoun);
       }
     }
 
@@ -172,26 +85,30 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
     return options;
   }
 
-  List<Color> _cardColors = List.filled(4, Colors.white);
-  List<Color> _textColors = List.filled(4, Colors.black);
 
-  void _answerQuestion(
-      String selectedOption, String correctSolution, int index) {
+  void setOptionsForQuestion() {
+    if (selectedQuestions.isNotEmpty) {
+      currentOptions = generateOptions(selectedQuestions[0]['correctSolution']);
+      _initializeVideo(selectedQuestions[0]['question']); // Load video for the question
+    } else {
+      // Handle end of quiz scenario, show results or navigate out
+      Navigator.pop(context); // Go back if no questions are left
+    }
+  }
+
+
+  void _answerQuestion(String selectedOption, String correctSolution, int index) {
     setState(() {
       selectedOptionIndex = index;
       if (selectedOption == correctSolution) {
         score += 100;
         _cardColors[index] = Colors.green;
         _textColors[index] = Colors.white;
-        correctCount++;
+        correctcount++;
       } else {
         _cardColors[index] = Colors.red;
         _textColors[index] = Colors.white;
-        incorrectCount++;
-        incorrectQuestions.add({
-          'question': selectedQuestions[0]['question'],
-          'correctSolution': correctSolution,
-        });
+        incorrectcount++;
       }
     });
 
@@ -202,42 +119,24 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
         selectedOptionIndex = -1;
       });
 
-      if (selectedQuestions.length > 1) {
-        selectedQuestions.removeAt(0);
-        videoController?.dispose();
-        setOptionsForQuestion();
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Quiz_Simple_Sentence_ResultScreen(
-              score: score,
-              correctcount: correctCount,
-              incorrectcount: incorrectCount,
-              totalQuestions: 10,
-              incorrectQuestions: incorrectQuestions,
-            ),
-          ),
-        );
+      if (selectedQuestions.isNotEmpty) {
+        selectedQuestions.removeAt(0); // Remove the answered question
+        if (selectedQuestions.isNotEmpty) {
+          setOptionsForQuestion(); // Load next question if available
+        } else {
+          // If no questions are left, end the quiz
+          Navigator.pop(context); // You can navigate to a results screen here
+        }
       }
     });
   }
-
-  @override
-  void dispose() {
-    videoController?.removeListener(() {});
-    videoController?.dispose();
-    db.close();
-    super.dispose();
-  }
-
 Widget buildOptionCard(int index) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;
 
   // Define the fixed width and height for each card
   double cardWidth = screenWidth < 600 ? screenWidth * 0.8 : screenWidth * 0.6;
-  double cardHeight = screenHeight * 0.2;  // Adjust this as per your requirement
+  double cardHeight = screenHeight * 0.23;  // Adjust this as per your requirement
 
   return Expanded(
     child: GestureDetector(
@@ -459,9 +358,49 @@ Widget buildOptionCard(int index) {
                 ],
               ),
             )
-          : const Center(
-              child: CircularProgressIndicator(),
+          : Padding(
+  padding: const EdgeInsets.all(16.0),
+  child: Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Card(
+          elevation: 8,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          color: Colors.white,
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            child: const Text(
+              "Wohoo !! There are no incorrect questions",
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.orange,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
+          ),
+        ),
+        const SizedBox(height: 16), // Add spacing between card and button
+        ElevatedButton.icon(
+          onPressed: () {
+            Navigator.pop(context); // Navigates back to the previous screen
+          },
+          icon: const Icon(Icons.arrow_back,color: Colors.white,),
+          label: const Text("Back To Result Screen",style: TextStyle(color: Colors.white),),
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), backgroundColor: Colors.orange,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ), // Set button color to orange
+          ),
+        ),
+      ],
+    ),
+  ),
+),
     );
   }
 }
