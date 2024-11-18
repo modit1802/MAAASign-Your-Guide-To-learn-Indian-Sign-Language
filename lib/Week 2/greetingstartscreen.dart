@@ -1,6 +1,6 @@
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%202/learngreeting.dart';
-import 'package:SignEase/Week 2/thirdstep.dart';
+import 'package:SignEase/Week%202/true_false_greeting.dart';
 import 'package:SignEase/Week 2/practiceassignment1.dart';
 import 'package:flutter/material.dart';
 
@@ -317,7 +317,7 @@ class _GreetingStartscreenState extends State<GreetingStartscreen> {
                       ),
                       SizedBox(height: screenHeight * 0.015),
                       _buildCard(
-                        onTap: () => _handleCardTap(2, PracticeAssignment2()),
+                        onTap: () => _handleCardTap(2, True_false_challenger_greetings()),
                         imagePath: 'images/true_false.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Guess Right !',
