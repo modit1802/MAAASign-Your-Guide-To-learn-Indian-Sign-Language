@@ -373,6 +373,72 @@ Widget build(BuildContext context) {
                         scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/Chapter5.png'),
+                        title: 'Verb Placement and Tense',
+                        onTap: () {
+                          print("Week 5");
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/Chapter6.png'),
+                        title: 'Adjectives and Adverbs',
+                        onTap: () {
+                          print("Week 6");
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/Chapter7.png'),
+                        title: 'Handling Time and Aspect',
+                        onTap: () {
+                          print("Week 7");
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/Chapter8.png'),
+                        title: 'Questions',
+                        onTap: () {
+                          print("Week 8");
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/Chapter9.png'),
+                        title: 'Negation',
+                        onTap: () {
+                          print("Week 9");
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/Chapter10.png'),
+                        title: 'Plurals',
+                        onTap: () {
+                          print("Week 10");
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                      ),
+                    ),
                   ],
                 ),
               ),
