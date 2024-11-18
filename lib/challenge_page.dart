@@ -65,9 +65,10 @@ class _ChallengePageState extends State<ChallengePage> {
         ?['score_challenger']
             ?.toString()??'0';
         print(score_challenger_week3);
-        score_challenger_week4 = result['week']?['week4']?['Score_Challenger_week4']
+        score_challenger_week4 = result['week']?['Week4']?['Score_Challenger_Week4']
                 ?['score_challenger']
             ?.toString()??'0';
+        print(score_challenger_week4);
       } else {
         score_challenger_week1 = '0';
         score_challenger_week2='0';
