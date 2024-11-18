@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:SignEase/Week%202/Greeting_Result_2.dart';
+import 'package:SignEase/Week%202/Result_t_f.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
@@ -161,7 +161,7 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Quiz_Verb_ResultScreen(
+            builder: (context) => Result_True_False(
               score: score,
               correctcount: correctCount,
               incorrectcount: incorrectCount,

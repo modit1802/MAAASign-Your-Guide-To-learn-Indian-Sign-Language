@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%202/play_incorrect_greeting.dart';
-import 'package:SignEase/Week%201/review_incorrect_videos.dart';
+import 'package:SignEase/Week%202/review_incorrect_videos.dart';
 import 'package:SignEase/Week%202/true_false_greeting.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -11,14 +11,14 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class Quiz_Verb_ResultScreen extends StatefulWidget {
+class Result_True_False extends StatefulWidget {
   final int score;
   final int totalQuestions;
   final int correctcount;
   final int incorrectcount;
   final List<Map<String, dynamic>> incorrectQuestions;
 
-  const Quiz_Verb_ResultScreen({
+  const Result_True_False({
     Key? key,
     required this.score,
     required this.totalQuestions,
@@ -28,12 +28,12 @@ class Quiz_Verb_ResultScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Quiz_Verb_ResultScreen> createState() =>
-      _Quiz_Verb_ResultScreenState();
+  State<Result_True_False> createState() =>
+      _Result_True_FalseState();
 }
 
-class _Quiz_Verb_ResultScreenState
-    extends State<Quiz_Verb_ResultScreen> {
+class _Result_True_FalseState
+    extends State<Result_True_False> {
   final ScreenshotController _screenshotController = ScreenshotController();
 
   late mongo.Db db;
