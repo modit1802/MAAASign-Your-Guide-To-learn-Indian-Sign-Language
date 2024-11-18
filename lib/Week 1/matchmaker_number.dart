@@ -68,11 +68,11 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
 
   // Cloudinary URLs for the number images (left-side)
   Map<String, String> images = {
-    '1': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/1_tlz5st.png',
-    '2': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716505/2_zdfgum.png',
-    '4': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716506/4_xzh3hq.png',
-    '5': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/5_vno5r2.png',
-    '6': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727716507/6_okwpzy.png',
+    '1': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415177/1_ypmmhh.png',
+    '2': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415124/2_tb6h2y.png',
+    '4': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415064/4_hltwy4.png',
+    '5': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415053/5_nofsuk.png',
+    '6': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415039/6_ireutv.png',
   };
 
   // Cloudinary URLs for the matching images (right-side)
