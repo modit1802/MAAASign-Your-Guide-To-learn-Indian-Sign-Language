@@ -1,5 +1,4 @@
-import 'package:SignEase/Week%203/bingo_result_noun.dart';
-
+import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/result_bingo_simple_Sentence.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:math';
@@ -14,6 +13,9 @@ class Bingo_game_simple_Sentences extends StatelessWidget {
     return MaterialApp(
       title: 'Video Bingo Game',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Color.fromARGB(255, 250, 233, 215),
+      ),
       home: BingoScreen(),
     );
   }
@@ -25,131 +27,129 @@ class BingoScreen extends StatefulWidget {
 }
 
 class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStateMixin {
-  final List<Map<String, String>> questions = [
-    {'question': "hello mother ______", 'answer': "hello"},
-    {'question': "aeroplane ______ in the sky", 'answer': "flies"},
-    {'question': "cat ______ on the mat", 'answer': "sits"},
-    {'question': "sun ______ in the east", 'answer': "rises"},
-    {'question': "stars ______ at night", 'answer': "twinkle"},
-    {'question': "birds ______ in the morning", 'answer': "chirp"},
-  ];
-
-  final Map<String, String> videoOptions = {
-    'hello': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731839165/5_nvihuh.mp4',
-    'flies': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/flies_video.mp4',
-    'sits': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/sits_video.mp4',
-    'rises': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/rises_video.mp4',
-    'twinkle': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/twinkle_video.mp4',
-    'chirp': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/chirp_video.mp4',
+  final Map<String, String> Simple_sentence_links = {
+    'Man and female person are washing the hands': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908793/26_nr8jcf.mp4',
+    'Birds fly in the house': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908784/27_fhujac.mp4',
+    'Teacher teaches student to swim': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908793/28_jcufnb.mp4',
+    'Student look at teacher': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908786/29_iukqk6.mp4',
+    'Aeroplane flies with the birds': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908792/30_yuq5c8.mp4',
+    'Mother loves her house': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908785/31_ceay4p.mp4',
+    'Teacher sees the Aeroplane': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908787/32_jjwbl8.mp4',
+    'Man loves the fish': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908785/33_wfyfje.mp4',
+    'Female Person sees the bird': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908787/34_vxshgh.mp4',
+    'Student loves to read book': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908789/35_b8lrsu.mp4',
+    'Man is looking at fish': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908783/37_cbx1v9.mp4',
+    'Teacher goes to school': 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908783/38_v2py8c.mp4',
+    'Student lives in India' : 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908783/39_viy9ma.mp4',
+    'Teacher eats lunch at school' : 'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731908783/40_v31g1n.mp4',
   };
 
-  late int currentQuestionIndex;
+  late String target_sentence;
   late List<String> currentOptions;
   int score = 0;
-  int questionCount = 0;
-  Random random = Random();
-  late AnimationController _controller;
-  bool showAnswer = false;
-  String selectedAnswer = '';
-   late String targetNoun;
-  
- 
   int correctCount = 0;
   int incorrectCount = 0;
-
+  int questionCount = 0;
   List<Map<String, dynamic>> incorrectQuestions = [];
- 
+  Random random = Random();
+  late AnimationController _controller;
   int chancesLeft = 2;
-  String selectedNoun = ''; // Track the selected option
+  bool showAnswer = false;
+  String selectedNoun = ''; // Track the selected noun
   Map<String, bool> selectionStatus = {}; // Track the selection status of each option
-  
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    _generateNewQuestion();
+    _generateNewRound();
   }
 
-  void _generateNewQuestion() {
+  void _generateNewRound() {
     setState(() {
-      if (questionCount == 6) {
+      if (questionCount == 10) {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Bingo_Noun_ResultScreen(
+            builder: (context) => Bingo_Simple_Sentence_ResultScreen(
               score: score,
-              correctcount: questionCount,
-              incorrectcount: 6 - questionCount,
-              totalQuestions: 6,
-              incorrectQuestions: [],
+              correctcount: correctCount,
+              incorrectcount: incorrectCount,
+              totalQuestions: questionCount,
+              incorrectQuestions: incorrectQuestions,
             ),
           ),
         );
         return;
       }
 
-      currentQuestionIndex = questionCount;
-      String correctAnswer = questions[currentQuestionIndex]['answer']!;
-      List<String> options = videoOptions.keys.toList();
-      options.remove(correctAnswer);
+      List<String> nouns = Simple_sentence_links.keys.toList();
+      target_sentence = nouns[random.nextInt(nouns.length)];
+      nouns.remove(target_sentence);
 
-      currentOptions = [correctAnswer, ...options..shuffle()].sublist(0, 4);
+      currentOptions = [target_sentence, ...nouns..shuffle()].sublist(0, 4);
       currentOptions.shuffle();
 
       questionCount++;
+      chancesLeft = 2;
       showAnswer = false;
-      selectedAnswer = '';
+      selectedNoun = ''; // Reset selected noun for the new round
+      selectionStatus = {}; // Reset selection status for the new round
       _controller.forward(from: 0);
     });
   }
 
-  void _checkAnswer(String answer) {
-  setState(() {
-    if (answer == questions[currentQuestionIndex]['answer']) {
-      score += 100;
-      selectionStatus[answer] = true; // Correct selection
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Correct! +100 points'),
-          backgroundColor: Colors.green,
-          duration: Duration(seconds: 1),
-        ),
-      );
-      _generateNewQuestion();
-    } else {
-      chancesLeft--;
-      selectionStatus[answer] = false; // Incorrect selection
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Incorrect! $chancesLeft chances left'),
-          backgroundColor: Colors.red,
-          duration: Duration(seconds: 1),
-        ),
-      );
-      if (chancesLeft == 0) {
-        // Highlight the correct video in green
-        selectionStatus[questions[currentQuestionIndex]['answer']!] = true;
-        Future.delayed(Duration(seconds: 2), () {
-          _generateNewQuestion();
-        });
+  void _checkAnswer(String noun) {
+    setState(() {
+      selectedNoun = noun; // Update the selected noun
+      if (noun == target_sentence) {
+        int points = chancesLeft == 2 ? 100 : chancesLeft == 1 ? 50 : 0;
+        score += points;
+        correctCount++;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Correct! +$points points'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 1),
+          ),
+        );
+        _generateNewRound();
+      } else {
+        incorrectCount++;
+        chancesLeft--;
+        selectionStatus[noun] = false; // Mark the selected option as incorrect
+        if (chancesLeft == 0) {
+          showAnswer = true;
+          selectionStatus[target_sentence] = true; // Mark the correct answer
+          incorrectQuestions.add({'question': Simple_sentence_links[target_sentence], 'correctSolution': target_sentence});
+          Future.delayed(Duration(seconds: 2), () {
+            _generateNewRound();
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Incorrect! $chancesLeft chances left.'),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 1),
+            ),
+          );
+        }
       }
-    }
-  });
-}
+    });
+  }
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
-        title: Text('Video Bingo Game'),
+        title: Text('Simple Sentence Video Bingo Game'),
         centerTitle: true,
       ),
       body: FadeTransition(
@@ -172,7 +172,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                questions[currentQuestionIndex]['question']!,
+                '"$target_sentence"',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -195,17 +195,17 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
                   ),
                   itemCount: currentOptions.length,
                   itemBuilder: (context, index) {
-                    String option = currentOptions[index];
+                    String noun = currentOptions[index];
                     return GestureDetector(
                       child: VideoTile(
-                        key: ValueKey(option),
-                        url: videoOptions[option]!,
-                        isCorrect: showAnswer && selectionStatus[option] == true, // Check if this option is the correct answer
-                        isIncorrect: showAnswer && selectionStatus[option] == false, // Check if this option was selected incorrectly
-                        isSelected: selectionStatus[option] == false || selectionStatus[option] == true, // Check if this option was selected
+                        key: ValueKey(noun),
+                        url: Simple_sentence_links[noun] ?? '',
+                        isCorrect: showAnswer && selectionStatus[noun] == true, // Check if this option is the correct answer
+                        isIncorrect: showAnswer && selectionStatus[noun] == false, // Check if this option was selected incorrectly
+                        isSelected: selectionStatus[noun] == false || selectionStatus[noun] == true, // Check if this option was selected
                         onSelected: (isSelected) {
                           if (isSelected) {
-                            _checkAnswer(option);
+                            _checkAnswer(noun);
                           }
                         },
                       ),
@@ -221,7 +221,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
     );
   }
 
-   Widget _buildInfoBox(String text) {
+  Widget _buildInfoBox(String text) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
@@ -234,7 +234,6 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
       ),
     );
   }
-
 }
 class VideoTile extends StatefulWidget {
   final String url;
@@ -295,17 +294,22 @@ class _VideoTileState extends State<VideoTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: widget.isCorrect
-          ? Colors.green.withOpacity(0.7) // Green if correct
+      color: widget.isCorrect && widget.isSelected
+          ? Colors.green // Green background if correctly selected
           : widget.isIncorrect
-              ? Colors.red.withOpacity(0.7) // Red if incorrect
-              : Colors.white,
+          ? Colors.red // Red background if incorrectly selected
+          : Colors.white,
       child: Stack(
         children: [
           if (_controller.value.isInitialized)
-            AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: VideoPlayer(_controller),
+            ColorFiltered(
+              colorFilter: widget.isCorrect && widget.isSelected
+                  ? ColorFilter.mode(Colors.green.withOpacity(0.5), BlendMode.srcATop)
+                  : ColorFilter.mode(Colors.transparent, BlendMode.srcATop),
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              ),
             )
           else
             Center(child: CircularProgressIndicator()),
@@ -320,32 +324,31 @@ class _VideoTileState extends State<VideoTile> {
                 padding: EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: widget.isCorrect ? Colors.green : Colors.black54,
+                  color: Colors.black54,
                 ),
                 child: Text(
-                  widget.isCorrect
-                      ? '✅'
-                      : widget.isIncorrect
-                          ? '❌'
-                          : '',
+                  widget.isSelected
+                      ? (widget.isCorrect ? '✅' : '❌')
+                      : '',
                   style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
               ),
             ),
           ),
-          Positioned.fill(
-            child: GestureDetector(
-              onTap: _togglePlayPause,
-              child: Align(
-                alignment: Alignment.center,
-                child: Icon(
-                  isPlaying ? Icons.pause_circle_outline : Icons.play_circle_outline,
-                  color: Colors.white,
-                  size: 48,
+          if (_controller.value.isInitialized)
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: _togglePlayPause,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    isPlaying ? Icons.pause_circle_outline : Icons.play_circle_outline,
+                    color: Colors.white,
+                    size: 48,
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

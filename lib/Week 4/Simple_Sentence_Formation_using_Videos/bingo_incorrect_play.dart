@@ -2,21 +2,21 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class Play_incorrect_simple_sentences extends StatefulWidget {
+class Bingo_Play_Incorrect extends StatefulWidget {
   final List<Map<String, dynamic>> incorrectQuestions;
 
   var score1;
 
-  Play_incorrect_simple_sentences({Key? key, required this.incorrectQuestions, required this.score1})
+  Bingo_Play_Incorrect({Key? key, required this.incorrectQuestions, required this.score1})
       : super(key: key);
 
   @override
-  State<Play_incorrect_simple_sentences> createState() =>
-      _Play_incorrect_simple_sentencesState();
+  State<Bingo_Play_Incorrect> createState() =>
+      _Bingo_Play_IncorrectState();
 }
 
-class _Play_incorrect_simple_sentencesState
-    extends State<Play_incorrect_simple_sentences> {
+class _Bingo_Play_IncorrectState
+    extends State<Bingo_Play_Incorrect> {
   late VideoPlayerController _controller;
 
   List<Map<String, dynamic>> incorrectQuestions = [];
@@ -60,7 +60,7 @@ class _Play_incorrect_simple_sentencesState
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> nouns =  ['I live in a house', 'People are living in India', 'Airplane fly over India', 'Student sees the teacher', 'I talk to friends', 'I wake up in the morning to work', 'You go to school in the morning', 'You read the school book', 'They look at the birds', 'I drink tea in morning', 'Teacher loves my work', 'Mother drank tea at office','Girl child is washing her hands','We are drinking tea'];
+    List<String> nouns =  ['Man and female person are washing the hands', 'Birds fly in the house', 'Teacher teaches student to swim', 'Aeroplane flies with the birds', 'Mother loves her house', 'Teacher sees the Aeroplane', 'Man loves the fish', 'Female Person sees the bird', 'Student loves to read book', 'Man is looking at fish', 'Teacher goes to school', 'Student lives in India','Teacher eats lunch at school','We are drinking tea'];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer
@@ -198,7 +198,7 @@ class _Play_incorrect_simple_sentencesState
                     Padding(
                       padding: EdgeInsets.only(top: screenHeight * 0.050),
                       child: Text(
-                        'Quiz Mania',
+                        'Retry ZonE',
                         style: TextStyle(
                           fontFamily: 'RubikWetPaint',
                           fontSize: isSmallScreen ? 38 : 40,
