@@ -145,17 +145,17 @@ class _InitialPage1State extends State<InitialPage1> {
     return (await showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('Are you sure?'),
+        title: const Text('Are you sure?', style: TextStyle(color: const Color.fromARGB(255, 238, 126, 34),fontWeight: FontWeight.bold),),
         content: const Text('Do you want to exit the app?'),
         actions: <Widget>[
           TextButton(
-            child: const Text('Cancel'),
+            child: const Text('Cancel', style: TextStyle(color: const Color.fromARGB(255, 238, 126, 34)),),
             onPressed: () {
               Navigator.of(context).pop(false); // Don't exit
             },
           ),
           TextButton(
-            child: const Text('Yes'),
+            child: const Text('Yes', style: TextStyle(color: const Color.fromARGB(255, 238, 126, 34)),),
             onPressed: () {
                 SystemNavigator.pop();  // Exit the app
             },
@@ -243,7 +243,7 @@ class _InitialPage1State extends State<InitialPage1> {
                 _onItemTapped(index);
               },
               type: BottomNavigationBarType.fixed,
-              selectedItemColor: Color.fromARGB(255, 165, 74, 17),
+              selectedItemColor: const Color.fromARGB(255, 238, 126, 34),
               unselectedItemColor: const Color.fromARGB(255, 145, 141, 141),
               backgroundColor: Colors.transparent,
               elevation: 0,

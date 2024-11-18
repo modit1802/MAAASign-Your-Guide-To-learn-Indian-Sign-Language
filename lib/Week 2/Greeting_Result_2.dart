@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%202/play_incorrect_greeting.dart';
 import 'package:SignEase/Week%201/review_incorrect_videos.dart';
-import 'package:SignEase/Week%202/thirdstep.dart';
+import 'package:SignEase/Week%202/true_false_greeting.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -289,7 +289,7 @@ class _Quiz_Verb_ResultScreenState
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          PracticeAssignment2()));
+                                          True_false_challenger_greetings()));
                             },
                             child: _buildCircularButton(
                                 Icons.refresh, "Play Again", Colors.teal)),
