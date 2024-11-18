@@ -14,13 +14,13 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
   List<Map<String, dynamic>> questionsAndSolutions = [
     {
       'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848348/16U_bymgr3.mp4',
-      'solution': 'I live in a house'
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731951051/41_aesnd6.mp4',
+      'solution': 'Student eats dinner at house'
     },
     {
       'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848409/7U_hptmcj.mp4',
-      'solution': 'People are living in India'
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731951219/42_eow81c.mp4',
+      'solution': 'Deaf people live in India'
     },
     {
       'question':
@@ -29,13 +29,13 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
     },
     {
       'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848345/25U_rnebn0.mp4',
-      'solution': 'Student sees the teacher'
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731951345/43_kityun.mp4',
+      'solution': 'Girl child eats breakfast at house'
     },
     {
       'question':
-          'https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848348/23U_uswf0h.mp4',
-      'solution': 'I talk to friends'
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731951448/50_bi91dr.mp4',
+      'solution': 'We cook dinner at home'
     },
     {
       'question':
@@ -231,53 +231,57 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
     super.dispose();
   }
 
-Widget buildOptionCard(int index) {
-  double screenWidth = MediaQuery.of(context).size.width;
-  double screenHeight = MediaQuery.of(context).size.height;
+  Widget buildOptionCard(int index) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
-  // Define the fixed width and height for each card
-  double cardWidth = screenWidth < 600 ? screenWidth * 0.8 : screenWidth * 0.6;
-  double cardHeight = screenHeight * 0.2;  // Adjust this as per your requirement
+    // Define the fixed width and height for each card
+    double cardWidth = screenWidth < 600 ? screenWidth * 0.8 : screenWidth * 0.6;
+    double cardHeight = screenHeight * 0.2;  // Adjust this as per your requirement
 
-  return Expanded(
-    child: GestureDetector(
-      onTap: selectedOptionIndex == -1
-          ? () => _answerQuestion(
-                currentOptions[index],
-                selectedQuestions[0]['solution'],
-                index,
-              )
-          : null,
-      child: SizedBox(
-        width: cardWidth,  // Fixed width
-        height: cardHeight,  // Fixed height
-        child: Card(
-          elevation: screenWidth < 600 ? 8 : 12,
-          color: _cardColors[index],
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(screenWidth * 0.04),
-          ),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: screenHeight * 0.050,
-              horizontal: screenWidth * 0.04,
+    return Expanded(
+      child: GestureDetector(
+        onTap: selectedOptionIndex == -1
+            ? () => _answerQuestion(
+          currentOptions[index],
+          selectedQuestions[0]['solution'],
+          index,
+        )
+            : null,
+        child: SizedBox(
+          width: cardWidth,  // Fixed width
+          height: cardHeight,  // Fixed height
+          child: Card(
+            elevation: screenWidth < 600 ? 8 : 12,
+            color: _cardColors[index],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(screenWidth * 0.04),
             ),
-            child: Center(
-              child: Text(
-                currentOptions[index],
-                style: TextStyle(
-                  fontSize: screenWidth < 600 ? 16 : 20,  // Reduced font size
-                  color: _textColors[index],
-                  fontWeight: FontWeight.bold,
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                vertical: screenHeight * 0.050,
+                horizontal: screenWidth * 0.04,
+              ),
+              child: Center(
+                child: Text(
+                  currentOptions[index],
+                  style: TextStyle(
+                    fontSize: screenWidth < 600 ? 16 : 20,  // Adjusted font size
+                    color: _textColors[index],
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,  // Ensure text is centered
+                  softWrap: true,               // Allow wrapping
+                  overflow: TextOverflow.clip,  // Use ellipsis for overflow text
+                  maxLines: 3,                 // Limit to 2 lines, adjust as needed
                 ),
               ),
             ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -327,7 +331,7 @@ Widget buildOptionCard(int index) {
                               -screenHeight *
                                   0.059), // Adjusted with MediaQuery
                           child: Text(
-                            "Identify the signs for each noun",
+                            "Identify the correct English Sentence",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: isSmallScreen ? 18 : 24,

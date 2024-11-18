@@ -51,16 +51,16 @@ class _DetailedProgressWeek4State extends State<DetailedProgressWeek4> {
         score_challenger = result['week']?['Week4']?['Score_Challenger_Week4']
                 ?['score_challenger']
             ?.toString();
-        score_basic_sentence = result['week']?['Week4']?['score_basic_sentence']
+        score_basic_sentence = result['week']?['week4']?['Score_Basic_Sentence']
                 ?['score_basic_sentence']
             ?.toString();
-        score_simple_sentence = result['week']?['Week4']?['Score_Simple_Sentence']
+        score_simple_sentence = result['week']?['week4']?['Score_Simple_Sentence']
                 ?['score_simple_sentence']
             ?.toString();
-        score_basic_sentence_FIB = result['week']?['Week4']?['score_basic_sentence_FIB']
+        score_basic_sentence_FIB = result['week']?['week4']?['Score_Basic_Sentence_FIB']
         ?['score_basic_sentence_FIB']
             ?.toString();
-        score_bingo_simple_sentence_2 = result['week']?['Week4']?['Score_bingo_simple_sentence']
+        score_bingo_simple_sentence_2 = result['week']?['week4']?['Score_bingo_simple_sentence']
         ?['score_bingo_simple_sentence_2']
             ?.toString();
         var data = result['week']?['Week4']?['Score_Challenger_Week4']
@@ -121,7 +121,7 @@ class _DetailedProgressWeek4State extends State<DetailedProgressWeek4> {
                   ColumnSeries<ScoreData, String>(
                     dataSource: [
                       ScoreData(
-                          'Verbs', double.tryParse(score_basic_sentence!) ?? 0),
+                          'Sentence Structure', double.tryParse(score_basic_sentence!) ?? 0),
                     ],
                     xValueMapper: (ScoreData data, _) => data.label,
                     yValueMapper: (ScoreData data, _) => data.value,
@@ -130,7 +130,7 @@ class _DetailedProgressWeek4State extends State<DetailedProgressWeek4> {
                   ),
                   ColumnSeries<ScoreData, String>(
                     dataSource: [
-                      ScoreData('Nouns', double.tryParse(score_simple_sentence!) ?? 0),
+                      ScoreData('Sentence Formation', double.tryParse(score_simple_sentence!) ?? 0),
                     ],
                     xValueMapper: (ScoreData data, _) => data.label,
                     yValueMapper: (ScoreData data, _) => data.value,
@@ -155,7 +155,7 @@ class _DetailedProgressWeek4State extends State<DetailedProgressWeek4> {
         child: Column(
           children: [
             const Text(
-              "Bingo Scores of Week 4",
+              "Bingo/Fill in the Blank Scores of Week 4",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -167,7 +167,7 @@ class _DetailedProgressWeek4State extends State<DetailedProgressWeek4> {
                   ColumnSeries<ScoreData, String>(
                     dataSource: [
                       ScoreData(
-                          'Verbs', double.tryParse(score_basic_sentence_FIB!) ?? 0),
+                          'Sentence Structure', double.tryParse(score_basic_sentence_FIB!) ?? 0),
                     ],
                     xValueMapper: (ScoreData data, _) => data.label,
                     yValueMapper: (ScoreData data, _) => data.value,
@@ -176,7 +176,7 @@ class _DetailedProgressWeek4State extends State<DetailedProgressWeek4> {
                   ),
                   ColumnSeries<ScoreData, String>(
                     dataSource: [
-                      ScoreData('Nouns', double.tryParse(score_bingo_simple_sentence_2!) ?? 0),
+                      ScoreData('Sentence Formation', double.tryParse(score_bingo_simple_sentence_2!) ?? 0),
                     ],
                     xValueMapper: (ScoreData data, _) => data.label,
                     yValueMapper: (ScoreData data, _) => data.value,
@@ -225,7 +225,7 @@ class _DetailedProgressWeek4State extends State<DetailedProgressWeek4> {
                       color: Colors.white,
                       title: "Week 4 Progress Report",
                       description:
-                          "Scroll Down to check your Detailed progress report of Week 4. It includes Challenger Result, Quiz results",
+                          "Scroll Down to check your Detailed progress report of Week 4. It includes Challenger Result, Quiz Results, Bingo Results",
                       index: 1,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       iconColor: const Color.fromARGB(255, 189, 74, 2),
@@ -290,8 +290,8 @@ class _DetailedProgressWeek4State extends State<DetailedProgressWeek4> {
                           ? "Quiz Not Attempted"
                           : "Quiz Scores",
                       description: (score_basic_sentence == null && score_simple_sentence == null)
-                          ? "You have not attempted the quiz for verbs, nouns and pronouns. Please first attempt the quiz then come to check the scores"
-                          : "🔔 Below are your quiz scores presented in verbs, nouns and pronouns! Red bar represents the Verbs score, Blue bar represents the Nouns score, and Green bar represents the Pronouns score",
+                          ? "You have not attempted the quiz for Sentence Structure and Sentence Formation. Please first attempt the quiz then come to check the scores"
+                          : "🔔 Below are your quiz scores presented in Sentence Structure and Sentence Formation! Red bar represents the Sentence Structure score, and Blue bar represents the Sentence Formation score",
                       index: 1,
                     ),
                   ),
@@ -311,8 +311,8 @@ class _DetailedProgressWeek4State extends State<DetailedProgressWeek4> {
                           ? "Bingo Not Attempted"
                           : "Bingo Scores",
                       description: (score_basic_sentence_FIB == null && score_bingo_simple_sentence_2 == null)
-                          ? "You have not attempted the Bingo for verbs, nouns and pronouns. Please first attempt the Bingo and then come to check the scores"
-                          : "🔔 Below are your Bingo scores presented in verbs, nouns and pronouns! Red bar represents the Verbs score, Blue bar represents the Nouns score, and Green bar represents the Pronouns score",
+                          ? "You have not attempted the Bingo for Sentence Structure and Sentence Formation. Please first attempt the Bingo and then come to check the scores"
+                          : "🔔 Below are your Bingo scores presented in Sentence Structure and Sentence Formation! Red bar represents the Sentence Structure score and Blue bar represents the Sentence Formation score",
                       index: 1,
                     ),
                   ),
