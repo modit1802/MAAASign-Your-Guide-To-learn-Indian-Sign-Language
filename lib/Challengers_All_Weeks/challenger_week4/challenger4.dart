@@ -131,33 +131,22 @@ class _ThirdGameState extends State<ThirdGame> {
     // challenger 1
 
     {
-      'question': 'eat lunch',
-      'solution_vids': ['eat', 'lunch'],
-      'solution': ['eat_i', 'lunch_i'],
+      'question': 'eat lunch dinner',
+      'solution_vids': ['eat', 'lunch', 'dinner'],  // Add 3 items here
+      'solution': ['eat_i', 'lunch_i', 'dinner_i'],
       'availableLetters': ['eat_i', 'cook_i', 'lunch_i', 'dinner_i'],
       'urls': {
-        'eat':
-            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4',
-        'cook':
-            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4',
-        'lunch':
-            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530818/lunch_cbcgwu.mp4',
-        'dinner':
-            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4',
-        'eat_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974723/Eat_vf1awm.png',
-        'cook_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974895/Cook_qmzd54.png',
-        'lunch_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974959/Lunch_lgyo07.png',
-        'dinner_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730975017/Dinner_cistxn.png',
-        'correct':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
-        'wrong':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
+        'eat': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4',
+        'cook': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4',
+        'lunch': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530818/lunch_cbcgwu.mp4',
+        'dinner': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4',
+        'eat_i': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974723/Eat_vf1awm.png',
+        'cook_i': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974895/Cook_qmzd54.png',
+        'lunch_i': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730974959/Lunch_lgyo07.png',
+        'dinner_i': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730975017/Dinner_cistxn.png',
+        'correct': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
+        'wrong': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif',
+        'wooden': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
       }
     },
 
@@ -710,6 +699,12 @@ Flexible(
         challengeData[currentChallengeIndex]['solution_vids'][1]],
   ),
 ),
+                              Flexible(
+                                child: VideoWidget(
+                                  challengeData[currentChallengeIndex]['urls'][
+                                  challengeData[currentChallengeIndex]['solution_vids'][2]],
+                                ),
+                              ),
           ],
                           ),
                         ),

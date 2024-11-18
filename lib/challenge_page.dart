@@ -21,6 +21,7 @@ class _ChallengePageState extends State<ChallengePage> {
   String? score_challenger_week2 = '0';
    String? score_challenger_week3 = '0';
    String? score_challenger_week4 = '0';
+   String? comingsoon = '0';
      late mongo.Db db;
   late mongo.DbCollection userCollection;
 
@@ -430,7 +431,7 @@ Widget build(BuildContext context) {
                         onTap: () {
                           print("Week 5");
                         },
-                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                        scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
                     ),
                     Padding(
@@ -441,7 +442,7 @@ Widget build(BuildContext context) {
                         onTap: () {
                           print("Week 6");
                         },
-                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                        scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
                     ),
                     Padding(
@@ -452,7 +453,7 @@ Widget build(BuildContext context) {
                         onTap: () {
                           print("Week 7");
                         },
-                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                        scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
                     ),
                     Padding(
@@ -463,7 +464,7 @@ Widget build(BuildContext context) {
                         onTap: () {
                           print("Week 8");
                         },
-                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                        scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
                     ),
                     Padding(
@@ -474,7 +475,7 @@ Widget build(BuildContext context) {
                         onTap: () {
                           print("Week 9");
                         },
-                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                        scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
                     ),
                     Padding(
@@ -485,7 +486,7 @@ Widget build(BuildContext context) {
                         onTap: () {
                           print("Week 10");
                         },
-                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
+                        scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
                     ),
                   ],
