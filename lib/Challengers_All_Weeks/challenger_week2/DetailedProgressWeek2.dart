@@ -168,7 +168,7 @@ class _DetailedProgressWeek2State extends State<DetailedProgressWeek2> {
                       color: Colors.white,
                       title: "Week 2 Progress Report",
                       description:
-                          "Scroll Down to check your Detailed progress report of Week 2. It includes Challenger Result, Quiz results",
+                          "Scroll Down to check your Detailed progress report of Week 2. It includes Challenger Result, Quiz Results and Guess Results",
                       index: 1,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       iconColor: const Color.fromARGB(255, 189, 74, 2),

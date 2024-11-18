@@ -3,6 +3,7 @@ import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%202/play_incorrect_greeting.dart';
 import 'package:SignEase/Week%202/review_incorrect_videos.dart';
 import 'package:SignEase/Week%202/true_false_greeting.dart';
+import 'package:SignEase/Week%202/week2_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -282,67 +283,72 @@ class _Result_True_FalseState
                       crossAxisSpacing: 16,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        GestureDetector(
+                        children: [
+                          GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          True_false_challenger_greetings()));
+                                          ReviewIncorrectSolution(
+                                            incorrectQuestions:
+                                            widget.incorrectQuestions,
+                                          )));
+                            },
+                            child: _buildCircularButton(Icons.visibility,
+                                "Review Mistakes", Colors.brown),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          PLay_Incorrect_Verbs(
+                                            incorrectQuestions:
+                                            widget.incorrectQuestions,
+                                            score1: widget.score,
+                                          )));
+                            },
+                            child: _buildCircularButton(Icons.assessment_outlined,
+                                "Retry Mistakes", Colors.grey),
+                          ),
+                          GestureDetector(
+                            onTap: _shareScore,
+                            child: _buildCircularButton(
+                                Icons.share, "Share Score", Colors.blue),
+                          ),
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            True_false_challenger_greetings()));
+                              },
+                              child: _buildCircularButton(
+                                  Icons.refresh, "Play Again", Colors.teal)),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Week2NewScreen()));
                             },
                             child: _buildCircularButton(
-                                Icons.refresh, "Play Again", Colors.teal)),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ReviewIncorrectSolution(
-                                          incorrectQuestions:
-                                          widget.incorrectQuestions,
-                                        )));
-                          },
-                          child: _buildCircularButton(Icons.visibility,
-                              "Review Mistakes", Colors.brown),
-                        ),
-                        GestureDetector(
-                          onTap: _shareScore,
-                          child: _buildCircularButton(
-                              Icons.share, "Share Score", Colors.blue),
-                        ),
-                        GestureDetector(
-                          onTap: _generateAndSharePDF,
-                          child: _buildCircularButton(Icons.picture_as_pdf,
-                              "Generate PDF", Colors.green),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const InitialPage1()));
-                          },
-                          child: _buildCircularButton(
-                              Icons.home, "Home", Colors.purple),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        PLay_Incorrect_Verbs(
-                                          incorrectQuestions:
-                                          widget.incorrectQuestions,
-                                          score1: widget.score,
-                                        )));
-                          },
-                          child: _buildCircularButton(Icons.assessment_outlined,
-                              "Mistake Reattempt", Colors.grey),
-                        ),
-                      ],
+                                Icons.arrow_back, "Week 2", Colors.pink),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => InitialPage1()));
+                            },
+                            child: _buildCircularButton(
+                                Icons.home, "Home", Colors.purple),
+                          ),
+                        ],
                     ),
                   ),
                 ),

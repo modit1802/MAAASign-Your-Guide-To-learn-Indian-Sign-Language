@@ -157,13 +157,22 @@ class _ChallengePageState extends State<ChallengePage> {
                   ),
                 ),
                 SizedBox(height: screenWidth * 0.02), // Responsive spacing
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: screenWidth * 0.05, // Responsive font size
-                    fontWeight: FontWeight.bold,
-                    color: isScoreAbove650 ? Colors.white : Colors.black, // Text color change based on score
+                Center(
+                  child:
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                    softWrap: false,              // Disable wrapping
+                    overflow: TextOverflow.clip,  // Clip the text instead of showing ellipsis
+                    maxLines: 1,
                   ),
+                ),
                 ),
               ],
             ),

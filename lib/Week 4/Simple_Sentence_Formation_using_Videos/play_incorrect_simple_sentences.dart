@@ -159,10 +159,14 @@ class _Play_incorrect_simple_sentencesState
               child: Text(
                 currentOptions[index],
                 style: TextStyle(
-                  fontSize: screenWidth < 600 ? 20 : 28,
+                  fontSize: screenWidth < 600 ? 16 : 20,  // Adjusted font size
                   color: _textColors[index],
                   fontWeight: FontWeight.bold,
                 ),
+                textAlign: TextAlign.center,  // Ensure text is centered
+                softWrap: true,               // Allow wrapping
+                overflow: TextOverflow.ellipsis,  // Use ellipsis for overflow text
+                maxLines: 3,                 // Limit to 2 lines, adjust as needed
               ),
             ),
           ),

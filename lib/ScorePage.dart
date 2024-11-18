@@ -100,7 +100,7 @@ class _ScorePageState extends State<ScorePage> {
         ?['score_challenger']
             ?.toString();
         print(score_challenger_week2);
-        score_challenger_week4=result['week']?['week4']?['Score_Challenger_Week4']
+        score_challenger_week4=result['week']?['Week4']?['Score_Challenger_Week4']
         ?['score_challenger']
             ?.toString();
         print(score_challenger_week4);
@@ -364,12 +364,12 @@ Widget build(BuildContext context) {
                 ),
             if (score_challenger_week4 != null)
               _buildCard(
-                onTap: () => _handleCardTap(1, const DetailedProgressWeek4()),
+                onTap: () => _handleCardTap(4, const DetailedProgressWeek4()),
                 color: Colors.white,
                 title: 'Week 4',
                 description:
                 'See the detailed score!',
-                index: 1,
+                index: 4,
                 score: int.parse(score_challenger_week4!),
               ),
             ],
