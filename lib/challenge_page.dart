@@ -327,53 +327,92 @@ Widget build(BuildContext context) {
                       ),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: buildCustomCard(
-                        image: AssetImage('images/chapter2.png'),
-                        title: 'Greetings & Relations',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Week2NewScreen()),
-                          );
-                        },
-                        scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
-                      ),
-                    ),
-                    
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: buildCustomCard(
-                        image: AssetImage('images/chapter3.png'),
-                        title: 'Nouns,Verbs & Pronouns ',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Week3Entry()),
-                          );
-                        },
-                        scoreChallengerWeek1: int.parse(score_challenger_week3??'0')
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: buildCustomCard(
-                        image: AssetImage('images/chapter4.png'),
-                        title: 'Simple Sentence Formation',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                               builder: (context) => Week4Entry()),
-                          );
-                        },
-                        scoreChallengerWeek1: int.parse(score_challenger_week4!??'0'),
-                      ),
-                    ),
-                    Padding(
+              if (score_challenger_week1 != null && int.parse(score_challenger_week1 ?? '0') > 650) Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: buildCustomCard(
+                              image: AssetImage('images/chapter2.png'),
+                              title: 'Greetings & Relations ',
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Week2NewScreen()),
+                                );
+                              }, scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
+                            ),
+                          ) else Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: buildCustomCard(
+                                image: AssetImage('images/chapter2.png'),
+                                title: 'Greetings & Relations 🔒',
+                                onTap: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Can't open this week yet please score more than 650 in week 1"),
+                                    ),
+                                  );
+                                },
+                                  scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
+                              ),
+                            ),
+                    if (score_challenger_week2 != null && int.parse(score_challenger_week2 ?? '0') > 650) Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: buildCustomCard(
+                              image: AssetImage('images/chapter2.png'),
+                              title: 'Noun,Verbs & Pronouns',
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Week3Entry()),
+                                );
+                              }, scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
+                            ),
+                          ) else Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: buildCustomCard(
+                                image: AssetImage('images/chapter3.png'),
+                                title: 'Noun,Verbs & Pronouns 🔒',
+                                onTap: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Can't open this week yet please score more than 650 in week 2"),
+                                    ),
+                                  );
+                                },
+                                  scoreChallengerWeek1: int.parse(score_challenger_week3??'0'),
+                              ),
+                            ),
+              
+                   if (score_challenger_week3 != null && int.parse(score_challenger_week3 ?? '0') > 650) Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: buildCustomCard(
+                              image: AssetImage('images/chapter4.png'),
+                              title: 'Simple Sentence Formation',
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Week3Entry()),
+                                );
+                              }, scoreChallengerWeek1: int.parse(score_challenger_week4??'0'),
+                            ),
+                          ) else Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: buildCustomCard(
+                                image: AssetImage('images/chapter4.png'),
+                                title: 'Simple Sentence Formation 🔒',
+                                onTap: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Can't open this week yet please score more than 650 in week 3"),
+                                    ),
+                                  );
+                                },
+                                  scoreChallengerWeek1: int.parse(score_challenger_week4??'0'),
+                              ),
+                            ),
+               Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/Chapter5.png'),
