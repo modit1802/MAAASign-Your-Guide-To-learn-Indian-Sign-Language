@@ -367,7 +367,7 @@ Widget build(BuildContext context) {
                     if (score_challenger_week2 != null && int.parse(score_challenger_week2 ?? '0') > 650) Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: buildCustomCard(
-                              image: AssetImage('images/chapter2.png'),
+                              image: AssetImage('images/chapter3.png'),
                               title: 'Noun,Verbs & Pronouns',
                               onTap: () {
                                 Navigator.push(
@@ -402,7 +402,7 @@ Widget build(BuildContext context) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Week3Entry()),
+                                      builder: (context) => Week4Entry()),
                                 );
                               }, scoreChallengerWeek1: int.parse(score_challenger_week4??'0'),
                             ),

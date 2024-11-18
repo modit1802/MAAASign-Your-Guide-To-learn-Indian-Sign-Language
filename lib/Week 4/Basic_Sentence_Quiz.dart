@@ -107,27 +107,32 @@ class _Basic_Sentence_Structure_QuizState extends State<Basic_Sentence_Structure
 
   void generateRandomQuiz() {
     selectedQuestions = [...questionsAndSolutions]..shuffle();
-    selectedQuestions = selectedQuestions.sublist(0, 6);
+    selectedQuestions = selectedQuestions.sublist(0, 10);
   }
 
   void setOptionsForQuestion() {
     currentOptions = generateOptions(selectedQuestions[0]['solution']);
     isLoading = true;
   }
-
+  int _factorial(int n) {
+    return n <= 1 ? 1 : n * _factorial(n - 1);
+  }
   List<String> generateOptions(String correctSolution) {
     List<String> options = [];
     options.add(correctSolution);
 
-    while (options.length < 4) {
-      String randomGloss = questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]['solution'];
-      if (!options.contains(randomGloss)) {
-        options.add(randomGloss);
+    // Generate permutations of the correct answer
+    List<String> words = correctSolution.split(' ');
+    for (int i = 0; i < 100; i++) {
+      List<String> shuffled = List.from(words)..shuffle();
+      String option = shuffled.join(' ');
+      if (!options.contains(option)) {
+        options.add(option);
       }
     }
 
     options.shuffle();
-    return options;
+    return options.take(4).toList();
   }
 
   List<Color> _cardColors = List.filled(4, Colors.white);
@@ -170,7 +175,7 @@ class _Basic_Sentence_Structure_QuizState extends State<Basic_Sentence_Structure
               score: score,
               correctcount: correctCount,
               incorrectcount: incorrectCount,
-              totalQuestions: 6,
+              totalQuestions: 10,
               incorrectQuestions: incorrectQuestions,
             ),
           ),
@@ -249,7 +254,7 @@ class _Basic_Sentence_Structure_QuizState extends State<Basic_Sentence_Structure
                           mainAxisSize: MainAxisSize.min, // Centers content vertically
                           children: [
                             Text(
-                              'Question ${6 - selectedQuestions.length + 1}/6',
+                              'Question ${10 - selectedQuestions.length + 1}/10',
                               style: TextStyle(
                                 fontSize: isSmallScreen ? 16 : 20,
                                 fontWeight: FontWeight.bold,
@@ -301,7 +306,7 @@ class _Basic_Sentence_Structure_QuizState extends State<Basic_Sentence_Structure
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16.0),
                     child: LinearProgressIndicator(
-                      value: (6 - selectedQuestions.length) / 6,
+                      value: (10 - selectedQuestions.length) / 10,
                       valueColor: const AlwaysStoppedAnimation<Color>(
                           Color.fromARGB(255, 189, 74, 2)),
                       backgroundColor:
