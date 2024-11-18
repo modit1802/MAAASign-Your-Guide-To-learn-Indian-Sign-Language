@@ -1,5 +1,5 @@
-import 'package:SignEase/Challengers_All_Weeks/challenger_week3/challenger3.dart';
 import 'package:SignEase/Initial_page_1.dart';
+import 'package:SignEase/Challengers_All_Weeks/challenger_week4/challenger4.dart';
 import 'package:SignEase/Week%204/Basic_Sentence_Structure.dart';
 import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/simple_sentence_start_page.dart';
 import 'package:SignEase/Week%204/tutorial_screen_week4.dart';
@@ -158,7 +158,7 @@ class _Week4EntryState extends State<Week4Entry> {
 
                   // Challenger Card
                   _buildCard(
-                    onTap: () => _handleCardTap(3, Challenger3(score: 0)),
+                    onTap: () => _handleCardTap(3, Challenger4(score: 0)),
                     imagePath: 'images/challenger.png',
                     color: Colors.white,
                     title: 'Challenger',

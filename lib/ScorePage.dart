@@ -7,6 +7,8 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week3/DetailedProgressWeek3.dart';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week2/DetailedProgressWeek2.dart';
 
+import 'Challengers_All_Weeks/challenger_Week4/DetailedProgressWeek4.dart';
+
 
 class ScorePage extends StatefulWidget {
   const ScorePage({super.key});
@@ -23,6 +25,7 @@ class _ScorePageState extends State<ScorePage> {
   String? score_challenger;
   String? score_challenger_week3;
   String? score_challenger_week2;
+  String? score_challenger_week4;
 
   @override
   void initState() {
@@ -97,10 +100,15 @@ class _ScorePageState extends State<ScorePage> {
         ?['score_challenger']
             ?.toString();
         print(score_challenger_week2);
+        score_challenger_week4=result['week']?['week4']?['Score_Challenger_Week4']
+        ?['score_challenger']
+            ?.toString();
+        print(score_challenger_week4);
       } else {
         score_challenger = null;
         score_challenger_week3=null;
         score_challenger_week2=null;
+        score_challenger_week4=null;
         print('No data found');
       }
     });
@@ -311,7 +319,7 @@ Widget build(BuildContext context) {
             SizedBox(height: screenHeight * 0.02), // Responsive spacing
 
             // Score Board Section
-            if (score_challenger != null || score_challenger_week3 != null)
+            if (score_challenger != null || score_challenger_week3 != null || score_challenger_week2 != null || score_challenger_week4 != null)
               Padding(
                 padding: EdgeInsets.all(screenWidth * 0.04),
                 child: Text(
@@ -354,6 +362,16 @@ Widget build(BuildContext context) {
                   index: 1,
                   score: int.parse(score_challenger_week3!),
                 ),
+            if (score_challenger_week4 != null)
+              _buildCard(
+                onTap: () => _handleCardTap(1, const DetailedProgressWeek4()),
+                color: Colors.white,
+                title: 'Week 4',
+                description:
+                'See the detailed score!',
+                index: 1,
+                score: int.parse(score_challenger_week4!),
+              ),
             ],
           ),
         ),
