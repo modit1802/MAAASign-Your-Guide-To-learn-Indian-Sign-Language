@@ -377,7 +377,7 @@ Widget build(BuildContext context) {
                                   MaterialPageRoute(
                                       builder: (context) => Week3Entry()),
                                 );
-                              }, scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
+                              }, scoreChallengerWeek1: int.parse(score_challenger_week3??'0'),
                             ),
                           ) else Padding(
                               padding: const EdgeInsets.all(8.0),
