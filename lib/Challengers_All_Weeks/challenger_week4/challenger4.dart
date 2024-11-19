@@ -45,7 +45,7 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -133,11 +133,11 @@ class _ThirdGameState extends State<ThirdGame> {
     {
       'question': 'They Office Walk',
       'solution_vids': ['They Office Walk'],  // Add 3 items here
-      'solution': ['they_i', 'office_i', 'walk_i'],
+      'solution': ['They_i', 'office_i', 'walk_i'],
       'availableLetters': ['office_i', 'walk_i', 'go_i', 'They_i'],
       'urls': {
         'They Office Walk': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731990214/44_tpfxr3.mp4',
-        'they_i': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731952266/They_agb4za.png',
+        'They_i': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731952266/They_agb4za.png',
         'office_i': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730984598/Office_jhay8v.png',
         'walk_i': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730989202/Walk_ucjkq9.png',
         'go_i': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730986208/Go_kmooei.png',
@@ -201,7 +201,7 @@ class _ThirdGameState extends State<ThirdGame> {
       'question': 'I You Love',
       'solution_vids': ['I You Love'],
       'solution':['I_i','You_i','Love_i'],
-      'availableLetters': ['Love_i','You_i','Live_i','I_i',],
+      'availableLetters': ['Love_i','You_i','Live_i','I_i'],
       'urls': {
         "I You Love":
             "https://res.cloudinary.com/dfph32nsq/video/upload/v1731990302/46_gtoown.mp4",
@@ -212,7 +212,7 @@ class _ThirdGameState extends State<ThirdGame> {
         'You_i':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1731950091/You_g6qwwc.png',
         'Live_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730989201/Live_hbudpg.pngg',
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1730989201/Live_hbudpg.png',
         'correct':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif',
         'wrong':
@@ -224,7 +224,7 @@ class _ThirdGameState extends State<ThirdGame> {
     {
       'question': 'He You Talk',
       'solution_vids': ['He You Talk'],
-      'solution':['he_i','you_i','talk_i','see_i'],
+      'solution':['he_i','you_i','talk_i'],
       'availableLetters': ['you_i','he_i','see_i','talk_i'],
       'urls': {
         "He You Talk":
@@ -232,7 +232,7 @@ class _ThirdGameState extends State<ThirdGame> {
         'he_i':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1731991318/He_rwe5eo.png',
         'you_i':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731950091/You_g6qwwc.pngg',
+            'https://res.cloudinary.com/dfph32nsq/image/upload/v1731950091/You_g6qwwc.png',
         'see_i':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1731991967/See_d1in8r.png',
         'talk_i':
@@ -249,7 +249,7 @@ class _ThirdGameState extends State<ThirdGame> {
     {
       'question': 'It My Office',
       'solution_vids': ['It My Office'],
-      'solution':['It_i','My_i','Office_i','Tea_i'],
+      'solution':['It_i','My_i','Office_i'],
       'availableLetters': ['It_i','My_i','Tea_i','Office_i'],
       'urls': {
         "It My Office":
@@ -274,7 +274,7 @@ class _ThirdGameState extends State<ThirdGame> {
     {
       'question': 'I house live',
       'solution_vids': ['I house live'],
-      'solution':['I_i', 'house_i','live_i','we_i'],
+      'solution':['I_i', 'house_i','live_i'],
       'availableLetters': ['we_i','I_i','house_i','live_i'],
       'urls': {
         'I house live':
@@ -324,7 +324,7 @@ class _ThirdGameState extends State<ThirdGame> {
     {
       'question': 'I Friend Talk',
       'solution_vids': ['I Friend Talk'],
-      'solution':["I_i","friend_i",'talk_i','brother_i'],
+      'solution':["I_i","friend_i",'talk_i'],
       'availableLetters': ['talk_i',"I_i",'brother_i',"friend_i"],
       'urls': {
         "I Friend Talk":
@@ -346,30 +346,6 @@ class _ThirdGameState extends State<ThirdGame> {
       }
     },
 
-    {
-      'question': 'People India Live',
-      'solution_vids': ['People India Live'],
-      'solution': ["People_i", "India_i","Live_i"],
-      'availableLetters': [ "House_i","Live_i","India_i","People_i"],
-      'urls': {
-        "People India live":
-            "https://res.cloudinary.com/dz3zoiak2/video/upload/v1731848409/7U_hptmcj.mp4",
-        "correct":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358648/correct_edynxy.gif",
-        "wrong":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1727358655/wrong_k3n0qk.gif",
-        "Live_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730989201/Live_hbudpg.png",
-        "India_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730989201/India_mdg3uj.png",
-        "House_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1730986851/House_mt8ywx.png",
-        "People_i":
-            "https://res.cloudinary.com/dfph32nsq/image/upload/v1731993411/People_idtjih.png",
-        'wooden':
-            'https://res.cloudinary.com/dfph32nsq/image/upload/v1727358650/wooden_mogsrx.png'
-      }
-    },
 ];
   late List<String?> solution;
   late List<String> availableLetters;
@@ -709,13 +685,13 @@ void _initializeChallenge() {
                   return Draggable<String>(
                     data: letter,
                     child: Image.network(
-                      challengeData[currentChallengeIndex]['urls'][letter]!,
+                      challengeData[currentChallengeIndex]['urls'][letter] ?? '',
                       width: screenWidth * 0.20,
                       height: screenHeight * 0.18,
                     ),
                     feedback: Material(
                       child: Image.network(
-                        challengeData[currentChallengeIndex]['urls'][letter]!,
+                        challengeData[currentChallengeIndex]['urls'][letter] ?? '',
                         width: screenWidth * 0.17,
                         height: screenHeight * 0.09,
                       ),

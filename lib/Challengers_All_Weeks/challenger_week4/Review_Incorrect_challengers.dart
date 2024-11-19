@@ -278,14 +278,6 @@ class _Review_Incorrect_ChallengersState
                                               ['solution_vids'][0]],
                                         ),
                                       ),
-                                      Flexible(
-                                        child: VideoWidget(
-                                          challengeData[currentChallengeIndex]
-                                              ['urls'][challengeData[
-                                                  currentChallengeIndex]
-                                              ['solution_vids'][1]],
-                                        ),
-                                      ),
                                     ],
                                   ),
                                 ),
