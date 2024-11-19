@@ -131,7 +131,7 @@ class _LearningZoneState extends State<LearningZone> {
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/hello_q0jqlg.mp4',
     'Hy':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113627/hy_ewk653.mp4',
-    'Goodbye':
+    'Good Bye':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/good_bye_fdlupb.mp4',
     'Namaste':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113630/namaste_ywacpg.mp4',
@@ -482,6 +482,76 @@ class _LearningZoneState extends State<LearningZone> {
                       ),
                     ),
                   ),
+                  if (filteredWords.isNotEmpty)
+            Positioned(
+              top: screenHeight * 0.16,
+              left: screenWidth * 0.04,
+              right: screenWidth * 0.04,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                    ),
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  // Wrap with SingleChildScrollView for vertical scrolling
+                  child: SizedBox(
+                    // Set the height based on the number of items
+                    height: filteredWords.length > 5
+                        ? screenHeight *
+                            0.4 // If there are more than 5 items, use a fixed height
+                        : filteredWords.length *
+                            60.0, // Otherwise, adjust based on the number of items
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: filteredWords.length,
+                      itemBuilder: (context, index) {
+                        final word = filteredWords[index].key;
+                        final link = filteredWords[index].value;
+                        return Column(
+                          children: [
+                            ListTile(
+                              title: Text(
+                                word,
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Search_Video_Screen(
+                                        word: word, link: link),
+                                  ),
+                                ).then((_) {
+                                  // Clear search bar when returning
+                                  _searchController.clear();
+                                  filterSuggestions();
+                                });
+                              },
+                            ),
+                            Divider(
+                              // Add horizontal line between items
+                              color: Colors.grey,
+                              thickness: 0.5,
+                              indent: 15,
+                              endIndent: 15,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
                   SizedBox(height: screenHeight * 0.02),
 
                   Center(
@@ -678,76 +748,7 @@ class _LearningZoneState extends State<LearningZone> {
           // Suggestion Box
 // Suggestion Box
 // Suggestion Box
-          if (filteredWords.isNotEmpty)
-            Positioned(
-              top: screenHeight * 0.16,
-              left: screenWidth * 0.04,
-              right: screenWidth * 0.04,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                    ),
                   ],
-                ),
-                child: SingleChildScrollView(
-                  // Wrap with SingleChildScrollView for vertical scrolling
-                  child: SizedBox(
-                    // Set the height based on the number of items
-                    height: filteredWords.length > 5
-                        ? screenHeight *
-                            0.4 // If there are more than 5 items, use a fixed height
-                        : filteredWords.length *
-                            60.0, // Otherwise, adjust based on the number of items
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: filteredWords.length,
-                      itemBuilder: (context, index) {
-                        final word = filteredWords[index].key;
-                        final link = filteredWords[index].value;
-                        return Column(
-                          children: [
-                            ListTile(
-                              title: Text(
-                                word,
-                                style: const TextStyle(color: Colors.black),
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Search_Video_Screen(
-                                        word: word, link: link),
-                                  ),
-                                ).then((_) {
-                                  // Clear search bar when returning
-                                  _searchController.clear();
-                                  filterSuggestions();
-                                });
-                              },
-                            ),
-                            Divider(
-                              // Add horizontal line between items
-                              color: Colors.grey,
-                              thickness: 0.5,
-                              indent: 15,
-                              endIndent: 15,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ),
-        ],
       ),
     );
   }

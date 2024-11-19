@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:SignEase/Week%202/Result_t_f.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:video_player/video_player.dart';
 
@@ -135,44 +137,62 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
     }
   }
 
-  void _answerQuestion(bool isTrue) {
-    String correctSolution = selectedQuestions[0]['solution'];
-    bool isCorrect = (displayedAnswer == correctSolution) == isTrue;
+ void _answerQuestion(bool isTrue) {
+  String correctSolution = selectedQuestions[0]['solution'];
+  bool isCorrect = (displayedAnswer == correctSolution) == isTrue;
 
-    setState(() {
-      if (isCorrect) {
-        score += 100;
-        correctCount++;
-      } else {
-        incorrectCount++;
-        incorrectQuestions.add({
-          'question': selectedQuestions[0]['question'],
-          'correctSolution': correctSolution,
-        });
-      }
-    });
+  setState(() {
+    if (isCorrect) {
+      score += 100;
+      correctCount++;
+      // Show success toast
+      Fluttertoast.showToast(
+        msg: "Correct Answer!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    } else {
+      incorrectCount++;
+      incorrectQuestions.add({
+        'question': selectedQuestions[0]['question'],
+        'correctSolution': correctSolution,
+      });
+      // Show error toast
+      Fluttertoast.showToast(
+        msg: "Wrong Answer! Correct: $correctSolution",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    }
+  });
 
-    Future.delayed(const Duration(seconds: 1), () {
-      if (selectedQuestions.length > 1) {
-        selectedQuestions.removeAt(0);
-        videoController?.dispose();
-        setQuestionAndAnswer();
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Result_True_False(
-              score: score,
-              correctcount: correctCount,
-              incorrectcount: incorrectCount,
-              totalQuestions: 6,
-              incorrectQuestions: incorrectQuestions,
-            ),
+  Future.delayed(const Duration(seconds: 0), () {
+    if (selectedQuestions.length > 1) {
+      selectedQuestions.removeAt(0);
+      videoController?.dispose();
+      setQuestionAndAnswer();
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Result_True_False(
+            score: score,
+            correctcount: correctCount,
+            incorrectcount: incorrectCount,
+            totalQuestions: 6,
+            incorrectQuestions: incorrectQuestions,
           ),
-        );
-      }
-    });
-  }
+        ),
+      );
+    }
+  });
+}
 
   @override
   void dispose() {
@@ -257,7 +277,7 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
 
   Widget buildQuestionCard(double screenWidth, double screenHeight, bool isSmallScreen) {
   return Padding(
-    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
     child: Transform.translate(
       offset: Offset(0, -screenHeight * 0.14),
       child: Card(
@@ -284,7 +304,7 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
                 alignment: Alignment.center,
                 children: [
                   SizedBox(
-                    width: screenWidth * 0.8, // Adjust width as per your requirement
+                    width: screenWidth * 0.4, // Adjust width as per your requirement
                     height: screenHeight * 0.5, // Adjust height as per your requirement
                     child: AspectRatio(
                       aspectRatio: videoController!.value.aspectRatio,
@@ -338,46 +358,71 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
   );
 }
 
-  Widget buildAnswerButtons(double screenWidth, double screenHeight) {
-    return Padding(
-      padding: EdgeInsets.all(screenWidth * 0.05),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ElevatedButton.icon(
-            onPressed: () => _answerQuestion(true),
-            icon: Icon(Icons.check_circle, color: Colors.white),
-            label: Text("True",style: TextStyle(color: Colors.white),),
-            style: ElevatedButton.styleFrom(
+ Widget buildAnswerButtons(double screenWidth, double screenHeight) {
+  return Padding(
+    padding: EdgeInsets.all(screenWidth * 0.05),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton.icon(
+          onPressed: () {
+            HapticFeedback.mediumImpact(); // Haptic feedback
+            Fluttertoast.showToast(
+              msg: "You selected True!",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
               backgroundColor: Colors.green.shade600,
-              padding: EdgeInsets.symmetric(
-                vertical: screenHeight * 0.02,
-                horizontal: screenWidth * 0.1,
-              ),
-              textStyle: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              textColor: Colors.white,
+            ); // Toast feedback
+            _answerQuestion(true);
+          },
+          icon: Icon(Icons.check_circle, color: Colors.white),
+          label: Text(
+            "True",
+            style: TextStyle(color: Colors.white),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green.shade600,
+            padding: EdgeInsets.symmetric(
+              vertical: screenHeight * 0.02,
+              horizontal: screenWidth * 0.1,
+            ),
+            textStyle: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          ElevatedButton.icon(
-            onPressed: () => _answerQuestion(false),
-            icon: Icon(Icons.cancel, color: Colors.white),
-            label: Text("False",style: TextStyle(color: Colors.white),),
-            style: ElevatedButton.styleFrom(
+        ),
+        ElevatedButton.icon(
+          onPressed: () {
+            HapticFeedback.mediumImpact(); // Haptic feedback
+            Fluttertoast.showToast(
+              msg: "You selected False!",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
               backgroundColor: Colors.red.shade600,
-              padding: EdgeInsets.symmetric(
-                vertical: screenHeight * 0.02,
-                horizontal: screenWidth * 0.1,
-              ),
-              textStyle: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              textColor: Colors.white,
+            ); // Toast feedback
+            _answerQuestion(false);
+          },
+          icon: Icon(Icons.cancel, color: Colors.white),
+          label: Text(
+            "False",
+            style: TextStyle(color: Colors.white),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.red.shade600,
+            padding: EdgeInsets.symmetric(
+              vertical: screenHeight * 0.02,
+              horizontal: screenWidth * 0.1,
+            ),
+            textStyle: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
+        ),
+      ],
+    ),
+  );
+}}

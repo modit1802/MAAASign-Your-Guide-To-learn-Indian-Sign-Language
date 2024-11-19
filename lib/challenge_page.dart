@@ -122,7 +122,6 @@ class _ChallengePageState extends State<ChallengePage> {
   return LayoutBuilder(
     builder: (context, constraints) {
       double screenWidth = MediaQuery.of(context).size.width;
-
       // Check if the score is greater than 650
       bool isScoreAbove650 = scoreChallengerWeek1 > 650;
 
@@ -166,12 +165,12 @@ class _ChallengePageState extends State<ChallengePage> {
                   child: Text(
                     title,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                     softWrap: false,              // Disable wrapping
-                    overflow: TextOverflow.clip,  // Clip the text instead of showing ellipsis
+                    overflow: TextOverflow.ellipsis,  // Clip the text instead of showing ellipsis
                     maxLines: 1,
                   ),
                 ),
@@ -245,7 +244,7 @@ Widget build(BuildContext context) {
                                 Text(
                                   'Challenger Zone',
                                   style: TextStyle(
-                                    fontSize: screenHeight * 0.025, // Responsive font size
+                                    fontSize: screenWidth * 0.06, // Responsive font size
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -427,9 +426,13 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/Chapter5.png'),
-                        title: 'Verb Placement and Tense',
+                        title: 'Verb Placement and Tense 🔒',
                         onTap: () {
-                          print("Week 5");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Week 5 will be available soon"),
+                                    ),
+                                  );
                         },
                         scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
@@ -438,9 +441,13 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/Chapter6.png'),
-                        title: 'Adjectives and Adverbs',
+                        title: 'Adjectives and Adverbs 🔒',
                         onTap: () {
-                          print("Week 6");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Week 6 will be available soon"),
+                                    ),
+                                  );
                         },
                         scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
@@ -449,9 +456,13 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/Chapter7.png'),
-                        title: 'Handling Time and Aspect',
+                        title: 'Handling Time and Aspect 🔒',
                         onTap: () {
-                          print("Week 7");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Week 7 will be available soon"),
+                                    ),
+                                  );
                         },
                         scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
@@ -460,9 +471,13 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/Chapter8.png'),
-                        title: 'Questions',
+                        title: 'Questions 🔒',
                         onTap: () {
-                          print("Week 8");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Week 8 will be available soon"),
+                                    ),
+                                  );
                         },
                         scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
@@ -471,9 +486,13 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/Chapter9.png'),
-                        title: 'Negation',
+                        title: 'Negation 🔒',
                         onTap: () {
-                          print("Week 9");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Week 9 will be available soon"),
+                                    ),
+                                  );
                         },
                         scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
@@ -482,9 +501,13 @@ Widget build(BuildContext context) {
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/Chapter10.png'),
-                        title: 'Plurals',
+                        title: 'Plurals 🔒',
                         onTap: () {
-                          print("Week 10");
+                          ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text("Week 10 will be available soon"),
+                                    ),
+                                  );
                         },
                         scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),

@@ -276,7 +276,7 @@ Widget build(BuildContext context) {
                               Text(
                                 'Score Zone',
                                 style: TextStyle(
-                                  fontSize: screenHeight * 0.025, // Responsive font size
+                                  fontSize: screenWidth * 0.06, // Responsive font size
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -322,13 +322,28 @@ Widget build(BuildContext context) {
             if (score_challenger != null || score_challenger_week3 != null || score_challenger_week2 != null || score_challenger_week4 != null)
               Padding(
                 padding: EdgeInsets.all(screenWidth * 0.04),
-                child: Text(
-                  "Score Board...",
-                  style: TextStyle(
-                    fontSize: screenHeight * 0.02, // Responsive font size
-                    color: Color.fromARGB(255, 113, 113, 113),
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Score Board...",
+                      style: TextStyle(
+                        fontSize: screenHeight * 0.02, // Responsive font size
+                        color: Color.fromARGB(255, 113, 113, 113),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    IconButton(
+          icon: Icon(
+            Icons.refresh,
+            color: Color.fromARGB(255, 113, 113, 113),
+          ),
+          onPressed: () async {
+            await connectToMongoDB(); // Refresh scores
+          },
+          tooltip: 'Refresh Scores',
+        ),
+                  ],
                 ),
               ),
 
