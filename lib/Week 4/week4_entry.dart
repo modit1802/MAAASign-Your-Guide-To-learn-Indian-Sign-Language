@@ -1,10 +1,15 @@
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week4/challenger4.dart';
+import 'package:SignEase/Week%204/Basic_Sentence_Quiz.dart';
 import 'package:SignEase/Week%204/Basic_Sentence_Structure.dart';
 import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/simple_sentence_start_page.dart';
 import 'package:SignEase/Week%204/tutorial_screen_week4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'Simple_Sentence_Formation_using_Videos/Quiz_Simple_Sentence_Quiz.dart';
+import 'Simple_Sentence_Formation_using_Videos/bingo_video_game.dart';
+import 'Simple_Sentence_Formation_using_Videos/learnpage_videos.dart';
 
 
 class Week4Entry extends StatefulWidget {
@@ -132,38 +137,56 @@ class _Week4EntryState extends State<Week4Entry> {
                 children: [
                   SizedBox(height: screenHeight * 0.14),
 
+                  _buildCard2(
+                    onTap: () => _handleCardTap(0, const Learn_Simple_Sentence()),
+                    imagePath: 'images/verbs.png',
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    title: 'Review Signing Simple Sentences',
+                    index: 0,
+                  ),
+                  const SizedBox(height: 10),
                   // Verb Card
                   _buildCard(
-                    onTap: () => _handleCardTap(0, const Basic_Sentence_Structure()),
-                    imagePath: 'images/sentence_struct.png',
+                    onTap: () => _handleCardTap(1, Basic_Sentence_Structure_Quiz()),
+                    imagePath: 'images/quiz.png',
                     color: const Color.fromARGB(255, 255, 255, 255),
-                    title: 'Basic Sentence Structure',
-                    description: 'Learn and practice Basic Sentence Structure in ISL',
-                    index: 0,
+                    title: 'Pop Quiz (Text) !',
+                    description: "Identify the correct ISL GLoss!",
+                    index: 1,
                   ),
 
                   const SizedBox(height: 10),
 
                   // Noun Card
                   _buildCard(
-                    onTap: () => _handleCardTap(1, const Simple_Sentence_Start_Page()),
-                    imagePath: 'images/sentence_formation.jpg',
-                    color: Colors.white,
-                    title: 'Simple Sentence Formation',
-                    description: 'Learn and practice Simple Sentence Formation in ISL',
-                    index: 1,
+                    onTap: () => _handleCardTap(2, Quiz_Simple_Sentence()),
+                    imagePath: 'images/quiz.png',
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    title: 'Pop Quiz (Videos) !',
+                    description:
+                    "Identify the correct Sentence!",
+                    index: 2,
                   ),
-
+                  const SizedBox(height: 10),
+                  _buildCard(
+                    onTap: () => _handleCardTap(3, Bingo_game_simple_Sentences()),
+                    imagePath: 'images/bingo.png',
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    title: 'Bingo Bonanza!',
+                    description:
+                    "Watch the clips, guess the word, and mark your card.",
+                    index: 3,
+                  ),
                   const SizedBox(height: 10),
 
                   // Challenger Card
                   _buildCard(
-                    onTap: () => _handleCardTap(3, Challenger4(score: 0)),
+                    onTap: () => _handleCardTap(4, Challenger4(score: 0)),
                     imagePath: 'images/challenger.png',
                     color: Colors.white,
                     title: 'Challenger',
                     description: 'Challenge yourself to unlock Week 4!',
-                    index: 3,
+                    index: 4,
                   ),
                 ],
               ),
@@ -285,6 +308,59 @@ class _Week4EntryState extends State<Week4Entry> {
                         description,
                         style: TextStyle(
                           fontSize: 14,
+                          color: isSelected ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _buildCard2({
+    required VoidCallback onTap,
+    required String imagePath,
+    required Color color,
+    required String title,
+    required int index,
+  }) {
+    final bool isSelected = _selectedCardIndex == index;
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 10,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(
+            height: 140,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    imagePath,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                           color: isSelected ? Colors.white : Colors.black,
                         ),
                       ),
