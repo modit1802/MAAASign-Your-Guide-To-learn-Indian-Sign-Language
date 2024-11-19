@@ -59,75 +59,26 @@ class _Retry_MistakesState
     super.dispose();
   }
 
+  int _factorial(int n) {
+    return n <= 1 ? 1 : n * _factorial(n - 1);
+  }
   List<String> generateOptions(String correctSolution) {
-    List<String> solution = [
-      'I BOOK READ LOVE',
-      'SHE DINNER COOK',
-      'WE SCHOOL GO',
-      'I TEA DRINK',
-      'SHE MARKET WALK',
-      'WE WORK GO',
-      'THEY BIRDS LOOK',
-      'I BOOK READ',
-      'SHE MORNING SLEEP',
-      'WE LUNCH EAT',
-      'THEY DINNER COOK',
-      'I STUDENT TEACH',
-      'SHE BOOK GIVE',
-      'THEY AEROPLANE FLY',
-      'I OFFICE WORK',
-      'SHE FRIEND TALK',
-      'HE HANDS WASH',
-      'THEY HOME GO',
-      'I BOOK LOOK',
-      'WE TEA DRINK',
-      'THEY SCHOOL WALK',
-      'I MARKET GO',
-      'SHE TEACHER SEE',
-      'WE INDIA FLY',
-      'THEY HOME WORK',
-      'I MOTHER TALK',
-      'SHE BOOK WRITE',
-      'WE DINNER EAT',
-      'I FATHER SEE',
-      'SHE BIRDS LOOK',
-      'WE MORNING WALK',
-      'I OFFICE GO',
-      'HE FISH SEE',
-      'SHE GIRL CHILD TALK',
-      'WE WORK FINISH',
-      'THEY BREAKFAST EAT',
-      'I SCHOOL WALK',
-      'SHE HANDS LOOK',
-      'I FRIEND TEACH',
-      'SHE LETTER MORNING READ',
-      'WE TEACHER SEE',
-      'THEY OFFICE WORK',
-      'I MARKET WALK',
-      'SHE FATHER FISH GIVE',
-      'WE BIRDS MORNING LOOK'
-    ];
     List<String> options = [];
+    options.add(correctSolution);
 
-    options.add(correctSolution); // Add the correct answer
-
-    // Remove the correct solution from the nouns list to avoid duplication
-    solution.remove(correctSolution);
-
-    Random random = Random();
-
-    while (options.length < 4) {
-      // Select a random pronoun from the remaining options
-      String randomPronoun = solution[random.nextInt(solution.length)];
-      if (!options.contains(randomPronoun)) {
-        options.add(randomPronoun);
+    // Generate permutations of the correct answer
+    List<String> words = correctSolution.split(' ');
+    for (int i = 0; i < 100; i++) {
+      List<String> shuffled = List.from(words)..shuffle();
+      String option = shuffled.join(' ');
+      if (!options.contains(option)) {
+        options.add(option);
       }
     }
 
     options.shuffle();
-    return options;
+    return options.take(4).toList();
   }
-
 
   void setOptionsForQuestion() {
     if (selectedQuestions.isNotEmpty) {
