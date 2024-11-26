@@ -231,18 +231,19 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
           ),
           child: Container(
             padding: EdgeInsets.symmetric(
-              vertical: screenHeight * 0.03,
-              horizontal: screenWidth * 0.04,
+              vertical: screenHeight * 0.02,
+              horizontal: screenWidth * 0.02,
             ),
             height: screenHeight * 0.12,
             child: Center(
               child: Text(
                 currentOptions[index],
                 style: TextStyle(
-                  fontSize: screenWidth < 600 ? 20 : 28,
+                  fontSize: screenWidth < 600 ? 14 : 18,
                   color: _textColors[index],
                   fontWeight: FontWeight.bold,
                 ),
+                maxLines: 2,
               ),
             ),
           ),

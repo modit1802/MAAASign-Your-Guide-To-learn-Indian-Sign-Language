@@ -328,51 +328,54 @@ class _Basic_Sentence_Structure_QuizState extends State<Basic_Sentence_Structure
   Widget buildOptionCard(int index) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    bool isSmallScreen = screenWidth < 600;
+
+    // Define the fixed width and height for each card
+    double cardWidth = screenWidth < 600 ? screenWidth * 0.8 : screenWidth * 0.6;
+    double cardHeight = screenHeight * 0.25; // Increased height for more content
 
     return Expanded(
       child: GestureDetector(
         onTap: selectedOptionIndex == -1
-            ? () {
-          _answerQuestion(currentOptions[index],
-              selectedQuestions[0]['solution'], index);
-        }
+            ? () => _answerQuestion(
+          currentOptions[index],
+          selectedQuestions[0]['solution'],
+          index,
+        )
             : null,
-        child: Container(
-          margin: EdgeInsets.symmetric(
-            vertical: screenHeight * 0.01, // Vertical space between cards
-            horizontal: screenWidth * 0.02, // Horizontal space between cards
-          ),
-          padding: EdgeInsets.all(screenWidth * 0.025),
-          height: screenHeight * 0.12, // Fixed height for consistent size
-          decoration: BoxDecoration(
+        child: SizedBox(
+          width: cardWidth,
+          height: cardHeight,
+          child: Card(
+            elevation: screenWidth < 600 ? 8 : 12,
             color: _cardColors[index],
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3), // Offset for shadow
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(screenWidth * 0.04),
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                vertical: screenHeight * 0.02, // Reduced padding
+                horizontal: screenWidth * 0.02,
               ),
-            ],
-          ),
-          child: Center(
-            child: Text(
-              currentOptions[index],
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: isSmallScreen ? 16 : 20,
-                fontWeight: FontWeight.bold,
-                color: _textColors[index],
+              child: Center(
+                child: Flexible(
+                  child: Text(
+                    currentOptions[index],
+                    style: TextStyle(
+                      fontSize: screenWidth < 600 ? 14 : 18, // Smaller font size
+                      color: _textColors[index],
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3, // Or remove to allow unlimited lines
+                  ),
+                ),
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ),
       ),
     );
   }
-
 }
