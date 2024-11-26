@@ -257,7 +257,7 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                       color: Colors.white,
                       title: "Week 3 Progress Report",
                       description:
-                          "Scroll Down to check your Detailed progress report of Week 3. It includes Challenger Result, Quiz Results and Bingo Results",
+                          "",
                       index: 1,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       iconColor: const Color.fromARGB(255, 189, 74, 2),
@@ -289,8 +289,8 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                       color: percentage > 0.6 ? Colors.green : Colors.red,
                       title: percentage > 0.6 ? "Success" : "Practice Needed",
                       description: percentage > 0.6
-                          ? "Congratulations you have successfully completed Week 3. Scroll down to view detailed progress report"
-                          : "Your score is not up to the mark. We recommend you to practice Week 3 again. Scroll down to view detailed progress report",
+                          ? "Congratulations you have successfully completed Week 3."
+                          : "Practice Week 3 Again",
                       index: 1,
                       titleColor: Colors.white,
                       iconColor: percentage > 0.6 ? Colors.green : Colors.red,
@@ -306,7 +306,7 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                       iconData: Icons.remove_red_eye,
                       color: Colors.white,
                       title: "Review Incorrect Challengers",
-                      description: "Tap me to view the incorrect challengers",
+                      description: "Tap me",
                       index: 0,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       descriptionColor: const Color.fromARGB(255, 0, 0, 0),
@@ -322,8 +322,8 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                           ? "Quiz Not Attempted"
                           : "Quiz Scores",
                       description: (score_verb == null && score_noun == null && score_pronoun==null)
-                          ? "You have not attempted the quiz for verbs, nouns and pronouns. Please first attempt the quiz then come to check the scores"
-                          : "🔔 Below are your quiz scores presented in verbs, nouns and pronouns! Red bar represents the Verbs score, Blue bar represents the Nouns score, and Green bar represents the Pronouns score",
+                          ? "You have not attempted the quiz for verbs, nouns and pronouns."
+                          : "🔔 Below are your quiz scores presented in verbs, nouns and pronouns!",
                       index: 1,
                     ),
                   ),
@@ -343,8 +343,8 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                           ? "Bingo Not Attempted"
                           : "Bingo Scores",
                       description: (score_verb2 == null && score_noun2 == null && score_pronoun2==null)
-                          ? "You have not attempted the Bingo for verbs, nouns and pronouns. Please first attempt the Bingo and then come to check the scores"
-                          : "🔔 Below are your Bingo scores presented in verbs, nouns and pronouns! Red bar represents the Verbs score, Blue bar represents the Nouns score, and Green bar represents the Pronouns score",
+                          ? "You have not attempted the Bingo for verbs, nouns and pronouns."
+                          : "🔔 Below are your Bingo scores presented in verbs, nouns and pronouns!",
                       index: 1,
                     ),
                   ),
@@ -390,7 +390,7 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        elevation: 10,
+       
         color: color,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Padding(
@@ -461,7 +461,7 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: SizedBox(
-            height: 100,
+            height: 120,
             child: Row(
               children: [
                 ClipRRect(

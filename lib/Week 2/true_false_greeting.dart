@@ -146,14 +146,7 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
       score += 100;
       correctCount++;
       // Show success toast
-      Fluttertoast.showToast(
-        msg: "Correct Answer!",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+     
     } else {
       incorrectCount++;
       incorrectQuestions.add({
@@ -161,14 +154,7 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
         'correctSolution': correctSolution,
       });
       // Show error toast
-      Fluttertoast.showToast(
-        msg: "Wrong Answer! Correct: $correctSolution",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+     
     }
   });
 
@@ -366,14 +352,7 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
       children: [
         ElevatedButton.icon(
           onPressed: () {
-            HapticFeedback.mediumImpact(); // Haptic feedback
-            Fluttertoast.showToast(
-              msg: "You selected True!",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              backgroundColor: Colors.green.shade600,
-              textColor: Colors.white,
-            ); // Toast feedback
+           
             _answerQuestion(true);
           },
           icon: Icon(Icons.check_circle, color: Colors.white),
@@ -395,14 +374,7 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
         ),
         ElevatedButton.icon(
           onPressed: () {
-            HapticFeedback.mediumImpact(); // Haptic feedback
-            Fluttertoast.showToast(
-              msg: "You selected False!",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              backgroundColor: Colors.red.shade600,
-              textColor: Colors.white,
-            ); // Toast feedback
+            
             _answerQuestion(false);
           },
           icon: Icon(Icons.cancel, color: Colors.white),

@@ -167,7 +167,7 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
                       color: Colors.white,
                       title: "Week 1 Progress Report",
                       description:
-                          "Scroll Down to check your Detailed progress report of week 1. It includes Challenger Result, Quiz Results and Match Results",
+                          "",
                       index: 1,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       iconColor: const Color.fromARGB(255, 189, 74, 2),
@@ -199,8 +199,8 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
                       color: percentage > 0.6 ? Colors.green : Colors.red,
                       title: percentage > 0.6 ? "Success" : "Practice Needed",
                       description: percentage > 0.6
-                          ? "Congratulations you have successfully completed week 1. Scroll down to view detailed progress report"
-                          : "Your score is not up to the mark. We recommend you to practice week 1 again. Scroll down to view detailed progress report",
+                          ? "Congratulations you have successfully completed week 1."
+                          : "Practice Week 1 Again",
                       index: 1,
                       titleColor: Colors.white,
                       iconColor: percentage > 0.6 ? Colors.green : Colors.red,
@@ -216,7 +216,7 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
                       iconData: Icons.remove_red_eye,
                       color: Colors.white,
                       title: "Review Incorrect Challengers",
-                      description: "Tap me to view the incorrect challengers",
+                      description: "Tap me",
                       index: 0,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       descriptionColor: const Color.fromARGB(255, 0, 0, 0),
@@ -233,7 +233,7 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
                           : "Quiz Scores",
                       description: (score_alpha == null && score_number == null)
                           ? "You have not attempted the quiz for numbers and alphabets. Please first attempt the quiz then come to check the scores"
-                          : "🔔 Below are your quiz scores presented in both letters and numbers! Red bar represents the Alphabet score and Orange bar represents the Numbers score",
+                          : "🔔 Below are your quiz scores presented in both letters and numbers!",
                       index: 1,
                     ),
                   ),
@@ -279,7 +279,7 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        elevation: 10,
+        
         color: color,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Padding(
@@ -350,7 +350,7 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: SizedBox(
-            height: 100,
+            height: 120,
             child: Row(
               children: [
                 ClipRRect(
