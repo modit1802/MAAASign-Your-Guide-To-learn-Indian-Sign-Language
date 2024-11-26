@@ -1,17 +1,3 @@
-// The buildscript block should go at the top, setting the Kotlin version.
-buildscript {
-    ext.kotlin_version = '1.8.0'  // Declare Kotlin version here
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.android.tools.build:gradle:7.3.0" // Make sure to use a compatible version of the Android Gradle plugin
-        classpath "com.google.gms:google-services:4.3.15" // For Firebase support
-    }
-}
-
 plugins {
     id "com.android.application"
     id 'com.google.gms.google-services'  // Firebase configuration
