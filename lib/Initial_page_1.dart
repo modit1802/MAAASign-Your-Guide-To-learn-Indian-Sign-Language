@@ -175,7 +175,7 @@ class _InitialPage1State extends State<InitialPage1> {
           title: FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
-              'MAAA: Your Guide to Learning ISL',
+              'MAAASign: Your Guide to Learning ISL',
               style: const TextStyle(
                 fontSize: 18, // Adjust as necessary
               ),
