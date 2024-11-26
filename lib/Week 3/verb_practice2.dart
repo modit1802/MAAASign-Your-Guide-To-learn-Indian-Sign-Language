@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:math';
-
+import 'package:SignEase/Week 3/bingo_tutorial.dart';
 import 'bingo_result_verb.dart';
 
 void main() {
@@ -72,6 +72,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
+    _showTutorialScreen();
     _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     _generateNewRound();
   }
@@ -154,6 +155,21 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
     _controller.dispose();
     super.dispose();
   }
+  void _showTutorialScreen() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              BingoTutorialScreen(
+                onBackPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +177,18 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
       appBar: AppBar(
         title: Text('Video Bingo Game'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.help_outline),
+            onPressed: () {
+              // Navigate to the tutorial screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BingoTutorialScreen(onBackPressed: () {Navigator.pop(context);  },)),
+              );
+            },
+          ),
+        ],
       ),
       body: FadeTransition(
         opacity: _controller,
@@ -210,9 +238,9 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
                       child: VideoTile(
                         key: ValueKey(noun),
                         url: verbGifs[noun] ?? '',
-                        isCorrect: showAnswer && selectionStatus[noun] == true, // Check if this option is the correct answer
-                        isIncorrect: showAnswer && selectionStatus[noun] == false, // Check if this option was selected incorrectly
-                        isSelected: selectionStatus[noun] == false || selectionStatus[noun] == true, // Check if this option was selected
+                        isCorrect: showAnswer && selectionStatus[noun] == true,
+                        isIncorrect: showAnswer && selectionStatus[noun] == false,
+                        isSelected: selectionStatus[noun] == false || selectionStatus[noun] == true,
                         onSelected: (isSelected) {
                           if (isSelected) {
                             _checkAnswer(noun);
