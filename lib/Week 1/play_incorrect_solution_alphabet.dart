@@ -70,11 +70,6 @@ void _answerQuestion(
         _cardColors[index] = Colors.red;
         _textColors[index] = Colors.white;
         incorrectcount++;
-        // Add the incorrect question to the list with the question and correct solution
-        incorrectQuestions.add({
-          'question': selectedQuestions[0]['question'],
-          'correctSolution': correctSolution,
-        });
       }
     });
 

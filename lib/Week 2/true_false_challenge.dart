@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:SignEase/Week%202/Result_t_f.dart';
+import 'package:SignEase/Week%202/Relation_Result_2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -180,7 +180,7 @@ class _True_False_ChallengeState extends State<True_False_Challenge> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Result_True_False(
+          builder: (context) => Quiz_Verb_ResultScreen(
             score: score,
             correctcount: correctCount,
             incorrectcount: incorrectCount,
