@@ -99,7 +99,11 @@ class _LearningZoneState extends State<LearningZone> {
         'https://res.cloudinary.com/dfph32nsq/image/upload/v1728468139/10_num_k0k0h7.png',
     'Girl Child':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730267226/girl_child_size_reduced_ai2wft.mp4',
+    'Daughter':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1730267226/girl_child_size_reduced_ai2wft.mp4',
     'Female Person':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1731604294/Female_Person_Compound_eosq00.mp4',
+    'Women':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1731604294/Female_Person_Compound_eosq00.mp4',
     'Good Morning':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730267228/good_morning_size_reduced_xdlcs7.mp4',
@@ -130,6 +134,8 @@ class _LearningZoneState extends State<LearningZone> {
     'Hello':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/hello_q0jqlg.mp4',
     'Hy':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113627/hy_ewk653.mp4',
+    'Hi':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113627/hy_ewk653.mp4',
     'Good Bye':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/good_bye_fdlupb.mp4',

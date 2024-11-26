@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week1/DetailedProgressWeek1.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,7 +8,9 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week3/DetailedProgressWeek3.dart';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week2/DetailedProgressWeek2.dart';
-
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 import 'Challengers_All_Weeks/challenger_Week4/DetailedProgressWeek4.dart';
 
 
@@ -26,6 +30,7 @@ class _ScorePageState extends State<ScorePage> {
   String? score_challenger_week3;
   String? score_challenger_week2;
   String? score_challenger_week4;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -65,6 +70,47 @@ class _ScorePageState extends State<ScorePage> {
     }
   }
 
+final ScreenshotController _screenshotController = ScreenshotController();
+
+  Future<void> _captureAndShare() async {
+    try {
+      // Ensure that the screenshot is captured only after the frame is rendered
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (!mounted) return;
+
+        final Uint8List? imageBytes = await _screenshotController.capture();
+        if (imageBytes == null) {
+          print("Error: Screenshot capture failed.");
+          return;
+        }
+
+        print("Screenshot captured successfully.");
+
+        // Get the temporary directory to save the file
+        final directory = await getTemporaryDirectory();
+        final imagePath = '${directory.path}/screenshot.png';
+
+        // Save the image bytes to the file
+        final file = File(imagePath);
+        await file.writeAsBytes(imageBytes);
+
+        // Ensure the file exists before sharing
+        if (await file.exists()) {
+          print("File saved at: $imagePath");
+
+          // Share the screenshot using share_plus
+          await Share.shareXFiles([XFile(imagePath)], text: 'Check out my score!');
+        } else {
+          print("Error: Screenshot file does not exist.");
+        }
+      });
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+
+
   Future<void> connectToMongoDB() async {
     db = mongo.Db(
         'mongodb://moditgrover2003iii:modit1346@cluster0-shard-00-00.eocm8.mongodb.net:27017,cluster0-shard-00-01.eocm8.mongodb.net:27017,cluster0-shard-00-02.eocm8.mongodb.net:27017/mydatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
@@ -72,9 +118,13 @@ class _ScorePageState extends State<ScorePage> {
       await db.open();
       userCollection = db.collection('users');
       await fetchResultsFromMongoDB();
-      print("Connected to MongoDB and result fetched!");
+      print("Connected to MongoDB and results fetched!");
     } catch (e) {
       print("Error connecting to MongoDB: $e");
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -224,173 +274,198 @@ Widget build(BuildContext context) {
 
   return Scaffold(
     backgroundColor: Color.fromARGB(255, 250, 233, 215),
-    body: SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.04,  // 4% padding from left and right
-          vertical: screenHeight * 0.02,   // 2% padding from top and bottom
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Greeting Text
-            RichText(
-              text: TextSpan(
-                style: TextStyle(
-                  fontSize: screenHeight * 0.03,  // Responsive font size
-                  color: Colors.black,
-                ),
-                children: <TextSpan>[
-                  TextSpan(text: "Hi "),
-                  TextSpan(
-                    text: "$username",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(text: " !"),
-                ],
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.02), // Responsive spacing
-
-            // Score Zone Container
-            Center(
-              child: Container(
-                height: screenHeight * 0.2, // Adjusted height based on screen size
-                width: screenWidth * 0.9,  // 90% of screen width
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 238, 126, 34),
-                  borderRadius: BorderRadius.circular(screenWidth * 0.01), // Responsive borderRadius
-                  
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(screenWidth * 0.04), // Responsive padding
-                  child: IntrinsicHeight(
-                    child: Row(
-                      children: [
-                        // Score Zone Text
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Score Zone',
-                                style: TextStyle(
-                                  fontSize: screenWidth * 0.06, // Responsive font size
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Score Image Container
-                        Container(
-                          height: screenHeight * 0.15, // Fixed height for image container
-                          width: screenHeight * 0.15, // Square container based on screen height
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(screenWidth * 0.05), // Responsive borderRadius
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: screenWidth * 0.05, // Responsive blur radius for shadow
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Image.asset(
-                              'images/scoreisl.png',
-                              width: screenWidth * 0.25, // Scaled image size
-                              height: screenWidth * 0.25, // Scaled image size
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
+    body: isLoading
+          ? Center(child: CircularProgressIndicator(color:const Color.fromARGB(255, 238, 126, 34)))
+          :Screenshot(
+        controller: _screenshotController,
+            child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+            horizontal: screenWidth * 0.04,  // 4% padding from left and right
+            vertical: screenHeight * 0.02,   // 2% padding from top and bottom
                     ),
+                    child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Greeting Text
+              RichText(
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: screenHeight * 0.03,  // Responsive font size
+                    color: Colors.black,
                   ),
-                ),
-              ),
-            ),
-
-            SizedBox(height: screenHeight * 0.02), // Responsive spacing
-
-            // Score Board Section
-            if (score_challenger != null || score_challenger_week3 != null || score_challenger_week2 != null || score_challenger_week4 != null)
-              Padding(
-                padding: EdgeInsets.all(screenWidth * 0.04),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Score Board...",
-                      style: TextStyle(
-                        fontSize: screenHeight * 0.02, // Responsive font size
-                        color: Color.fromARGB(255, 113, 113, 113),
-                        fontWeight: FontWeight.bold,
-                      ),
+                  children: <TextSpan>[
+                    TextSpan(text: "Hi "),
+                    TextSpan(
+                      text: "$username",
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    IconButton(
-          icon: Icon(
-            Icons.refresh,
-            color: Color.fromARGB(255, 113, 113, 113),
-          ),
-          onPressed: () async {
-            await connectToMongoDB(); // Refresh scores
-          },
-          tooltip: 'Refresh Scores',
-        ),
+                    TextSpan(text: " !"),
                   ],
                 ),
               ),
-
-              if (score_challenger != null)
-                _buildCard(
-                  onTap: () => _handleCardTap(2, const DetailedProgressWeek1()),
-                  color: Colors.white,
-                  title: 'Week 1',
-                  description:
-                      'See the detailed score!',
-                  index: 2,
-                  score: int.parse(score_challenger!),
+              SizedBox(height: screenHeight * 0.02), // Responsive spacing
+            
+              // Score Zone Container
+              Center(
+                child: Container(
+                  height: screenHeight * 0.2, // Adjusted height based on screen size
+                  width: screenWidth * 0.9,  // 90% of screen width
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 238, 126, 34),
+                    borderRadius: BorderRadius.circular(screenWidth * 0.01), // Responsive borderRadius
+                    
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(screenWidth * 0.04), // Responsive padding
+                    child: IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          // Score Zone Text
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Score Zone',
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.06, // Responsive font size
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // Score Image Container
+                          Container(
+                            height: screenHeight * 0.15, // Fixed height for image container
+                            width: screenHeight * 0.15, // Square container based on screen height
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(screenWidth * 0.05), // Responsive borderRadius
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: screenWidth * 0.05, // Responsive blur radius for shadow
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Image.asset(
+                                'images/scoreisl.png',
+                                width: screenWidth * 0.25, // Scaled image size
+                                height: screenWidth * 0.25, // Scaled image size
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              if (score_challenger_week2 != null)
-                _buildCard(
-                  onTap: () => _handleCardTap(3, const DetailedProgressWeek2()),
-                  color: Colors.white,
-                  title: 'Week 2',
-                  description:
-                  'See the detailed score!',
-                  index: 3,
-                  score: int.parse(score_challenger_week2!),
-                ),
-              if (score_challenger_week3 != null)
-                _buildCard(
-                  onTap: () => _handleCardTap(1, const DetailedProgressWeek3()),
-                  color: Colors.white,
-                  title: 'Week 3',
-                  description:
-                  'See the detailed score!',
-                  index: 1,
-                  score: int.parse(score_challenger_week3!),
-                ),
-            if (score_challenger_week4 != null)
-              _buildCard(
-                onTap: () => _handleCardTap(4, const DetailedProgressWeek4()),
-                color: Colors.white,
-                title: 'Week 4',
-                description:
-                'See the detailed score!',
-                index: 4,
-                score: int.parse(score_challenger_week4!),
               ),
-            ],
+            
+              SizedBox(height: screenHeight * 0.02), // Responsive spacing
+            
+              // Score Board Section
+              if (score_challenger != null || score_challenger_week3 != null || score_challenger_week2 != null || score_challenger_week4 != null)
+                Padding(
+                  padding: EdgeInsets.all(screenWidth * 0.04),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Score Board",
+                        style: TextStyle(
+                          fontSize: screenHeight * 0.02, // Responsive font size
+                          color: Color.fromARGB(255, 238, 126, 34),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+            icon: Icon(
+              Icons.share,
+              color: Color.fromARGB(255, 238, 126, 34),
+            ),
+            onPressed: _captureAndShare,
+            tooltip: 'Refresh Scores',
+                    ),
+                      Transform.translate(
+                        offset: Offset(screenWidth*0.08, 0),
+                        child: Text(
+                                      "Refresh",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromARGB(255, 238, 126, 34),
+                                      ),
+                                    ),
+                      ),
+                      IconButton(
+            icon: Icon(
+              Icons.refresh,
+              color: Color.fromARGB(255, 238, 126, 34),
+            ),
+            onPressed: () async {
+              await connectToMongoDB(); // Refresh scores
+            },
+            tooltip: 'Refresh Scores',
+                    ),
+                    
+                    ],
+                  ),
+                ),
+            
+                if (score_challenger != null)
+                  _buildCard(
+                    onTap: () => _handleCardTap(2, const DetailedProgressWeek1()),
+                    color: Colors.white,
+                    title: 'Week 1',
+                    description:
+                        'See the detailed score!',
+                    index: 2,
+                    score: int.parse(score_challenger!),
+                  ),
+                if (score_challenger_week2 != null)
+                  _buildCard(
+                    onTap: () => _handleCardTap(3, const DetailedProgressWeek2()),
+                    color: Colors.white,
+                    title: 'Week 2',
+                    description:
+                    'See the detailed score!',
+                    index: 3,
+                    score: int.parse(score_challenger_week2!),
+                  ),
+                if (score_challenger_week3 != null)
+                  _buildCard(
+                    onTap: () => _handleCardTap(1, const DetailedProgressWeek3()),
+                    color: Colors.white,
+                    title: 'Week 3',
+                    description:
+                    'See the detailed score!',
+                    index: 1,
+                    score: int.parse(score_challenger_week3!),
+                  ),
+              if (score_challenger_week4 != null)
+                _buildCard(
+                  onTap: () => _handleCardTap(4, const DetailedProgressWeek4()),
+                  color: Colors.white,
+                  title: 'Week 4',
+                  description:
+                  'See the detailed score!',
+                  index: 4,
+                  score: int.parse(score_challenger_week4!),
+                ),
+              ],
+            ),
+                    ),
+                  ),
           ),
-        ),
-      ),
     );
   }
 }
