@@ -19,7 +19,7 @@ class _Tutorial_screen_for_challenger_week3State
 void initState() {
   super.initState();
   _controller = VideoPlayerController.network(
-    'https://res.cloudinary.com/dfph32nsq/video/upload/v1730454638/Videolink_zelqbp.mp4' // Replace with your video URL or asset
+    'https://res.cloudinary.com/dfph32nsq/video/upload/v1732626802/Challenger_Week2_mq7dsl.mp4' // Replace with your video URL or asset
   )
     ..initialize().then((_) {
       setState(() {
@@ -288,9 +288,9 @@ Widget _buildCard2({
   descriptionPoints: [
     "1: Please watch the video carefully.",
     "2: Drag the yellow box and drop them in wooden box",
-    "3: As you can see Sign of 'D' has been dragged and putted in the first box as per spelling of 'DOG'",
-    "4: Similary repeat the steps with remaining alphabets.",
-    "5: Once you place all the signs in wooden box press the 'Check now' Button.",
+    "3: As you can see Sign of 'HELLO' has been dragged and putted in the first box as per spelling of 'HELLO FATHER'",
+    "4: Similarly repeat the steps with remaining words.",
+    "5: Once you place all the words in wooden box press the 'Check now' Button.",
     "6: When you complete the tutorial to make exit press the '❌' button on the top of the screen."
   ],
   index: 2,

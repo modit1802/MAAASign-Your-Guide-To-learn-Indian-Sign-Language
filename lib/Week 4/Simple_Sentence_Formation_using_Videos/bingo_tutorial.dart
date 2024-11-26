@@ -19,7 +19,7 @@ class _BingoTutorialScreenState
   void initState() {
     super.initState();
     _controller = VideoPlayerController.network(
-        'https://res.cloudinary.com/dfph32nsq/video/upload/v1732626802/Bingo_Tutorial_vrrjls.mp4' // Replace with your video URL or asset
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1732626803/Bingo_Tutorial_Week4_ezeye4.mp4' // Replace with your video URL or asset
     )
       ..initialize().then((_) {
         setState(() {

@@ -289,7 +289,7 @@ Widget _buildCard2({
     "1: Please watch the video carefully.",
     "2: Drag the yellow box and drop them in wooden box",
     "3: As you can see Sign of 'D' has been dragged and putted in the first box as per spelling of 'DOG'",
-    "4: Similary repeat the steps with remaining alphabets.",
+    "4: Similarly repeat the steps with remaining alphabets.",
     "5: Once you place all the signs in wooden box press the 'Check now' Button.",
     "6: When you complete the tutorial to make exit press the '❌' button on the top of the screen."
   ],

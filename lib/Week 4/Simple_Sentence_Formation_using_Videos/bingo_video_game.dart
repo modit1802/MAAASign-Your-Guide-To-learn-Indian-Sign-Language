@@ -2,7 +2,7 @@ import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/result_
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:math';
-import 'package:SignEase/Week 3/bingo_tutorial.dart';
+import 'package:SignEase/Week 4/Simple_Sentence_Formation_using_Videos/bingo_tutorial.dart';
 
 
 void main() {
