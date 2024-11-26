@@ -29,7 +29,8 @@ class _Review_Incorrect_SolutionState extends State<Review_Incorrect_Solution> {
           ),
         ),
         backgroundColor: const Color.fromARGB(255, 252, 133, 37),
-        body: Container(
+        body: widget.incorrectQuestions.isNotEmpty
+            ? Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -65,6 +66,36 @@ class _Review_Incorrect_SolutionState extends State<Review_Incorrect_Solution> {
                 ),
             ],
           ),
-        ));
+        )
+        : Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'images/celebrate-cat.gif', // Replace with your GIF path
+                height: 200,
+                width: 200,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                "Congratulations! 🎉",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                "You got all the answers correct!",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
+    );
   }
 }

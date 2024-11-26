@@ -464,8 +464,6 @@ class _ThirdGameState extends State<ThirdGame> {
           score += 100;
         } else if (attempts == 1) {
           score += 50;
-        } else if (attempts == 2) {
-          score += 25;
         }
       });
       _scrollToGif();

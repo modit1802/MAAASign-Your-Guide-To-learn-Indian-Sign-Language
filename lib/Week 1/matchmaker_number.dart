@@ -277,7 +277,7 @@ Widget build(BuildContext context) {
           ],
         ),
       ),
-      if (showRibbon) const RibbonWidget(),
+      if (showRibbon) RibbonWidget(score1: score),
       if (showNextStepButton)
         Padding(
           padding: const EdgeInsets.all(108.0),
@@ -347,18 +347,24 @@ Widget build(BuildContext context) {
 }
 
 class RibbonWidget extends StatelessWidget {
-  const RibbonWidget({super.key});
+  final int score1;
+
+  const RibbonWidget({Key? key, required this.score1}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 150,
-      color: Color.fromARGB(255, 16, 161, 0),
-      child: const Center(
+      color: score1 ==500
+          ? Color.fromARGB(255, 16, 161, 0)
+          : score1>0 && score1<500
+          ? Color.fromARGB(255, 250, 200, 2)
+          : Color.fromARGB(255, 200, 0, 0), // Different color for a score of 0
+      child: Center(
         child: Text(
-          'Congratulations!',
-          style: TextStyle(color: Colors.white, fontSize: 20),
+          score1 == 500 ? 'Congratulations!' : score1>0 && score1<500 ? 'Good Attempt!' : 'Try next time!',
+          style: const TextStyle(color: Colors.white, fontSize: 20),
         ),
       ),
     );
