@@ -169,8 +169,9 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Video Bingo Game'),
+        title: Text('Nouns Video Bingo Game',style: TextStyle(color: Color.fromARGB(255, 165, 74, 17)),),
         centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 250, 233, 215),
         actions: [
           IconButton(
             icon: Icon(Icons.help_outline),
