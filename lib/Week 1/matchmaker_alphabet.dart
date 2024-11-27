@@ -161,7 +161,7 @@ Widget build(BuildContext context) {
               child: Center(
                 child: Text(
                   "Score: $score",
-                  style: const TextStyle(color: Colors.white, fontSize: 24),
+                  style: const TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),
