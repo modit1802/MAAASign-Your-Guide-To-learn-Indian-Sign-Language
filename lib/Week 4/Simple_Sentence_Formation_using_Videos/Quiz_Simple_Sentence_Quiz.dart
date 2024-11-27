@@ -237,7 +237,7 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
 
     // Define the fixed width and height for each card
     double cardWidth = screenWidth < 600 ? screenWidth * 0.8 : screenWidth * 0.6;
-    double cardHeight = screenHeight * 0.25; // Increased height for more content
+    double cardHeight = screenHeight * 0.2;  // Adjust this as per your requirement
 
     return Expanded(
       child: GestureDetector(
@@ -249,8 +249,8 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
         )
             : null,
         child: SizedBox(
-          width: cardWidth,
-          height: cardHeight,
+          width: cardWidth,  // Fixed width
+          height: cardHeight,  // Fixed height
           child: Card(
             elevation: screenWidth < 600 ? 8 : 12,
             color: _cardColors[index],
@@ -259,23 +259,21 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
             ),
             child: Container(
               padding: EdgeInsets.symmetric(
-                vertical: screenHeight * 0.02, // Reduced padding
-                horizontal: screenWidth * 0.02,
+                vertical: screenHeight * 0.050,
+                horizontal: screenWidth * 0.04,
               ),
               child: Center(
-                child: Flexible(
-                  child: Text(
-                    currentOptions[index],
-                    style: TextStyle(
-                      fontSize: screenWidth < 600 ? 14 : 18, // Smaller font size
-                      color: _textColors[index],
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: null, // Or remove to allow unlimited lines
+                child: Text(
+                  currentOptions[index],
+                  style: TextStyle(
+                    fontSize: screenWidth < 600 ? 16 : 20,  // Adjusted font size
+                    color: _textColors[index],
+                    fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,  // Ensure text is centered
+                  softWrap: true,               // Allow wrapping
+                  overflow: TextOverflow.clip,  // Use ellipsis for overflow text
+                  maxLines: 3,                 // Limit to 2 lines, adjust as needed
                 ),
               ),
             ),
@@ -284,7 +282,6 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

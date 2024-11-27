@@ -128,47 +128,38 @@ class _Retry_MistakesState
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    // Define the fixed width and height for each card
-    double cardWidth = screenWidth < 600 ? screenWidth * 0.8 : screenWidth * 0.6;
-    double cardHeight = screenHeight * 0.25; // Increased height for more content
+    if (index >= currentOptions.length || index >= _cardColors.length || index >= _textColors.length) {
+      return SizedBox.shrink();
+    }
 
     return Expanded(
       child: GestureDetector(
         onTap: selectedOptionIndex == -1
             ? () => _answerQuestion(
           currentOptions[index],
-          selectedQuestions[0]['solution'],
+          selectedQuestions[0]['correctSolution'] ?? 'No Solution',
           index,
         )
             : null,
-        child: SizedBox(
-          width: cardWidth,
-          height: cardHeight,
-          child: Card(
-            elevation: screenWidth < 600 ? 8 : 12,
-            color: _cardColors[index],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(screenWidth * 0.04),
+        child: Card(
+          elevation: screenWidth < 600 ? 8 : 12,
+          color: _cardColors[index],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(screenWidth * 0.04),
+          ),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              vertical: screenHeight * 0.03,
+              horizontal: screenWidth * 0.04,
             ),
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                vertical: screenHeight * 0.02, // Reduced padding
-                horizontal: screenWidth * 0.02,
-              ),
-              child: Center(
-                child: Flexible(
-                  child: Text(
-                    currentOptions[index],
-                    style: TextStyle(
-                      fontSize: screenWidth < 600 ? 14 : 18, // Smaller font size
-                      color: _textColors[index],
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 3, // Or remove to allow unlimited lines
-                  ),
+            height: screenHeight * 0.12,
+            child: Center(
+              child: Text(
+                currentOptions[index],
+                style: TextStyle(
+                  fontSize: screenWidth < 600 ? 20 : 28,
+                  color: _textColors[index],
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -177,7 +168,6 @@ class _Retry_MistakesState
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
