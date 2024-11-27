@@ -23,8 +23,9 @@ class _ReviewIncorrectSolutionState extends State<ReviewIncorrectSolution> {
         widget.incorrectQuestions.map<VideoPlayerController>((question) {
       final controller = VideoPlayerController.network(question['question']);
       controller.initialize().then((_) {
+        controller.setVolume(0.0);
         setState(() {});
-        controller.setVolume(0.0); // Refresh UI after video initialization
+         // Refresh UI after video initialization
         controller.play(); // Autoplay on initialization
       });
       // Listen for video end to update the UI

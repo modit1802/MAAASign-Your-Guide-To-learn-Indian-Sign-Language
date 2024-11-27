@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%202/play_incorrect_relation.dart';
-import 'package:SignEase/review_incorrect_videos.dart';
+import 'package:SignEase/Week%202/review_incorrect_videos.dart';
 import 'package:SignEase/Week%202/true_false_challenge.dart';
 import 'package:SignEase/Week%202/week2_entry.dart';
 import 'package:flutter/material.dart';

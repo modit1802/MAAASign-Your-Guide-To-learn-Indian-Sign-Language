@@ -3,7 +3,7 @@
 import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%203/play_incorrect_pronoun.dart';
-import 'package:SignEase/review_incorrect_videos.dart';
+import 'package:SignEase/Week%202/review_incorrect_videos.dart';
 import 'package:SignEase/Week%203/pronoun_quiz.dart';
 import 'package:SignEase/Week%203/week3_entry.dart';
 import 'package:flutter/material.dart';
