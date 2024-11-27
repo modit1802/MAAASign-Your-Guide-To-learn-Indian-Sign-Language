@@ -1,157 +1,151 @@
 import 'dart:async';
+import 'package:SignEase/Week%201/Tutorial_screen_for_challenger_matchmaker.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-class MatchMakerGame extends StatelessWidget {
+class Match_maker_alphabet extends StatelessWidget {
+  final int score;
+
+  const Match_maker_alphabet({Key? key, required this.score}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AlphabetGameNavigator(),
+      backgroundColor: Color.fromARGB(255, 250, 233, 215),
+      body: Container(
+        decoration: const BoxDecoration(),
+        child: Stack(
+          children: [
+            AlphabetFruitMatch(score: score), // Pass the score to the widget
+            // Circular Home Button
+            Positioned(
+              top: 40,
+              left: 20,
+              child: FloatingActionButton(
+                backgroundColor: Color.fromARGB(255, 252, 133, 37),
+                foregroundColor: Colors.white,
+                onPressed: () {
+                  // Navigate to the initial page (modify as needed)
+                  Navigator.pop(context); // Replace with your initial page
+                },
+                child: const Icon(Icons.home), // Home icon
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class AlphabetGameNavigator extends StatefulWidget {
+class AlphabetFruitMatch extends StatefulWidget {
+  final int score;
+
+  const AlphabetFruitMatch({super.key, required this.score});
+
   @override
-  _AlphabetGameNavigatorState createState() => _AlphabetGameNavigatorState();
+  _AlphabetFruitMatchState createState() => _AlphabetFruitMatchState();
 }
 
-class _AlphabetGameNavigatorState extends State<AlphabetGameNavigator> {
-  int currentGameIndex = 0;
-  int totalScore = 0;
+class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTickerProviderStateMixin {
+  late int score;
+  late AnimationController _controller;
+  late Timer _ribbonTimer;
+  late Timer _buttonTimer;
+  bool showRibbon = false;
+  bool showNextStepButton = false;
+  bool showMagicEffect = false;
 
-  final List<Map<String, String>> allMatches = [
-    {'T': 'Tree', 'O': 'Orange', 'R': 'Rabbit', 'M': 'Monkey', 'F': 'Fish', 'G': 'Grapes'},
-    {'A': 'Apple', 'Y': 'YoYo', 'K': 'Kite', 'V': 'Violin', 'C': 'Cat', 'U': 'Umbrella'},
-    {'J': 'Jug', 'D': 'Dog', 'S': 'Snail', 'L': 'Lion', 'N': 'Nest', 'H': 'House'},
-    {'P': 'Parrot', 'Q': 'Queen', 'I': 'Ice Cream', 'E': 'Elephant', 'B': 'Ball', 'W': 'Watch'}
-  ];
-
-
-  final Map<String, String> images = {
-    'B': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/B-unlabelled_w31a7y.png',
-    'A': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/A-unlabelled_igujpe.png',
-    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/C-unlabelled_rxxbds.png',
-    'D': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/D-unlabelled_wtzvac.png',
-    'E': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/E-unlabelled_blw8z3.png',
-    'F': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/F-unlabelled_snbfpt.png',
-    'G': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/G-unlabelled_s2gkov.png',
-    'H': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355181/H-unlabelled_ly0uji.png',
-    'I': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/I-unlabelled_ony1yb.png',
-    'J': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/J-unlabelled_oyfo82.png',
-    'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/K-unlabelled_xrrfnn.png',
-    'L': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355182/L-unlabelled_hhwzsw.png',
-    'M': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355183/M-unlabelled_wjswwl.png',
-    'N': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355183/N-unlabelled_rxq0j5.png',
-    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355198/O-unlabelled_y5juiu.png',
-    'P': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355198/P-unlabelled_wqndna.png',
-    'Q': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355198/Q-unlabelled_vcixdp.png',
-    'R': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355199/R-unlabelled_gpraqs.png',
-    'S': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355199/S-unlabelled_oasqu9.png',
-    'T': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355199/T-unlabelled_lqapym.png',
-    'U': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/U-unlabelled_kvzsbn.png',
-    'V': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/V-unlabelled_ffi7tv.png',
-    'W': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/W-unlabelled_vnlcoq.png',
-    'X': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355204/X-unlabelled_ufoyeu.png',
-    'Y': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/Y-unlabelled_qwzmjd.png',
-    'Z': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1730355180/Z-unlabelled_afrfch.png',
-
+  List<String> alphabetList = ['O', 'K', 'C', 'D', 'E'];
+  Map<String, String> matches = {
+    'O': 'Orange',
+    'K': 'Kite',
+    'C': 'Candy',
+    'D': 'Dog',
+    'E': 'Egg',
   };
 
-  final Map<String, String> images2 = {
-    'A': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726919/apple_ecnzt8.png',
-    'B': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726907/ball_a6kj9i.png',
-    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726905/cat_tgyrlt.png',
-    'D': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726905/dog1_gp18by.png',
-    'E': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726907/elephant_q7awma.png',
-    'F': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726906/fish_z5jt9q.png',
-    'G': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726905/grapes_waru8a.png',
-    'H': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726905/house_t7yyeo.png',
-    'I': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726916/icecream_wdpsfl.png',
-    'J': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726904/jug_dyzpug.png',
-    'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726903/kite_dohrsc.png',
-    'L': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726903/lion_nndhjz.png',
-    'M': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726902/monkey_xg79lj.png',
-    'N': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726903/nest_ubx4kg.png',
-    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726901/orange1_dm10aa.png',
-    'P': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726899/parrot_vtrwqp.png',
-    'Q': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726914/queen_ietryw.png',
-    'R': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726903/rabbit_tjd7sj.png',
-    'S':'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726903/snail_zwlefe.png',
-    'T':'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726901/tree_uc1hho.png',
-    'U':'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726902/umbrella_fnqzgn.png',
-    'V':'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726899/violin_mncug8.png',
-    'W':'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726927/watch_txuhl8.png',
-    'X':'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726899/xylophone_yvmxil.png',
-    'Y':'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726900/yoyo_flnmgu.png',
-    'Z':'https://res.cloudinary.com/dfph32nsq/image/upload/v1732726898/zebra_ow86ws.png',
+  Map<String, String> images = {
+    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png',
+    'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/K_rv6591.png',
+    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
+    'D': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png',
+    'E': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png',
   };
 
+  Map<String, String> images2 = {
+    'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346884/kite_t2qkvv.png',
+    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969891/cherry_hsxug7.png',
+    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/orange_jvyqo7.png',
+    'D': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/dog_rlu4zj.png',
+    'E': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346883/egg_owyxyy.png',
+  };
 
-  void onGameComplete(int score) {
-    setState(() {
-      totalScore += score;
-      currentGameIndex++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (currentGameIndex < allMatches.length) {
-      return AlphabetMatchGame(
-        matches: allMatches[currentGameIndex],
-        images: images,
-        images2: images2,
-        onGameComplete: onGameComplete,
-      );
-    } else {
-      return FinalScoreScreen(totalScore: totalScore);
-    }
-  }
-}
-
-class AlphabetMatchGame extends StatefulWidget {
-  final Map<String, String> matches;
-  final Map<String, String> images;
-  final Map<String, String> images2;
-  final Function(int) onGameComplete;
-
-  const AlphabetMatchGame({
-    required this.matches,
-    required this.images,
-    required this.images2,
-    required this.onGameComplete,
-  });
-
-  @override
-  _AlphabetMatchGameState createState() => _AlphabetMatchGameState();
-}
-
-class _AlphabetMatchGameState extends State<AlphabetMatchGame> {
-  late List<String> alphabetList;
-  late Map<String, String> currentMatches;
-  late Map<String, bool> matchedItems;
-  int score = 0;
+  // A map to track which images have been matched
+  Map<String, bool> matchedItems = {
+    'O': false,
+    'K': false,
+    'C': false,
+    'D': false,
+    'E': false,
+  };
 
   @override
   void initState() {
     super.initState();
-    initializeGame();
+    // Initialize the score first
+    score = widget.score;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showtutorialscreen();
+    });
+
+    alphabetList.shuffle(Random());
+
+    // Shuffle the right side (matches keys)
+    var shuffledKeys = matches.keys.toList()..shuffle(Random());
+    matches = Map.fromEntries(shuffledKeys.map((key) => MapEntry(key, matches[key]!)));
+    // Initialize the AnimationController
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2), // Set your desired duration
+    );
+
+    // Initialize the timers
+    //_ribbonTimer = Timer(Duration.zero, () {});
+    //_buttonTimer = Timer(Duration.zero, () {});
+
+    // Example of how to show ribbons (you can set the time according to your need)
+    
   }
 
-  // Initialize the game and reset the state variables
-  void initializeGame() {
-    currentMatches = Map.from(widget.matches);  // Copy the map for the current game
-    alphabetList = currentMatches.keys.toList();
-    alphabetList.shuffle(Random());  // Shuffle the list of alphabets
-    matchedItems = Map.fromIterable(alphabetList, key: (k) => k, value: (_) => false);  // Reset matched items
+    void _showtutorialscreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Tutorial_screen_for_challenger_matchmaker(
+          onBackPressed: () {
+            Navigator.pop(
+                context); // Return to the current screen on back press
+          },
+        ),
+      ),
+    );
   }
+
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
-      body: Center(
+  void dispose() {
+    _controller.dispose();
+    _ribbonTimer.cancel(); // Ensure timer is canceled
+    _buttonTimer.cancel();
+    super.dispose();
+  }
+
+ @override
+Widget build(BuildContext context) {
+  return Stack(
+    children: [
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -175,64 +169,104 @@ class _AlphabetMatchGameState extends State<AlphabetMatchGame> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // Left side options (Draggables)
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: alphabetList
                           .map(
-                            (alphabet) => Visibility(
-                          visible: !matchedItems[alphabet]!,
-                          child: Draggable<String>(
-                            data: alphabet,
-                            feedback: Image.network(
-                              widget.images[alphabet]!,
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.cover,
+                            (alphabet) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Draggable<String>(
+                                data: alphabet,
+                                feedback: Image.network(
+                                  images[alphabet]!,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                                childWhenDragging: Container(),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 7,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Visibility(
+                                      visible: !matchedItems[alphabet]!,
+                                      child: Image.network(
+                                        images[alphabet]!,
+                                        width: 90,
+                                        height: 90,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                            childWhenDragging: Container(),
-                            child: Image.network(
-                              widget.images[alphabet]!,
-                              width: 90,
-                              height: 90,
-                            ),
-                          ),
-                        ),
-                      )
+                          )
                           .toList(),
                     ),
                   ),
-                  // Right side targets
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: currentMatches.entries.map((entry) {
-                          return DragTarget<String>(
-                            builder: (context, accepted, rejected) {
-                              return Column(
-                                children: [
-                                  Text(entry.value),
-                                  Image.network(
-                                    widget.images2[entry.key]!,
-                                    width: 90,
-                                    height: 90,
-                                  ),
-                                ],
-                              );
-                            },
-                            onWillAccept: (data) => data == entry.key,
-                            onAccept: (data) {
-                              setState(() {
-                                score += 100;
-                                matchedItems[data] = true;
-                                currentMatches.remove(data);
-                                if (alphabetList.every((item) => matchedItems[item]!)) {
-                                  widget.onGameComplete(score);  // Game complete, move to next
+                        children: matches.entries.map((entry) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: DragTarget<String>(
+                              builder: (context, accepted, rejected) {
+                                return Column(
+                                  children: [
+                                    Text(entry.value),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(color: const Color.fromARGB(255, 255, 255, 255)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 7,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Image.network(
+                                          images2[entry.key]!,
+                                          width: 90,
+                                          height: 90,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                              onWillAccept: (data) => data == entry.key,
+                              onAccept: (data) {
+                                if (data == entry.key) {
+                                  setState(() {
+                                    score += 100;
+                                    alphabetList.remove(data);
+                                    matches.remove(entry.key);
+                                    if (alphabetList.isEmpty) {
+                                      _completeGame();
+                                    }
+                                  });
                                 }
-                              });
-                            },
+                              },
+                            ),
                           );
                         }).toList(),
                       ),
@@ -244,35 +278,95 @@ class _AlphabetMatchGameState extends State<AlphabetMatchGame> {
           ],
         ),
       ),
-    );
+      if (showRibbon) RibbonWidget(score1: score),
+      if (showNextStepButton)
+        Padding(
+          padding: const EdgeInsets.all(108.0),
+          child: Center(
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 252, 133, 37),
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pop(context); // Back button with icon
+              },
+              child: const Icon(Icons.arrow_back), // Back icon
+            ),
+          ),
+        ),
+      Positioned(
+        bottom: 10,
+        left: 20,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color.fromARGB(255, 252, 133, 37),
+            foregroundColor: Colors.white,
+          ),
+          onPressed: _skipAllAnimations,
+          child: const Text('Skip'),
+        ),
+      ),
+    ],
+  );
+}
+ 
+  void _skipAllAnimations() {
+    // Simulate dropping all items one by one without increasing score
+    Future.forEach(alphabetList.toList(), (alphabet) async {
+      await Future.delayed(const Duration(seconds: 1)); // Delay for animation effect
+      setState(() {
+        alphabetList.remove(alphabet);
+        matches.remove(alphabet);
+        if (alphabetList.isEmpty) {
+          _completeGame();
+        }
+      });
+    });
+  }
+
+  void _completeGame() {
+    if (mounted) {
+  setState(() {
+    showRibbon = true;
+    showNextStepButton = true;
+  });
+}
+    _controller.forward();
+    _ribbonTimer = Timer(const Duration(seconds: 2), () {
+      setState(() {
+        showRibbon = false;
+      });
+    });
+    _buttonTimer = Timer(const Duration(seconds: 4), () {
+      setState(() {
+        showNextStepButton = false;
+        Navigator.pop(context); // Automatically navigate back after completing the game
+      });
+    });
   }
 }
 
-class FinalScoreScreen extends StatelessWidget {
-  final int totalScore;
 
-  const FinalScoreScreen({Key? key, required this.totalScore}) : super(key: key);
+class RibbonWidget extends StatelessWidget {
+  final int score1;
+
+  const RibbonWidget({Key? key, required this.score1}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Total Score: $totalScore",
-              style: const TextStyle(color: Colors.black, fontSize: 32),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("Go Home"),
-            ),
-          ],
+    return Container(
+      width: double.infinity,
+      height: 150,
+      color: score1 ==500
+          ? Color.fromARGB(255, 16, 161, 0)
+          : score1>0 && score1<500
+          ? Color.fromARGB(255, 250, 200, 2)
+          : Color.fromARGB(255, 200, 0, 0), // Different color for a score of 0
+      child: Center(
+        child: Text(
+          score1 == 500 ? 'Congratulations!' : score1>0 && score1<500 ? 'Good Attempt!' : 'Try next time!',
+          style: const TextStyle(color: Colors.white, fontSize: 20),
         ),
       ),
     );
