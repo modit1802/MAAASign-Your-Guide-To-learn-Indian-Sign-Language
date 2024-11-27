@@ -511,7 +511,7 @@ class _ThirdGameState extends State<ThirdGame> {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Challenger Round',
                         description:
-                            "Drag the alphabet signs into the correct boxes to spell the object shown. For more information press the 'tutorial button' on the top",
+                            "Drag the alphabet signs into the correct boxes. For help, press the 'tutorial button' on the top",
                         index: 2,
                       ),
                       Material(
@@ -705,7 +705,7 @@ class _ThirdGameState extends State<ThirdGame> {
               borderRadius: BorderRadius.circular(screenWidth * 0.03),
             ),
             child: Text(
-              "${maxAttempts - attempts} Chance Left",
+              "${maxAttempts - attempts} Chance",
               style:
                   TextStyle(color: Colors.white, fontSize: screenWidth * 0.04),
             ),

@@ -590,7 +590,7 @@ void _initializeChallenge() {
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Challenger Round',
                         description:
-                            "Drag the verbs/nouns signs into the correct boxes to spell the object shown. For more information press the 'tutorial button' on the top",
+                            "Drag the words into the correct boxes. For help, press the 'tutorial button' on the top",
                         index: 2,
                       ),
                       Material(
@@ -799,7 +799,7 @@ void _initializeChallenge() {
               borderRadius: BorderRadius.circular(screenWidth * 0.03),
             ),
             child: Text(
-              "${maxAttempts - attempts} Chance Left",
+              "${maxAttempts - attempts} Chance",
               style:
                   TextStyle(color: Colors.white, fontSize: screenWidth * 0.04),
             ),
