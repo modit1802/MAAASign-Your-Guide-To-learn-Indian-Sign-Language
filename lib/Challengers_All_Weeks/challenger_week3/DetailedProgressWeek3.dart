@@ -251,14 +251,13 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                   const SizedBox(height: 40),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, right: 8, top: 8),
-                    child: _buildCard(
+                    child: _buildCard3(
                       onTap: () {},
                       iconData: Icons.calendar_month,
                       color: Colors.white,
                       title: "Week 3 Progress Report",
-                      description:
-                          "",
                       index: 1,
+                      height1: 35,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       iconColor: const Color.fromARGB(255, 189, 74, 2),
                       descriptionColor: const Color.fromARGB(255, 0, 0, 0),
@@ -299,32 +298,17 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: _buildCard2(
+                    child: _buildCard3(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>Review_Incorrect_Challengers(incorrectChallenger:incorrectQuestions,)));
                       },
                       iconData: Icons.remove_red_eye,
                       color: Colors.white,
                       title: "Review Incorrect Challengers",
-                      description: "Tap me",
                       index: 0,
+                      height1: 70,
                       titleColor: const Color.fromARGB(255, 0, 0, 0),
                       descriptionColor: const Color.fromARGB(255, 0, 0, 0),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    child: _buildCard(
-                      onTap: () {},
-                      iconData: Icons.quiz,
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      title: (score_verb == null && score_noun == null && score_pronoun==null)
-                          ? "Quiz Not Attempted"
-                          : "Quiz Scores",
-                      description: (score_verb == null && score_noun == null && score_pronoun==null)
-                          ? "You have not attempted the quiz for verbs, nouns and pronouns."
-                          : "🔔 Below are your quiz scores presented in verbs, nouns and pronouns!",
-                      index: 1,
                     ),
                   ),
                   // Show the score card only if both score_verb and score_noun are available
@@ -333,21 +317,6 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
                       padding: const EdgeInsets.all(8.0),
                       child: _buildScoreCard(),
                     ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    child: _buildCard(
-                      onTap: () {},
-                      iconData: Icons.quiz,
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      title: (score_verb2 == null && score_noun2 == null && score_pronoun2==null)
-                          ? "Bingo Not Attempted"
-                          : "Bingo Scores",
-                      description: (score_verb2 == null && score_noun2 == null && score_pronoun2==null)
-                          ? "You have not attempted the Bingo for verbs, nouns and pronouns."
-                          : "🔔 Below are your Bingo scores presented in verbs, nouns and pronouns!",
-                      index: 1,
-                    ),
-                  ),
                   // Show the score card only if both score_verb and score_noun are available
                   if (score_verb2 != null && score_noun2 != null && score_pronoun2!=null)
                     Padding(
@@ -504,7 +473,62 @@ class _DetailedProgressWeek3State extends State<DetailedProgressWeek3> {
       ),
     );
   }
+  Widget _buildCard3({
+    required VoidCallback onTap,
+    required IconData iconData,
+    required Color color,
+    required String title,
+    required int index,
+    required double height1,
+    Color titleColor = Colors.black, // Default title color
+    Color iconColor =
+    const Color.fromARGB(255, 206, 109, 30), // Default icon color
+    Color descriptionColor = Colors.black, // Default description color
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
 
+        color: color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: SizedBox(
+            height: height1,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    color: Colors.white,
+                    child: Icon(iconData, color: iconColor), // Set icon color
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: titleColor, // Set title color
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class ScoreData {
