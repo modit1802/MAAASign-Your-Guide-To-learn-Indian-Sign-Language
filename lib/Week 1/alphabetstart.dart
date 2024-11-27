@@ -318,7 +318,7 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                       SizedBox(height: screenHeight * 0.015),
                       _buildCard(
                         onTap: () => _handleCardTap(
-                            2, AlphabetGameNavigator()),
+                            2, Match_maker_alphabet(score: 0,)),
                         imagePath: 'images/match.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Match It Up !',
