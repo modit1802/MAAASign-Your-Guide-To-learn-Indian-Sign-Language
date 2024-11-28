@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:SignEase/Week%202/compoundsentences.dart';
 import 'package:SignEase/Week%201/learnnumbers.dart';
-import 'package:SignEase/Week%201/matchmaker_number.dart';
+import 'package:SignEase/Week%201/matchmaker_number_1.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -321,7 +321,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           ),
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Match_maker_numbers(score: widget.score)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Match_maker_numbers1(score: widget.score)));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),

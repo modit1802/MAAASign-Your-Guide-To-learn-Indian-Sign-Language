@@ -1,8 +1,15 @@
+import 'dart:math';
+
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%201/learnalphabet.dart';
-import 'package:SignEase/Week%201/matchmaker_alphabet.dart';
+import 'package:SignEase/Week%201/matchmaker_alphabet_1.dart';
 import 'package:SignEase/Week%201/practiceassignment1.dart';
 import 'package:flutter/material.dart';
+
+import 'matchmaker_alphabet_2.dart';
+import 'matchmaker_alphabet_3.dart';
+import 'matchmaker_alphabet_4.dart';
+import 'matchmaker_alphabet_5.dart';
 
 class AlphabetStartscreen extends StatefulWidget {
   const AlphabetStartscreen({super.key});
@@ -151,6 +158,25 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
           }));
     });
   }
+  void _handleCardTap2(int index, List<Widget> nextPages) {
+    setState(() {
+      _selectedCardIndex = index;
+    });
+
+    // Pick a random page
+    final random = Random();
+    Widget randomPage = nextPages[random.nextInt(nextPages.length)];
+
+    Future.delayed(const Duration(milliseconds: 200), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => randomPage),
+      ).then((_) => setState(() {
+        _selectedCardIndex = null; // Reset after navigation
+      }));
+    });
+  }
+
 
   int _currentIndex = 0; // This keeps track of the selected tab index
 
@@ -317,8 +343,8 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                       ),
                       SizedBox(height: screenHeight * 0.015),
                       _buildCard(
-                        onTap: () => _handleCardTap(
-                            2, Match_maker_alphabet(score: 0,)),
+                        onTap: () => _handleCardTap2(
+                            2, [Match_maker_alphabet1(score: 0,),Match_maker_alphabet2(score: 0,),Match_maker_alphabet3(score: 0,),Match_maker_alphabet4(score: 0,),Match_maker_alphabet5(score: 0,)]),
                         imagePath: 'images/match.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Match It Up !',

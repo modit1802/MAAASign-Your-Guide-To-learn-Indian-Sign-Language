@@ -3,10 +3,10 @@ import 'package:SignEase/Week%201/Tutorial_screen_for_challenger_matchmaker.dart
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-class Match_maker_alphabet extends StatelessWidget {
+class Match_maker_numbers1 extends StatelessWidget {
   final int score;
 
-  const Match_maker_alphabet({Key? key, required this.score}) : super(key: key);
+  const Match_maker_numbers1({Key? key, required this.score}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,56 +55,55 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
   bool showRibbon = false;
   bool showNextStepButton = false;
   bool showMagicEffect = false;
+ List<String> alphabetList = ['1', '2', '4', '5', '6'];
 
-  List<String> alphabetList = ['O', 'K', 'C', 'D', 'E'];
+  // Matching logic for each number and object
   Map<String, String> matches = {
-    'O': 'Orange',
-    'K': 'Kite',
-    'C': 'Candy',
-    'D': 'Dog',
-    'E': 'Egg',
+    '1': 'teddy',
+    '2': 'banana',
+    '4': 'icecream',
+    '5': 'five',
+    '6': 'boys',
   };
 
+  // Cloudinary URLs for the number images (left-side)
   Map<String, String> images = {
-    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340552/O_zdqyev.png',
-    'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340553/K_rv6591.png',
-    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/C_qsn6tc.png',
-    'D': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/D_hnrexc.png',
-    'E': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727340550/E_tupepq.png',
+    '1': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415177/1_ypmmhh.png',
+    '2': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415124/2_tb6h2y.png',
+    '4': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415064/4_hltwy4.png',
+    '5': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415053/5_nofsuk.png',
+    '6': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1731415039/6_ireutv.png',
   };
 
+  // Cloudinary URLs for the matching images (right-side)
   Map<String, String> images2 = {
-    'K': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346884/kite_t2qkvv.png',
-    'C': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969891/cherry_hsxug7.png',
-    'O': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/orange_jvyqo7.png',
-    'D': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727969890/dog_rlu4zj.png',
-    'E': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727346883/egg_owyxyy.png',
-  };
-
-  // A map to track which images have been matched
+    '1': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717827/teddy_ztzcst.png',
+    '2': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717826/banana_djgdle.png',
+    '4': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717830/icecream_ceyf4o.png',
+    '5': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717826/five_a64ptj.png',
+    '6': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717828/boys_ghv7pn.png',
+  };  // A map to track which images have been matched
   Map<String, bool> matchedItems = {
-    'O': false,
-    'K': false,
-    'C': false,
-    'D': false,
-    'E': false,
+    '1': false,
+    '2': false,
+    '4': false,
+    '5': false,
+    '6': false,
   };
 
   @override
   void initState() {
     super.initState();
-    // Initialize the score first
     score = widget.score;
         WidgetsBinding.instance.addPostFrameCallback((_) {
       _showtutorialscreen();
     });
-
+    // Initialize the AnimationController
     alphabetList.shuffle(Random());
 
     // Shuffle the right side (matches keys)
     var shuffledKeys = matches.keys.toList()..shuffle(Random());
     matches = Map.fromEntries(shuffledKeys.map((key) => MapEntry(key, matches[key]!)));
-    // Initialize the AnimationController
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2), // Set your desired duration
@@ -161,7 +160,7 @@ Widget build(BuildContext context) {
               child: Center(
                 child: Text(
                   "Score: $score",
-                  style: const TextStyle(color: Colors.white, fontSize: 18),
+                  style: const TextStyle(color: Colors.white, fontSize:18),
                 ),
               ),
             ),
@@ -344,7 +343,6 @@ Widget build(BuildContext context) {
     });
   }
 }
-
 
 class RibbonWidget extends StatelessWidget {
   final int score1;

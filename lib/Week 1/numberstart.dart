@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%201/learnnumbers.dart';
-import 'package:SignEase/Week%201/matchmaker_number.dart';
+import 'package:SignEase/Week%201/matchmaker_number_1.dart';
+import 'package:SignEase/Week%201/matchmaker_number_2.dart';
 import 'package:SignEase/Week%201/practiceassignment2.dart';
 import 'package:flutter/material.dart';
 
@@ -151,7 +154,24 @@ class _NumberStartscreenState extends State<NumberStartscreen> {
           }));
     });
   }
+  void _handleCardTap2(int index, List<Widget> nextPages) {
+    setState(() {
+      _selectedCardIndex = index;
+    });
 
+    // Pick a random page
+    final random = Random();
+    Widget randomPage = nextPages[random.nextInt(nextPages.length)];
+
+    Future.delayed(const Duration(milliseconds: 200), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => randomPage),
+      ).then((_) => setState(() {
+        _selectedCardIndex = null; // Reset after navigation
+      }));
+    });
+  }
   int _currentIndex = 0; // This keeps track of the selected tab index
 
   void _onItemTapped(int index) {
@@ -317,8 +337,8 @@ class _NumberStartscreenState extends State<NumberStartscreen> {
                       ),
                       SizedBox(height: screenHeight * 0.02),
                       _buildCard(
-                        onTap: () => _handleCardTap(
-                            2, const Match_maker_numbers(score: 0)),
+                        onTap: () => _handleCardTap2(
+                            2, [const Match_maker_numbers1(score: 0),const Match_maker_numbers2(score: 0)]),
                         imagePath: 'images/match.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Match It Up !',
