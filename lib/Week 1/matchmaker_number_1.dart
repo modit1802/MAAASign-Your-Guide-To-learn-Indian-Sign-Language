@@ -59,11 +59,11 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
 
   // Matching logic for each number and object
   Map<String, String> matches = {
-    '1': 'teddy',
-    '2': 'banana',
-    '4': 'icecream',
-    '5': 'five',
-    '6': 'boys',
+    '1': 'star',
+    '2': 'cherry',
+    '4': 'flowers',
+    '5': 'cake',
+    '6': 'diamond',
   };
 
   // Cloudinary URLs for the number images (left-side)
@@ -77,11 +77,11 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
 
   // Cloudinary URLs for the matching images (right-side)
   Map<String, String> images2 = {
-    '1': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717827/teddy_ztzcst.png',
-    '2': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717826/banana_djgdle.png',
-    '4': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717830/icecream_ceyf4o.png',
-    '5': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717826/five_a64ptj.png',
-    '6': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1727717828/boys_ghv7pn.png',
+    '1': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732818324/1_bqda7t.png',
+    '2': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732818327/2_zz27zi.png',
+    '4': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732818325/4_drnb7j.png',
+    '5': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732818326/5_qznslv.png',
+    '6': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732818325/6_dtib2j.png',
   };  // A map to track which images have been matched
   Map<String, bool> matchedItems = {
     '1': false,

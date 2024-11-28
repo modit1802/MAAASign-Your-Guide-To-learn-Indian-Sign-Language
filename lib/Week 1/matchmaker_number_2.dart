@@ -59,11 +59,11 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
 
   // Matching logic for each number and object
   Map<String, String> matches = {
-    '3': 'teddy',
-    '7': 'banana',
-    '8': 'icecream',
-    '9': 'five',
-    '10': 'boys',
+    '3': 'balloon',
+    '7': 'balloon',
+    '8': 'flower',
+    '9': 'birds',
+    '10': 'cars',
   };
 
   // Cloudinary URLs for the number images (left-side)
@@ -84,11 +84,11 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
     '10': 'https://res.cloudinary.com/dfph32nsq/image/upload/v1732818324/10_mkvllb.png',
   };  // A map to track which images have been matched
   Map<String, bool> matchedItems = {
-    '1': false,
-    '2': false,
-    '4': false,
-    '5': false,
-    '6': false,
+    '3': false,
+    '7': false,
+    '8': false,
+    '9': false,
+    '10': false,
   };
 
 
