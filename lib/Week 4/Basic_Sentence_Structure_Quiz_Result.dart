@@ -2,8 +2,6 @@ import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Week%204/Review_Mistakes.dart';
 import 'package:SignEase/Week%204/Retry_Mistakes.dart';
-import 'package:SignEase/Week%201/practiceassignment1.dart';
-import 'package:SignEase/Week%201/week1_entry.dart';
 import 'package:SignEase/Week%204/Basic_Sentence_Quiz.dart';
 import 'package:SignEase/Week%204/week4_entry.dart';
 import 'package:flutter/material.dart';

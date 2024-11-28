@@ -283,16 +283,7 @@ Widget build(BuildContext context) {
         Padding(
           padding: const EdgeInsets.all(108.0),
           child: Center(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 252, 133, 37),
-                foregroundColor: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context); // Back button with icon
-              },
-              child: const Icon(Icons.arrow_back), // Back icon
-            ),
+            child: Image.asset('images/celebrate-cat.gif'),
           ),
         ),
       Positioned(

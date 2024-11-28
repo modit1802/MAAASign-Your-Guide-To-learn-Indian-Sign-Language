@@ -231,241 +231,218 @@ class _Quiz_Simple_SentenceState extends State<Quiz_Simple_Sentence> {
     super.dispose();
   }
 
-  Widget buildOptionCard(int index) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+ Widget buildOptionCard(int index) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
 
-    // Define the fixed width and height for each card
-    double cardWidth = screenWidth < 600 ? screenWidth * 0.8 : screenWidth * 0.6;
-    double cardHeight = screenHeight * 0.2;  // Adjust this as per your requirement
-
-    return Expanded(
-      child: GestureDetector(
-        onTap: selectedOptionIndex == -1
-            ? () => _answerQuestion(
-          currentOptions[index],
-          selectedQuestions[0]['solution'],
-          index,
-        )
-            : null,
-        child: SizedBox(
-          width: cardWidth,  // Fixed width
-          height: cardHeight,  // Fixed height
-          child: Card(
-            elevation: screenWidth < 600 ? 8 : 12,
-            color: _cardColors[index],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(screenWidth * 0.04),
-            ),
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                vertical: screenHeight * 0.050,
-                horizontal: screenWidth * 0.04,
-              ),
-              child: Center(
-                child: Text(
-                  currentOptions[index],
-                  style: TextStyle(
-                    fontSize: screenWidth < 600 ? 16 : 20,  // Adjusted font size
-                    color: _textColors[index],
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,  // Ensure text is centered
-                  softWrap: true,               // Allow wrapping
-                  overflow: TextOverflow.clip,  // Use ellipsis for overflow text
-                  maxLines: 3,                 // Limit to 2 lines, adjust as needed
-                ),
+  return Padding(
+    padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+    child: GestureDetector(
+      onTap: selectedOptionIndex == -1
+          ? () => _answerQuestion(
+                currentOptions[index],
+                selectedQuestions[0]['solution'],
+                index,
+              )
+          : null,
+      child: Card(
+        elevation: screenWidth < 600 ? 8 : 12,
+        color: _cardColors[index],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(screenWidth * 0.04),
+        ),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            vertical: screenHeight * 0.03,
+            horizontal: screenWidth * 0.04,
+          ),
+          height: screenHeight * 0.12,
+          child: Center(
+            child: Text(
+              currentOptions[index],
+              style: TextStyle(
+                fontSize: screenWidth < 600 ? 12 : 16,
+                color: _textColors[index],
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
-  @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    bool isSmallScreen = screenWidth < 600;
+@override
+Widget build(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+  bool isSmallScreen = screenWidth < 600;
 
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
-      body: selectedQuestions.isNotEmpty
-          ? SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    height: screenHeight * 0.35,
-                    padding: const EdgeInsets.all(16),
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 252, 133, 37),
-                      borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(20)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Transform.translate(
-                          offset: Offset(0,
-                              -screenHeight * 0.02), // Adjusted with MediaQuery
-                          child: Padding(
-                            padding:
-                                EdgeInsets.only(bottom: screenHeight * 0.059),
-                            child: Text(
-                              'Quiz Mania',
-                              style: TextStyle(
-                                fontFamily: 'RubikWetPaint',
-                                fontSize: isSmallScreen ? 32 : 40,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: screenHeight * 0.001),
-                        Transform.translate(
-                          offset: Offset(
-                              0,
-                              -screenHeight *
-                                  0.059), // Adjusted with MediaQuery
+  return Scaffold(
+    backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+    body: selectedQuestions.isNotEmpty
+        ? SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: screenHeight * 0.35,
+                  padding: const EdgeInsets.all(16),
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 252, 133, 37),
+                    borderRadius:
+                        BorderRadius.vertical(bottom: Radius.circular(20)),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Transform.translate(
+                        offset: Offset(0, -screenHeight * 0.02),
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: screenHeight * 0.059),
                           child: Text(
-                            "Identify the correct English Sentence",
+                            'Quiz Mania',
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: isSmallScreen ? 18 : 24,
+                              fontFamily: 'RubikWetPaint',
+                              fontSize: isSmallScreen ? 32 : 40,
                               fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-                    child: SingleChildScrollView(
-                      child: Transform.translate(
-                        offset: Offset(0,-screenHeight * 0.17), // Adjusted with MediaQuery
-                        child: Container(
-                          height: screenHeight * 0.5,
-                          width: screenWidth * 0.8,
-                          child: Card(
+                      ),
+                      SizedBox(height: screenHeight * 0.001),
+                      Transform.translate(
+                        offset: Offset(0, -screenHeight * 0.059),
+                        child: Text(
+                          "Identify the signs of Simple Sentence",
+                          style: TextStyle(
                             color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            elevation: 8,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    'Question ${10 - selectedQuestions.length + 1}/10',
-                                    style: TextStyle(
-                                      fontSize: isSmallScreen ? 16 : 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: const Color.fromARGB(
-                                          255, 206, 109, 30),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  height: screenHeight * 0.43,
-                                  child: Center(
-                                    child: videoController != null &&
-                                            videoController!.value.isInitialized
-                                        ? Stack(
-                                            alignment: Alignment.center,
-                                            children: [
-                                              AspectRatio(
-                                                aspectRatio: videoController!
-                                                    .value.aspectRatio,
-                                                child: VideoPlayer(
-                                                    videoController!),
-                                              ),
-                                              if (videoController!
-                                                      .value.position ==
-                                                  videoController!
-                                                      .value.duration)
-                                                IconButton(
-                                                  icon: Icon(
-                                                    Icons.replay,
-                                                    color: Colors.white,
-                                                    size: 30,
-                                                  ),
-                                                  onPressed: () {
-                                                    videoController!
-                                                        .seekTo(Duration.zero);
-                                                    videoController!.play();
-                                                    setState(() {});
-                                                  },
-                                                ),
-                                            ],
-                                          )
-                                        : CircularProgressIndicator(
-                                            color: const Color.fromARGB(
-                                                255, 189, 74, 2),
-                                          ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            fontSize: isSmallScreen ? 18 : 24,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                  SizedBox(height: screenHeight * 0.0001),
-                  for (int rowIndex = 0;
-                      rowIndex < (currentOptions.length / 2).ceil();
-                      rowIndex++)
-                    Transform.translate(
-                      offset: Offset(
-                          0, -screenHeight * 0.16), // Adjusted with MediaQuery
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: screenWidth * 0.05,
-                          vertical: screenHeight * 0.003,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            if (rowIndex * 2 < currentOptions.length)
-                              buildOptionCard(rowIndex * 2),
-                            if (rowIndex * 2 + 1 < currentOptions.length)
-                              buildOptionCard(rowIndex * 2 + 1),
-                          ],
-                        ),
-                      ),
-                    ),
-                  Transform.translate(
-                    offset: Offset(0, -screenHeight * 0.14),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                ),
+                SizedBox(height: screenHeight * 0.02),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                  child: SingleChildScrollView(
+                    child: Transform.translate(
+                      offset: Offset(0, -screenHeight * 0.17),
                       child: Container(
-                        height: MediaQuery.of(context).size.width * 0.08,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16.0),
-                          child: LinearProgressIndicator(
-                            value: (10 - selectedQuestions.length) / 10,
-                            valueColor: const AlwaysStoppedAnimation<Color>(
-                                Color.fromARGB(255, 189, 74, 2)),
-                            backgroundColor:
-                                const Color.fromARGB(255, 189, 187, 187),
+                        height: screenHeight * 0.5,
+                        width: screenWidth * 0.8,
+                        child: Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          elevation: 8,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Question ${10 - selectedQuestions.length + 1}/10',
+                                  style: TextStyle(
+                                    fontSize: isSmallScreen ? 16 : 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color.fromARGB(
+                                        255, 206, 109, 30),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: screenHeight * 0.43,
+                                child: Center(
+                                  child: videoController != null &&
+                                          videoController!.value.isInitialized
+                                      ? Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            AspectRatio(
+                                              aspectRatio: videoController!
+                                                  .value.aspectRatio,
+                                              child: VideoPlayer(
+                                                  videoController!),
+                                            ),
+                                            if (videoController!
+                                                    .value.position ==
+                                                videoController!
+                                                    .value.duration)
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.replay,
+                                                  color: Colors.white,
+                                                  size: 30,
+                                                ),
+                                                onPressed: () {
+                                                  videoController!
+                                                      .seekTo(Duration.zero);
+                                                  videoController!.play();
+                                                  setState(() {});
+                                                },
+                                              ),
+                                          ],
+                                        )
+                                      : CircularProgressIndicator(
+                                          color: const Color.fromARGB(
+                                              255, 189, 74, 2),
+                                        ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            )
-          : const Center(
-              child: CircularProgressIndicator(),
+                ),
+                SizedBox(height: screenHeight * 0.0001),
+                Transform.translate(
+                  offset: Offset(0, -screenHeight * 0.16),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < currentOptions.length; i++)
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.05,
+                              ),
+                          child: buildOptionCard(i),
+                        ),
+                    ],
+                  ),
+                ),
+                Transform.translate(
+                  offset: Offset(0, -screenHeight * 0.14),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Container(
+                      height: MediaQuery.of(context).size.width * 0.08,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: LinearProgressIndicator(
+                          value: (10 - selectedQuestions.length) / 10,
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                              Color.fromARGB(255, 189, 74, 2)),
+                          backgroundColor:
+                              const Color.fromARGB(255, 189, 187, 187),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-    );
-  }
+          )
+        : const Center(
+            child: CircularProgressIndicator(),
+          ),
+  );
+}
+
 }

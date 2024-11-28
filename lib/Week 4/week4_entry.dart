@@ -1,8 +1,6 @@
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week4/challenger4.dart';
 import 'package:SignEase/Week%204/Basic_Sentence_Quiz.dart';
-import 'package:SignEase/Week%204/Basic_Sentence_Structure.dart';
-import 'package:SignEase/Week%204/Simple_Sentence_Formation_using_Videos/simple_sentence_start_page.dart';
 import 'package:SignEase/Week%204/tutorial_screen_week4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

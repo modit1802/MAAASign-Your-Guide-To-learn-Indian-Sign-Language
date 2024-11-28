@@ -4,19 +4,16 @@ import 'package:video_player/video_player.dart';
 
 class Retry_Mistakes extends StatefulWidget {
   final List<Map<String, dynamic>> incorrectQuestions;
-
   var score1;
 
   Retry_Mistakes({Key? key, required this.incorrectQuestions, required this.score1})
       : super(key: key);
 
   @override
-  State<Retry_Mistakes> createState() =>
-      _Retry_MistakesState();
+  State<Retry_Mistakes> createState() => _Retry_MistakesState();
 }
 
-class _Retry_MistakesState
-    extends State<Retry_Mistakes> {
+class _Retry_MistakesState extends State<Retry_Mistakes> {
   late VideoPlayerController _controller;
 
   List<Map<String, dynamic>> incorrectQuestions = [];
@@ -29,14 +26,14 @@ class _Retry_MistakesState
   int correctcount = 0;
   int incorrectcount = 0;
   int selectedOptionIndex = -1;
-  int score1=0;
+  int score1 = 0;
 
   @override
   void initState() {
     super.initState();
     incorrectQuestions = widget.incorrectQuestions;
     selectedQuestions = List.from(incorrectQuestions);
-    score1=widget.score1;// Copy the questions list
+    score1 = widget.score1; // Copy the questions list
     if (selectedQuestions.isNotEmpty) {
       setOptionsForQuestion();
     }
@@ -62,6 +59,7 @@ class _Retry_MistakesState
   int _factorial(int n) {
     return n <= 1 ? 1 : n * _factorial(n - 1);
   }
+
   List<String> generateOptions(String correctSolution) {
     List<String> options = [];
     options.add(correctSolution);
@@ -89,7 +87,6 @@ class _Retry_MistakesState
       Navigator.pop(context); // Go back if no questions are left
     }
   }
-
 
   void _answerQuestion(String selectedOption, String correctSolution, int index) {
     setState(() {
@@ -124,6 +121,7 @@ class _Retry_MistakesState
       }
     });
   }
+
   Widget buildOptionCard(int index) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -132,35 +130,33 @@ class _Retry_MistakesState
       return SizedBox.shrink();
     }
 
-    return Expanded(
-      child: GestureDetector(
-        onTap: selectedOptionIndex == -1
-            ? () => _answerQuestion(
-          currentOptions[index],
-          selectedQuestions[0]['correctSolution'] ?? 'No Solution',
-          index,
-        )
-            : null,
-        child: Card(
-          elevation: screenWidth < 600 ? 8 : 12,
-          color: _cardColors[index],
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(screenWidth * 0.04),
-          ),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: screenHeight * 0.03,
-              horizontal: screenWidth * 0.04,
-            ),
-            height: screenHeight * 0.12,
-            child: Center(
-              child: Text(
+    return GestureDetector(
+      onTap: selectedOptionIndex == -1
+          ? () => _answerQuestion(
                 currentOptions[index],
-                style: TextStyle(
-                  fontSize: screenWidth < 600 ? 20 : 28,
-                  color: _textColors[index],
-                  fontWeight: FontWeight.bold,
-                ),
+                selectedQuestions[0]['correctSolution'] ?? 'No Solution',
+                index,
+              )
+          : null,
+      child: Card(
+        elevation: screenWidth < 600 ? 8 : 12,
+        color: _cardColors[index],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(screenWidth * 0.04),
+        ),
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            vertical: screenHeight * 0.03,
+            horizontal: screenWidth * 0.04,
+          ),
+          height: screenHeight * 0.12,
+          child: Center(
+            child: Text(
+              currentOptions[index],
+              style: TextStyle(
+                fontSize: screenWidth < 600 ? 20 : 28,
+                color: _textColors[index],
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -179,181 +175,126 @@ class _Retry_MistakesState
       backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       body: selectedQuestions.isNotEmpty
           ? SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: screenHeight * 0.4,
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 252, 133, 37),
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-              ),
-              child: Align(
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: screenHeight * 0.1),
-                      child: Text(
-                        'Quiz Mania',
-                        style: TextStyle(
-                          fontFamily: 'RubikWetPaint',
-                          fontSize: isSmallScreen ? 38 : 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: screenHeight * 0.4,
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 252, 133, 37),
+                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
                     ),
-                    SizedBox(
-                      height: screenHeight * 0.03,
-                    ),
-                    Text(
-                      "Translate the following English Sentence to Indian Sign Language Gloss",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: isSmallScreen ? 18 : 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          Transform.translate(
-            offset: Offset(0, -screenHeight * 0.08),
-            child: Padding(
-              padding: EdgeInsets.all(isSmallScreen ? 8 : 16), // Padding adjustment
-              child: Container(
-                width: screenWidth * 0.9, // Width adjustment based on screen size
-                height: screenHeight * 0.25, // Adjust height based on screen size
-                child: Card(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  elevation: 8,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                    child: Align(
+                      alignment: Alignment.center,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Display the question number
+                          Padding(
+                            padding: EdgeInsets.only(top: screenHeight * 0.1),
+                            child: Text(
+                              'Quiz Mania',
+                              style: TextStyle(
+                                fontFamily: 'RubikWetPaint',
+                                fontSize: isSmallScreen ? 38 : 40,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: screenHeight * 0.03,
+                          ),
                           Text(
-                            'Question ${6 - selectedQuestions.length + 1}/6', // Show the question number
+                            "Translate the following English Sentence to Indian Sign Language Gloss",
                             style: TextStyle(
-                              fontSize: isSmallScreen ? 16 : 20, // Font size adjustment
+                              color: Colors.white,
+                              fontSize: isSmallScreen ? 18 : 24,
                               fontWeight: FontWeight.bold,
-                              color: const Color.fromARGB(255, 206, 109, 30),
                             ),
-                          ),
-                          // Display the image
-                          Center(
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Text(
-                                  selectedQuestions[0]['question'],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: isSmallScreen ? 20 : 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                            textAlign: TextAlign.center,
+                          )
                         ],
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-          ),
-          // Display options in two rows with two options each
-          for (int i = 0; i < 2; i++) ...[
-            Transform.translate(
-            offset: Offset(0, -screenHeight * 0.08),
-            child: Padding(
-            padding: EdgeInsets.symmetric(
-            horizontal: isSmallScreen ? 8 : 16), // Padding adjustment
-            child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-            buildOptionCard(i * 2),
-            buildOptionCard(i * 2 + 1),
-    ],
-    ),
-    ),
-    ),
-            ],
-            Transform.translate(
-              offset: Offset(0, -screenHeight * 0.05),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.width * 0.08,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16.0),
-                    child: LinearProgressIndicator(
-                      value: (6 - selectedQuestions.length) / 6,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                          Color.fromARGB(255, 189, 74, 2)),
-                      backgroundColor: const Color.fromARGB(255, 189, 187, 187),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      )
-          : Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Card(
-                elevation: 8,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      Text(
-                        'All Correct!',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                  Transform.translate(
+                    offset: Offset(0, -screenHeight * 0.08),
+                    child: Padding(
+                      padding: EdgeInsets.all(isSmallScreen ? 8 : 16),
+                      child: Container(
+                        width: screenWidth * 0.9,
+                        height: screenHeight * 0.25,
+                        child: Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          elevation: 8,
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Display the question number
+                                  Text(
+                                    'Question ${10 - selectedQuestions.length + 1}/10',
+                                    style: TextStyle(
+                                      fontSize: isSmallScreen ? 16 : 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color.fromARGB(255, 206, 109, 30),
+                                    ),
+                                  ),
+                                  // Display the image
+                                  Center(
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Text(
+                                          selectedQuestions[0]['question'],
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: isSmallScreen ? 20 : 24,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      SizedBox(height: 16),
-                      Text(
-                        'Your Score: $score1',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  // Updated: Display options in column-wise layout with vertical translation
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 8 : 16),
+                    child: Column(
+                      children: [
+                        for (int i = 0; i < 4; i++) // Loop through 4 options
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Transform.translate(
+                              offset: Offset(0, -screenHeight * 0.08), // Vertical offset for upwards translation
+                              child: buildOptionCard(i), // Each option gets a card
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Go Back'),
+            )
+          : Center(
+              child: Text(
+                'No Questions Available',
+                style: TextStyle(fontSize: 24),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
