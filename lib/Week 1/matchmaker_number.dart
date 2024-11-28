@@ -160,7 +160,7 @@ Widget build(BuildContext context) {
               child: Center(
                 child: Text(
                   "Score: $score",
-                  style: const TextStyle(color: Colors.white, fontSize: 24),
+                  style: const TextStyle(color: Colors.white, fontSize:18),
                 ),
               ),
             ),
@@ -280,11 +280,18 @@ Widget build(BuildContext context) {
       if (showRibbon) RibbonWidget(score1: score),
       if (showNextStepButton)
         Padding(
-          padding: const EdgeInsets.all(108.0),
+          padding: const EdgeInsets.all(16.0), // Reduced padding for better visibility
           child: Center(
-            child: Image.asset('images/celebrate-cat.gif'),
+            child: Image.asset(
+              'images/celebrate-cat.gif',
+              width: MediaQuery.of(context).size.width * 0.8, // 80% of screen width
+              height: MediaQuery.of(context).size.height * 0.4, // 40% of screen height
+              fit: BoxFit.contain, // Maintain aspect ratio
+            ),
           ),
         ),
+
+
       Positioned(
         bottom: 10,
         left: 20,
