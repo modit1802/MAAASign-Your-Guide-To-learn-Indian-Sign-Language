@@ -15,6 +15,74 @@
       },
       "oauth_client": [
         {
+          "client_id": "894444876029-6pr4mqag92fcss9rflg1eoch0kqu9lo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_login_signup",
+            "certificate_hash": "ae2836c1584b504e93bcf35d8f87a128abdc0b70"
+          }
+        },
+        {
+          "client_id": "894444876029-gjvog8gf1egh6lp3of3s410qa660qpb4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_login_signup",
+            "certificate_hash": "74b0c7751e1d4efa22e29c6994fb4c4f8489e57c"
+          }
+        },
+        {
+          "client_id": "894444876029-oebmb7ftpb1k9jm03011fv4l9qi3qt7b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_login_signup",
+            "certificate_hash": "3f503591094337961cf2c7e9eb21b993d6105bc0"
+          }
+        },
+        {
+          "client_id": "894444876029-9dnpfrgrbenq54k9ndlltm9lkjfgm9bc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV_KJLOe5aMGSY6mlg1dAm35wAb1o3bsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894444876029-9dnpfrgrbenq54k9ndlltm9lkjfgm9bc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "894444876029-rmrlud9kfulbe4s5gi3vhu4ltj6m3md8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterLoginSignup"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894444876029:android:15c9d75c9223181be20e94",
+        "android_client_info": {
+          "package_name": "com.maaa.flutter_login_signup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894444876029-8k5mkaj9mb7uv1mkam5jh7jjvtjjrh9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maaa.flutter_login_signup",
+            "certificate_hash": "ae2836c1584b504e93bcf35d8f87a128abdc0b70"
+          }
+        },
+        {
           "client_id": "894444876029-9dnpfrgrbenq54k9ndlltm9lkjfgm9bc.apps.googleusercontent.com",
           "client_type": 3
         }

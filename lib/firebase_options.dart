@@ -42,7 +42,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAV_KJLOe5aMGSY6mlg1dAm35wAb1o3bsY',
-    appId: '1:894444876029:android:06b09d39536dc425e20e94',
+    appId: '1:894444876029:android:15c9d75c9223181be20e94',
     messagingSenderId: '894444876029',
     projectId: 'loginsignupapp-7c92a',
     databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
@@ -56,6 +56,8 @@ class DefaultFirebaseOptions {
     projectId: 'loginsignupapp-7c92a',
     databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
     storageBucket: 'loginsignupapp-7c92a.appspot.com',
+    androidClientId: '894444876029-6pr4mqag92fcss9rflg1eoch0kqu9lo8.apps.googleusercontent.com',
+    iosClientId: '894444876029-rmrlud9kfulbe4s5gi3vhu4ltj6m3md8.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterLoginSignup',
   );
 
@@ -66,18 +68,20 @@ class DefaultFirebaseOptions {
     projectId: 'loginsignupapp-7c92a',
     databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
     storageBucket: 'loginsignupapp-7c92a.appspot.com',
+    androidClientId: '894444876029-6pr4mqag92fcss9rflg1eoch0kqu9lo8.apps.googleusercontent.com',
+    iosClientId: '894444876029-rmrlud9kfulbe4s5gi3vhu4ltj6m3md8.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterLoginSignup',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyACSu3jUhSEt2rWSYccdIFS38xIijO_8nw',
-    appId: '1:894444876029:web:dbb9bd53cecab6b1e20e94',
+    appId: '1:894444876029:web:1227396d052027ede20e94',
     messagingSenderId: '894444876029',
     projectId: 'loginsignupapp-7c92a',
     authDomain: 'loginsignupapp-7c92a.firebaseapp.com',
     databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
     storageBucket: 'loginsignupapp-7c92a.appspot.com',
-    measurementId: 'G-2R3C2Z62JN',
+    measurementId: 'G-XX5B7PLGT2',
   );
 
 }

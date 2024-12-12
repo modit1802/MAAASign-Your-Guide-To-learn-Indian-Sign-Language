@@ -15,16 +15,16 @@ if (localPropertiesFile.exists()) {
 
 def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
 if (flutterVersionCode == null) {
-    flutterVersionCode = "1"
+    flutterVersionCode = "2"
 }
 
 def flutterVersionName = localProperties.getProperty("flutter.versionName")
 if (flutterVersionName == null) {
-    flutterVersionName = "1.0"
+    flutterVersionName = "1.1"
 }
 
 android {
-    namespace = "com.example.flutter_login_signup"
+    namespace = "com.maaa.flutter_login_signup"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -34,16 +34,25 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.flutter_login_signup"
+        applicationId = "com.maaa.flutter_login_signup"
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutterVersionCode.toInteger()
-        versionName = flutterVersionName
+        versionCode = 2
+        versionName = "1.1"
     }
+        signingConfigs {
+            release {
+                storeFile file('my-release-key.jks')
+                storePassword 'maaasign'
+                keyAlias 'my-key-alias'
+                keyPassword 'maaasign'
+            }
+        }
+
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.debug
+            signingConfig = signingConfigs.release
         }
     }
 }
