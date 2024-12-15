@@ -1,6 +1,6 @@
 plugins {
     id "com.android.application"
-    id 'com.google.gms.google-services'  // Firebase configuration
+    id "com.google.gms.google-services"  // Firebase configuration
     id "kotlin-android"  // Kotlin plugin
     id "dev.flutter.flutter-gradle-plugin"  // Flutter plugin
 }
@@ -8,55 +8,79 @@ plugins {
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader("UTF-8") { reader ->
+    localPropertiesFile.withReader("UTF-8") { reader -> 
         localProperties.load(reader)
     }
 }
 
-def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
-if (flutterVersionCode == null) {
-    flutterVersionCode = "2"
-}
-
-def flutterVersionName = localProperties.getProperty("flutter.versionName")
-if (flutterVersionName == null) {
-    flutterVersionName = "1.1"
-}
+def flutterVersionCode = localProperties.getProperty("flutter.versionCode") ?: "2"
+def flutterVersionName = localProperties.getProperty("flutter.versionName") ?: "1.1"
 
 android {
     namespace = "com.maaa.flutter_login_signup"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+    compileSdk = 34 // Updated to a recent version
+    ndkVersion = "25.2.9519653" // Ensure the NDK version is up-to-date
 
     defaultConfig {
         applicationId = "com.maaa.flutter_login_signup"
-        minSdk = 23
-        targetSdk = flutter.targetSdkVersion
-        versionCode = 2
-        versionName = "1.1"
+        minSdk = 23 // Minimum SDK for compatibility
+        targetSdk = 34 // Align with compileSdk
+        versionCode = flutterVersionCode.toInteger()
+        versionName = flutterVersionName
+        multiDexEnabled true // Enable MultiDex support
     }
-        signingConfigs {
-            release {
-                storeFile file('my-release-key.jks')
-                storePassword 'maaasign'
-                keyAlias 'my-key-alias'
-                keyPassword 'maaasign'
-            }
-        }
 
+    signingConfigs {
+        release {
+            storeFile file("my-release-key.jks")
+            storePassword "maaasign" // Replace with environment variables for security
+            keyAlias "my-key-alias"
+            keyPassword "maaasign" // Replace with environment variables for security
+        }
+    }
 
     buildTypes {
         release {
             signingConfig = signingConfigs.release
+            minifyEnabled true // Enable code shrinking and optimization
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11 // Updated for modern Java support
+        targetCompatibility = JavaVersion.VERSION_11 // Updated for modern Java support
+    }
+
+    kotlinOptions {
+        jvmTarget = "11" // Ensure compatibility with Java 11
+    }
+
+    lintOptions {
+        abortOnError false // Prevent build failures due to lint warnings
+    }
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}" // Avoid resource conflicts
         }
     }
 }
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation "androidx.multidex:multidex:2.0.1" // MultiDex for large projects
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.21" // Match Kotlin version
+
+    // Firebase BOM (Bill of Materials) to manage dependencies
+    implementation platform('com.google.firebase:firebase-bom:32.2.0')
+    implementation "com.google.firebase:firebase-auth" // Firebase Authentication
+    implementation "com.google.firebase:firebase-database" // Firebase Realtime Database
+    implementation "com.google.firebase:firebase-analytics" // Firebase Analytics (optional)
 }

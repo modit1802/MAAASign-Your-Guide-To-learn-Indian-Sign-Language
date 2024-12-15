@@ -83,6 +83,22 @@
           }
         },
         {
+          "client_id": "894444876029-h9cnqv9j33tkitbluhjl2pmn3e2fhrsj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maaa.flutter_login_signup",
+            "certificate_hash": "3f503591094337961cf2c7e9eb21b993d6105bc0"
+          }
+        },
+        {
+          "client_id": "894444876029-rpg8nvs0l05tg89cdhrt6ks4ktdg6t6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maaa.flutter_login_signup",
+            "certificate_hash": "74b0c7751e1d4efa22e29c6994fb4c4f8489e57c"
+          }
+        },
+        {
           "client_id": "894444876029-9dnpfrgrbenq54k9ndlltm9lkjfgm9bc.apps.googleusercontent.com",
           "client_type": 3
         }

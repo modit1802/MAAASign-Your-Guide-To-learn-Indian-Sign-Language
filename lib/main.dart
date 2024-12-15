@@ -15,8 +15,8 @@ void main() async {
 
   // Set system bottom navigation bar color and orientation
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      systemNavigationBarColor: const Color.fromARGB(255, 250, 233, 215), // Change this to the color you want
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: Color.fromARGB(255, 250, 233, 215), // Change this to the color you want
       systemNavigationBarIconBrightness: Brightness.light, // Set to light if the color is dark
     ),
   );
@@ -38,14 +38,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        systemNavigationBarColor: const Color.fromARGB(255, 250, 233, 215), // Choose your desired color
+      const SystemUiOverlayStyle(
+        systemNavigationBarColor: Color.fromARGB(255, 250, 233, 215), // Choose your desired color
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Firebase Auth',
+      title: 'MAAASign:Your Guide to learn ISL',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
