@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:SignEase/Week%201/Tutorial_screen_for_challenger_matchmaker.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 class Match_maker_alphabet5 extends StatelessWidget {
   final int score;
@@ -55,7 +57,8 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
   bool showRibbon = false;
   bool showNextStepButton = false;
   bool showMagicEffect = false;
-
+  final String mongoDbUri = "mongodb://moditgrover2003iii:modit1346@cluster0-shard-00-00.eocm8.mongodb.net:27017,cluster0-shard-00-01.eocm8.mongodb.net:27017,cluster0-shard-00-02.eocm8.mongodb.net:27017/mydatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
+  final String collectionName = "users";
   List<String> alphabetList = ['T', 'U', 'V', 'W', 'X'];
   Map<String, String> matches = {
     'T': 'Tree',
@@ -131,6 +134,42 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
     );
   }
 
+  Future<void> _storeScoreInMongoDB() async {
+    try {
+      var db = mongo.Db(mongoDbUri);
+      await db.open();
+      var collection = db.collection(collectionName);
+      String? userId = await getUserId();
+      var userDoc = await collection.findOne(mongo.where.eq('userId', userId));
+      // Insert the score with a timestamp
+      if (userDoc == null) {
+        // If user doesn't exist, insert new document with only Score_number
+        await collection.insert({
+          'userId': userId,
+          'week': {
+            'week1': {
+              'Score_alphabet_match': {
+                'score_alphabet_match': score,
+              }
+            }
+          }
+        });
+      } else {
+        // If user exists, add or update only the Score_number field inside week1
+        await collection.update(
+          mongo.where.eq('userId', userId),
+          mongo.modify.set('week.week1.Score_alphabet_match', {
+            'score_alphabet_match': score,
+          }),
+        );
+      }
+      print("Inserted Score in MongoDB");
+      print("UserID:$userId");
+      await db.close();
+    } catch (e) {
+      print("Error storing score in MongoDB: $e");
+    }
+  }
 
   @override
   void dispose() {
@@ -335,12 +374,20 @@ Widget build(BuildContext context) {
         showRibbon = false;
       });
     });
-    _buttonTimer = Timer(const Duration(seconds: 4), () {
+    _buttonTimer = Timer(const Duration(seconds: 4), () async {
       setState(() {
         showNextStepButton = false;
-        Navigator.pop(context); // Automatically navigate back after completing the game
       });
+      await _storeScoreInMongoDB();
+      // Automatically navigate back after completing the game
+      if (mounted) {
+        Navigator.pop(context);
+      }
     });
+  }
+  Future<String?> getUserId() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    return user?.uid;
   }
 }
 

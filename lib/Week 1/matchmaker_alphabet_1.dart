@@ -149,7 +149,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
           'week': {
             'week1': {
               'Score_alphabet_match': {
-                'score_alphabet_match': widget.score,
+                'score_alphabet_match': score,
               }
             }
           }
@@ -159,7 +159,7 @@ class _AlphabetFruitMatchState extends State<AlphabetFruitMatch> with SingleTick
         await collection.update(
           mongo.where.eq('userId', userId),
           mongo.modify.set('week.week1.Score_alphabet_match', {
-            'score_alphabet_match': widget.score,
+            'score_alphabet_match': score,
           }),
         );
       }

@@ -46,7 +46,7 @@ class _Week1EntryState extends State<Week1Entry> {
         score1 = data?['week']?['week1']?['Score_alphabet']?['score_alphabet'] ?? 0;
         score2 = data?['week']?['week1']?['Score_alphabet_match']?['score_alphabet_match'] ?? 0;
         score3 = data?['week']?['week1']?['Score_number']?['score_number'] ?? 0;
-        score4 = 600;
+        score4 = data?['week']?['week1']?['Score_number_match']?['score_number_match'] ?? 0;
         score_challenger=data?['week']?['week1']?['Score_Challenger_week1']
         ?['score_challenger'];
         score = score1 + score2 + score3 + score4;
@@ -156,17 +156,17 @@ class _Week1EntryState extends State<Week1Entry> {
                     ),
                     const SizedBox(height: 10),
                     _buildCard(
-                      onTap: score >= 2000
+                      onTap: score >= 1500
                           ? () => _handleCardTap(2, Challenger1(score: score))
                           : () {}, // Provide a no-op function when locked
                       imagePath: 'images/challenger.png',
-                      color: score >= 2000
+                      color: score >= 1500
                           ? Colors.white
                           : Colors.grey.shade400, // Change color if locked
                       title: 'Challenger',
-                      description: score >= 2000
+                      description: score >= 1500
                           ? 'Challenge yourself to unlock Week 2!'
-                          : 'Score 2000+ to unlock!',
+                          : 'Score 1500+ to unlock!',
                       index: 2,
                     ),
 
