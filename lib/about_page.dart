@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 class AboutPage extends StatelessWidget {
+  // Function to launch the Google Form URL
+  void _launchGoogleForm() async {
+    final Uri url = Uri.parse('https://forms.gle/As4vSAfZH56KiQnt7'); // Your Google Form URL
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,7 +182,6 @@ class AboutPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 24),
-
               Divider(),
               SizedBox(height: 16),
 
@@ -189,6 +198,25 @@ class AboutPage extends StatelessWidget {
               Text(
                 'Sign language builds bridges. Whether you\'re connecting with the deaf and hard-of-hearing community, adding a valuable skill to your resume, or simply learning something new, this app makes your journey easy and enjoyable. Start learning today and experience the impact of sign language in your life and the lives of those around you!',
                 style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+              ),
+              SizedBox(height: 24),
+
+              // Add Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: _launchGoogleForm,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 165, 74, 17),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    'Open Feedback Form',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                ),
               ),
               SizedBox(height: 24),
             ],
