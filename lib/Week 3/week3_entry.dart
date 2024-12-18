@@ -1,12 +1,16 @@
-import 'package:SignEase/Challengers_All_Weeks/challenger_week3/challenger3.dart';
+import 'package:SignEase/Challengers_All_Weeks/challenger_week1/challenger1.dart';
 import 'package:SignEase/Initial_page_1.dart';
+import 'package:SignEase/Week%201/alphabetstart.dart';
+import 'package:SignEase/Week%201/numberstart.dart';
 import 'package:SignEase/Week%203/pronounstart.dart';
 import 'package:SignEase/Week%203/verbstart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:SignEase/Week%203/nounstart.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
-
+import '../Challengers_All_Weeks/challenger_week3/challenger3.dart';
+import 'nounstart.dart';
 
 class Week3Entry extends StatefulWidget {
   const Week3Entry({super.key});
@@ -17,229 +21,317 @@ class Week3Entry extends StatefulWidget {
 
 class _Week3EntryState extends State<Week3Entry> {
   bool _showGif = false;
+  bool _showScoreBox = false;
   int? _selectedCardIndex;
-  
-  int _currentIndex = 0; // This keeps track of the selected tab index
+  int score1=0;
+  int score2=0;
+  int score3=0;
+  int score4=0;
+  int score5=0;
+  int score6=0;
+  int score = 0;
+  int score_challenger=0;
+  @override
+  void initState() {
+    super.initState();
+    _fetchScoresFromMongoDB();
+  }
 
+  Future<void> _fetchScoresFromMongoDB() async {
+    try {
+      // Replace with your MongoDB connection details
+      final db = await mongo.Db.create(
+          'mongodb://moditgrover2003iii:modit1346@cluster0-shard-00-00.eocm8.mongodb.net:27017,cluster0-shard-00-01.eocm8.mongodb.net:27017,cluster0-shard-00-02.eocm8.mongodb.net:27017/mydatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
+      await db.open();
+
+      // Replace with your collection and query
+      final collection = db.collection('users');
+      String? userId = await getUserId();
+      final data = await collection.findOne({"userId": userId});
+
+      setState(() {
+        score1 = data?['week']?['week3']?['Score_verb']?['score_verb'] ?? 0;
+        score2 = data?['week']?['week3']?['Score_verb2']?['score_verb2'] ?? 0;
+        score3 = data?['week']?['week3']?['Score_noun']?['score_noun'] ?? 0;
+        score4 = data?['week']?['week3']?['Score_noun2']?['score_noun2'] ?? 0;
+        score5 = data?['week']?['week3']?['Score_pronoun']?['score_pronoun'] ?? 0;
+        score6 = data?['week']?['week3']?['Score_pronoun2']?['score_pronoun2'] ?? 0;
+
+        score_challenger=data?['week']?['week3']?['Score_Challenger_Week3']?['score_challenger'];
+        score = score1 + score2 + score3 + score4 + score5 + score6;
+      });
+
+      await db.close();
+    } catch (e) {
+      print("Error fetching scores: $e");
+      setState(() {
+        score1 = 0;
+        score2 = 0;
+        score3 = 0;
+        score4 = 0;
+        score5 = 0;
+        score6 = 0;
+        score = 0;
+        score_challenger=0;
+      });
+    }
+  }
   void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex =index; // Update the current index to highlight the selected tab
-    });
+    setState(() {});
 
-    // You can add navigation or specific actions based on the selected index
     switch (index) {
       case 0:
-        // Navigate to the Home screen or perform any action
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 0),
           ),
-        ); // Replace with your actual route
+        );
         break;
       case 1:
-        // Navigate to the Test screen or perform any action
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 1),
           ),
-        ); // Replace with your actual route
+        );
         break;
       case 2:
-        // Navigate to the Score screen or perform any action
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 2),
           ),
-        );  // Replace with your actual route
+        );
         break;
       case 3:
-        // Navigate to the About screen or perform any action
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 3),
           ),
-        );  // Replace with your actual route
+        );
         break;
       default:
         break;
     }
-  } // Track the selected card index
-
+  }
+  Future<String?> getUserId() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    return user?.uid;
+  }
   @override
   Widget build(BuildContext context) {
-        final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color.fromARGB(0, 0, 0, 0),
       statusBarIconBrightness: Brightness.light,
     ));
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
-      bottomNavigationBar: Container(
-  decoration: const BoxDecoration(
-    color: Color.fromARGB(255, 250, 233, 215),
-    borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(20.0),
-      topRight: Radius.circular(20.0),
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.black26,
-        blurRadius: 10.0,
-      ),
-    ],
-  ),
-  child: ClipRRect(
-    borderRadius: const BorderRadius.only(
-      topLeft: Radius.circular(20.0),
-      topRight: Radius.circular(20.0),
-    ),
-    child: BottomAppBar(
-      color: Colors.transparent,
-      elevation: 0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return GestureDetector(
+      onTap: () {
+        if (_showScoreBox) {
+          setState(() {
+            _showScoreBox = false;
+          });
+        }
+      },
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+        bottomNavigationBar: _buildBottomNavigationBar(),
+        body: Stack(
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.home,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here (default is 24)
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: screenHeight*0.14),
+
+                    // Alphabet Circle widget - Card 1
+                    _buildCard(
+                      onTap: () => _handleCardTap(0, const VerbStartScreen()),
+                      imagePath: 'images/verbs_init.png',
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      title: 'Verbs',
+                      description: 'Learn and practice signing verbs',
+                      index: 0,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    // Number Circle widget - Card 2
+                    _buildCard(
+                      onTap: () => _handleCardTap(1, const NounStartScreen()),
+                      imagePath: 'images/nouns.png',
+                      color: Colors.white,
+                      title: 'Nouns',
+                      description: 'Learn and practice signing nouns',
+                      index: 1,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    // Number Circle widget - Card 2
+                    _buildCard(
+                      onTap: () => _handleCardTap(2, const PronounStartScreen()),
+                      imagePath: 'images/pronouns.png',
+                      color: Colors.white,
+                      title: 'Pronouns',
+                      description: 'Learn and practice signing pronouns',
+                      index: 2,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    // Challenger Circle widget - Card 3
+                    _buildCard(
+                      onTap: score >= 2500
+                          ? () => _handleCardTap(2, Challenger3(score: score))
+                          : () {}, // Provide a no-op function when locked
+                      imagePath: 'images/challenger.png',
+                      color: score >= 2500
+                          ? Colors.white
+                          : Colors.grey.shade400, // Change color if locked
+                      title: 'Challenger',
+                      description: score >= 2500
+                          ? 'Challenge yourself to unlock Week 4!'
+                          : 'Score 2500+ to unlock!',
+                      index: 2,
+                    ),
+                  ],
+                ),
               ),
-              onPressed: () => _onItemTapped(0),
             ),
-            IconButton(
-              icon: const Icon(
-                Icons.fact_check,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
+            if (_showGif) ..._buildGifOverlay(context),
+            Positioned(
+              top: screenHeight * 0.065,
+              left: screenWidth * 0.05,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(screenWidth * 0.02),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                  ),
+                ),
               ),
-              onPressed: () => _onItemTapped(1),
             ),
-            IconButton(
-              icon: const Icon(
-                Icons.score,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
+            Positioned(
+              top: screenHeight * 0.065,
+              right: screenWidth * 0.05,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _showScoreBox = !_showScoreBox;
+                  });
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        "Score: $score",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    if (_showScoreBox)
+                      Container(
+                        margin: const EdgeInsets.only(top: 8),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 4,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Verb Quiz: $score1", style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                            Text("Verb Bingo: $score2", style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                            Text("Noun Quiz: $score3", style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                            Text("Noun Bingo: $score4",style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            ),
+                            Text("Pronoun Quiz: $score5",style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            ),
+                            Text("Pronoun Bingo: $score6",style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            ),
+                            Text(
+                              score_challenger == 0 ? "Challenger: Not Attempted" : "Challenger: $score_challenger",
+                              style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            ),
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
               ),
-              onPressed: () => _onItemTapped(2),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.info,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
-              ),
-              onPressed: () => _onItemTapped(3),
             ),
           ],
         ),
       ),
-    ),
-  ),
-),
-
-      body: Stack(
-        children: [
-   
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: screenHeight*0.14),
-
-                  // Alphabet Circle widget - Card 1
-                  _buildCard(
-                    onTap: () => _handleCardTap(0, const VerbStartScreen()),
-                    imagePath: 'images/verbs_init.png',
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    title: 'Verbs',
-                    description: 'Learn and practice signing verbs',
-                    index: 0,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // Number Circle widget - Card 2
-                  _buildCard(
-                    onTap: () => _handleCardTap(1, const NounStartScreen()),
-                    imagePath: 'images/nouns.png',
-                    color: Colors.white,
-                    title: 'Nouns',
-                    description: 'Learn and practice signing nouns',
-                    index: 1,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // Number Circle widget - Card 2
-                  _buildCard(
-                    onTap: () => _handleCardTap(2, const PronounStartScreen()),
-                    imagePath: 'images/pronouns.png',
-                    color: Colors.white,
-                    title: 'Pronouns',
-                    description: 'Learn and practice signing pronouns',
-                    index: 2,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // Challenger Circle widget - Card 3
-                  _buildCard(
-                    onTap: () => _handleCardTap(3, Challenger3(score: 0)),
-                    imagePath: 'images/challenger.png',
-                    color: Colors.white,
-                    title: 'Challenger',
-                    description: 'Challenge yourself to unlock Week 4 !',
-                    index: 3,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          if (_showGif)
-            ..._buildGifOverlay(context),
-                 Positioned(
-            top: screenHeight * 0.065,
-            left: screenWidth * 0.05,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                padding: EdgeInsets.all(screenWidth * 0.02),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      spreadRadius: 2,
-                      blurRadius: 4,
-                    ),
-                  ],
-                ),
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: Color.fromARGB(255, 165, 74, 17),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
-  // Handle Card Tap with index and navigation
   void _handleCardTap(int index, Widget nextPage) {
     setState(() {
       _selectedCardIndex = index;
@@ -249,25 +341,11 @@ class _Week3EntryState extends State<Week3Entry> {
         context,
         MaterialPageRoute(builder: (context) => nextPage),
       ).then((_) => setState(() {
-        _selectedCardIndex = null; // Reset after navigation
+        _selectedCardIndex = null;
       }));
     });
   }
 
-  // Background Builder
-  Widget _buildBackground() {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Colors.white],
-        ),
-      ),
-    );
-  }
-
-  // Card Builder for consistency
   Widget _buildCard({
     required VoidCallback onTap,
     required String imagePath,
@@ -281,7 +359,7 @@ class _Week3EntryState extends State<Week3Entry> {
       onTap: onTap,
       child: Card(
         elevation: 10,
-        color: isSelected ? const Color.fromARGB(255, 255, 145, 77): color,
+        color: isSelected ? const Color.fromARGB(255, 255, 145, 77) : color,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -331,13 +409,12 @@ class _Week3EntryState extends State<Week3Entry> {
     );
   }
 
-  // GIF Overlay Builder
   List<Widget> _buildGifOverlay(BuildContext context) {
     return [
       Container(color: Colors.black.withOpacity(0.92)),
       Center(
         child: Image.asset(
-          'images/week3_start_teacher.gif',
+          'images/teacher2.gif',
           height: 350,
           fit: BoxFit.contain,
         ),
@@ -361,7 +438,71 @@ class _Week3EntryState extends State<Week3Entry> {
     ];
   }
 
-  void _navigateToPage(Widget page) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  Widget _buildBottomNavigationBar() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 250, 233, 215),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10.0,
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+        child: BottomAppBar(
+          color: Colors.transparent,
+          elevation: 0,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.home,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                    size: 30,
+                  ),
+                  onPressed: () => _onItemTapped(0),
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.fact_check,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                    size: 30,
+                  ),
+                  onPressed: () => _onItemTapped(1),
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.score,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                    size: 30,
+                  ),
+                  onPressed: () => _onItemTapped(2),
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.info,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                    size: 30,
+                  ),
+                  onPressed: () => _onItemTapped(3),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

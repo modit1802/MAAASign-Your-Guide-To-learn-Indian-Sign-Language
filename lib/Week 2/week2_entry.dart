@@ -1,9 +1,15 @@
-import 'package:SignEase/Challengers_All_Weeks/challenger_week2/challenger2.dart';
+import 'package:SignEase/Challengers_All_Weeks/challenger_week1/challenger1.dart';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/Week%202/greetingstartscreen.dart';
+import 'package:SignEase/Week%201/alphabetstart.dart';
+import 'package:SignEase/Week%201/numberstart.dart';
 import 'package:SignEase/Week%202/relationstartscreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
+
+import '../Challengers_All_Weeks/challenger_week2/challenger2.dart';
+import 'greetingstartscreen.dart';
 
 class Week2NewScreen extends StatefulWidget {
   const Week2NewScreen({super.key});
@@ -14,58 +20,99 @@ class Week2NewScreen extends StatefulWidget {
 
 class _Week2NewScreenState extends State<Week2NewScreen> {
   bool _showGif = false;
+  bool _showScoreBox = false;
   int? _selectedCardIndex;
-  int _currentIndex = 0; // This keeps track of the selected tab index
+  int score1=0;
+  int score2=0;
+  int score3=0;
+  int score4=0;
+  int score = 0;
+  int score_challenger=0;
+  @override
+  void initState() {
+    super.initState();
+    _fetchScoresFromMongoDB();
+  }
 
+  Future<void> _fetchScoresFromMongoDB() async {
+    try {
+      // Replace with your MongoDB connection details
+      final db = await mongo.Db.create(
+          'mongodb://moditgrover2003iii:modit1346@cluster0-shard-00-00.eocm8.mongodb.net:27017,cluster0-shard-00-01.eocm8.mongodb.net:27017,cluster0-shard-00-02.eocm8.mongodb.net:27017/mydatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
+      await db.open();
+
+      // Replace with your collection and query
+      final collection = db.collection('users');
+      String? userId = await getUserId();
+      final data = await collection.findOne({"userId": userId});
+
+      setState(() {
+        score1 = data?['week']?['week2']?['Score_greeting']?['score_greeting'] ?? 0;
+        score2 = data?['week']?['week2']?['Score_greeting2']?['score_greeting_2'] ?? 0;
+        score3 = data?['week']?['week2']?['Score_relation']?['score_relation'] ?? 0;
+        score4 = data?['week']?['week2']?['Score_relation2']?['score_relation_2'] ?? 0;
+        score_challenger=data?['week']?['week2']?['Score_Challenger_Week2']
+        ?['score_challenger'];
+        score = score1 + score2 + score3 + score4;
+      });
+
+      await db.close();
+    } catch (e) {
+      print("Error fetching scores: $e");
+      setState(() {
+        score1 = 0;
+        score2 = 0;
+        score3 = 0;
+        score4 = 0;
+        score = 0;
+        score_challenger=0;
+      });
+    }
+  }
   void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex =index; // Update the current index to highlight the selected tab
-    });
+    setState(() {});
 
-    // You can add navigation or specific actions based on the selected index
     switch (index) {
       case 0:
-        // Navigate to the Home screen or perform any action
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 0),
           ),
-        ); // Replace with your actual route
+        );
         break;
       case 1:
-        // Navigate to the Test screen or perform any action
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 1),
           ),
-        ); // Replace with your actual route
+        );
         break;
       case 2:
-        // Navigate to the Score screen or perform any action
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 2),
           ),
-        );  // Replace with your actual route
+        );
         break;
       case 3:
-        // Navigate to the About screen or perform any action
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => InitialPage1(index: 3),
           ),
-        );  // Replace with your actual route
+        );
         break;
       default:
         break;
     }
   }
-  // Track the selected card index
-
+  Future<String?> getUserId() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    return user?.uid;
+  }
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -74,158 +121,187 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
       statusBarColor: Color.fromARGB(0, 0, 0, 0),
       statusBarIconBrightness: Brightness.light,
     ));
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
-      bottomNavigationBar: Container(
-  decoration: const BoxDecoration(
-    color: Color.fromARGB(255, 250, 233, 215),
-    borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(20.0),
-      topRight: Radius.circular(20.0),
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.black26,
-        blurRadius: 10.0,
-      ),
-    ],
-  ),
-  child: ClipRRect(
-    borderRadius: const BorderRadius.only(
-      topLeft: Radius.circular(20.0),
-      topRight: Radius.circular(20.0),
-    ),
-    child: BottomAppBar(
-      color: Colors.transparent,
-      elevation: 0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return GestureDetector(
+      onTap: () {
+        if (_showScoreBox) {
+          setState(() {
+            _showScoreBox = false;
+          });
+        }
+      },
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+        bottomNavigationBar: _buildBottomNavigationBar(),
+        body: Stack(
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.home,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here (default is 24)
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: screenHeight*0.14),
+
+
+                    // Greeting Circle widget - Card 1
+                    _buildCard(
+                      onTap: () => _handleCardTap(0, const GreetingStartscreen()),
+                      imagePath: 'images/greetings.png',
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      title: 'Greetings',
+                      description:
+                      'Learn and practice signing greetings',
+                      index: 0,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    // Relation Circle widget - Card 2
+                    _buildCard(
+                      onTap: () => _handleCardTap(1, const RelationStartscreen()),
+                      imagePath: 'images/Relation.png',
+                      color: Colors.white,
+                      title: 'Relations',
+                      description:
+                      'Learn and practice signing relations',
+                      index: 1,
+                    ),
+
+                    const SizedBox(height: 10),
+                    _buildCard(
+                      onTap: score >= 1500
+                          ? () => _handleCardTap(2, Challenger2(score: score))
+                          : () {}, // Provide a no-op function when locked
+                      imagePath: 'images/challenger.png',
+                      color: score >= 1500
+                          ? Colors.white
+                          : Colors.grey.shade400, // Change color if locked
+                      title: 'Challenger',
+                      description: score >= 1500
+                          ? 'Challenge yourself to unlock Week 3!'
+                          : 'Score 1500+ to unlock!',
+                      index: 2,
+                    ),
+                  ],
+                ),
               ),
-              onPressed: () => _onItemTapped(0),
             ),
-            IconButton(
-              icon: const Icon(
-                Icons.fact_check,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
+            if (_showGif) ..._buildGifOverlay(context),
+            Positioned(
+              top: screenHeight * 0.065,
+              left: screenWidth * 0.05,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(screenWidth * 0.02),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                      ),
+                    ],
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                  ),
+                ),
               ),
-              onPressed: () => _onItemTapped(1),
             ),
-            IconButton(
-              icon: const Icon(
-                Icons.score,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
+            Positioned(
+              top: screenHeight * 0.065,
+              right: screenWidth * 0.05,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _showScoreBox = !_showScoreBox;
+                  });
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        "Score: $score",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    if (_showScoreBox)
+                      Container(
+                        margin: const EdgeInsets.only(top: 8),
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 4,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Greeting Quiz: $score1", style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                            Text("Greeting True False: $score2", style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                            Text("Relation Quiz: $score3", style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                            Text("Relation True False: $score4",style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            ),
+                            Text(
+                              score_challenger == 0 ? "Challenger: Not Attempted" : "Challenger: $score_challenger",
+                              style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            ),
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
               ),
-              onPressed: () => _onItemTapped(2),
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.info,
-                color: Color.fromARGB(255, 165, 74, 17),
-                size: 30, // Adjust size here
-              ),
-              onPressed: () => _onItemTapped(3),
             ),
           ],
         ),
       ),
-    ),
-  ),
-),
-
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: screenHeight*0.14),
-                  
-
-                  // Greeting Circle widget - Card 1
-                  _buildCard(
-                    onTap: () => _handleCardTap(0, const GreetingStartscreen()),
-                    imagePath: 'images/greetings.png',
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    title: 'Greetings',
-                    description:
-                        'Learn and practice signing greetings',
-                    index: 0,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // Relation Circle widget - Card 2
-                  _buildCard(
-                    onTap: () => _handleCardTap(1, const RelationStartscreen()),
-                    imagePath: 'images/Relation.png',
-                    color: Colors.white,
-                    title: 'Relations',
-                    description:
-                        'Learn and practice signing relations',
-                    index: 1,
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  // Challenger Circle widget - Card 3
-                  _buildCard(
-                    onTap: () => _handleCardTap(2, Challenger2(score: 0)),
-                    imagePath: 'images/challenger.png',
-                    color: Colors.white,
-                    title: 'Challenger',
-                    description:
-                        'Challenge yourself to unlock Week 3 !',
-                    index: 2,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: screenHeight * 0.065,
-            left: screenWidth * 0.05,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                padding: EdgeInsets.all(screenWidth * 0.02),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      spreadRadius: 2,
-                      blurRadius: 4,
-                    ),
-                  ],
-                ),
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: Color.fromARGB(255, 165, 74, 17),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
-  // Handle Card Tap with index and navigation
   void _handleCardTap(int index, Widget nextPage) {
     setState(() {
       _selectedCardIndex = index;
@@ -235,13 +311,11 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
         context,
         MaterialPageRoute(builder: (context) => nextPage),
       ).then((_) => setState(() {
-            _selectedCardIndex = null; // Reset after navigation
-          }));
+        _selectedCardIndex = null;
+      }));
     });
   }
 
-
-  // Card Builder for consistency
   Widget _buildCard({
     required VoidCallback onTap,
     required String imagePath,
@@ -305,13 +379,12 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
     );
   }
 
-  // GIF Overlay Builder
   List<Widget> _buildGifOverlay(BuildContext context) {
     return [
       Container(color: Colors.black.withOpacity(0.92)),
       Center(
         child: Image.asset(
-          'images/teacher_week.gif',
+          'images/teacher2.gif',
           height: 350,
           fit: BoxFit.contain,
         ),
@@ -335,70 +408,71 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
     ];
   }
 
-  // Bottom Buttons
-  Widget _buildBottomButtons() {
-    return Positioned(
-      bottom: 20,
-      left: 0,
-      right: 0,
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildBottomButton(
-                icon: Icons.home,
-                onTap: () => _navigateToPage(const InitialPage1(
-                      index: 0,
-                    ))),
-            const SizedBox(width: 20),
-            _buildBottomButton(
-                icon: Icons.fact_check,
-                onTap: () => _navigateToPage(const InitialPage1(
-                      index: 1,
-                    ))),
-            const SizedBox(width: 20),
-            _buildBottomButton(
-                icon: Icons.score,
-                onTap: () => _navigateToPage(const InitialPage1(index: 2))),
-            const SizedBox(width: 20),
-            _buildBottomButton(
-                icon: Icons.info,
-                onTap: () => _navigateToPage(const InitialPage1(index: 3))),
-          ],
+  Widget _buildBottomNavigationBar() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 250, 233, 215),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10.0,
+          ),
+        ],
       ),
-    );
-  }
-
-  // Bottom Button Builder for consistency
-  Widget _buildBottomButton(
-      {required IconData icon, required VoidCallback onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              spreadRadius: 2,
-              blurRadius: 4,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+        child: BottomAppBar(
+          color: Colors.transparent,
+          elevation: 0,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.home,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                    size: 30,
+                  ),
+                  onPressed: () => _onItemTapped(0),
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.fact_check,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                    size: 30,
+                  ),
+                  onPressed: () => _onItemTapped(1),
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.score,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                    size: 30,
+                  ),
+                  onPressed: () => _onItemTapped(2),
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.info,
+                    color: Color.fromARGB(255, 165, 74, 17),
+                    size: 30,
+                  ),
+                  onPressed: () => _onItemTapped(3),
+                ),
+              ],
             ),
-          ],
-        ),
-        child: Icon(
-          icon,
-          size: 30,
-          color: const Color.fromARGB(255, 165, 74, 17),
+          ),
         ),
       ),
     );
-  }
-
-  // Navigation Helper
-  void _navigateToPage(Widget page) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
   }
 }

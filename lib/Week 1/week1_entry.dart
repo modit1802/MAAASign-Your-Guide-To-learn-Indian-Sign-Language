@@ -269,7 +269,9 @@ class _Week1EntryState extends State<Week1Entry> {
                               fontWeight: FontWeight.bold,
                             ),
                             ),
-                            Text("Challenger: $score_challenger",style: const TextStyle(
+                            Text(
+                              score_challenger == 0 ? "Challenger: Not Attempted" : "Challenger: $score_challenger",
+                              style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
