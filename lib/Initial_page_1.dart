@@ -59,7 +59,7 @@ class _InitialPage1State extends State<InitialPage1> {
     LearningZone(),
     ChallengePage(),
     ScorePage(),
-    LeaderBoard(),
+    // LeaderBoard(),
     AboutPage(),
   ];
 
@@ -262,10 +262,10 @@ class _InitialPage1State extends State<InitialPage1> {
                   icon: Icon(Icons.score),
                   label: 'Score',
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.people_alt_outlined),
-                  label: 'Leader Board',
-                ),                
+                // BottomNavigationBarItem(
+                //   icon: Icon(Icons.people_alt_outlined),
+                //   label: 'Leader Board',
+                // ),                
                 BottomNavigationBarItem(
                   icon: Icon(Icons.info),
                   label: 'About',
