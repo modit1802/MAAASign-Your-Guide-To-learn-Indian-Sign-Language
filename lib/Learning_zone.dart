@@ -215,6 +215,7 @@ class _LearningZoneState extends State<LearningZone> {
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/talk_l_zurskm.mp4',
     'Wake Up':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/wake_up_l_o1upds.mp4',
+    // ignore: equal_keys_in_map
     'Work':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/work_l_ik2ynw.mp4',
     'Finish':
@@ -724,10 +725,7 @@ class _LearningZoneState extends State<LearningZone> {
               ),
             ),
           ),
-          // Suggestion Box
-          // Suggestion Box
-// Suggestion Box
-// Suggestion Box
+
                   ],
       ),
     );

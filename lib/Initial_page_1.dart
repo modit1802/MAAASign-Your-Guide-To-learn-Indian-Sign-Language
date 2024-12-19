@@ -1,6 +1,7 @@
 import 'package:SignEase/Learning_zone.dart';
 import 'package:SignEase/ScorePage.dart';
 import 'package:SignEase/about_page.dart';
+import 'package:SignEase/leaderboard.dart';
 import 'package:SignEase/sabse_jyada_main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -58,6 +59,7 @@ class _InitialPage1State extends State<InitialPage1> {
     LearningZone(),
     ChallengePage(),
     ScorePage(),
+    LeaderBoard(),
     AboutPage(),
   ];
 
@@ -260,6 +262,10 @@ class _InitialPage1State extends State<InitialPage1> {
                   icon: Icon(Icons.score),
                   label: 'Score',
                 ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.people_alt_outlined),
+                  label: 'Leader Board',
+                ),                
                 BottomNavigationBarItem(
                   icon: Icon(Icons.info),
                   label: 'About',
