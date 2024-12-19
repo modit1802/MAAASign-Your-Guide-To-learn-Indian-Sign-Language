@@ -1,11 +1,10 @@
 import 'dart:math';
-
 import 'package:SignEase/Initial_page_1.dart';
+import 'package:SignEase/Week%201/crossword.dart';
 import 'package:SignEase/Week%201/learnalphabet.dart';
 import 'package:SignEase/Week%201/matchmaker_alphabet_1.dart';
 import 'package:SignEase/Week%201/practiceassignment1.dart';
 import 'package:flutter/material.dart';
-
 import 'matchmaker_alphabet_2.dart';
 import 'matchmaker_alphabet_3.dart';
 import 'matchmaker_alphabet_4.dart';
@@ -341,16 +340,28 @@ class _AlphabetStartscreenState extends State<AlphabetStartscreen> {
                             "Identify the correct alphabet!",
                         index: 1,
                       ),
+                      //testing of new game cross word
+                      SizedBox(height: screenHeight * 0.015),
+                      _buildCard(
+                        onTap: () => _handleCardTap(2, WordConnectGame()),
+                        imagePath: 'images/wordconnect.png',
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        title: 'Word Chain !',
+                        description:
+                            "Identify the correct order of cross word!",
+                        index: 2,
+                      ),
+
                       SizedBox(height: screenHeight * 0.015),
                       _buildCard(
                         onTap: () => _handleCardTap2(
-                            2, [Match_maker_alphabet1(score: 0,),Match_maker_alphabet2(score: 0,),Match_maker_alphabet3(score: 0,),Match_maker_alphabet4(score: 0,),Match_maker_alphabet5(score: 0,)]),
+                            3, [Match_maker_alphabet1(score: 0,),Match_maker_alphabet2(score: 0,),Match_maker_alphabet3(score: 0,),Match_maker_alphabet4(score: 0,),Match_maker_alphabet5(score: 0,)]),
                         imagePath: 'images/match.png',
                         color: const Color.fromARGB(255, 255, 255, 255),
                         title: 'Match It Up !',
                         description:
                             "Pair the alphabets with items",
-                        index: 2,
+                        index: 3,
                       ),
                       SizedBox(height: screenHeight * 0.015),
                     ],
