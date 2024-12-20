@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
-
+import 'dart:math';
 import 'Basic_Sentence_Structure_Quiz_Result.dart';
 
 class Basic_Sentence_Structure_Quiz extends StatefulWidget {
@@ -117,23 +117,28 @@ class _Basic_Sentence_Structure_QuizState extends State<Basic_Sentence_Structure
   int _factorial(int n) {
     return n <= 1 ? 1 : n * _factorial(n - 1);
   }
-  List<String> generateOptions(String correctSolution) {
-    List<String> options = [];
-    options.add(correctSolution);
 
-    // Generate permutations of the correct answer
+  List<String> generateOptions(String correctSolution) {
+    // Use a Set to ensure uniqueness of options
+    Set<String> options = {correctSolution};
     List<String> words = correctSolution.split(' ');
-    for (int i = 0; i < 100; i++) {
-      List<String> shuffled = List.from(words)..shuffle();
+    Random random = Random();
+
+    // Generate unique permutations until we have 4 options
+    while (options.length < 4) {
+      // Shuffle words to create a permutation
+      List<String> shuffled = List.from(words)..shuffle(random);
       String option = shuffled.join(' ');
-      if (!options.contains(option)) {
-        options.add(option);
-      }
+
+      // Add the new permutation to the set
+      options.add(option);
     }
 
-    options.shuffle();
-    return options.take(4).toList();
+    // Convert to a list, shuffle the final options, and return
+    List<String> result = options.toList()..shuffle(random);
+    return result;
   }
+
 
   List<Color> _cardColors = List.filled(4, Colors.white);
   List<Color> _textColors = List.filled(4, Colors.black);
