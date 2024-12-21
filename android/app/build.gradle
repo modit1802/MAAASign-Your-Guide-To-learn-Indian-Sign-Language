@@ -13,7 +13,7 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def flutterVersionCode ="3"
+def flutterVersionCode = "3"
 def flutterVersionName = "1.2"
 
 android {
