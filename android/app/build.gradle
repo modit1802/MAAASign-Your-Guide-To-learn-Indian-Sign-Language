@@ -13,8 +13,8 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def flutterVersionCode = localProperties.getProperty("flutter.versionCode") ?: "2"
-def flutterVersionName = localProperties.getProperty("flutter.versionName") ?: "1.1"
+def flutterVersionCode = "3"
+def flutterVersionName = "1.2"
 
 android {
     namespace = "com.maaa.flutter_login_signup"

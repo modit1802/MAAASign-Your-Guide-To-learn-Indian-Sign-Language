@@ -91,11 +91,35 @@
           }
         },
         {
+          "client_id": "894444876029-l86m37a17rr7k0uff874430hjjp0j4i4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maaa.flutter_login_signup",
+            "certificate_hash": "0d7f574593c7b44c2bb281194464165eb72ca6a9"
+          }
+        },
+        {
+          "client_id": "894444876029-okl3a1u936vhuscbv1qtocs08jlnjp4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maaa.flutter_login_signup",
+            "certificate_hash": "4405da47222b7150a089ac06eeae727725323009"
+          }
+        },
+        {
           "client_id": "894444876029-rpg8nvs0l05tg89cdhrt6ks4ktdg6t6g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.maaa.flutter_login_signup",
             "certificate_hash": "74b0c7751e1d4efa22e29c6994fb4c4f8489e57c"
+          }
+        },
+        {
+          "client_id": "894444876029-tpq1ecb5126170qsfj1k815gjpdinaih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maaa.flutter_login_signup",
+            "certificate_hash": "0867b27e7a159ced3c024d57be2fed7535604124"
           }
         },
         {
