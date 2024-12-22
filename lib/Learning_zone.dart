@@ -329,7 +329,7 @@ class _LearningZoneState extends State<LearningZone> {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color.fromARGB(255, 253, 245, 237),
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -533,7 +533,7 @@ class _LearningZoneState extends State<LearningZone> {
                           );
                         },
                       ),
-                    ),                 
+                    ),
 
                   Center(
                     child: Container(
@@ -626,107 +626,119 @@ class _LearningZoneState extends State<LearningZone> {
                     ),
                   ),
                   SizedBox(
-                    height: 300,
-                    child: PageView(
-                      children: [
-                        buildCustomCard(
-                          image: AssetImage('images/alphabets.jpg'),
-                          title: 'Review Signing Alphabets',
+                    height: screenHeight * 0.30,
+                    child: PageView.builder(
+                      controller: PageController(
+                        viewportFraction:
+                            0.8, // 80% of the current page is shown, 20% of the next/previous card visible
+                      ),
+                      itemCount: 8, // The number of pages
+                      itemBuilder: (context, index) {
+                        return buildCustomCard(
+                          image: AssetImage(
+                            // Add your respective image for each card
+                            index == 0
+                                ? 'images/alphabets.jpg'
+                                : index == 1
+                                    ? 'images/numbers.jpg'
+                                    : index == 2
+                                        ? 'images/greetings.png'
+                                        : index == 3
+                                            ? 'images/Relation.jpg'
+                                            : index == 4
+                                                ? 'images/verbs.png'
+                                                : index == 5
+                                                    ? 'images/nouns.png'
+                                                    : index == 6
+                                                        ? 'images/pronouns.png'
+                                                        : 'images/sentence_struct.png', // You can continue this pattern for all other images
+                          ),
+                          title: index == 0
+                              ? 'Review Signing Alphabets'
+                              : index == 1
+                                  ? 'Review Signing Numbers'
+                                  : index == 2
+                                      ? 'Review Signing Greetings'
+                                      : index == 3
+                                          ? 'Review Signing Relations'
+                                          : index == 4
+                                              ? 'Review Signing Verbs'
+                                              : index == 5
+                                                  ? 'Review Signing Nouns'
+                                                  : index == 6
+                                                      ? 'Review Signing Pronouns'
+                                                      : 'Review Basic Sentence Structure', // Titles based on index
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LearnAlphabet()),
-                            );
+                            // Use the navigation logic based on the index, assuming each index points to a different screen.
+                            switch (index) {
+                              case 0:
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LearnAlphabet()),
+                                );
+                                break;
+                              case 1:
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LearnNumbers()),
+                                );
+                                break;
+                              case 2:
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LearnGreetings()),
+                                );
+                                break;
+                              case 3:
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LearnRelations()),
+                                );
+                                break;
+                              case 4:
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LearnVerbs()),
+                                );
+                                break;
+                              case 5:
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LearnNouns()),
+                                );
+                                break;
+                              case 6:
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LearnPronouns()),
+                                );
+                                break;
+                              case 7:
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Learn_Simple_Sentence()),
+                                );
+                                break;
+                            }
                           },
-                        ),
-                        buildCustomCard(
-                          image: AssetImage('images/numbers.jpg'),
-                          title: 'Review Signing Numbers',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LearnNumbers()),
-                            );
-                          },
-                        ),
-                        buildCustomCard(
-                          image: AssetImage('images/greetings.png'),
-                          title: 'Review Signing Greetings',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LearnGreetings()),
-                            );
-                          },
-                        ),
-                        buildCustomCard(
-                          image: AssetImage('images/Relation.jpg'),
-                          title: 'Review Signing Relations',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LearnRelations()),
-                            );
-                          },
-                        ),
-                        buildCustomCard(
-                          image: AssetImage('images/verbs.png'),
-                          title: 'Review Signing Verbs',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LearnVerbs()),
-                            );
-                          },
-                        ),
-                        buildCustomCard(
-                          image: AssetImage('images/nouns.png'),
-                          title: 'Review Signing Nouns',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LearnNouns()),
-                            );
-                          },
-                        ),
-                        buildCustomCard(
-                          image: AssetImage('images/pronouns.png'),
-                          title: 'Review Signing Pronouns',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LearnPronouns()),
-                            );
-                          },
-                        ),
-                        buildCustomCard(
-                          image: AssetImage('images/sentence_struct.png'),
-                          title: 'Review Basic Sentence Structure',
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      Learn_Simple_Sentence()),
-                            );
-                          },
-                        ), // Add other cards similarly...
-                      ],
+                        );
+                      },
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
           ),
-
-                  ],
+        ],
       ),
     );
   }

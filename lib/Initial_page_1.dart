@@ -2,6 +2,7 @@ import 'package:SignEase/Learning_zone.dart';
 import 'package:SignEase/ScorePage.dart';
 import 'package:SignEase/about_page.dart';
 import 'package:SignEase/leaderboard.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:SignEase/sabse_jyada_main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,8 +35,8 @@ class _InitialPage1State extends State<InitialPage1> {
     _pageController = PageController(initialPage: _currentIndex);
     _fetchUserPhoto();
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.black, // Set desired color here
+      const SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.black,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
@@ -45,7 +46,10 @@ class _InitialPage1State extends State<InitialPage1> {
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
-        DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
         setState(() {
           _photoUrl = userDoc['photoUrl'];
         });
@@ -59,7 +63,6 @@ class _InitialPage1State extends State<InitialPage1> {
     LearningZone(),
     ChallengePage(),
     ScorePage(),
-    // LeaderBoard(),
     AboutPage(),
   ];
 
@@ -74,11 +77,10 @@ class _InitialPage1State extends State<InitialPage1> {
       });
       await _googleSignIn.signOut();
       await FirebaseAuth.instance.signOut();
+      await Future.delayed(const Duration(seconds: 2));
 
-      await Future.delayed(const Duration(seconds: 4));
-
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Sabse_Jyada_Main_page()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => Sabse_Jyada_Main_page()));
     } catch (e) {
       print('Logout error: $e');
     } finally {
@@ -108,7 +110,7 @@ class _InitialPage1State extends State<InitialPage1> {
   void _showProfileDialog() {
     showDialog(
       context: context,
-      barrierDismissible: true, // Allows the dialog to close when tapping outside
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
@@ -118,21 +120,23 @@ class _InitialPage1State extends State<InitialPage1> {
             mainAxisSize: MainAxisSize.min,
             children: [
               CircleAvatar(
-                backgroundImage: _photoUrl != null ? NetworkImage(_photoUrl!) : null,
+                backgroundImage:
+                    _photoUrl != null ? NetworkImage(_photoUrl!) : null,
                 radius: 40,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Hi, ${FirebaseAuth.instance.currentUser?.displayName ?? 'User'}!',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog before logging out
+                  Navigator.of(context).pop();
                   _logout();
                 },
-                child: Text('Sign out'),
+                child: const Text('Sign out'),
               ),
             ],
           ),
@@ -141,47 +145,45 @@ class _InitialPage1State extends State<InitialPage1> {
     );
   }
 
-  // This is the WillPopScope method
   Future<bool> _onWillPop() async {
-    // You can show a confirmation dialog here, for example:
     return (await showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Are you sure?', style: TextStyle(color: const Color.fromARGB(255, 238, 126, 34),fontWeight: FontWeight.bold),),
-        content: const Text('Do you want to exit the app?'),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Cancel', style: TextStyle(color: const Color.fromARGB(255, 238, 126, 34)),),
-            onPressed: () {
-              Navigator.of(context).pop(false); // Don't exit
-            },
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text('Are you sure?',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 238, 126, 34),
+                    fontWeight: FontWeight.bold)),
+            content: const Text('Do you want to exit the app?'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Cancel',
+                    style: TextStyle(color: Color.fromARGB(255, 238, 126, 34))),
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+              ),
+              TextButton(
+                child: const Text('Yes',
+                    style: TextStyle(color: Color.fromARGB(255, 238, 126, 34))),
+                onPressed: () {
+                  SystemNavigator.pop();
+                },
+              ),
+            ],
           ),
-          TextButton(
-            child: const Text('Yes', style: TextStyle(color: const Color.fromARGB(255, 238, 126, 34)),),
-            onPressed: () {
-                SystemNavigator.pop();  // Exit the app
-            },
-          ),
-        ],
-      ),
-    )) ??
-        false; // If the user does not press any button, default to false
+        )) ??
+        false;
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _onWillPop, // Add this line to handle back button press
+      onWillPop: _onWillPop,
       child: Scaffold(
         appBar: AppBar(
-          title: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              'MAAASign: Your Guide to Learning ISL',
-              style: const TextStyle(
-                fontSize: 18, // Adjust as necessary
-              ),
-            ),
+          title: const Text(
+            'MAAASign: Your Guide to Learning ISL',
+            style: TextStyle(fontSize: 18),
           ),
           automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 250, 233, 215),
@@ -200,8 +202,6 @@ class _InitialPage1State extends State<InitialPage1> {
               ),
           ],
         ),
-
-
         body: Stack(
           children: [
             PageView(
@@ -217,62 +217,82 @@ class _InitialPage1State extends State<InitialPage1> {
             if (_isLoading) _buildLoadingOverlay(),
           ],
         ),
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 250, 233, 215),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10.0,
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.white,
+          color: const Color.fromARGB(255, 250, 233, 215),
+          buttonBackgroundColor: Colors.white,
+          height: 50,
+          index: _currentIndex,
+          onTap: _onItemTapped,
+          items: [
+            Material(
+              elevation: _currentIndex == 0
+                  ? 8
+                  : 0, // Elevation only for selected item
+              color: Colors.transparent,
+              shape: CircleBorder(), // Makes the button circular
+              child: CircleAvatar(
+                radius: 25, // Circle radius
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.home,
+                  size: 30,
+                  color: _currentIndex == 0
+                      ? const Color.fromARGB(
+                          255, 238, 126, 34) // Selected color
+                      : Colors.grey, // Default color for unselected items
+                ),
               ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
             ),
-            child: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              onTap: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-                _onItemTapped(index);
-              },
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: const Color.fromARGB(255, 238, 126, 34),
-              unselectedItemColor: const Color.fromARGB(255, 145, 141, 141),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
+            Material(
+              elevation: _currentIndex == 1 ? 8 : 0,
+              color: Colors.transparent,
+              shape: CircleBorder(),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.fact_check,
+                  size: 30,
+                  color: _currentIndex == 1
+                      ? const Color.fromARGB(255, 238, 126, 34)
+                      : Colors.grey,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.fact_check),
-                  label: 'Test',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.score),
-                  label: 'Score',
-                ),
-                // BottomNavigationBarItem(
-                //   icon: Icon(Icons.people_alt_outlined),
-                //   label: 'Leader Board',
-                // ),                
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.info),
-                  label: 'About',
-                ),
-              ],
+              ),
             ),
-          ),
+            Material(
+              elevation: _currentIndex == 2 ? 8 : 0,
+              color: Colors.transparent,
+              shape: CircleBorder(),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.score,
+                  size: 30,
+                  color: _currentIndex == 2
+                      ? const Color.fromARGB(255, 238, 126, 34)
+                      : Colors.grey,
+                ),
+              ),
+            ),
+            Material(
+              elevation: _currentIndex == 3 ? 8 : 0,
+              color: Colors.transparent,
+              shape: CircleBorder(),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.info,
+                  size: 30,
+                  color: _currentIndex == 3
+                      ? const Color.fromARGB(255, 238, 126, 34)
+                      : Colors.grey,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -45,6 +45,7 @@ dependencies:
   firebase_storage: ^12.3.4
   fluttertoast: ^8.2.8
   url_launcher: ^6.0.20
+  curved_navigation_bar: ^1.0.6
 
 dev_dependencies:
   flutter_test:
