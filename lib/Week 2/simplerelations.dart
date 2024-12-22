@@ -196,6 +196,10 @@ class _Simple_Relation_linksState extends State<Simple_Relation_links> {
     'people': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125684/people_jjw2bk.mp4',
     'friend': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125682/friend_kjbxg8.mp4',
     'man': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125683/man_vy9lea.mp4',
+    'uncle':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888120/uncle_labelled_uzy4fk.mp4',
+    'aunt':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888119/aunt_labelled_nmlweo.mp4',
+    'nephew':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888126/nephew_labelled_kqravp.mp4',
+    'niece':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888122/niece_labelled_auxqyu.mp4',
   };
 
   int _currentIndex = 0;

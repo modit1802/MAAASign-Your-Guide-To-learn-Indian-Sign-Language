@@ -62,7 +62,7 @@ class _PLay_Incorrect_VerbsState
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> pronouns = ['Hello', 'Hy', 'Good Bye', 'Namaste', 'Good Morning', 'Good Afternoon', 'Good Night', 'See You Again', 'See You Tomorrow', 'Welcome',];
+    List<String> pronouns = ['Hello', 'Hy', 'Good Bye', 'Namaste', 'Good Morning', 'Good Afternoon', 'Good Night', 'See You Again', 'See You Tomorrow', 'Welcome',"What's Up?"];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer

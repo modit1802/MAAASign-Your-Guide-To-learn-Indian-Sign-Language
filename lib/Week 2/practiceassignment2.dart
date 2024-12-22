@@ -15,52 +15,92 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266842/baby_u_p1lbqp.mp4',
-      'solution': 'baby'
+      'solution': 'Baby'
     },
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/mother_u_tkkg10.mp4',
-      'solution': 'mother'
+      'solution': 'Mother'
     },
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266839/father_u_jdbajr.mp4',
-      'solution': 'father'
+      'solution': 'Father'
     },
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4}',
-      'solution': 'brother',
+      'solution': 'Brother',
     },
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266838/sister_u_wpybjz.mp4',
-      'solution': 'sister'
+      'solution': 'Sister'
     },
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/people_u_t4403p.mp4',
-      'solution': 'people'
+      'solution': 'People'
     },
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266835/friend_u_nfctlk.mp4',
-      'solution': 'friend'
+      'solution': 'Friend'
     },
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266834/man_u_llmdsh.mp4',
-      'solution': 'man'
+      'solution': 'Man'
     },
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266837/girl_child_u_qnjmxl.mp4',
-      'solution': 'girl child'
+      'solution': 'Girl Child'
     },
     {
       'question':
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266844/female_person_u_cgv3es.mp4',
-      'solution': 'female person'
+      'solution': 'Female Person'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888120/uncle_labelled_uzy4fk.mp4',
+      'solution': 'Uncle'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888119/aunt_labelled_nmlweo.mp4',
+      'solution': 'Aunt'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888119/grandfather_labelled_xcsrat.mp4',
+      'solution': 'Grand Father'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888126/grandmother_labelled_cv8wrg.mp4',
+      'solution': 'Grand Mother'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888120/granddaughter_labelled_csxpvw.mp4',
+      'solution': 'Grand Daughter'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888120/grandson_labelled_eonjnt.mp4',
+      'solution': 'Grand Son'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888122/niece_labelled_auxqyu.mp4',
+      'solution': 'Niece'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888126/nephew_labelled_kqravp.mp4',
+      'solution': 'Nephew'
     },
   ];
 

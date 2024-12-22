@@ -193,6 +193,7 @@ class _Compund_Sentences_linksState extends State<Compund_Sentences_links> {
     'good_night': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730186218/Good_Night_simple_asxfpe.mp4',
     'see_you_again': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113629/see_you_again_pq2rok.mp4',
     'see_you_tomorrow': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113636/see_you_tomorrow_kkhlel.mp4',
+    'whats_up':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734887485/What_s_Up_labelled_bwix9k.mp4',
   };
 
   int _currentIndex = 0;

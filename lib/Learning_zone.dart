@@ -115,6 +115,8 @@ class _LearningZoneState extends State<LearningZone> {
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113629/see_you_again_pq2rok.mp4',
     'See You Tomorrow':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113636/see_you_tomorrow_kkhlel.mp4',
+    'whats_up':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734887485/What_s_Up_labelled_bwix9k.mp4',
     'Baby':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125689/baby_m5j2ml.mp4',
     'Mother':

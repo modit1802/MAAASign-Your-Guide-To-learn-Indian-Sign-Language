@@ -62,7 +62,7 @@ class _PLay_Incorrect_VerbsState
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> pronouns = ['Sister', 'Father', 'Mother', 'Female Person', 'Girl Child', 'Friend', 'Baby', 'Man', 'People', 'Brother'];
+    List<String> pronouns = ['Sister', 'Father', 'Mother', 'Female Person', 'Girl Child', 'Friend', 'Baby', 'Man', 'People', 'Brother', 'Nephew' ,'Niece' ,'Grand Mother' ,'Grand Son' ,'Grand Father' ,'Grand Daughter' ,'Uncle' ,'Aunt' ,];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer

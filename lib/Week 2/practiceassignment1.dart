@@ -62,6 +62,11 @@ class _PracticeAssignment1State extends State<PracticeAssignment1> {
           'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/see_you_tomorrow_u_wqcfwu.mp4',
       'solution': 'See You Tomorrow'
     },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734887473/What_s_Up_ugj5gn.mp4',
+      'solution': "What's Up?"
+    },
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];

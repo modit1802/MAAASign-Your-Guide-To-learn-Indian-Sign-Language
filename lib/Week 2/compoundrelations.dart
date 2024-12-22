@@ -190,6 +190,10 @@ class _Compund_Relations_linksState extends State<Compund_Relations_links> {
   final Map<String, String> relationGifs = const {
     'girl_child': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730267226/girl_child_size_reduced_ai2wft.mp4',
     'female_person': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731604294/Female_Person_Compound_eosq00.mp4',
+    'grand_mother':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888126/grandmother_labelled_cv8wrg.mp4',
+    'grand_daughter':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888120/granddaughter_labelled_csxpvw.mp4',
+    'grand_son':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888120/grandson_labelled_eonjnt.mp4',
+    'grand_father':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888119/grandfather_labelled_xcsrat.mp4',
   };
 
   int _currentIndex = 0;
