@@ -99,7 +99,7 @@ class _VerbQuizState extends State<VerbQuiz> {
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410727/fly_wuvwnz.mp4',
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890674/fly_bm5i6w.mp4',
       'solution': 'Fly'
     },
     {
@@ -124,9 +124,110 @@ class _VerbQuizState extends State<VerbQuiz> {
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410735/swim_omqssn.mp4',
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890682/swim_rqfbkd.mp4',
       'solution': 'Swim'
     },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890666/wait_jb17dl.mp4',
+      'solution': 'Wait'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890667/wear_fkpoy7.mp4',
+      'solution': 'Wear'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890668/drive_anmwpx.mp4',
+      'solution': 'Drive'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890668/dance_uxql6k.mp4',
+      'solution': 'Dance'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890668/draw_nv18vo.mp4',
+      'solution': 'Draw'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890669/travel_vtddll.mp4',
+      'solution': 'Travel'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890669/clean_a12isl.mp4',
+      'solution': 'Clean'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890671/listen_brxvjq.mp4',
+      'solution': 'Listen'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890670/jump_c38hgb.mp4',
+      'solution': 'Jump'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890671/cry_s2tyyz.mp4',
+      'solution': 'Cry'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890671/catch_ngo7mv.mp4',
+      'solution': 'Catch'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890672/meet_ivsfa2.mp4',
+      'solution': 'Meet'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890674/stand_fejkqq.mp4',
+      'solution': 'Stand'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890675/smile_sjxvzd.mp4',
+      'solution': 'Smile'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890675/think_pjswbu.mp4',
+      'solution': 'Think'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890676/sing_r6mzzg.mp4',
+      'solution': 'Sing'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890676/grow_md03gs.mp4',
+      'solution': 'Grow'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890678/run_ac37ln.mp4',
+      'solution': 'Run'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890679/sit_nci0xg.mp4',
+      'solution': 'Sit'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890679/play_tei2bg.mp4',
+      'solution': 'Play'
+    },
+
   ];
 
   List<Map<String, dynamic>> selectedQuestions = [];

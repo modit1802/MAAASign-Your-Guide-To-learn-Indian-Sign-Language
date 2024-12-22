@@ -48,6 +48,26 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
     'Teacher' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/teacher_tqdyrt.mp4',
     'Home' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/home_ocdazz.mp4',
     'India' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/india_ludfnp.mp4',
+    "Chair": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892129/chair_si7osy.mp4",
+    "Delhi": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892131/Delhi_cparbw.mp4",
+    "Car": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892131/car_dhbu9a.mp4",
+    "Football": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892133/football_mwcosq.mp4",
+    "Shirt": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892133/shirt_muc04j.mp4",
+    "Water": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892133/water_n1yaxd.mp4",
+    "Sun": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892134/sun_nljhud.mp4",
+    "Coffee": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892135/coffee_ytk8dg.mp4",
+    "Table": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892137/table_dvccpo.mp4",
+    "Shoes": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892137/shoes_fsghis.mp4",
+    "Egg": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892138/egg_egmswp.mp4",
+    "Cricket": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892138/cricket_f0a9ik.mp4",
+    "Garden": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892139/garden_pwxfez.mp4",
+    "Train": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892141/train_h4wgxx.mp4",
+    "Flower": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892142/flower_wyc7aj.mp4",
+    "Mirror": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892142/mirror_wtdydk.mp4",
+    "Tree": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892143/tree_ed0q7g.mp4",
+    "Bus": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892145/bus_svvoj3.mp4",
+    "Floor": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892145/floor_xnnsb1.mp4",
+    "Moon": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892147/moon_bphrg5.mp4"
   };
 
   late String targetNoun;

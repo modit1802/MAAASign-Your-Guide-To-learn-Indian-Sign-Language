@@ -66,7 +66,7 @@ class _PLay_Incorrect_VerbsState
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> pronouns = ['Come', 'Drink', 'Eat', 'Cook', 'Walk', 'Write', 'Read', 'Wake Up', 'Use', 'Finish', 'Talk', 'Work', 'Sleep'];
+    List<String> pronouns = ['Come', 'Drink', 'Eat', 'Cook', 'Walk', 'Write', 'Read', 'Wake Up', 'Use', 'Finish', 'Talk', 'Work', 'Sleep',"Play", "Sit", "Run", "Grow", "Sing", "Think", "Smile", "Stand", "Catch", "Meet", "Cry", "Jump", "Listen", "Clean", "Travel", "Draw", "Dance", "Drive", "Wear", "Wait"];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer

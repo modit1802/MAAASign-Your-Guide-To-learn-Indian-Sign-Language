@@ -62,7 +62,7 @@ class _PLay_Incorrect_NounsState
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> nouns = ['School', 'Breakfast', 'Lunch', 'Dinner', 'Book', 'Morning', 'Work', 'Hands', 'Deaf', 'Market', 'Tea', 'Office'];
+    List<String> nouns = ['School', 'Breakfast', 'Lunch', 'Dinner', 'Book', 'Morning', 'Work', 'Hands', 'Deaf', 'Market', 'Tea', 'Office',"Egg", "Floor", "Moon", "Water", "Table", "Tree", "Bus", "Car", "Cricket", "Flower", "Shirt", "Chair", "Shoes", "Coffee", "Sun", "Mirror", "Garden", "Train", "Delhi", "Football"];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer

@@ -115,7 +115,7 @@ class _LearningZoneState extends State<LearningZone> {
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113629/see_you_again_pq2rok.mp4',
     'See You Tomorrow':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113636/see_you_tomorrow_kkhlel.mp4',
-    'whats_up':
+    'Whats_up':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1734887485/What_s_Up_labelled_bwix9k.mp4',
     'Baby':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125689/baby_m5j2ml.mp4',
@@ -133,6 +133,22 @@ class _LearningZoneState extends State<LearningZone> {
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125682/friend_kjbxg8.mp4',
     'Man':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730125683/man_vy9lea.mp4',
+    'grand_mother':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888126/grandmother_labelled_cv8wrg.mp4',
+    'grand_daughter':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888120/granddaughter_labelled_csxpvw.mp4',
+    'grand_son':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888120/grandson_labelled_eonjnt.mp4',
+    'grand_father':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888119/grandfather_labelled_xcsrat.mp4',
+    'uncle':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888120/uncle_labelled_uzy4fk.mp4',
+    'aunt':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888119/aunt_labelled_nmlweo.mp4',
+    'nephew':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888126/nephew_labelled_kqravp.mp4',
+    'niece':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734888122/niece_labelled_auxqyu.mp4',
     'Hello':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730113628/hello_q0jqlg.mp4',
     'Hy':
@@ -183,6 +199,46 @@ class _LearningZoneState extends State<LearningZone> {
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410108/India_labelled_e7hc14.mp4',
     'Birds':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410116/Birds_labelled_v8ajkw.mp4',
+    'Egg':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891814/egg_labelled_rbsv4f.mp4',
+    'Floor':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891814/floor_labelled_fjthev.mp4',
+    'Moon':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891815/moon_labelled_byw2uu.mp4',
+    'Water':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891815/water_labelled_jvqbfn.mp4',
+    'Table':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891816/table_labelled_etlhjx.mp4',
+    'Tree':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891816/tree_labelled_hv7mof.mp4',
+    'Bus':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891817/bus_labelled_a7licg.mp4',
+    'Car':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891818/car_labelled_cnxsxu.mp4',
+    'Cricket':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891820/cricket_labelled_angypw.mp4',
+    'Flower':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891821/flower_labelled_tunlpp.mp4',
+    'Shirt':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891822/shirt_labelled_hjsiqp.mp4',
+    'Chair':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891823/chair_labelled_n5xjbi.mp4',
+    'Shoes':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891823/shoes_labelled_wutejf.mp4',
+    'Coffee':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891824/office_labelled_fs8b2y.mp4',
+    'Sun':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891825/sun_labelled_hzawsr.mp4',
+    'Mirror':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891827/mirror_labelled_gpodlh.mp4',
+    'Garden':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891828/garden_labelled_ksjalq.mp4',
+    'Train':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891830/train_labelled_xm0azf.mp4',
+    'Delhi':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891829/Delhi_labelled_cd9nuv.mp4',
+    'Football':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734891832/football_labelled_prpmvf.mp4',
     'I (Pronoun)':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558959/I_l_yyecwh.mp4',
     'You':
@@ -229,13 +285,53 @@ class _LearningZoneState extends State<LearningZone> {
     'Wash':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409737/Wash_labelled_jvhgir.mp4',
     'Fly':
-        'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409737/Fly_labelled_swrtnf.mp4',
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890135/fly__labelled_j9xcbb.mp4',
     'Give':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409738/Give_labelled_n99bii.mp4',
+    'Catch':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890133/catch_labelled_p3cske.mp4',
+    'Cry':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890134/cry_labelled_imopdy.mp4',
+    'Wear':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890135/wear_labelled_hq6leo.mp4',
+    'Grow':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890136/grow_labelled_kfenxp.mp4',
+    'Drive':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890137/drive_labelled_ucmbgh.mp4',
+    'Sing':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890137/sing_labelled_x6vmao.mp4',
+    'Clean':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890138/clean_labelled_odui5v.mp4',
+    'Wait':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890138/wait_labelled_apa5d1.mp4',
+    'Jump':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890138/jump_labelled_djtf90.mp4',
+    'Listen':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/listen_labelled_oqridg.mp4',
+    'Sit':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/sit_labelled_qjmkel.mp4',
+    'Think':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/think_labelled_s6wwuc.mp4',
+    'Stand':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/stand_labelled_eqp833.mp4',
+    'Meet':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/meet_labelled_gumy3r.mp4',
+    'Dance':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890140/dance_labelled_esqtcb.mp4',
+    'Run':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890140/run_labelled_yc8zzk.mp4',
+    'Play':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890141/play_labelled_mqufuu.mp4',
+    'Smile':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890140/smile_labelled_il8qfa.mp4',
+    'Draw':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890141/draw_labelled_kphqz2.mp4',
+    'Travel':
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890144/travel_labelled_txpf7d.mp4',
     'Teach':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409737/Teach_labelled_urxibn.mp4',
     'Swim':
-        'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409738/Swim_labelled_uuemob.mp4',
+        'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890142/swim_labelled_mkv4nm.mp4',
     'Live':
         'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409740/Live_labelled_im0cj3.mp4',
     'Love':
