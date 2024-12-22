@@ -217,83 +217,99 @@ class _InitialPage1State extends State<InitialPage1> {
             if (_isLoading) _buildLoadingOverlay(),
           ],
         ),
-        bottomNavigationBar: CurvedNavigationBar(
+        bottomNavigationBar: Container(
+        
+  decoration: BoxDecoration(
+    color: const Color.fromARGB(255, 250, 233, 215),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.3),
+        spreadRadius: 2,
+        blurRadius: 10,
+        offset: const Offset(0, -3), // Shadow appears above the navbar
+      ),
+    ],
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(30),
+      topRight: Radius.circular(30),
+    ),
+  ),
+  child: CurvedNavigationBar(
+    backgroundColor: Colors.transparent,
+    color: const Color.fromARGB(255, 250, 233, 215),
+    buttonBackgroundColor:  const Color.fromARGB(255, 255, 249, 242),
+    height: 60,
+    index: _currentIndex,
+    onTap: _onItemTapped,
+    items: [
+      Material(
+        elevation: _currentIndex == 0 ? 12 : 0,
+        color: Colors.transparent,
+        shape: const CircleBorder(),
+        child: CircleAvatar(
+          radius: 25,
           backgroundColor: Colors.white,
-          color: const Color.fromARGB(255, 250, 233, 215),
-          buttonBackgroundColor: Colors.white,
-          height: 50,
-          index: _currentIndex,
-          onTap: _onItemTapped,
-          items: [
-            Material(
-              elevation: _currentIndex == 0
-                  ? 8
-                  : 0, // Elevation only for selected item
-              color: Colors.transparent,
-              shape: CircleBorder(), // Makes the button circular
-              child: CircleAvatar(
-                radius: 25, // Circle radius
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.home,
-                  size: 30,
-                  color: _currentIndex == 0
-                      ? const Color.fromARGB(
-                          255, 238, 126, 34) // Selected color
-                      : Colors.grey, // Default color for unselected items
-                ),
-              ),
-            ),
-            Material(
-              elevation: _currentIndex == 1 ? 8 : 0,
-              color: Colors.transparent,
-              shape: CircleBorder(),
-              child: CircleAvatar(
-                radius: 25,
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.fact_check,
-                  size: 30,
-                  color: _currentIndex == 1
-                      ? const Color.fromARGB(255, 238, 126, 34)
-                      : Colors.grey,
-                ),
-              ),
-            ),
-            Material(
-              elevation: _currentIndex == 2 ? 8 : 0,
-              color: Colors.transparent,
-              shape: CircleBorder(),
-              child: CircleAvatar(
-                radius: 25,
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.score,
-                  size: 30,
-                  color: _currentIndex == 2
-                      ? const Color.fromARGB(255, 238, 126, 34)
-                      : Colors.grey,
-                ),
-              ),
-            ),
-            Material(
-              elevation: _currentIndex == 3 ? 8 : 0,
-              color: Colors.transparent,
-              shape: CircleBorder(),
-              child: CircleAvatar(
-                radius: 25,
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.info,
-                  size: 30,
-                  color: _currentIndex == 3
-                      ? const Color.fromARGB(255, 238, 126, 34)
-                      : Colors.grey,
-                ),
-              ),
-            ),
-          ],
+          child: Icon(
+            Icons.home,
+            size: 30,
+            color: _currentIndex == 0
+                ? const Color.fromARGB(255, 238, 126, 34)
+                : Colors.grey,
+          ),
         ),
+      ),
+      Material(
+        elevation: _currentIndex == 1 ? 10 : 0,
+        color: Colors.transparent,
+        shape: const CircleBorder(),
+        child: CircleAvatar(
+          radius: 25,
+          backgroundColor: Colors.white,
+          child: Icon(
+            Icons.fact_check,
+            size: 30,
+            color: _currentIndex == 1
+                ? const Color.fromARGB(255, 238, 126, 34)
+                : Colors.grey,
+          ),
+        ),
+      ),
+      Material(
+        elevation: _currentIndex == 2 ? 10 : 0,
+        color: Colors.transparent,
+        shape: const CircleBorder(),
+        child: CircleAvatar(
+          radius: 25,
+          backgroundColor: Colors.white,
+          child: Icon(
+            Icons.score,
+            size: 30,
+            color: _currentIndex == 2
+                ? const Color.fromARGB(255, 238, 126, 34)
+                : Colors.grey,
+          ),
+        ),
+      ),
+      Material(
+        elevation: _currentIndex == 3 ? 10 : 0,
+        color: Colors.transparent,
+        shape: const CircleBorder(),
+        child: CircleAvatar(
+          radius: 25,
+          backgroundColor: Colors.white,
+          child: Icon(
+            Icons.info,
+            size: 30,
+            color: _currentIndex == 3
+                ? const Color.fromARGB(255, 238, 126, 34)
+                : Colors.grey,
+          ),
+        ),
+      ),
+    ],
+  ),
+)
+,
       ),
     );
   }
