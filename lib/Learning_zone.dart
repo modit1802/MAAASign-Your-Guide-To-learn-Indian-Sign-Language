@@ -365,12 +365,20 @@ class _LearningZoneState extends State<LearningZone> {
   };
 
   List<MapEntry<String, String>> filteredWords = [];
+  late PageController _pageController;
 
   @override
   void initState() {
     super.initState();
     _getUsername();
+    _pageController = PageController(viewportFraction: 0.9);
     _searchController.addListener(filterSuggestions);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   void filterSuggestions() {
@@ -425,16 +433,16 @@ class _LearningZoneState extends State<LearningZone> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8),
+        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 253, 245, 237),
-          borderRadius: BorderRadius.circular(8),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
-              blurRadius: 5,
-              offset: Offset(0, 3),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
             ),
           ],
         ),
@@ -443,27 +451,52 @@ class _LearningZoneState extends State<LearningZone> {
           children: [
             // Image section
             Expanded(
-              flex: 3,
+              flex: 1,
               child: ClipRRect(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(8)),
-                child: Image(
-                  image: image,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+                child: Stack(
+                  children: [
+                    Image(
+                      image: image,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.6),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 4,
+                                color: Colors.black45,
+                                offset: Offset(1, 1),
+                              ),
+                            ],
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            // Title section
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
               ),
             ),
           ],
@@ -499,7 +532,7 @@ class _LearningZoneState extends State<LearningZone> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
+      backgroundColor:const Color.fromARGB(255, 250, 233, 215),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -530,60 +563,193 @@ class _LearningZoneState extends State<LearningZone> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  TextField(
-                    controller: _searchController,
-                    cursorColor: Colors.black,
-                    style: const TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      hintText: "Type Word/Sentence to search ...",
-                      hintStyle: const TextStyle(color: Colors.black54),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 12.0, horizontal: 20.0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      suffixIcon: Container(
-                        margin: const EdgeInsets.all(8.0),
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 238, 126, 34),
-                          shape: BoxShape.circle,
+                  Center(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color.fromARGB(255, 224, 118, 30),
+                            const Color.fromARGB(255, 230, 136, 23),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
                         ),
-                        child: IconButton(
-                          icon: const Icon(Icons.search,
-                              color: Colors.white, size: 20),
-                          onPressed: () {
-                            String query = _searchController.text.trim();
-                            if (query.isNotEmpty) {
-                              // Navigate to Search_Video_Screen with the search query and corresponding link
-                              final entry = filteredWords.firstWhere(
-                                (entry) => entry.key
-                                    .toLowerCase()
-                                    .startsWith(query.toLowerCase()),
-                                orElse: () => MapEntry('', ''),
-                              );
-                              if (entry.key.isNotEmpty) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Search_Video_Screen(
-                                      word: entry.key,
-                                      link: entry.value,
+                        borderRadius: BorderRadius.circular(screenWidth * 0.03),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.08),
+                            blurRadius: screenWidth * 0.05,
+                            offset: Offset(0, screenHeight * 0.02),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(screenWidth * 0.06),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Reviewing Zone',
+                                    style: TextStyle(
+                                      fontSize: screenWidth * 0.07,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                          color: Colors.black.withOpacity(0.4),
+                                          blurRadius: screenWidth * 0.02,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                );
-                              }
-                              _searchController.clear();
-                            }
-                          },
+                                  SizedBox(height: screenHeight * 0.015),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: screenHeight * 0.008,
+                                        horizontal: screenWidth * 0.03),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(
+                                          screenWidth * 0.02),
+                                    ),
+                                    child: Text(
+                                      'Learn Indian Sign Language with ease!',
+                                      style: TextStyle(
+                                        fontSize: screenWidth * 0.045,
+                                        color: Colors.white.withOpacity(0.9),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: screenWidth * 0.05,
+                            ),
+                            SizedBox(
+                              width: screenHeight * 0.1,
+                              height: screenHeight * 0.1,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.white,
+                                      Colors.grey.shade300,
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.circular(screenWidth * 0.05),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0),
+                                      blurRadius: screenWidth * 0.04,
+                                      offset: Offset(0, screenHeight * 0.015),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.circular(screenWidth * 0.05),
+                                  child: Image.asset(
+                                    'images/childisl.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
 
+                  SizedBox(height: screenHeight * 0.023),
+                  TextField(
+                    controller: _searchController,
+                    cursorColor: Colors.orange,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: "Type Word/Sentence to search ...",
+                      hintStyle:
+                          const TextStyle(color: Colors.black54, fontSize: 14),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 14.0, horizontal: 20.0),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        borderSide: BorderSide(
+                          color: const Color.fromARGB(255, 238, 126, 34),
+                          width: 1.5,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        borderSide: BorderSide(
+                          color: const Color.fromARGB(255, 255, 184, 95),
+                          width: 2.0,
+                        ),
+                      ),
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          String query = _searchController.text.trim();
+                          if (query.isNotEmpty) {
+                            // Navigate to Search_Video_Screen with the search query and corresponding link
+                            final entry = filteredWords.firstWhere(
+                              (entry) => entry.key
+                                  .toLowerCase()
+                                  .startsWith(query.toLowerCase()),
+                              orElse: () => MapEntry('', ''),
+                            );
+                            if (entry.key.isNotEmpty) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Search_Video_Screen(
+                                    word: entry.key,
+                                    link: entry.value,
+                                  ),
+                                ),
+                              );
+                            }
+                            _searchController.clear();
+                          }
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromARGB(255, 238, 126, 34),
+                                Color.fromARGB(255, 255, 184, 95),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(Icons.search,
+                              color: Colors.white, size: 22),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
                   // Suggestions Box
                   if (filteredWords.isNotEmpty)
                     Container(
@@ -633,167 +799,202 @@ class _LearningZoneState extends State<LearningZone> {
                       ),
                     ),
 
-                  Center(
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 238, 126, 34),
-                        borderRadius: BorderRadius.circular(screenWidth * 0.01),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(screenWidth * 0.04),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Reviewing Zone',
-                                    style: TextStyle(
-                                      fontSize: screenWidth * 0.06,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: screenHeight * 0.16,
-                              height: screenHeight * 0.16,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.circular(screenWidth * 0.04),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
-                                      blurRadius: screenWidth * 0.02,
-                                      offset: Offset(0, screenHeight * 0.01),
-                                    ),
-                                  ],
-                                ),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Image.asset(
-                                    'images/childisl.png',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
+                  SizedBox(height: screenHeight * 0.005),
                   SizedBox(
-                    height: screenHeight * 0.3,
+                    height: screenHeight * 0.35,
                     child: PageView.builder(
-                      controller: PageController(
-                        viewportFraction:
-                            0.8, // 80% of the current page is shown, 20% of the next/previous card visible
-                      ),
-                      itemCount: 8, // The number of pages
+                      controller:
+                          _pageController, // Ensure _pageController is initialized in your StatefulWidget
+                      itemCount: 8,
                       itemBuilder: (context, index) {
-                        return buildCustomCard(
-                          image: AssetImage(
-                            // Add your respective image for each card
-                            index == 0
-                                ? 'images/alphabets.jpg'
-                                : index == 1
-                                    ? 'images/numbers.jpg'
-                                    : index == 2
-                                        ? 'images/greetings.png'
-                                        : index == 3
-                                            ? 'images/Relation.jpg'
-                                            : index == 4
-                                                ? 'images/verbs.png'
-                                                : index == 5
-                                                    ? 'images/nouns.png'
-                                                    : index == 6
-                                                        ? 'images/pronouns.png'
-                                                        : 'images/sentence_struct.png', // You can continue this pattern for all other images
-                          ),
-                          title: index == 0
-                              ? 'Review Signing Alphabets'
-                              : index == 1
-                                  ? 'Review Signing Numbers'
-                                  : index == 2
-                                      ? 'Review Signing Greetings'
-                                      : index == 3
-                                          ? 'Review Signing Relations'
-                                          : index == 4
-                                              ? 'Review Signing Verbs'
-                                              : index == 5
-                                                  ? 'Review Signing Nouns'
-                                                  : index == 6
-                                                      ? 'Review Signing Pronouns'
-                                                      : 'Review Basic Sentence Structure', // Titles based on index
-                          onTap: () {
-                            // Use the navigation logic based on the index, assuming each index points to a different screen.
-                            switch (index) {
-                              case 0:
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LearnAlphabet()),
-                                );
-                                break;
-                              case 1:
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LearnNumbers()),
-                                );
-                                break;
-                              case 2:
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LearnGreetings()),
-                                );
-                                break;
-                              case 3:
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LearnRelations()),
-                                );
-                                break;
-                              case 4:
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LearnVerbs()),
-                                );
-                                break;
-                              case 5:
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LearnNouns()),
-                                );
-                                break;
-                              case 6:
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LearnPronouns()),
-                                );
-                                break;
-                              case 7:
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          Learn_Simple_Sentence()),
-                                );
-                                break;
+                        return AnimatedBuilder(
+                          animation: _pageController,
+                          builder: (context, child) {
+                            double value = 0.0;
+                            if (_pageController.position.haveDimensions) {
+                              value = index - _pageController.page!;
+                              value = (1 - value.abs() * 0.3).clamp(0.8, 1.0);
                             }
+
+                            return GestureDetector(
+                              onTap: () {
+                                // Implement navigation or functionality for each card here
+                                switch (index) {
+                                  case 0:
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              LearnAlphabet()),
+                                    );
+                                    break;
+                                  case 1:
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LearnNumbers()),
+                                    );
+                                    break;
+                                  case 2:
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              LearnGreetings()),
+                                    );
+                                    break;
+                                  case 3:
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              LearnRelations()),
+                                    );
+                                    break;
+                                  case 4:
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LearnVerbs()),
+                                    );
+                                    break;
+                                  case 5:
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LearnNouns()),
+                                    );
+                                    break;
+                                  case 6:
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              LearnPronouns()),
+                                    );
+                                    break;
+                                  case 7:
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Learn_Simple_Sentence()),
+                                    );
+                                    break;
+                                }
+                              },
+                              child: Transform(
+                                transform: Matrix4.identity()
+                                  ..scale(value)
+                                  ..rotateY(
+                                      (index - (_pageController.page ?? 0)) *
+                                          0.1),
+                                alignment: Alignment.center,
+                                child: buildCustomCard(
+                                  image: AssetImage(
+                                    index == 0
+                                        ? 'images/alphabets.jpg'
+                                        : index == 1
+                                            ? 'images/numbers.jpg'
+                                            : index == 2
+                                                ? 'images/greetings.png'
+                                                : index == 3
+                                                    ? 'images/Relation.jpg'
+                                                    : index == 4
+                                                        ? 'images/verbs.png'
+                                                        : index == 5
+                                                            ? 'images/nouns.png'
+                                                            : index == 6
+                                                                ? 'images/pronouns.png'
+                                                                : 'images/sentence_struct.png',
+                                  ),
+                                  title: index == 0
+                                      ? 'Review Signing Alphabets'
+                                      : index == 1
+                                          ? 'Review Signing Numbers'
+                                          : index == 2
+                                              ? 'Review Signing Greetings'
+                                              : index == 3
+                                                  ? 'Review Signing Relations'
+                                                  : index == 4
+                                                      ? 'Review Signing Verbs'
+                                                      : index == 5
+                                                          ? 'Review Signing Nouns'
+                                                          : index == 6
+                                                              ? 'Review Signing Pronouns'
+                                                              : 'Review Basic Sentence Structure',
+                                  onTap: () {
+                                    // Ensure the onTap logic is passed correctly
+                                    switch (index) {
+                                      case 0:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LearnAlphabet()),
+                                        );
+                                        break;
+                                      case 1:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LearnNumbers()),
+                                        );
+                                        break;
+                                      case 2:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LearnGreetings()),
+                                        );
+                                        break;
+                                      case 3:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LearnRelations()),
+                                        );
+                                        break;
+                                      case 4:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LearnVerbs()),
+                                        );
+                                        break;
+                                      case 5:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LearnNouns()),
+                                        );
+                                        break;
+                                      case 6:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LearnPronouns()),
+                                        );
+                                        break;
+                                      case 7:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Learn_Simple_Sentence()),
+                                        );
+                                        break;
+                                    }
+                                  },
+                                ),
+                              ),
+                            );
                           },
                         );
                       },
