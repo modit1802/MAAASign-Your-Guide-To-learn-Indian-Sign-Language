@@ -241,20 +241,6 @@ print('Download URL: $downloadUrl');
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                     ),
                     const SizedBox(height: 8),
-                    GestureDetector(
-                      onTap: _pickImage,
-                      child: CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.white,
-                        backgroundImage: _selectedImage != null
-                            ? FileImage(_selectedImage!)
-                            : NetworkImage(_defaultPhotoUrl) as ImageProvider,
-                        child: _selectedImage == null
-                            ? const Icon(Icons.add_a_photo, size: 30,color: Color.fromARGB(255, 252, 133, 37))
-                            : null,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
                     TextField(
                       controller: _nameController,
                       focusNode: _nameFocusNode,
