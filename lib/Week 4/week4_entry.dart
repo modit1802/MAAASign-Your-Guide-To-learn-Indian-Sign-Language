@@ -185,7 +185,7 @@ class _Week4EntryState extends State<Week4Entry> {
         // Challenger Card
                       _buildCard(
                         onTap: score >= 1500
-                            ? () => _handleCardTap(2, Challenger4(score: score))
+                            ? () => _handleCardTap(2, Challenger4(score: 0))
                             : () {}, // Provide a no-op function when locked
                         imagePath: 'images/challenger.png',
                         color: score >= 1500

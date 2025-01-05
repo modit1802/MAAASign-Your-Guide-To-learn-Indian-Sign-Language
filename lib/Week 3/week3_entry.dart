@@ -187,7 +187,7 @@ class _Week3EntryState extends State<Week3Entry> {
                     // Challenger Circle widget - Card 3
                     _buildCard(
                       onTap: score >= 2500
-                          ? () => _handleCardTap(2, Challenger3(score: score))
+                          ? () => _handleCardTap(2, Challenger3(score: 0))
                           : () {}, // Provide a no-op function when locked
                       imagePath: 'images/challenger.png',
                       color: score >= 2500

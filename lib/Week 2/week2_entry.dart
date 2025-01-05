@@ -166,7 +166,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
                     const SizedBox(height: 10),
                     _buildCard(
                       onTap: score >= 1500
-                          ? () => _handleCardTap(2, Challenger2(score: score))
+                          ? () => _handleCardTap(2, Challenger2(score: 0))
                           : () {}, // Provide a no-op function when locked
                       imagePath: 'images/challenger.png',
                       color: score >= 1500
