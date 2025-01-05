@@ -48,11 +48,10 @@ class _Week4EntryState extends State<Week4Entry> {
       final data = await collection.findOne({"userId": userId});
 
       setState(() {
-        score1 = data?['week']?['week4']?['Score_Basic_Sentence']?['score_basic_sentence'] ?? 0;
-        score2 = data?['week']?['week4']?['Score_Simple_Sentence']?['score_simple_sentence'] ?? 0;
-        score3 = data?['week']?['week4']?['Score_bingo_simple_sentence']?['score_bingo_simple_sentence_2'] ?? 0;
-        score_challenger=data?['week']?['Week4']?['Score_Challenger_Week4']
-        ?['score_challenger'];
+        score1 = (data?['week']?['week4']?['Score_Basic_Sentence']?['score_basic_sentence'] ?? 0) as int;
+        score2 = (data?['week']?['week4']?['Score_Simple_Sentence']?['score_simple_sentence'] ?? 0) as int;
+        score3 = (data?['week']?['week4']?['Score_bingo_simple_sentence']?['score_bingo_simple_sentence_2'] ?? 0) as int;
+        score_challenger=(data?['week']?['Week4']?['Score_Challenger_Week4']?['score_challenger']) as int;
         score = score1 + score2 + score3;
       });
 

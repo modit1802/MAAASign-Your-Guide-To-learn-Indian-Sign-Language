@@ -50,14 +50,13 @@ class _Week3EntryState extends State<Week3Entry> {
       final data = await collection.findOne({"userId": userId});
 
       setState(() {
-        score1 = data?['week']?['week3']?['Score_verb']?['score_verb'] ?? 0;
-        score2 = data?['week']?['week3']?['Score_verb2']?['score_verb2'] ?? 0;
-        score3 = data?['week']?['week3']?['Score_noun']?['score_noun'] ?? 0;
-        score4 = data?['week']?['week3']?['Score_noun2']?['score_noun2'] ?? 0;
-        score5 = data?['week']?['week3']?['Score_pronoun']?['score_pronoun'] ?? 0;
-        score6 = data?['week']?['week3']?['Score_pronoun2']?['score_pronoun2'] ?? 0;
-
-        score_challenger=data?['week']?['week3']?['Score_Challenger_Week3']?['score_challenger'];
+        score1 = (data?['week']?['week3']?['Score_verb']?['score_verb'] ?? 0) as int;
+        score2 = (data?['week']?['week3']?['Score_verb2']?['score_verb2'] ?? 0) as int;
+        score3 = (data?['week']?['week3']?['Score_noun']?['score_noun'] ?? 0) as int;
+        score4 = (data?['week']?['week3']?['Score_noun2']?['score_noun2'] ?? 0) as int;
+        score5 = (data?['week']?['week3']?['Score_pronoun']?['score_pronoun'] ?? 0) as int;
+        score6 = (data?['week']?['week3']?['Score_pronoun2']?['score_pronoun2'] ?? 0) as int;
+        score_challenger=(data?['week']?['week3']?['Score_Challenger_Week3']?['score_challenger']) as int;
         score = score1 + score2 + score3 + score4 + score5 + score6;
       });
 

@@ -53,10 +53,12 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAErJlVrC9tP8DEKY9fhVpZBHY5UOOZBAQ',
-    appId: '1:184647523239:android:87173471d782fa36a4b482',
-    messagingSenderId: '184647523239',
-    projectId: 'maaasign-isl-learning-ap-817ac',
-    storageBucket: 'maaasign-isl-learning-ap-817ac.firebasestorage.app',
+    apiKey: 'AIzaSyAV_KJLOe5aMGSY6mlg1dAm35wAb1o3bsY',
+    appId: '1:894444876029:android:15c9d75c9223181be20e94',
+    messagingSenderId: '894444876029',
+    projectId: 'loginsignupapp-7c92a',
+    databaseURL: 'https://loginsignupapp-7c92a-default-rtdb.firebaseio.com',
+    storageBucket: 'loginsignupapp-7c92a.appspot.com',
   );
+
 }

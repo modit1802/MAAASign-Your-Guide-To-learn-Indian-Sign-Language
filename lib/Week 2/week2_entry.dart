@@ -47,12 +47,11 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
       final data = await collection.findOne({"userId": userId});
 
       setState(() {
-        score1 = data?['week']?['week2']?['Score_greeting']?['score_greeting'] ?? 0;
-        score2 = data?['week']?['week2']?['Score_greeting2']?['score_greeting_2'] ?? 0;
-        score3 = data?['week']?['week2']?['Score_relation']?['score_relation'] ?? 0;
-        score4 = data?['week']?['week2']?['Score_relation2']?['score_relation_2'] ?? 0;
-        score_challenger=data?['week']?['week2']?['Score_Challenger_Week2']
-        ?['score_challenger'];
+        score1 = (data?['week']?['week2']?['Score_greeting']?['score_greeting'] ?? 0) as int;
+        score2 = (data?['week']?['week2']?['Score_greeting2']?['score_greeting_2'] ?? 0) as int;
+        score3 = (data?['week']?['week2']?['Score_relation']?['score_relation'] ?? 0) as int;
+        score4 = (data?['week']?['week2']?['Score_relation2']?['score_relation_2'] ?? 0) as int;
+        score_challenger=(data?['week']?['week2']?['Score_Challenger_Week2']?['score_challenger']) as int;
         score = score1 + score2 + score3 + score4;
       });
 
