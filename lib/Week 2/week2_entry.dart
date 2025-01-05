@@ -1,7 +1,4 @@
-import 'package:SignEase/Challengers_All_Weeks/challenger_week1/challenger1.dart';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/Week%201/alphabetstart.dart';
-import 'package:SignEase/Week%201/numberstart.dart';
 import 'package:SignEase/Week%202/relationstartscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +48,7 @@ class _Week2NewScreenState extends State<Week2NewScreen> {
         score2 = (data?['week']?['week2']?['Score_greeting2']?['score_greeting_2'] ?? 0) as int;
         score3 = (data?['week']?['week2']?['Score_relation']?['score_relation'] ?? 0) as int;
         score4 = (data?['week']?['week2']?['Score_relation2']?['score_relation_2'] ?? 0) as int;
-        score_challenger=(data?['week']?['week2']?['Score_Challenger_Week2']?['score_challenger']) as int;
+        score_challenger=(data?['week']?['week2']?['Score_Challenger_Week2']?['score_challenger'] ?? 0) as int;
         score = score1 + score2 + score3 + score4;
       });
 

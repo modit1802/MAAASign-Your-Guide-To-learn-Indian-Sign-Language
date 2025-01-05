@@ -158,7 +158,7 @@ class _Week1EntryState extends State<Week1Entry> {
                     const SizedBox(height: 10),
                     _buildCard(
                       onTap: score >= 1500
-                          ? () => _handleCardTap(2, Challenger1(score: score))
+                          ? () => _handleCardTap(2, Challenger1(score: 0))
                           : () {}, // Provide a no-op function when locked
                       imagePath: 'images/challenger.png',
                       color: score >= 1500

@@ -18,6 +18,8 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
   String? score_challenger;
   String? score_alpha;
   String? score_number;
+  String? score_alphabet_match;
+  String? score_number_match;
   List<Map<String, dynamic>>? incorrectQuestions;
   bool isLoading = true; // Initial state is loading
 
@@ -54,6 +56,8 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
         score_number = result['week']?['week1']?['Score_number']
                 ?['score_number']
             ?.toString();
+        score_alphabet_match = (result?['week']?['week1']?['Score_alphabet_match']?['score_alphabet_match']?.toString());
+        score_number_match = (result?['week']?['week1']?['Score_number_match']?['score_number_match']?.toString());
 
         var data = result['week']?['week1']?['Score_Challenger_week1']
             ?['Incorrect_challenges'];
@@ -121,7 +125,7 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
                     ],
                     xValueMapper: (ScoreData data, _) => data.label,
                     yValueMapper: (ScoreData data, _) => data.value,
-                    color: Colors.orange,
+                    color: Colors.blue,
                     dataLabelSettings: const DataLabelSettings(isVisible: true),
                   ),
                 ],
@@ -132,7 +136,52 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
       ),
     );
   }
-
+  Widget _buildScoreCard2() {
+    return Card(
+      elevation: 10,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            const Text(
+              "Match Scores of Week 1",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: SfCartesianChart(
+                primaryXAxis: CategoryAxis(),
+                series: <CartesianSeries<ScoreData, String>>[
+                  ColumnSeries<ScoreData, String>(
+                    dataSource: [
+                      ScoreData(
+                          'Alphabets', double.tryParse(score_alphabet_match!) ?? 0),
+                    ],
+                    xValueMapper: (ScoreData data, _) => data.label,
+                    yValueMapper: (ScoreData data, _) => data.value,
+                    color: Colors.red,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                  ColumnSeries<ScoreData, String>(
+                    dataSource: [
+                      ScoreData('Numbers', double.tryParse(score_number_match!) ?? 0),
+                    ],
+                    xValueMapper: (ScoreData data, _) => data.label,
+                    yValueMapper: (ScoreData data, _) => data.value,
+                    color: Colors.blue,
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
   Future<String?> getUserId() async {
     User? user = FirebaseAuth.instance.currentUser;
     return user?.uid;
@@ -226,6 +275,11 @@ class _DetailedProgressWeek1State extends State<DetailedProgressWeek1> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: _buildScoreCard(),
+                    ),
+                  if (score_alphabet_match != null && score_number_match != null)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: _buildScoreCard2(),
                     ),
                 ],
               ),
