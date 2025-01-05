@@ -43,14 +43,14 @@ class _Week1EntryState extends State<Week1Entry> {
       final data = await collection.findOne({"userId": userId});
 
       setState(() {
-        score1 = data?['week']?['week1']?['Score_alphabet']?['score_alphabet'] ?? 0;
-        score2 = data?['week']?['week1']?['Score_alphabet_match']?['score_alphabet_match'] ?? 0;
-        score3 = data?['week']?['week1']?['Score_number']?['score_number'] ?? 0;
-        score4 = data?['week']?['week1']?['Score_number_match']?['score_number_match'] ?? 0;
-        score_challenger=data?['week']?['week1']?['Score_Challenger_week1']
-        ?['score_challenger'];
+        score1 = (data?['week']?['week1']?['Score_alphabet']?['score_alphabet'] ?? 0) as int;
+        score2 = (data?['week']?['week1']?['Score_alphabet_match']?['score_alphabet_match'] ?? 0) as int;
+        score3 = (data?['week']?['week1']?['Score_number']?['score_number'] ?? 0) as int;
+        score4 = (data?['week']?['week1']?['Score_number_match']?['score_number_match'] ?? 0) as int;
+        score_challenger = (data?['week']?['week1']?['Score_Challenger_week1']?['score_challenger'] ?? 0) as int;
         score = score1 + score2 + score3 + score4;
       });
+
 
       await db.close();
     } catch (e) {
@@ -109,6 +109,7 @@ class _Week1EntryState extends State<Week1Entry> {
     User? user = FirebaseAuth.instance.currentUser;
     return user?.uid;
   }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
