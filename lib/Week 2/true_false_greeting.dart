@@ -9,10 +9,12 @@ import 'package:video_player/video_player.dart';
 
 class True_false_challenger_greetings extends StatefulWidget {
   @override
-  _True_false_challenger_greetingsState createState() => _True_false_challenger_greetingsState();
+  _True_false_challenger_greetingsState createState() =>
+      _True_false_challenger_greetingsState();
 }
 
-class _True_false_challenger_greetingsState extends State<True_false_challenger_greetings> {
+class _True_false_challenger_greetingsState
+    extends State<True_false_challenger_greetings> {
   List<Map<String, dynamic>> questionsAndSolutions = [
     {
       'question':
@@ -31,7 +33,7 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/namaste_u_iptdsn.mp4',
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1736093012/namaste_u_iptdsn_lrun3n.mp4',
       'solution': 'Namaste'
     },
     {
@@ -66,7 +68,7 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
     },
     {
       'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734887473/What_s_Up_ugj5gn.mp4',
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1734887473/What_s_Up_ugj5gn.mp4',
       'solution': "What's Up?"
     },
   ];
@@ -142,48 +144,46 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
     }
   }
 
- void _answerQuestion(bool isTrue) {
-  String correctSolution = selectedQuestions[0]['solution'];
-  bool isCorrect = (displayedAnswer == correctSolution) == isTrue;
+  void _answerQuestion(bool isTrue) {
+    String correctSolution = selectedQuestions[0]['solution'];
+    bool isCorrect = (displayedAnswer == correctSolution) == isTrue;
 
-  setState(() {
-    if (isCorrect) {
-      score += 100;
-      correctCount++;
-      // Show success toast
-     
-    } else {
-      incorrectCount++;
-      incorrectQuestions.add({
-        'question': selectedQuestions[0]['question'],
-        'correctSolution': correctSolution,
-      });
-      // Show error toast
-     
-    }
-  });
+    setState(() {
+      if (isCorrect) {
+        score += 100;
+        correctCount++;
+        // Show success toast
+      } else {
+        incorrectCount++;
+        incorrectQuestions.add({
+          'question': selectedQuestions[0]['question'],
+          'correctSolution': correctSolution,
+        });
+        // Show error toast
+      }
+    });
 
-  Future.delayed(const Duration(seconds: 0), () {
-    if (selectedQuestions.length > 1) {
-      selectedQuestions.removeAt(0);
-      videoController?.dispose();
-      setQuestionAndAnswer();
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Result_True_False(
-            score: score,
-            correctcount: correctCount,
-            incorrectcount: incorrectCount,
-            totalQuestions: 6,
-            incorrectQuestions: incorrectQuestions,
+    Future.delayed(const Duration(seconds: 0), () {
+      if (selectedQuestions.length > 1) {
+        selectedQuestions.removeAt(0);
+        videoController?.dispose();
+        setQuestionAndAnswer();
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Result_True_False(
+              score: score,
+              correctcount: correctCount,
+              incorrectcount: incorrectCount,
+              totalQuestions: 6,
+              incorrectQuestions: incorrectQuestions,
+            ),
           ),
-        ),
-      );
-    }
-  });
-}
+        );
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -214,8 +214,8 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
 
                   // Answer Section
                   Transform.translate(
-                    offset: Offset(0, -screenHeight*0.14),
-                    child: buildAnswerButtons(screenWidth, screenHeight)),
+                      offset: Offset(0, -screenHeight * 0.14),
+                      child: buildAnswerButtons(screenWidth, screenHeight)),
                 ],
               ),
             )
@@ -266,140 +266,144 @@ class _True_false_challenger_greetingsState extends State<True_false_challenger_
     );
   }
 
-  Widget buildQuestionCard(double screenWidth, double screenHeight, bool isSmallScreen) {
-  return Padding(
-    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
-    child: Transform.translate(
-      offset: Offset(0, -screenHeight * 0.14),
-      child: Card(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        elevation: 8,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Question ${6 - selectedQuestions.length + 1}/6',
-                style: TextStyle(
-                  fontSize: isSmallScreen ? 18 : 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 80, 24, 24),
-                ),
-              ),
-            ),
-            if (videoController != null && videoController!.value.isInitialized)
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: screenWidth * 0.4, // Adjust width as per your requirement
-                    height: screenHeight * 0.5, // Adjust height as per your requirement
-                    child: AspectRatio(
-                      aspectRatio: videoController!.value.aspectRatio,
-                      child: VideoPlayer(videoController!),
-                    ),
+  Widget buildQuestionCard(
+      double screenWidth, double screenHeight, bool isSmallScreen) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
+      child: Transform.translate(
+        offset: Offset(0, -screenHeight * 0.14),
+        child: Card(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          elevation: 8,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Question ${6 - selectedQuestions.length + 1}/6',
+                  style: TextStyle(
+                    fontSize: isSmallScreen ? 18 : 20,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 80, 24, 24),
                   ),
-                  if (videoController!.value.position ==
-                      videoController!.value.duration)
-                    ElevatedButton(
-                      onPressed: () {
-                        videoController!.seekTo(Duration.zero); // Reset to start
-                        videoController!.play(); // Play video
-                        setState(() {}); // Update UI to hide button
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black.withOpacity(0.5),
-                        shape: CircleBorder(),
-                        padding: const EdgeInsets.all(20),
-                      ),
-                      child: const Icon(
-                        Icons.replay,
-                        size: 36,
-                        color: Colors.white,
-                      ),
-                    ),
-                ],
-              )
-            else
-              Container(
-                height: screenHeight * 0.25, // Keep consistent fallback size
-                alignment: Alignment.center,
-                child: CircularProgressIndicator(
-                  color: Color.fromARGB(255, 243, 128, 27),
                 ),
               ),
-            SizedBox(height: screenHeight * 0.02),
-            Text(
-              '$displayedAnswer',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.deepOrange,
-                fontWeight: FontWeight.w500,
-                fontSize: isSmallScreen ? 18 : 20,
+              if (videoController != null &&
+                  videoController!.value.isInitialized)
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: screenWidth *
+                          0.4, // Adjust width as per your requirement
+                      height: screenHeight *
+                          0.5, // Adjust height as per your requirement
+                      child: AspectRatio(
+                        aspectRatio: videoController!.value.aspectRatio,
+                        child: VideoPlayer(videoController!),
+                      ),
+                    ),
+                    if (videoController!.value.position ==
+                        videoController!.value.duration)
+                      ElevatedButton(
+                        onPressed: () {
+                          videoController!
+                              .seekTo(Duration.zero); // Reset to start
+                          videoController!.play(); // Play video
+                          setState(() {}); // Update UI to hide button
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black.withOpacity(0.5),
+                          shape: CircleBorder(),
+                          padding: const EdgeInsets.all(20),
+                        ),
+                        child: const Icon(
+                          Icons.replay,
+                          size: 36,
+                          color: Colors.white,
+                        ),
+                      ),
+                  ],
+                )
+              else
+                Container(
+                  height: screenHeight * 0.25, // Keep consistent fallback size
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    color: Color.fromARGB(255, 243, 128, 27),
+                  ),
+                ),
+              SizedBox(height: screenHeight * 0.02),
+              Text(
+                '$displayedAnswer',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.deepOrange,
+                  fontWeight: FontWeight.w500,
+                  fontSize: isSmallScreen ? 18 : 20,
+                ),
               ),
-            ),
-            SizedBox(height: screenHeight * 0.02),
-          ],
+              SizedBox(height: screenHeight * 0.02),
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
- Widget buildAnswerButtons(double screenWidth, double screenHeight) {
-  return Padding(
-    padding: EdgeInsets.all(screenWidth * 0.05),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ElevatedButton.icon(
-          onPressed: () {
-           
-            _answerQuestion(true);
-          },
-          icon: Icon(Icons.check_circle, color: Colors.white),
-          label: Text(
-            "True",
-            style: TextStyle(color: Colors.white),
-          ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green.shade600,
-            padding: EdgeInsets.symmetric(
-              vertical: screenHeight * 0.02,
-              horizontal: screenWidth * 0.1,
+  Widget buildAnswerButtons(double screenWidth, double screenHeight) {
+    return Padding(
+      padding: EdgeInsets.all(screenWidth * 0.05),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ElevatedButton.icon(
+            onPressed: () {
+              _answerQuestion(true);
+            },
+            icon: Icon(Icons.check_circle, color: Colors.white),
+            label: Text(
+              "True",
+              style: TextStyle(color: Colors.white),
             ),
-            textStyle: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        ElevatedButton.icon(
-          onPressed: () {
-            
-            _answerQuestion(false);
-          },
-          icon: Icon(Icons.cancel, color: Colors.white),
-          label: Text(
-            "False",
-            style: TextStyle(color: Colors.white),
-          ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red.shade600,
-            padding: EdgeInsets.symmetric(
-              vertical: screenHeight * 0.02,
-              horizontal: screenWidth * 0.1,
-            ),
-            textStyle: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green.shade600,
+              padding: EdgeInsets.symmetric(
+                vertical: screenHeight * 0.02,
+                horizontal: screenWidth * 0.1,
+              ),
+              textStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-      ],
-    ),
-  );
-}}
+          ElevatedButton.icon(
+            onPressed: () {
+              _answerQuestion(false);
+            },
+            icon: Icon(Icons.cancel, color: Colors.white),
+            label: Text(
+              "False",
+              style: TextStyle(color: Colors.white),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red.shade600,
+              padding: EdgeInsets.symmetric(
+                vertical: screenHeight * 0.02,
+                horizontal: screenWidth * 0.1,
+              ),
+              textStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

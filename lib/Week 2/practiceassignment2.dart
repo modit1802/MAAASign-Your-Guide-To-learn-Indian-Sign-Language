@@ -29,7 +29,7 @@ class _PracticeAssignment2State extends State<PracticeAssignment2> {
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4}',
+          'https://res.cloudinary.com/dfph32nsq/video/upload/v1736093467/brother_u_dg76hq_tubshm.mp4',
       'solution': 'Brother',
     },
     {
