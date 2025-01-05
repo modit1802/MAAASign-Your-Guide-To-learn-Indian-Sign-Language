@@ -13,8 +13,8 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def flutterVersionCode = "5"
-def flutterVersionName = "1.4"
+def flutterVersionCode = "9"
+def flutterVersionName = "1.63"
 
 android {
     namespace = "com.maaa.flutter_login_signup"
@@ -32,7 +32,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("my-release-key.jks")
+            storeFile file("my-release-key-modit.jks")
             storePassword "maaasign" // Replace with environment variables for security
             keyAlias "my-key-alias"
             keyPassword "maaasign" // Replace with environment variables for security

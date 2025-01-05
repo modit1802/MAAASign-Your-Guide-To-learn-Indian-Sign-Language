@@ -221,68 +221,111 @@ Widget build(BuildContext context) {
                 ),
               ),
               SizedBox(height: screenHeight * 0.02),
-              Center(
-                child: Container(
-                  height: screenHeight * 0.2, // Adjusted height based on screen size
-                  width: screenWidth * 0.9,  // 90% of screen width
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 238, 126, 34),
-                    borderRadius: BorderRadius.circular(screenWidth * 0.01), // Responsive borderRadius
-
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(screenWidth * 0.04), // Responsive padding
-                    child: IntrinsicHeight(
-                      child: Row(
-                        children: [
-                          // Score Zone Text
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Challenger Zone',
-                                  style: TextStyle(
-                                    fontSize: screenWidth * 0.06, // Responsive font size
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // Score Image Container
-                          Container(
-                            height: screenHeight * 0.15, // Fixed height for image container
-                            width: screenHeight * 0.15, // Square container based on screen height
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(screenWidth * 0.05), // Responsive borderRadius
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  blurRadius: screenWidth * 0.05, // Responsive blur radius for shadow
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Image.asset(
-                                'images/challenger_girl.jpeg',
-                                width: screenWidth * 0.25, // Scaled image size
-                                height: screenWidth * 0.25, // Scaled image size
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                  Center(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color.fromARGB(255, 224, 118, 30),
+                            const Color.fromARGB(255, 230, 136, 23),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(screenWidth * 0.03),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.08),
+                            blurRadius: screenWidth * 0.05,
+                            offset: Offset(0, screenHeight * 0.02),
                           ),
                         ],
                       ),
+                      child: Padding(
+                        padding: EdgeInsets.all(screenWidth * 0.06),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Challenge Zone',
+                                    style: TextStyle(
+                                      fontSize: screenWidth * 0.07,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                          color: Colors.black.withOpacity(0.4),
+                                          blurRadius: screenWidth * 0.02,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: screenHeight * 0.015),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: screenHeight * 0.008,
+                                        horizontal: screenWidth * 0.03),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(
+                                          screenWidth * 0.02),
+                                    ),
+                                    child: Text(
+                                      'Challenge yourself by clicking on weeks!',
+                                      style: TextStyle(
+                                        fontSize: screenWidth * 0.045,
+                                        color: Colors.white.withOpacity(0.9),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: screenWidth * 0.05,
+                            ),
+                            SizedBox(
+                              width: screenHeight * 0.1,
+                              height: screenHeight * 0.1,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.white,
+                                      Colors.grey.shade300,
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.circular(screenWidth * 0.05),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0),
+                                      blurRadius: screenWidth * 0.04,
+                                      offset: Offset(0, screenHeight * 0.015),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.circular(screenWidth * 0.05),
+                                  child: Image.asset(
+                                    'images/scoreisl.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
               SizedBox(height: screenHeight * 0.02),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),

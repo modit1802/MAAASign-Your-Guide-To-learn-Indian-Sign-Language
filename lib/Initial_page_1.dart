@@ -230,8 +230,8 @@ class _InitialPage1State extends State<InitialPage1> {
       ),
     ],
     borderRadius: const BorderRadius.only(
-      topLeft: Radius.circular(30),
-      topRight: Radius.circular(30),
+      topLeft: Radius.circular(25),
+      topRight: Radius.circular(25),
     ),
   ),
   child: CurvedNavigationBar(
@@ -243,15 +243,15 @@ class _InitialPage1State extends State<InitialPage1> {
     onTap: _onItemTapped,
     items: [
       Material(
-        elevation: _currentIndex == 0 ? 12 : 0,
+        elevation: _currentIndex == 0 ? 8: 0,
         color: Colors.transparent,
         shape: const CircleBorder(),
         child: CircleAvatar(
-          radius: 25,
+          radius: 20,
           backgroundColor: Colors.white,
           child: Icon(
             Icons.home,
-            size: 30,
+            size: 25,
             color: _currentIndex == 0
                 ? const Color.fromARGB(255, 238, 126, 34)
                 : Colors.grey,
@@ -259,15 +259,15 @@ class _InitialPage1State extends State<InitialPage1> {
         ),
       ),
       Material(
-        elevation: _currentIndex == 1 ? 10 : 0,
+        elevation: _currentIndex == 1 ? 8 : 0,
         color: Colors.transparent,
         shape: const CircleBorder(),
         child: CircleAvatar(
-          radius: 25,
+          radius: 20,
           backgroundColor: Colors.white,
           child: Icon(
             Icons.fact_check,
-            size: 30,
+            size: 25,
             color: _currentIndex == 1
                 ? const Color.fromARGB(255, 238, 126, 34)
                 : Colors.grey,
@@ -275,15 +275,15 @@ class _InitialPage1State extends State<InitialPage1> {
         ),
       ),
       Material(
-        elevation: _currentIndex == 2 ? 10 : 0,
+        elevation: _currentIndex == 2 ? 8 : 0,
         color: Colors.transparent,
         shape: const CircleBorder(),
         child: CircleAvatar(
-          radius: 25,
+          radius: 20,
           backgroundColor: Colors.white,
           child: Icon(
             Icons.score,
-            size: 30,
+            size: 25,
             color: _currentIndex == 2
                 ? const Color.fromARGB(255, 238, 126, 34)
                 : Colors.grey,
@@ -291,15 +291,15 @@ class _InitialPage1State extends State<InitialPage1> {
         ),
       ),
       Material(
-        elevation: _currentIndex == 3 ? 10 : 0,
+        elevation: _currentIndex == 3 ? 8 : 0,
         color: Colors.transparent,
         shape: const CircleBorder(),
         child: CircleAvatar(
-          radius: 25,
+          radius: 20,
           backgroundColor: Colors.white,
           child: Icon(
             Icons.info,
-            size: 30,
+            size: 25,
             color: _currentIndex == 3
                 ? const Color.fromARGB(255, 238, 126, 34)
                 : Colors.grey,
