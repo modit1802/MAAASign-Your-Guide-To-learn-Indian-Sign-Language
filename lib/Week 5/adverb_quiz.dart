@@ -11,196 +11,91 @@ class AdverbQuiz extends StatefulWidget {
 }
 
 class _AdverbQuizState extends State<AdverbQuiz> {
-  List<Map<String, dynamic>> questionsAndSolutions = [
+  List<Map<String, dynamic>> adverbsAndSolutions = [
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4',
-      'solution': 'School'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/quickly_lsfkuy.mp4',
+      'solution': 'Quickly'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/market_vfh9vj.mp4',
-      'solution': 'Market'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/hard_rqsoay.mp4',
+      'solution': 'Hard'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530818/lunch_cbcgwu.mp4',
-      'solution': 'Lunch'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/now_en4dn1.mp4',
+      'solution': 'Now'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/tea_i6mkyc.mp4',
-      'solution': 'Tea'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/soon_ljtjce.mp4',
+      'solution': 'Soon'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4',
-      'solution': 'Office'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/tomorrow_ttp6fr.mp4',
+      'solution': 'Tomorrow'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/morning_pvtuty.mp4',
-      'solution': 'Morning'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904255/today_mxig1u.mp4',
+      'solution': 'Today'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/breakfast_hb90fq.mp4',
-      'solution': 'Breakfast'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/yesterday_aq8wxd.mp4',
+      'solution': 'Yesterday'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4',
-      'solution': 'Hands'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904255/here_mbkt2f.mp4',
+      'solution': 'Here'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/deaf_ezkwye.mp4',
-      'solution': 'Deaf'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/there_l9n2iy.mp4',
+      'solution': 'There'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4',
-      'solution': 'Dinner'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904253/always_t0ulev.mp4',
+      'solution': 'Always'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4',
-      'solution': 'Book'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/often_tp7ros.mp4',
+      'solution': 'Often'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/student_ohmjwi.mp4',
-      'solution': 'Student'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/sometimes_gcawfc.mp4',
+      'solution': 'Sometimes'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410468/fish_kkyqvv.mp4',
-      'solution': 'Fish'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/rarely_ie3yi7.mp4',
+      'solution': 'Rarely'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/birds_ict0au.mp4',
-      'solution': 'Birds'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904253/never_zpvexx.mp4',
+      'solution': 'Never'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410469/aeroplane_qpzztg.mp4',
-      'solution': 'Aeroplane'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/very_vtzjsw.mp4',
+      'solution': 'Very'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/teacher_tqdyrt.mp4',
-      'solution': 'Teacher'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/enough_nnofv5.mp4',
+      'solution': 'Enough'
     },
     {
       'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/home_ocdazz.mp4',
-      'solution': 'Home'
-    },
-    {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/india_ludfnp.mp4',
-      'solution': 'India'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892129/chair_si7osy.mp4',
-      'solution': 'Chair'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892131/Delhi_cparbw.mp4',
-      'solution': 'Delhi'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892131/car_dhbu9a.mp4',
-      'solution': 'Car'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892133/football_mwcosq.mp4',
-      'solution': 'Football'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892133/shirt_muc04j.mp4',
-      'solution': 'Shirt'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892133/water_n1yaxd.mp4',
-      'solution': 'Water'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892134/sun_nljhud.mp4',
-      'solution': 'Sun'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892135/coffee_ytk8dg.mp4',
-      'solution': 'Coffee'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892137/table_dvccpo.mp4',
-      'solution': 'Table'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892137/shoes_fsghis.mp4',
-      'solution': 'Shoes'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892138/egg_egmswp.mp4',
-      'solution': 'Egg'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892138/cricket_f0a9ik.mp4',
-      'solution': 'Cricket'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892139/garden_pwxfez.mp4',
-      'solution': 'Garden'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892141/train_h4wgxx.mp4',
-      'solution': 'Train'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892142/flower_wyc7aj.mp4',
-      'solution': 'Flower'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892142/mirror_wtdydk.mp4',
-      'solution': 'Mirror'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892143/tree_ed0q7g.mp4',
-      'solution': 'Tree'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892145/bus_svvoj3.mp4',
-      'solution': 'Bus'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892145/floor_xnnsb1.mp4',
-      'solution': 'Floor'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734892147/moon_bphrg5.mp4',
-      'solution': 'Moon'
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/already_jniiti.mp4',
+      'solution': 'Already'
     },
   ];
 
@@ -251,7 +146,7 @@ class _AdverbQuizState extends State<AdverbQuiz> {
   }
 
   void generateRandomQuiz() {
-    selectedQuestions = [...questionsAndSolutions]..shuffle();
+    selectedQuestions = [...adverbsAndSolutions]..shuffle();
     selectedQuestions = selectedQuestions.sublist(0, 6);
   }
 
@@ -280,7 +175,7 @@ class _AdverbQuizState extends State<AdverbQuiz> {
 
     while (options.length < 4) {
       String randomOption =
-          questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]
+          adverbsAndSolutions[random.nextInt(adverbsAndSolutions.length)]
               ['solution'];
       if (!options.contains(randomOption)) {
         options.add(randomOption);
