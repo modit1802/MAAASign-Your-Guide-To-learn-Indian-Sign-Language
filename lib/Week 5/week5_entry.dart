@@ -11,6 +11,8 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 import '../Challengers_All_Weeks/challenger_week3/challenger3.dart';
 import '../Week 3/nounstart.dart';
+import 'adjectivestart.dart';
+import 'adverbstart.dart';
 
 class Week5Entry extends StatefulWidget {
   const Week5Entry({super.key});
@@ -150,7 +152,7 @@ class _Week5EntryState extends State<Week5Entry> {
 
                     // Alphabet Circle widget - Card 1
                     _buildCard(
-                      onTap: () => _handleCardTap(0, const VerbStartScreen()),
+                      onTap: () => _handleCardTap(0, const AdjectiveStartScreen()),
                       imagePath: 'images/adjectives.jpg',
                       color: const Color.fromARGB(255, 255, 255, 255),
                       title: 'Adjectives',
@@ -162,7 +164,7 @@ class _Week5EntryState extends State<Week5Entry> {
 
                     // Number Circle widget - Card 2
                     _buildCard(
-                      onTap: () => _handleCardTap(1, const NounStartScreen()),
+                      onTap: () => _handleCardTap(1, const AdverbStartScreen()),
                       imagePath: 'images/adverbs.png',
                       color: Colors.white,
                       title: 'Adverbs',
