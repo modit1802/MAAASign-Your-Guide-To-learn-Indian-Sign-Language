@@ -21,7 +21,6 @@ class _VideoWidgetState extends State<VideoWidget> {
   void initState() {
     super.initState();
     _initializeController(widget.videoUrl);
-    
   }
 
   @override
@@ -138,7 +137,7 @@ class _ThirdGameState extends State<ThirdGame> {
         'hello':
             'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/hello_u_hmbf7y.mp4',
         'namaste':
-            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/namaste_u_iptdsn.mp4',
+            'https://res.cloudinary.com/dfph32nsq/video/upload/v1736093012/namaste_u_iptdsn_lrun3n.mp4',
         'father':
             'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266839/father_u_jdbajr.mp4',
         'mother':
@@ -171,7 +170,7 @@ class _ThirdGameState extends State<ThirdGame> {
         'hy':
             'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266600/hy_u_dfsvt4.mp4',
         'namaste':
-            'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266608/namaste_u_iptdsn.mp4',
+            'https://res.cloudinary.com/dfph32nsq/video/upload/v1736093012/namaste_u_iptdsn_lrun3n.mp4',
         'father':
             'https://res.cloudinary.com/dfph32nsq/video/upload/v1730266839/father_u_jdbajr.mp4',
         'mother':
@@ -268,7 +267,7 @@ class _ThirdGameState extends State<ThirdGame> {
         "welcome":
             "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266601/welcome_u_np7ibt.mp4",
         "brother":
-            "https://res.cloudinary.com/dfph32nsq/video/upload/v1730266840/brother_u_dg76hq.mp4",
+            "https://res.cloudinary.com/dfph32nsq/video/upload/v1736093467/brother_u_dg76hq_tubshm.mp4",
         'welcome_i':
             'https://res.cloudinary.com/dfph32nsq/image/upload/v1731056082/WELCOME_id8mnm.png',
         'brother_i':
