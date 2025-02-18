@@ -62,7 +62,7 @@ class _PLay_Incorrect_PronounsState
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> pronouns = ['I', 'You', 'He', 'She', 'It', 'We', 'They'];
+    List<String> pronouns = ['I', 'You', 'He', 'She', 'It', 'We', 'They', 'My'];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer

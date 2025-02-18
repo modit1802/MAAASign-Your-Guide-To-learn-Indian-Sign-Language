@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
+import 'Week 5/week5_entry.dart';
+
 class ChallengePage extends StatefulWidget {
   const ChallengePage({super.key});
 
@@ -465,32 +467,45 @@ Widget build(BuildContext context) {
                                   scoreChallengerWeek1: int.parse(score_challenger_week4??'0'),
                               ),
                             ),
-               Padding(
+                    if (score_challenger_week4 != null && int.parse(score_challenger_week4 ?? '0') > 650) Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/Chapter5.png'),
-                        title: 'Verb Placement and Tense 🔒',
+                        title: 'Adjectives and Adverbs',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Week5Entry()),
+                          );
+                        }, scoreChallengerWeek1: int.parse(score_challenger_week4??'0'),
+                      ),
+                    ) else Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/Chapter5.png'),
+                        title: 'Adjectives and Adverbs 🔒',
                         onTap: () {
                           ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text("Week 5 will be available soon"),
-                                    ),
-                                  );
+                            SnackBar(
+                              content: Text("Can't open this week yet please score more than 650 in week 4"),
+                            ),
+                          );
                         },
-                        scoreChallengerWeek1: int.parse(comingsoon!??'0'),
+                        scoreChallengerWeek1: int.parse(score_challenger_week4??'0'),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
                         image: AssetImage('images/Chapter6.png'),
-                        title: 'Adjectives and Adverbs 🔒',
+                        title: 'Verb Placement and Tense 🔒',
                         onTap: () {
                           ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text("Week 6 will be available soon"),
-                                    ),
-                                  );
+                            SnackBar(
+                              content: Text("Week 6 will be available soon"),
+                            ),
+                          );
                         },
                         scoreChallengerWeek1: int.parse(comingsoon!??'0'),
                       ),
