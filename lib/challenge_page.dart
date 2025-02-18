@@ -470,7 +470,7 @@ Widget build(BuildContext context) {
                     if (score_challenger_week4 != null && int.parse(score_challenger_week4 ?? '0') > 650) Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
-                        image: AssetImage('images/Chapter5.png'),
+                        image: AssetImage('images/Week5.png'),
                         title: 'Adjectives and Adverbs',
                         onTap: () {
                           Navigator.push(
@@ -483,7 +483,7 @@ Widget build(BuildContext context) {
                     ) else Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: buildCustomCard(
-                        image: AssetImage('images/Chapter5.png'),
+                        image: AssetImage('images/Week5.png'),
                         title: 'Adjectives and Adverbs 🔒',
                         onTap: () {
                           ScaffoldMessenger.of(context).showSnackBar(
