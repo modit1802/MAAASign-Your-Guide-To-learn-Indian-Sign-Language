@@ -187,51 +187,26 @@ class Verbs_links extends StatefulWidget {
 }
 
 class _Verbs_linksState extends State<Verbs_links> {
-  final Map<String, String> greetingGifs = const {
-    'Come': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/come_l_xxndp7.mp4',
-    'Eat': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/eat_l_kqflhk.mp4',
-    'Drink': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/drink_l_qcxtet.mp4',
-    'Read': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/read_l_pdsx7g.mp4',
-    'Write': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558847/write_l_i7jrlt.mp4',
-    'Sleep': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/sleep_l_wej9uh.mp4',
-    'Walk': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558851/walk_l_urzxqn.mp4',
-    'Talk': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/talk_l_zurskm.mp4',
-    'Wake Up': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/wake_up_l_o1upds.mp4',
-    'Work': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/work_l_ik2ynw.mp4',
-    'Finish': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558848/finish_l_vl1692.mp4',
-    'Use': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730558849/use_l_nwwifk.mp4',
-    'Cook': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730559387/cook_l_tao1wz.mp4',
-    'Wash':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409737/Wash_labelled_jvhgir.mp4',
-    'Fly':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890135/fly__labelled_j9xcbb.mp4',
-    'Give':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409738/Give_labelled_n99bii.mp4',
-    'Teach':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409737/Teach_labelled_urxibn.mp4',
-    'Swim':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890142/swim_labelled_mkv4nm.mp4',
-    'Live':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409740/Live_labelled_im0cj3.mp4',
-    'Love':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409740/Love_labelled_flwjac.mp4',
-    'See':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409740/See_labelled_vbmmjz.mp4',
-    'Go':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409740/Go_labelled_crsq3i.mp4',
-    'Look':'https://res.cloudinary.com/dfph32nsq/video/upload/v1731409741/Look_labelled_xp94zn.mp4',
-    'Catch':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890133/catch_labelled_p3cske.mp4',
-    'Cry':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890134/cry_labelled_imopdy.mp4',
-    'Wear':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890135/wear_labelled_hq6leo.mp4',
-    'Grow':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890136/grow_labelled_kfenxp.mp4',
-    'Drive':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890137/drive_labelled_ucmbgh.mp4',
-    'Sing':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890137/sing_labelled_x6vmao.mp4',
-    'Clean':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890138/clean_labelled_odui5v.mp4',
-    'Wait':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890138/wait_labelled_apa5d1.mp4',
-    'Jump':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890138/jump_labelled_djtf90.mp4',
-    'Listen':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/listen_labelled_oqridg.mp4',
-    'Sit':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/sit_labelled_qjmkel.mp4',
-    'Think':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/think_labelled_s6wwuc.mp4',
-    'Stand':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/stand_labelled_eqp833.mp4',
-    'Meet':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890139/meet_labelled_gumy3r.mp4',
-    'Dance':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890140/dance_labelled_esqtcb.mp4',
-    'Run':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890140/run_labelled_yc8zzk.mp4',
-    'Play':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890141/play_labelled_mqufuu.mp4',
-    'Smile':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890140/smile_labelled_il8qfa.mp4',
-    'Draw':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890141/draw_labelled_kphqz2.mp4',
-    'Travel':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890144/travel_labelled_txpf7d.mp4',
+  final Map<String, String> adverbGifs = const {
+    'Quickly': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890316/quickly_l_lfzjwa.mp4',
+    'Hard': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739889429/hard_l_ihtrjs.mp4',
+    'Now': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890312/now_l_tnom21.mp4',
+    'Soon': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890313/soon_l_km8cr8.mp4',
+    'Tomorrow': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890242/tomorrow_l_zryue2.mp4',
+    'Today': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890250/today_l_n0sasm.mp4',
+    'Yesterday': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890222/yesterday_l_buidwj.mp4',
+    'Here': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890250/here_l_sp6nte.mp4',
+    'There': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890241/there_l_v2lz4e.mp4',
+    'Always': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890250/always_l_iloz1c.mp4',
+    'Often': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890315/often_l_nurme5.mp4',
+    'Sometimes': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890312/sometimes_l_id1uz7.mp4',
+    'Rarely': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890313/rarely_l_czma80.mp4',
+    'Never': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890299/never_l_ene69b.mp4',
+    'Very': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890311/very_l_oycivk.mp4',
+    'Enough': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890310/enough_l_hszrfy.mp4',
+    'Already': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739890249/already_l_qmrf0k.mp4',
   };
+
 
   int _currentIndex = 0;
 
@@ -265,9 +240,9 @@ class _Verbs_linksState extends State<Verbs_links> {
     return Center(
       child: PageView.builder(
         onPageChanged: _onPageChanged,
-        itemCount: greetingGifs.length,
+        itemCount: adverbGifs.length,
         itemBuilder: (context, index) {
-          final url = greetingGifs.values.elementAt(index);
+          final url = adverbGifs.values.elementAt(index);
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
