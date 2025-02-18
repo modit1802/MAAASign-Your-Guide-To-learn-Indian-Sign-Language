@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:SignEase/Week%203/Nouns_Result.dart';
+import 'package:SignEase/Week%205/Adverbs_Result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
@@ -329,7 +329,7 @@ class _AdverbQuizState extends State<AdverbQuiz> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Quiz_Noun_ResultScreen(
+            builder: (context) => Quiz_Adverb_ResultScreen(
               score: score,
               correctcount: correctCount,
               incorrectcount: incorrectCount,
@@ -435,7 +435,7 @@ Widget build(BuildContext context) {
                       Transform.translate(
                         offset: Offset(0, -screenHeight * 0.059),
                         child: Text(
-                          "Identify the signs for each Nouns",
+                          "Identify the signs for each Adverbs",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isSmallScreen ? 18 : 24,

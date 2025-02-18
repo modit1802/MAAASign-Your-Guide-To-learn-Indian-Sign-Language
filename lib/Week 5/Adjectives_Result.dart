@@ -4,6 +4,8 @@ import 'package:SignEase/Week%203/play_incorrect_verb.dart';
 import 'package:SignEase/Week%202/review_incorrect_videos.dart';
 import 'package:SignEase/Week%203/verb_quiz.dart';
 import 'package:SignEase/Week%203/week3_entry.dart';
+import 'package:SignEase/Week%205/play_incorrect_adjective.dart';
+import 'package:SignEase/Week%205/week5_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -11,6 +13,8 @@ import 'package:share_plus/share_plus.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pdf/widgets.dart' as pw;
+
+import 'adjective_quiz.dart';
 
 class Quiz_Adjective_ResultScreen extends StatefulWidget {
   final int score;
@@ -69,7 +73,7 @@ class _Quiz_Adjective_ResultScreenState
       var userDoc = await userCollection.findOne(mongo.where.eq('userId', userId));
 
       // Define the week key
-      String weekKey = 'week3';
+      String weekKey = 'week5';
 
       if (userDoc == null) {
         // If user doesn't exist, insert new document with only Score_verb
@@ -77,9 +81,9 @@ class _Quiz_Adjective_ResultScreenState
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_verb': {
-                'score_verb': widget.score,
-                'incorrectQuestions_verb': widget.incorrectQuestions,
+              'Score_adjective': {
+                'score_adjective': widget.score,
+                'incorrectQuestions_adjective': widget.incorrectQuestions,
               }
             }
           }
@@ -88,9 +92,9 @@ class _Quiz_Adjective_ResultScreenState
         // If user exists, add or update only the Score_verb field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_verb', {
-            'score_verb': widget.score,
-            'incorrectQuestions_verb': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_adjective', {
+            'score_adjective': widget.score,
+            'incorrectQuestions_adjective': widget.incorrectQuestions,
           }),
         );
       }
@@ -304,7 +308,7 @@ class _Quiz_Adjective_ResultScreenState
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PLay_Incorrect_Verbs(
+                                        PLay_Incorrect_Adjectives(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
                                           score1: widget.score,
@@ -324,7 +328,7 @@ class _Quiz_Adjective_ResultScreenState
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          VerbQuiz()));
+                                          AdjectiveQuiz()));
                             },
                             child: _buildCircularButton(
                                 Icons.refresh, "Play Again", Colors.teal)),
@@ -333,10 +337,10 @@ class _Quiz_Adjective_ResultScreenState
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Week3Entry()));
+                                    builder: (context) => Week5Entry()));
                           },
                           child: _buildCircularButton(
-                              Icons.arrow_back, "Week 3", Colors.pink),
+                              Icons.arrow_back, "Week 5", Colors.pink),
                         ),
                         GestureDetector(
                           onTap: () {

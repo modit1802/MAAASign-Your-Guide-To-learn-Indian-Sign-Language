@@ -6,6 +6,8 @@ import 'package:SignEase/Week%203/play_incorrect_noun.dart';
 import 'package:SignEase/Week%202/review_incorrect_videos.dart';
 import 'package:SignEase/Week%203/noun_quiz.dart';
 import 'package:SignEase/Week%203/week3_entry.dart';
+import 'package:SignEase/Week%205/play_incorrect_adverb.dart';
+import 'package:SignEase/Week%205/week5_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -71,7 +73,7 @@ class _Quiz_Adverb_ResultScreenState
       var userDoc = await userCollection.findOne(mongo.where.eq('userId', userId));
 
       // Define the week key
-      String weekKey = 'week3';
+      String weekKey = 'week5';
 
       if (userDoc == null) {
         // If user doesn't exist, insert new document with only Score_noun
@@ -79,9 +81,9 @@ class _Quiz_Adverb_ResultScreenState
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_noun': {
-                'score_noun': widget.score,
-                'incorrectQuestions_noun': widget.incorrectQuestions,
+              'Score_adverb': {
+                'score_adverb': widget.score,
+                'incorrectQuestions_adverb': widget.incorrectQuestions,
                 'incorrectcount1':widget.incorrectcount,
               }
             }
@@ -91,9 +93,9 @@ class _Quiz_Adverb_ResultScreenState
         // If user exists, add or update only the Score_noun field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_noun', {
-            'score_noun': widget.score,
-            'incorrectQuestions_noun': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_adverb', {
+            'score_adverb': widget.score,
+            'incorrectQuestions_adverb': widget.incorrectQuestions,
           }),
         );
       }
@@ -307,7 +309,7 @@ class _Quiz_Adverb_ResultScreenState
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PLay_Incorrect_Nouns(
+                                        PLay_Incorrect_Adverbs(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
                                           score1: widget.score,
@@ -336,10 +338,10 @@ class _Quiz_Adverb_ResultScreenState
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Week3Entry()));
+                                    builder: (context) => Week5Entry()));
                           },
                           child: _buildCircularButton(
-                              Icons.arrow_back, "Week 1", Colors.pink),
+                              Icons.arrow_back, "Week 5", Colors.pink),
                         ),
                         GestureDetector(
                           onTap: () {

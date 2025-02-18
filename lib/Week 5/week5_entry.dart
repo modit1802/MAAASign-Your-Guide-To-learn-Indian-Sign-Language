@@ -1,16 +1,10 @@
-import 'package:SignEase/Challengers_All_Weeks/challenger_week1/challenger1.dart';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/Week%201/alphabetstart.dart';
-import 'package:SignEase/Week%201/numberstart.dart';
-import 'package:SignEase/Week%203/pronounstart.dart';
-import 'package:SignEase/Week%203/verbstart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
 import '../Challengers_All_Weeks/challenger_week3/challenger3.dart';
-import '../Week 3/nounstart.dart';
 import 'adjectivestart.dart';
 import 'adverbstart.dart';
 
@@ -29,8 +23,6 @@ class _Week5EntryState extends State<Week5Entry> {
   int score2=0;
   int score3=0;
   int score4=0;
-  int score5=0;
-  int score6=0;
   int score = 0;
   int score_challenger=0;
   @override
@@ -52,14 +44,12 @@ class _Week5EntryState extends State<Week5Entry> {
       final data = await collection.findOne({"userId": userId});
 
       setState(() {
-        score1 = (data?['week']?['week3']?['Score_verb']?['score_verb'] ?? 0) as int;
-        score2 = (data?['week']?['week3']?['Score_verb2']?['score_verb2'] ?? 0) as int;
-        score3 = (data?['week']?['week3']?['Score_noun']?['score_noun'] ?? 0) as int;
-        score4 = (data?['week']?['week3']?['Score_noun2']?['score_noun2'] ?? 0) as int;
-        score5 = (data?['week']?['week3']?['Score_pronoun']?['score_pronoun'] ?? 0) as int;
-        score6 = (data?['week']?['week3']?['Score_pronoun2']?['score_pronoun2'] ?? 0) as int;
-        score_challenger=(data?['week']?['week3']?['Score_Challenger_Week3']?['score_challenger'] ?? 0) as int;
-        score = score1 + score2 + score3 + score4 + score5 + score6;
+        score1 = (data?['week']?['week5']?['Score_adjective']?['score_adjective'] ?? 0) as int;
+        score2 = (data?['week']?['week5']?['Score_adjective2']?['score_adjective2'] ?? 0) as int;
+        score3 = (data?['week']?['week5']?['Score_adverb']?['score_adverb'] ?? 0) as int;
+        score4 = (data?['week']?['week5']?['Score_adverb2']?['score_adverb2'] ?? 0) as int;
+        score_challenger=(data?['week']?['week5']?['Score_Challenger_Week5']?['score_challenger'] ?? 0) as int;
+        score = score1 + score2 + score3 + score4;
       });
 
       await db.close();
@@ -70,8 +60,6 @@ class _Week5EntryState extends State<Week5Entry> {
         score2 = 0;
         score3 = 0;
         score4 = 0;
-        score5 = 0;
-        score6 = 0;
         score = 0;
         score_challenger=0;
       });
@@ -267,34 +255,22 @@ class _Week5EntryState extends State<Week5Entry> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Verb Quiz: $score1", style: const TextStyle(
+                            Text("Adjective Quiz: $score1", style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),),
-                            Text("Verb Bingo: $score2", style: const TextStyle(
+                            Text("Adjective Bingo: $score2", style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),),
-                            Text("Noun Quiz: $score3", style: const TextStyle(
+                            Text("Adverb Quiz: $score3", style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),),
-                            Text("Noun Bingo: $score4",style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            ),
-                            Text("Pronoun Quiz: $score5",style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            ),
-                            Text("Pronoun Bingo: $score6",style: const TextStyle(
+                            Text("Adverb Bingo: $score4",style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

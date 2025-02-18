@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:SignEase/Week%203/Verbs_Result.dart';
+import 'package:SignEase/Week%205/Adjectives_Result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
@@ -11,224 +11,137 @@ class AdjectiveQuiz extends StatefulWidget {
 }
 
 class _AdjectiveQuizState extends State<AdjectiveQuiz> {
-  List<Map<String, dynamic>> questionsAndSolutions = [
+  List<Map<String, dynamic>> adjectiveVideos = [
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530660/finish_abglyx.mp4',
-      'solution': 'Finish'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897613/beautiful_bz4eod.mp4',
+      'solution': 'Beautiful'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4',
-      'solution': 'Eat'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897758/delicious_fc16jv.mp4',
+      'solution': 'Delicious'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4',
-      'solution': 'Walk'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897768/intelligent_gvtnyz.mp4',
+      'solution': 'Intelligent'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/talk_jh3iqu.mp4',
-      'solution': 'Talk'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897621/bright_nof7io.mp4',
+      'solution': 'Bright'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/work_ejax98.mp4',
-      'solution': 'Work'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897773/proud_pk3f9s.mp4',
+      'solution': 'Proud'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/wake_up_c6pbs5.mp4',
-      'solution': 'Wake Up'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897766/hot_dqkqvc.mp4',
+      'solution': 'Hot(Feel)'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/use_gzlhmv.mp4',
-      'solution': 'Use'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897764/hot_things_sg4blu.mp4',
+      'solution': 'Hot(Things)'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/read_w5djtk.mp4',
-      'solution': 'Read'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897685/busy_l6ljzm.mp4',
+      'solution': 'Busy'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/sleep_vwyvtz.mp4',
-      'solution': 'Sleep'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897761/fast_hdlcaz.mp4',
+      'solution': 'Fast'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4',
-      'solution': 'Cook'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897760/fresh_afehew.mp4',
+      'solution': 'Fresh'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/write_omxdnp.mp4',
-      'solution': 'Write'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897706/cold_bewa1z.mp4',
+      'solution': 'Cold'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4',
-      'solution': 'Drink'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897616/bad_y4ocsr.mp4',
+      'solution': 'Bad'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4',
-      'solution': 'Come'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897609/big_wqdsar.mp4',
+      'solution': 'Big'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410721/go_idycp2.mp4',
-      'solution': 'Go'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897762/good_j1od8d.mp4',
+      'solution': 'Good'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410725/wash_cstfkb.mp4',
-      'solution': 'Wash'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897781/tall_ugh0zs.mp4',
+      'solution': 'Tall'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410726/live_ge7jys.mp4',
-      'solution': 'Live'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897778/short_djtuin.mp4',
+      'solution': 'Short'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410727/love_d6fjxt.mp4',
-      'solution': 'Love'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897772/old_llxpk8.mp4',
+      'solution': 'Old(Things)'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890674/fly_bm5i6w.mp4',
-      'solution': 'Fly'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897770/old_people_migzzj.mp4',
+      'solution': 'Old(People)'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410729/look_qm9e55.mp4',
-      'solution': 'Look'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897784/young_iffauh.mp4',
+      'solution': 'Young'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410730/teach_bzjkbw.mp4',
-      'solution': 'Teach'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897759/early_lk630z.mp4',
+      'solution': 'Early'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410730/see_hdv0qq.mp4',
-      'solution': 'See'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897770/late_coixse.mp4',
+      'solution': 'Late'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410731/give_lminrz.mp4',
-      'solution': 'Give'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897762/happy_aql9hw.mp4',
+      'solution': 'Happy'
     },
     {
-      'question':
-          'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890682/swim_rqfbkd.mp4',
-      'solution': 'Swim'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897775/sad_icm5u1.mp4',
+      'solution': 'Sad'
     },
     {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890666/wait_jb17dl.mp4',
-      'solution': 'Wait'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897609/angry_smme0q.mp4',
+      'solution': 'Angry'
     },
     {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890667/wear_fkpoy7.mp4',
-      'solution': 'Wear'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897767/important_ah3jxw.mp4',
+      'solution': 'Important'
     },
     {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890668/drive_anmwpx.mp4',
-      'solution': 'Drive'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897783/weak_cjvisf.mp4',
+      'solution': 'Weak'
     },
     {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890668/dance_uxql6k.mp4',
-      'solution': 'Dance'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897777/sick_btmtcd.mp4',
+      'solution': 'Sick'
     },
     {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890668/draw_nv18vo.mp4',
-      'solution': 'Draw'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897781/white_ufozsj.mp4',
+      'solution': 'White'
     },
     {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890669/travel_vtddll.mp4',
-      'solution': 'Travel'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897779/sweet_ohin7f.mp4',
+      'solution': 'Sweet'
     },
     {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890669/clean_a12isl.mp4',
-      'solution': 'Clean'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897774/quiet_f9no21.mp4',
+      'solution': 'Quiet'
     },
     {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890671/listen_brxvjq.mp4',
-      'solution': 'Listen'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897758/dark_islurc.mp4',
+      'solution': 'Dark'
     },
     {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890670/jump_c38hgb.mp4',
-      'solution': 'Jump'
+      'question': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897785/yellow_rluoxo.mp4',
+      'solution': 'Yellow'
     },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890671/cry_s2tyyz.mp4',
-      'solution': 'Cry'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890671/catch_ngo7mv.mp4',
-      'solution': 'Catch'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890672/meet_ivsfa2.mp4',
-      'solution': 'Meet'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890674/stand_fejkqq.mp4',
-      'solution': 'Stand'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890675/smile_sjxvzd.mp4',
-      'solution': 'Smile'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890675/think_pjswbu.mp4',
-      'solution': 'Think'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890676/sing_r6mzzg.mp4',
-      'solution': 'Sing'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890676/grow_md03gs.mp4',
-      'solution': 'Grow'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890678/run_ac37ln.mp4',
-      'solution': 'Run'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890679/sit_nci0xg.mp4',
-      'solution': 'Sit'
-    },
-    {
-      'question':
-      'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890679/play_tei2bg.mp4',
-      'solution': 'Play'
-    },
-
   ];
+
 
   List<Map<String, dynamic>> selectedQuestions = [];
   List<Map<String, dynamic>> incorrectQuestions = [];
@@ -277,7 +190,7 @@ class _AdjectiveQuizState extends State<AdjectiveQuiz> {
   }
 
   void generateRandomQuiz() {
-    selectedQuestions = [...questionsAndSolutions]..shuffle();
+    selectedQuestions = [...adjectiveVideos]..shuffle();
     selectedQuestions = selectedQuestions.sublist(0, 6);
   }
 
@@ -306,7 +219,7 @@ class _AdjectiveQuizState extends State<AdjectiveQuiz> {
 
     while (options.length < 4) {
       String randomOption =
-          questionsAndSolutions[random.nextInt(questionsAndSolutions.length)]
+      adjectiveVideos[random.nextInt(adjectiveVideos.length)]
               ['solution'];
       if (!options.contains(randomOption)) {
         options.add(randomOption);
@@ -355,7 +268,7 @@ class _AdjectiveQuizState extends State<AdjectiveQuiz> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Quiz_Verb_ResultScreen(
+            builder: (context) => Quiz_Adjective_ResultScreen(
               score: score,
               correctcount: correctCount,
               incorrectcount: incorrectCount,
@@ -461,7 +374,7 @@ Widget build(BuildContext context) {
                       Transform.translate(
                         offset: Offset(0, -screenHeight * 0.059),
                         child: Text(
-                          "Identify the signs for each Verbs",
+                          "Identify the signs for each Adjectives",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isSmallScreen ? 18 : 24,

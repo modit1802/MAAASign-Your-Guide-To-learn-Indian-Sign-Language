@@ -66,19 +66,25 @@ class _PLay_Incorrect_AdjectivesState
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> pronouns = ['Come', 'Drink', 'Eat', 'Cook', 'Walk', 'Write', 'Read', 'Wake Up', 'Use', 'Finish', 'Talk', 'Work', 'Sleep',"Play", "Sit", "Run", "Grow", "Sing", "Think", "Smile", "Stand", "Catch", "Meet", "Cry", "Jump", "Listen", "Clean", "Travel", "Draw", "Dance", "Drive", "Wear", "Wait"];
+    List<String> adjectives = [
+      'Beautiful', 'Delicious', 'Intelligent', 'Bright', 'Proud',
+      'Hot', 'Hot', 'Busy', 'Fast', 'Fresh', 'Cold', 'Bad',
+      'Big', 'Good', 'Tall', 'Short', 'Old', 'Old', 'Young',
+      'Early', 'Late', 'Happy', 'Sad', 'Angry', 'Important',
+      'Weak', 'Sick', 'White', 'Sweet', 'Quiet', 'Dark', 'Yellow'
+    ];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer
 
     // Remove the correct solution from the pronouns list to avoid duplication
-    pronouns.remove(correctSolution);
+    adjectives.remove(correctSolution);
 
     Random random = Random();
 
     while (options.length < 4) {
       // Select a random pronoun from the remaining options
-      String randomPronoun = pronouns[random.nextInt(pronouns.length)];
+      String randomPronoun = adjectives[random.nextInt(adjectives.length)];
       if (!options.contains(randomPronoun)) {
         options.add(randomPronoun);
       }
@@ -223,7 +229,7 @@ Widget build(BuildContext context) {
                       Transform.translate(
                         offset: Offset(0, -screenHeight * 0.059),
                         child: Text(
-                          "Identify the signs for each Verb",
+                          "Identify the signs for each Adjective",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isSmallScreen ? 18 : 24,

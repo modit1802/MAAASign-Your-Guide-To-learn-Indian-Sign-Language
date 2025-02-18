@@ -62,19 +62,23 @@ class _PLay_Incorrect_AdverbsState
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> nouns = ['School', 'Breakfast', 'Lunch', 'Dinner', 'Book', 'Morning', 'Work', 'Hands', 'Deaf', 'Market', 'Tea', 'Office',"Egg", "Floor", "Moon", "Water", "Table", "Tree", "Bus", "Car", "Cricket", "Flower", "Shirt", "Chair", "Shoes", "Coffee", "Sun", "Mirror", "Garden", "Train", "Delhi", "Football"];
+    List<String> adverbs = [
+      'Quickly', 'Hard', 'Now', 'Soon', 'Tomorrow', 'Today', 'Yesterday',
+      'Here', 'There', 'Always', 'Often', 'Sometimes', 'Rarely',
+      'Never', 'Very', 'Enough', 'Already'
+    ];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer
 
     // Remove the correct solution from the nouns list to avoid duplication
-    nouns.remove(correctSolution);
+    adverbs.remove(correctSolution);
 
     Random random = Random();
 
     while (options.length < 4) {
       // Select a random pronoun from the remaining options
-      String randomPronoun = nouns[random.nextInt(nouns.length)];
+      String randomPronoun = adverbs[random.nextInt(adverbs.length)];
       if (!options.contains(randomPronoun)) {
         options.add(randomPronoun);
       }
@@ -218,7 +222,7 @@ Widget build(BuildContext context) {
                       Transform.translate(
                         offset: Offset(0, -screenHeight * 0.059),
                         child: Text(
-                          "Identify the signs for each Noun",
+                          "Identify the signs for each Adverb",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isSmallScreen ? 18 : 24,
