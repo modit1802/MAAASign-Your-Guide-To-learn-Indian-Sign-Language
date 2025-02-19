@@ -197,7 +197,7 @@ class _Week3EntryState extends State<Week3Entry> {
                       description: score >= 2500
                           ? 'Challenge yourself to unlock Week 4!'
                           : 'Score 2500+ to unlock!',
-                      index: 2,
+                      index: 3,
                     ),
                   ],
                 ),

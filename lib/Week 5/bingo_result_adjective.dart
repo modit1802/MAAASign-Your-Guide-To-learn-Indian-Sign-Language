@@ -2,9 +2,10 @@
 
 import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/Week%203/play_incorrect_noun.dart';
 import 'package:SignEase/Week%202/review_incorrect_videos.dart';
-import 'package:SignEase/Week%203/noun_quiz.dart';
+import 'package:SignEase/Week%203/play_incorrect_verb.dart';
+import 'package:SignEase/Week%203/verb_practice2.dart';
+import 'package:SignEase/Week%203/verb_quiz.dart';
 import 'package:SignEase/Week%203/week3_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,14 +15,14 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class Quiz_Noun_ResultScreen extends StatefulWidget {
+class Bingo_Adjective_ResultScreen extends StatefulWidget {
   final int score;
   final int totalQuestions;
   final int correctcount;
   final int incorrectcount;
   final List<Map<String, dynamic>> incorrectQuestions;
 
-  const Quiz_Noun_ResultScreen({
+  const Bingo_Adjective_ResultScreen({
     Key? key,
     required this.score,
     required this.totalQuestions,
@@ -31,12 +32,12 @@ class Quiz_Noun_ResultScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Quiz_Noun_ResultScreen> createState() =>
-      _Quiz_Noun_ResultScreenState();
+  State<Bingo_Adjective_ResultScreen> createState() =>
+      _Bingo_Adjective_ResultScreenState();
 }
 
-class _Quiz_Noun_ResultScreenState
-    extends State<Quiz_Noun_ResultScreen> {
+class _Bingo_Adjective_ResultScreenState
+    extends State<Bingo_Adjective_ResultScreen> {
   final ScreenshotController _screenshotController = ScreenshotController();
 
   late mongo.Db db;
@@ -74,26 +75,26 @@ class _Quiz_Noun_ResultScreenState
       String weekKey = 'week3';
 
       if (userDoc == null) {
-        // If user doesn't exist, insert new document with only Score_noun
+        // If user doesn't exist, insert new document with only Score_verb
         await userCollection.insert({
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_noun': {
-                'score_noun': widget.score,
-                'incorrectQuestions_noun': widget.incorrectQuestions,
-                'incorrectcount1':widget.incorrectcount,
+              'Score_verb2': {
+                'score_verb2': widget.score,
+                'incorrectQuestions_verb2': widget.incorrectQuestions,
+                'incorrectcount2':widget.incorrectcount,
               }
             }
           }
         });
       } else {
-        // If user exists, add or update only the Score_noun field inside week1
+        // If user exists, add or update only the Score_verb field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_noun', {
-            'score_noun': widget.score,
-            'incorrectQuestions_noun': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_verb2', {
+            'score_verb2': widget.score,
+            'incorrectQuestions_verb2': widget.incorrectQuestions,
           }),
         );
       }
@@ -307,7 +308,7 @@ class _Quiz_Noun_ResultScreenState
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PLay_Incorrect_Nouns(
+                                        PLay_Incorrect_Verbs(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
                                           score1: widget.score,
@@ -327,7 +328,7 @@ class _Quiz_Noun_ResultScreenState
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          NounQuiz()));
+                                          VideoBingoGame()));
                             },
                             child: _buildCircularButton(
                                 Icons.refresh, "Play Again", Colors.teal)),

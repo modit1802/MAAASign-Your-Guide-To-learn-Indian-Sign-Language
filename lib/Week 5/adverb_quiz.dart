@@ -1,82 +1,184 @@
 import 'dart:math';
+import 'package:SignEase/Week%205/Adverbs_Result.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:video_player/video_player.dart';
 
-class PLay_Incorrect_Pronouns extends StatefulWidget {
-  final List<Map<String, dynamic>> incorrectQuestions;
-
-  var score1;
-
-  PLay_Incorrect_Pronouns({Key? key, required this.incorrectQuestions, required this.score1})
-      : super(key: key);
-
+class AdverbQuiz extends StatefulWidget {
   @override
-  State<PLay_Incorrect_Pronouns> createState() =>
-      _PLay_Incorrect_PronounsState();
+  _AdverbQuizState createState() => _AdverbQuizState();
 }
 
-class _PLay_Incorrect_PronounsState
-    extends State<PLay_Incorrect_Pronouns> {
-  late VideoPlayerController _controller;
+class _AdverbQuizState extends State<AdverbQuiz> {
+  List<Map<String, dynamic>> adverbsAndSolutions = [
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/quickly_lsfkuy.mp4',
+      'solution': 'Quickly'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/hard_rqsoay.mp4',
+      'solution': 'Hard'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/now_en4dn1.mp4',
+      'solution': 'Now'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/soon_ljtjce.mp4',
+      'solution': 'Soon'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/tomorrow_ttp6fr.mp4',
+      'solution': 'Tomorrow'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904255/today_mxig1u.mp4',
+      'solution': 'Today'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/yesterday_aq8wxd.mp4',
+      'solution': 'Yesterday'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904255/here_mbkt2f.mp4',
+      'solution': 'Here'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/there_l9n2iy.mp4',
+      'solution': 'There'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904253/always_t0ulev.mp4',
+      'solution': 'Always'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/often_tp7ros.mp4',
+      'solution': 'Often'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/sometimes_gcawfc.mp4',
+      'solution': 'Sometimes'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/rarely_ie3yi7.mp4',
+      'solution': 'Rarely'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904253/never_zpvexx.mp4',
+      'solution': 'Never'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/very_vtzjsw.mp4',
+      'solution': 'Very'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/enough_nnofv5.mp4',
+      'solution': 'Enough'
+    },
+    {
+      'question':
+      'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/already_jniiti.mp4',
+      'solution': 'Already'
+    },
+  ];
 
-  List<Map<String, dynamic>> incorrectQuestions = [];
   List<Map<String, dynamic>> selectedQuestions = [];
-  List<String> currentOptions = [];
-  List<Color> _cardColors = List.filled(4, Colors.white);
-  List<Color> _textColors = List.filled(4, Colors.black);
-
+  List<Map<String, dynamic>> incorrectQuestions = [];
+  Random random = Random();
   int score = 0;
-  int correctcount = 0;
-  int incorrectcount = 0;
   int selectedOptionIndex = -1;
-  int score1=0;
+  List<String> currentOptions = [];
+  bool isLoading = true;
+  int correctCount = 0;
+  int incorrectCount = 0;
+  late mongo.Db db;
+  late mongo.DbCollection userCollection;
+  String? userId;
+  VideoPlayerController? videoController;
 
   @override
   void initState() {
     super.initState();
-    incorrectQuestions = widget.incorrectQuestions;
-    selectedQuestions = List.from(incorrectQuestions);
-    score1=widget.score1;// Copy the questions list
-    if (selectedQuestions.isNotEmpty) {
-      setOptionsForQuestion();
+    generateRandomQuiz();
+    _fetchUserId();
+    connectToMongoDB();
+    setOptionsForQuestion();
+  }
+
+  Future<void> _fetchUserId() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      setState(() {
+        userId = user.uid;
+      });
+      print('User ID: $userId');
     }
   }
 
-  // Initialize video player controller
-  void _initializeVideo(String videoUrl) {
-    _controller = VideoPlayerController.network(videoUrl)
-      ..initialize().then((_) {
-        _controller.setVolume(0.0);
-        setState(() {}); // Update the UI after initializing
-      })
-      ..setLooping(true)
-      ..play(); // Auto-play the video if needed
+  Future<void> connectToMongoDB() async {
+    db = mongo.Db(
+        'mongodb://moditgrover2003iii:modit1346@cluster0-shard-00-00.eocm8.mongodb.net:27017,cluster0-shard-00-01.eocm8.mongodb.net:27017,cluster0-shard-00-02.eocm8.mongodb.net:27017/mydatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority');
+
+    try {
+      await db.open();
+      userCollection = db.collection('users');
+      print("Connected to MongoDB!");
+    } catch (e) {
+      print("Error connecting to MongoDB: $e");
+    }
   }
 
-  @override
-  void dispose() {
-    _controller.removeListener(() {});
-    _controller.dispose();
-    
-    super.dispose();
+  void generateRandomQuiz() {
+    selectedQuestions = [...adverbsAndSolutions]..shuffle();
+    selectedQuestions = selectedQuestions.sublist(0, 6);
+  }
+
+  void setOptionsForQuestion() {
+    if (selectedQuestions.isNotEmpty) {
+      currentOptions = generateOptions(selectedQuestions[0]['solution']);
+      videoController =
+          VideoPlayerController.network(selectedQuestions[0]['question'])
+            ..initialize().then((_) {
+              videoController?.setVolume(0.0);
+              setState(() {});
+              videoController?.play();
+            })
+            ..addListener(() {
+              if (videoController!.value.position ==
+                  videoController!.value.duration) {
+                setState(() {});
+              }
+            });
+    }
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> pronouns = ['I', 'You', 'He', 'She', 'It', 'We', 'They', 'My'];
     List<String> options = [];
-
-    options.add(correctSolution); // Add the correct answer
-
-    // Remove the correct solution from the pronouns list to avoid duplication
-    pronouns.remove(correctSolution);
-
-    Random random = Random();
+    options.add(correctSolution);
 
     while (options.length < 4) {
-      // Select a random pronoun from the remaining options
-      String randomPronoun = pronouns[random.nextInt(pronouns.length)];
-      if (!options.contains(randomPronoun)) {
-        options.add(randomPronoun);
+      String randomOption =
+          adverbsAndSolutions[random.nextInt(adverbsAndSolutions.length)]
+              ['solution'];
+      if (!options.contains(randomOption)) {
+        options.add(randomOption);
       }
     }
 
@@ -84,70 +186,79 @@ class _PLay_Incorrect_PronounsState
     return options;
   }
 
+  List<Color> _cardColors = List.filled(4, Colors.white);
+  List<Color> _textColors = List.filled(4, Colors.black);
 
-  void setOptionsForQuestion() {
-    if (selectedQuestions.isNotEmpty) {
-      currentOptions = generateOptions(selectedQuestions[0]['correctSolution']);
-      _initializeVideo(selectedQuestions[0]['question']); // Load video for the question
-    } else {
-      // Handle end of quiz scenario, show results or navigate out
-      Navigator.pop(context); // Go back if no questions are left
-    }
-  }
-
-
- void _answerQuestion(String selectedOption, String correctSolution, int index) {
-  setState(() {
-    selectedOptionIndex = index;
-    if (selectedOption == correctSolution) {
-      score += 100;
-      _cardColors[index] = Colors.green;
-      _textColors[index] = Colors.white;
-      correctcount++;
-    } else {
-      _cardColors[index] = Colors.red;
-      _textColors[index] = Colors.white;
-      incorrectcount++;
-    }
-  });
-
-  // Delay to show the color and reset
-  Future.delayed(const Duration(seconds: 1), () {
+  void _answerQuestion(
+      String selectedOption, String correctSolution, int index) {
     setState(() {
-      _cardColors = List.filled(4, Colors.white);
-      _textColors = List.filled(4, Colors.black);
-      selectedOptionIndex = -1;
+      selectedOptionIndex = index;
+      if (selectedOption == correctSolution) {
+        score += 100;
+        _cardColors[index] = Colors.green;
+        _textColors[index] = Colors.white;
+        correctCount++;
+      } else {
+        _cardColors[index] = Colors.red;
+        _textColors[index] = Colors.white;
+        incorrectCount++;
+        incorrectQuestions.add({
+          'question': selectedQuestions[0]['question'],
+          'correctSolution': correctSolution,
+        });
+      }
     });
 
-    if (selectedQuestions.isNotEmpty) {
-      selectedQuestions.removeAt(0); // Remove the answered question
-      if (selectedQuestions.isNotEmpty) {
-        setOptionsForQuestion(); // Load next question
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        _cardColors = List.filled(4, Colors.white);
+        _textColors = List.filled(4, Colors.black);
+        selectedOptionIndex = -1;
+      });
+
+      if (selectedQuestions.length > 1) {
+        selectedQuestions.removeAt(0);
+        videoController?.dispose();
+        setOptionsForQuestion();
       } else {
-        // No questions left, navigate to results or exit
-        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Quiz_Adverb_ResultScreen(
+              score: score,
+              correctcount: correctCount,
+              incorrectcount: incorrectCount,
+              totalQuestions: 6,
+              incorrectQuestions: incorrectQuestions,
+            ),
+          ),
+        );
       }
-    }
-  });
-}
+    });
+  }
 
+  @override
+  void dispose() {
+    videoController?.removeListener(() {});
+    videoController?.dispose();
+    db.close();
+    super.dispose();
+  }
 
- Widget buildOptionCard(int index) {
+  Widget buildOptionCard(int index) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;
 
   return Padding(
     padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
     child: GestureDetector(
-      onTap: () {
-        if (selectedOptionIndex == -1) {
-          _answerQuestion(
-            currentOptions[index],
-            selectedQuestions[0]['correctSolution'], // Correct key for the solution
-            index,
-          );
-        }
-      },
+      onTap: selectedOptionIndex == -1
+          ? () => _answerQuestion(
+                currentOptions[index],
+                selectedQuestions[0]['solution'],
+                index,
+              )
+          : null,
       child: Card(
         elevation: screenWidth < 600 ? 8 : 12,
         color: _cardColors[index],
@@ -219,7 +330,7 @@ Widget build(BuildContext context) {
                       Transform.translate(
                         offset: Offset(0, -screenHeight * 0.059),
                         child: Text(
-                          "Identify the signs for each Pronoun",
+                          "Identify the signs for each Adverbs",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isSmallScreen ? 18 : 24,
@@ -262,19 +373,20 @@ Widget build(BuildContext context) {
                               Container(
                                 height: screenHeight * 0.43,
                                 child: Center(
-                                  child: _controller.value.isInitialized
+                                  child: videoController != null &&
+                                          videoController!.value.isInitialized
                                       ? Stack(
                                           alignment: Alignment.center,
                                           children: [
                                             AspectRatio(
-                                              aspectRatio: _controller
+                                              aspectRatio: videoController!
                                                   .value.aspectRatio,
                                               child: VideoPlayer(
-                                                  _controller!),
+                                                  videoController!),
                                             ),
-                                            if (_controller
+                                            if (videoController!
                                                     .value.position ==
-                                                _controller
+                                                videoController!
                                                     .value.duration)
                                               IconButton(
                                                 icon: Icon(
@@ -283,9 +395,9 @@ Widget build(BuildContext context) {
                                                   size: 30,
                                                 ),
                                                 onPressed: () {
-                                                  _controller!
+                                                  videoController!
                                                       .seekTo(Duration.zero);
-                                                  _controller!.play();
+                                                  videoController!.play();
                                                   setState(() {});
                                                 },
                                               ),

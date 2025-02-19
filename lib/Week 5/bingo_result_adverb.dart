@@ -14,14 +14,16 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class Quiz_Noun_ResultScreen extends StatefulWidget {
+import '../Week 3/noun_practice2.dart';
+
+class Bingo_Adverb_ResultScreen extends StatefulWidget {
   final int score;
   final int totalQuestions;
   final int correctcount;
   final int incorrectcount;
   final List<Map<String, dynamic>> incorrectQuestions;
 
-  const Quiz_Noun_ResultScreen({
+  const Bingo_Adverb_ResultScreen({
     Key? key,
     required this.score,
     required this.totalQuestions,
@@ -31,12 +33,12 @@ class Quiz_Noun_ResultScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Quiz_Noun_ResultScreen> createState() =>
-      _Quiz_Noun_ResultScreenState();
+  State<Bingo_Adverb_ResultScreen> createState() =>
+      _Bingo_Adverb_ResultScreenState();
 }
 
-class _Quiz_Noun_ResultScreenState
-    extends State<Quiz_Noun_ResultScreen> {
+class _Bingo_Adverb_ResultScreenState
+    extends State<Bingo_Adverb_ResultScreen> {
   final ScreenshotController _screenshotController = ScreenshotController();
 
   late mongo.Db db;
@@ -79,10 +81,10 @@ class _Quiz_Noun_ResultScreenState
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_noun': {
-                'score_noun': widget.score,
-                'incorrectQuestions_noun': widget.incorrectQuestions,
-                'incorrectcount1':widget.incorrectcount,
+              'Score_noun2': {
+                'score_noun2': widget.score,
+                'incorrectQuestions_noun2': widget.incorrectQuestions,
+                'incorrectcount2':widget.incorrectcount,
               }
             }
           }
@@ -91,9 +93,9 @@ class _Quiz_Noun_ResultScreenState
         // If user exists, add or update only the Score_noun field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_noun', {
-            'score_noun': widget.score,
-            'incorrectQuestions_noun': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_noun2', {
+            'score_noun2': widget.score,
+            'incorrectQuestions_noun2': widget.incorrectQuestions,
           }),
         );
       }
@@ -327,7 +329,7 @@ class _Quiz_Noun_ResultScreenState
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          NounQuiz()));
+                                          VideoBingoGame()));
                             },
                             child: _buildCircularButton(
                                 Icons.refresh, "Play Again", Colors.teal)),

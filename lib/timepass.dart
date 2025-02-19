@@ -1,11 +1,3 @@
-import 'package:SignEase/Week%201/learnalphabet.dart';
-import 'package:SignEase/Week%201/learnnumbers.dart';
-import 'package:SignEase/Week%202/learngreeting.dart';
-import 'package:SignEase/Week%202/learnrelations.dart';
-import 'package:SignEase/Week%203/learnnoun.dart';
-import 'package:SignEase/Week%203/learnpronoun.dart';
-import 'package:SignEase/Week%203/learnverbs.dart';
-import 'package:SignEase/Week%204/learn_basic_sentence_structure.dart';
 import 'package:SignEase/searched_video_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

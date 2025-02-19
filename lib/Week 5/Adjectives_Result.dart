@@ -1,11 +1,11 @@
-// ignore_for_file: file_names, avoid_print, sized_box_for_whitespace, avoid_unnecessary_containers
-
 import 'dart:io';
 import 'package:SignEase/Initial_page_1.dart';
-import 'package:SignEase/Week%203/play_incorrect_noun.dart';
+import 'package:SignEase/Week%203/play_incorrect_verb.dart';
 import 'package:SignEase/Week%202/review_incorrect_videos.dart';
-import 'package:SignEase/Week%203/noun_quiz.dart';
+import 'package:SignEase/Week%203/verb_quiz.dart';
 import 'package:SignEase/Week%203/week3_entry.dart';
+import 'package:SignEase/Week%205/play_incorrect_adjective.dart';
+import 'package:SignEase/Week%205/week5_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -14,14 +14,16 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class Quiz_Noun_ResultScreen extends StatefulWidget {
+import 'adjective_quiz.dart';
+
+class Quiz_Adjective_ResultScreen extends StatefulWidget {
   final int score;
   final int totalQuestions;
   final int correctcount;
   final int incorrectcount;
   final List<Map<String, dynamic>> incorrectQuestions;
 
-  const Quiz_Noun_ResultScreen({
+  const Quiz_Adjective_ResultScreen({
     Key? key,
     required this.score,
     required this.totalQuestions,
@@ -31,12 +33,12 @@ class Quiz_Noun_ResultScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Quiz_Noun_ResultScreen> createState() =>
-      _Quiz_Noun_ResultScreenState();
+  State<Quiz_Adjective_ResultScreen> createState() =>
+      _Quiz_Adjective_ResultScreenState();
 }
 
-class _Quiz_Noun_ResultScreenState
-    extends State<Quiz_Noun_ResultScreen> {
+class _Quiz_Adjective_ResultScreenState
+    extends State<Quiz_Adjective_ResultScreen> {
   final ScreenshotController _screenshotController = ScreenshotController();
 
   late mongo.Db db;
@@ -71,29 +73,28 @@ class _Quiz_Noun_ResultScreenState
       var userDoc = await userCollection.findOne(mongo.where.eq('userId', userId));
 
       // Define the week key
-      String weekKey = 'week3';
+      String weekKey = 'week5';
 
       if (userDoc == null) {
-        // If user doesn't exist, insert new document with only Score_noun
+        // If user doesn't exist, insert new document with only Score_verb
         await userCollection.insert({
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_noun': {
-                'score_noun': widget.score,
-                'incorrectQuestions_noun': widget.incorrectQuestions,
-                'incorrectcount1':widget.incorrectcount,
+              'Score_adjective': {
+                'score_adjective': widget.score,
+                'incorrectQuestions_adjective': widget.incorrectQuestions,
               }
             }
           }
         });
       } else {
-        // If user exists, add or update only the Score_noun field inside week1
+        // If user exists, add or update only the Score_verb field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_noun', {
-            'score_noun': widget.score,
-            'incorrectQuestions_noun': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_adjective', {
+            'score_adjective': widget.score,
+            'incorrectQuestions_adjective': widget.incorrectQuestions,
           }),
         );
       }
@@ -307,7 +308,7 @@ class _Quiz_Noun_ResultScreenState
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PLay_Incorrect_Nouns(
+                                        PLay_Incorrect_Adjectives(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
                                           score1: widget.score,
@@ -327,7 +328,7 @@ class _Quiz_Noun_ResultScreenState
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          NounQuiz()));
+                                          AdjectiveQuiz()));
                             },
                             child: _buildCircularButton(
                                 Icons.refresh, "Play Again", Colors.teal)),
@@ -336,10 +337,10 @@ class _Quiz_Noun_ResultScreenState
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Week3Entry()));
+                                    builder: (context) => Week5Entry()));
                           },
                           child: _buildCircularButton(
-                              Icons.arrow_back, "Week 3", Colors.pink),
+                              Icons.arrow_back, "Week 5", Colors.pink),
                         ),
                         GestureDetector(
                           onTap: () {

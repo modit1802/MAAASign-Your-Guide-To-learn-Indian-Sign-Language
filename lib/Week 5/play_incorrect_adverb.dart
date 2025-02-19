@@ -2,21 +2,21 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class PLay_Incorrect_Pronouns extends StatefulWidget {
+class PLay_Incorrect_Adverbs extends StatefulWidget {
   final List<Map<String, dynamic>> incorrectQuestions;
 
   var score1;
 
-  PLay_Incorrect_Pronouns({Key? key, required this.incorrectQuestions, required this.score1})
+  PLay_Incorrect_Adverbs({Key? key, required this.incorrectQuestions, required this.score1})
       : super(key: key);
 
   @override
-  State<PLay_Incorrect_Pronouns> createState() =>
-      _PLay_Incorrect_PronounsState();
+  State<PLay_Incorrect_Adverbs> createState() =>
+      _PLay_Incorrect_AdverbsState();
 }
 
-class _PLay_Incorrect_PronounsState
-    extends State<PLay_Incorrect_Pronouns> {
+class _PLay_Incorrect_AdverbsState
+    extends State<PLay_Incorrect_Adverbs> {
   late VideoPlayerController _controller;
 
   List<Map<String, dynamic>> incorrectQuestions = [];
@@ -55,26 +55,30 @@ class _PLay_Incorrect_PronounsState
 
   @override
   void dispose() {
-    _controller.removeListener(() {});
-    _controller.dispose();
+    _controller?.removeListener(() {});
+    _controller?.dispose();
     
     super.dispose();
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> pronouns = ['I', 'You', 'He', 'She', 'It', 'We', 'They', 'My'];
+    List<String> adverbs = [
+      'Quickly', 'Hard', 'Now', 'Soon', 'Tomorrow', 'Today', 'Yesterday',
+      'Here', 'There', 'Always', 'Often', 'Sometimes', 'Rarely',
+      'Never', 'Very', 'Enough', 'Already'
+    ];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer
 
-    // Remove the correct solution from the pronouns list to avoid duplication
-    pronouns.remove(correctSolution);
+    // Remove the correct solution from the nouns list to avoid duplication
+    adverbs.remove(correctSolution);
 
     Random random = Random();
 
     while (options.length < 4) {
       // Select a random pronoun from the remaining options
-      String randomPronoun = pronouns[random.nextInt(pronouns.length)];
+      String randomPronoun = adverbs[random.nextInt(adverbs.length)];
       if (!options.contains(randomPronoun)) {
         options.add(randomPronoun);
       }
@@ -130,7 +134,6 @@ class _PLay_Incorrect_PronounsState
     }
   });
 }
-
 
  Widget buildOptionCard(int index) {
   double screenWidth = MediaQuery.of(context).size.width;
@@ -219,7 +222,7 @@ Widget build(BuildContext context) {
                       Transform.translate(
                         offset: Offset(0, -screenHeight * 0.059),
                         child: Text(
-                          "Identify the signs for each Pronoun",
+                          "Identify the signs for each Adverb",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isSmallScreen ? 18 : 24,
@@ -262,19 +265,20 @@ Widget build(BuildContext context) {
                               Container(
                                 height: screenHeight * 0.43,
                                 child: Center(
-                                  child: _controller.value.isInitialized
+                                  child: _controller != null &&
+                                          _controller!.value.isInitialized
                                       ? Stack(
                                           alignment: Alignment.center,
                                           children: [
                                             AspectRatio(
-                                              aspectRatio: _controller
+                                              aspectRatio: _controller!
                                                   .value.aspectRatio,
                                               child: VideoPlayer(
                                                   _controller!),
                                             ),
-                                            if (_controller
+                                            if (_controller!
                                                     .value.position ==
-                                                _controller
+                                                _controller!
                                                     .value.duration)
                                               IconButton(
                                                 icon: Icon(
@@ -345,5 +349,4 @@ Widget build(BuildContext context) {
             child: CircularProgressIndicator(),
           ),
   );
-}
-}
+}}
