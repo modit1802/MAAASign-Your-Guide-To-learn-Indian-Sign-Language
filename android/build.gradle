@@ -1,18 +1,40 @@
+// Kotlin version updated to 1.8.10 (or higher) to resolve warning
+ext.kotlin_version = '1.8.10' 
+
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
 }
-                                                                                                        
+
 rootProject.buildDir = "../build"
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
 subprojects {
     project.evaluationDependsOn(":app")
 }
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
+}
+
+// Adding Kotlin plugin dependency to ensure compatibility
+buildscript {
+    ext {
+        kotlin_version = '1.8.10' // Make sure Kotlin is at least version 1.8.10
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:7.6.0' // Ensure Gradle plugin is updated
+    }
 }
