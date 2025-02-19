@@ -60,23 +60,25 @@ class _PLay_Incorrect_BingoState
   }
 
   List<String> generateOptions(String correctSolution) {
-    List<String> adverbs = [
-      'Quickly', 'Hard', 'Now', 'Soon', 'Tomorrow', 'Today', 'Yesterday',
-      'Here', 'There', 'Always', 'Often', 'Sometimes', 'Rarely',
-      'Never', 'Very', 'Enough', 'Already'
+    List<String> adjectives = [
+      'Beautiful', 'Delicious', 'Intelligent', 'Bright', 'Proud',
+      'Hot', 'Hot', 'Busy', 'Fast', 'Fresh', 'Cold', 'Bad',
+      'Big', 'Good', 'Tall', 'Short', 'Old', 'Old', 'Young',
+      'Early', 'Late', 'Happy', 'Sad', 'Angry', 'Important',
+      'Weak', 'Sick', 'White', 'Sweet', 'Quiet', 'Dark', 'Yellow'
     ];
     List<String> options = [];
 
     options.add(correctSolution); // Add the correct answer
 
     // Remove the correct solution from the pronouns list to avoid duplication
-    adverbs.remove(correctSolution);
+    adjectives.remove(correctSolution);
 
     Random random = Random();
 
     while (options.length < 4) {
       // Select a random pronoun from the remaining options
-      String randomPronoun = adverbs[random.nextInt(adverbs.length)];
+      String randomPronoun = adjectives[random.nextInt(adjectives.length)];
       if (!options.contains(randomPronoun)) {
         options.add(randomPronoun);
       }
@@ -210,7 +212,7 @@ class _PLay_Incorrect_BingoState
                       height: screenHeight * 0.03,
                     ),
                     Text(
-                      "Identify the below signs of Adverbs",
+                      "Identify the below signs of Adjectives",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: isSmallScreen ? 18 : 24,

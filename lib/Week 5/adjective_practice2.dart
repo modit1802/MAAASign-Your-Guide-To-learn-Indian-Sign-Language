@@ -28,51 +28,41 @@ class BingoScreen extends StatefulWidget {
 }
 
 class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStateMixin {
-  final Map<String, String> verbGifs =
-  {'Finish': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530660/finish_abglyx.mp4',
-    'Eat' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530657/eat_yaf2hc.mp4',
-    'Walk' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/walk_zsaaad.mp4',
-    'Talk' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/talk_jh3iqu.mp4',
-    'Work' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/work_ejax98.mp4',
-    'Wake Up' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/wake_up_c6pbs5.mp4',
-    'Use' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530655/use_gzlhmv.mp4',
-    'Read' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/read_w5djtk.mp4',
-    'Sleep' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530654/sleep_vwyvtz.mp4',
-    'Cook' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/cook_epek8y.mp4',
-    'Write' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/write_omxdnp.mp4',
-    'Drink' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/drink_fxt97a.mp4',
-    'Come' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530653/come_glgkmw.mp4',
-    'Go' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410721/go_idycp2.mp4',
-    'Wash' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410725/wash_cstfkb.mp4',
-    'Live' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410726/live_ge7jys.mp4',
-    'Love' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410727/love_d6fjxt.mp4',
-    'Fly' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890674/fly_bm5i6w.mp4',
-    'Look' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410729/look_qm9e55.mp4',
-    'Teach' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410730/teach_bzjkbw.mp4',
-    'See' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410730/see_hdv0qq.mp4',
-    'Give' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410731/give_lminrz.mp4',
-    'Swim' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890682/swim_rqfbkd.mp4',
-    'Play':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890679/play_tei2bg.mp4',
-    'Sit':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890679/sit_nci0xg.mp4',
-    'Run':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890678/run_ac37ln.mp4',
-    'Grow':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890676/grow_md03gs.mp4',
-    'Sing':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890676/sing_r6mzzg.mp4',
-    'Think':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890675/think_pjswbu.mp4',
-    'Smile':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890675/smile_sjxvzd.mp4',
-    'Stand':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890674/stand_fejkqq.mp4',
-    'Catch':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890671/catch_ngo7mv.mp4',
-    'Meet':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890672/meet_ivsfa2.mp4',
-    'Cry':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890671/cry_s2tyyz.mp4',
-    'Jump':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890670/jump_c38hgb.mp4',
-    'Listen':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890671/listen_brxvjq.mp4',
-    'Clean':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890669/clean_a12isl.mp4',
-    'Travel':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890669/travel_vtddll.mp4',
-    'Draw':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890668/draw_nv18vo.mp4',
-    'Dance':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890668/dance_uxql6k.mp4',
-    'Drive':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890668/drive_anmwpx.mp4',
-    'Wear':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890667/wear_fkpoy7.mp4',
-    'Wait':'https://res.cloudinary.com/dfph32nsq/video/upload/v1734890666/wait_jb17dl.mp4',
+  final Map<String, String> adjectiveVideos = {
+    'Beautiful': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897613/beautiful_bz4eod.mp4',
+    'Delicious': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897758/delicious_fc16jv.mp4',
+    'Intelligent': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897768/intelligent_gvtnyz.mp4',
+    'Bright': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897621/bright_nof7io.mp4',
+    'Proud': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897773/proud_pk3f9s.mp4',
+    'Hot(Feel)': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897766/hot_dqkqvc.mp4',
+    'Hot(Things)': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897764/hot_things_sg4blu.mp4',
+    'Busy': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897685/busy_l6ljzm.mp4',
+    'Fast': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897761/fast_hdlcaz.mp4',
+    'Fresh': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897760/fresh_afehew.mp4',
+    'Cold': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897706/cold_bewa1z.mp4',
+    'Bad': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897616/bad_y4ocsr.mp4',
+    'Big': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897609/big_wqdsar.mp4',
+    'Good': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897762/good_j1od8d.mp4',
+    'Tall': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897781/tall_ugh0zs.mp4',
+    'Short': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897778/short_djtuin.mp4',
+    'Old(Things)': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897772/old_llxpk8.mp4',
+    'Old(People)': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897770/old_people_migzzj.mp4',
+    'Young': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897784/young_iffauh.mp4',
+    'Early': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897759/early_lk630z.mp4',
+    'Late': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897770/late_coixse.mp4',
+    'Happy': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897762/happy_aql9hw.mp4',
+    'Sad': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897775/sad_icm5u1.mp4',
+    'Angry': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897609/angry_smme0q.mp4',
+    'Important': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897767/important_ah3jxw.mp4',
+    'Weak': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897783/weak_cjvisf.mp4',
+    'Sick': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897777/sick_btmtcd.mp4',
+    'White': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897781/white_ufozsj.mp4',
+    'Sweet': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897779/sweet_ohin7f.mp4',
+    'Quiet': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897774/quiet_f9no21.mp4',
+    'Dark': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897758/dark_islurc.mp4',
+    'Yellow': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739897785/yellow_rluoxo.mp4',
   };
+
 
   late String targetNoun;
   late List<String> currentOptions;
@@ -114,7 +104,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
         return;
       }
 
-      List<String> nouns = verbGifs.keys.toList();
+      List<String> nouns = adjectiveVideos.keys.toList();
       targetNoun = nouns[random.nextInt(nouns.length)];
       nouns.remove(targetNoun);
 
@@ -152,7 +142,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
         if (chancesLeft == 0) {
           showAnswer = true;
           selectionStatus[targetNoun] = true; // Mark the correct answer
-          incorrectQuestions.add({'question': verbGifs[targetNoun], 'correctSolution': targetNoun});
+          incorrectQuestions.add({'question': adjectiveVideos[targetNoun], 'correctSolution': targetNoun});
           Future.delayed(Duration(seconds: 2), () {
             _generateNewRound();
           });
@@ -194,7 +184,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Verbs Video Bingo Game',style: TextStyle(color: Color.fromARGB(255, 165, 74, 17)),),
+        title: Text('Adjectives Video Bingo Game',style: TextStyle(color: Color.fromARGB(255, 165, 74, 17)),),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 250, 233, 215),
         actions: [
@@ -257,7 +247,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
                     return GestureDetector(
                       child: VideoTile(
                         key: ValueKey(noun),
-                        url: verbGifs[noun] ?? '',
+                        url: adjectiveVideos[noun] ?? '',
                         isCorrect: showAnswer && selectionStatus[noun] == true,
                         isIncorrect: showAnswer && selectionStatus[noun] == false,
                         isSelected: selectionStatus[noun] == false || selectionStatus[noun] == true,

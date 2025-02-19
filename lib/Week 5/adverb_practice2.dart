@@ -28,46 +28,24 @@ class BingoScreen extends StatefulWidget {
 }
 
 class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStateMixin {
-  final Map<String, String> nounGifs = {
-    'Book': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/book_rmof9s.mp4',
-    'School': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/school_kmk2uh.mp4',
-    'Lunch': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530818/lunch_cbcgwu.mp4',
-    'Hands': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/hands_hngxdm.mp4',
-    'Morning': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/morning_pvtuty.mp4',
-    'Deaf': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/deaf_ezkwye.mp4',
-    'Tea': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/tea_i6mkyc.mp4',
-    'Office': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530817/office_ggo4af.mp4',
-    'Breakfast': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530816/breakfast_hb90fq.mp4',
-    'Dinner': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530815/dinner_blbwzm.mp4',
-    'Market': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530819/market_vfh9vj.mp4',
-    'Work': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1730530814/work_zjfapw.mp4',
-    'Student' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/student_ohmjwi.mp4',
-    'Birds' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410467/birds_ict0au.mp4',
-    'Fish' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410468/fish_kkyqvv.mp4',
-    'Aeroplane' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410469/aeroplane_qpzztg.mp4',
-    'Teacher' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/teacher_tqdyrt.mp4',
-    'Home' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410473/home_ocdazz.mp4',
-    'India' : 'https://res.cloudinary.com/dfph32nsq/video/upload/v1731410475/india_ludfnp.mp4',
-    "Chair": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892129/chair_si7osy.mp4",
-    "Delhi": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892131/Delhi_cparbw.mp4",
-    "Car": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892131/car_dhbu9a.mp4",
-    "Football": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892133/football_mwcosq.mp4",
-    "Shirt": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892133/shirt_muc04j.mp4",
-    "Water": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892133/water_n1yaxd.mp4",
-    "Sun": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892134/sun_nljhud.mp4",
-    "Coffee": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892135/coffee_ytk8dg.mp4",
-    "Table": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892137/table_dvccpo.mp4",
-    "Shoes": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892137/shoes_fsghis.mp4",
-    "Egg": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892138/egg_egmswp.mp4",
-    "Cricket": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892138/cricket_f0a9ik.mp4",
-    "Garden": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892139/garden_pwxfez.mp4",
-    "Train": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892141/train_h4wgxx.mp4",
-    "Flower": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892142/flower_wyc7aj.mp4",
-    "Mirror": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892142/mirror_wtdydk.mp4",
-    "Tree": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892143/tree_ed0q7g.mp4",
-    "Bus": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892145/bus_svvoj3.mp4",
-    "Floor": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892145/floor_xnnsb1.mp4",
-    "Moon": "https://res.cloudinary.com/dfph32nsq/video/upload/v1734892147/moon_bphrg5.mp4"
+  final Map<String, String> adverbGifs = {
+    'Quickly': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/quickly_lsfkuy.mp4',
+    'Hard': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/hard_rqsoay.mp4',
+    'Now': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/now_en4dn1.mp4',
+    'Soon': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/soon_ljtjce.mp4',
+    'Tomorrow': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/tomorrow_ttp6fr.mp4',
+    'Today': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904255/today_mxig1u.mp4',
+    'Yesterday': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/yesterday_aq8wxd.mp4',
+    'Here': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904255/here_mbkt2f.mp4',
+    'There': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/there_l9n2iy.mp4',
+    'Always': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904253/always_t0ulev.mp4',
+    'Often': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/often_tp7ros.mp4',
+    'Sometimes': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904256/sometimes_gcawfc.mp4',
+    'Rarely': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/rarely_ie3yi7.mp4',
+    'Never': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904253/never_zpvexx.mp4',
+    'Very': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904252/very_vtzjsw.mp4',
+    'Enough': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/enough_nnofv5.mp4',
+    'Already': 'https://res.cloudinary.com/dfph32nsq/video/upload/v1739904254/already_jniiti.mp4',
   };
 
   late String targetNoun;
@@ -110,7 +88,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
         return;
       }
 
-      List<String> nouns = nounGifs.keys.toList();
+      List<String> nouns = adverbGifs.keys.toList();
       targetNoun = nouns[random.nextInt(nouns.length)];
       nouns.remove(targetNoun);
 
@@ -148,7 +126,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
         if (chancesLeft == 0) {
           showAnswer = true;
           selectionStatus[targetNoun] = true; // Mark the correct answer
-          incorrectQuestions.add({'question': nounGifs[targetNoun], 'correctSolution': targetNoun});
+          incorrectQuestions.add({'question': adverbGifs[targetNoun], 'correctSolution': targetNoun});
           Future.delayed(Duration(seconds: 2), () {
             _generateNewRound();
           });
@@ -189,7 +167,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nouns Video Bingo Game',style: TextStyle(color: Color.fromARGB(255, 165, 74, 17)),),
+        title: Text('Adverbs Video Bingo Game',style: TextStyle(color: Color.fromARGB(255, 165, 74, 17)),),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 250, 233, 215),
         actions: [
@@ -252,7 +230,7 @@ class _BingoScreenState extends State<BingoScreen> with SingleTickerProviderStat
                     return GestureDetector(
                       child: VideoTile(
                         key: ValueKey(noun),
-                        url: nounGifs[noun] ?? '',
+                        url: adverbGifs[noun] ?? '',
                         isCorrect: showAnswer && selectionStatus[noun] == true,
                         isIncorrect: showAnswer && selectionStatus[noun] == false,
                         isSelected: selectionStatus[noun] == false || selectionStatus[noun] == true,

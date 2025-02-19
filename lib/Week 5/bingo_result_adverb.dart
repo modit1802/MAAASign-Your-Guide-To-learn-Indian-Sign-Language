@@ -6,6 +6,8 @@ import 'package:SignEase/Week%203/play_incorrect_noun.dart';
 import 'package:SignEase/Week%202/review_incorrect_videos.dart';
 import 'package:SignEase/Week%203/noun_quiz.dart';
 import 'package:SignEase/Week%203/week3_entry.dart';
+import 'package:SignEase/Week%205/play_incorrect_adverb.dart';
+import 'package:SignEase/Week%205/week5_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -14,7 +16,7 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-import '../Week 3/noun_practice2.dart';
+import 'adverb_practice2.dart';
 
 class Bingo_Adverb_ResultScreen extends StatefulWidget {
   final int score;
@@ -73,29 +75,29 @@ class _Bingo_Adverb_ResultScreenState
       var userDoc = await userCollection.findOne(mongo.where.eq('userId', userId));
 
       // Define the week key
-      String weekKey = 'week3';
+      String weekKey = 'week5';
 
       if (userDoc == null) {
-        // If user doesn't exist, insert new document with only Score_noun
+        // If user doesn't exist, insert new document with only Score_adverb
         await userCollection.insert({
           'userId': userId,
           'week': {
             weekKey: {
-              'Score_noun2': {
-                'score_noun2': widget.score,
-                'incorrectQuestions_noun2': widget.incorrectQuestions,
+              'Score_adverb2': {
+                'Score_adverb2': widget.score,
+                'incorrectQuestions_adverb2': widget.incorrectQuestions,
                 'incorrectcount2':widget.incorrectcount,
               }
             }
           }
         });
       } else {
-        // If user exists, add or update only the Score_noun field inside week1
+        // If user exists, add or update only the Score_adverb field inside week1
         await userCollection.update(
           mongo.where.eq('userId', userId),
-          mongo.modify.set('week.$weekKey.Score_noun2', {
-            'score_noun2': widget.score,
-            'incorrectQuestions_noun2': widget.incorrectQuestions,
+          mongo.modify.set('week.$weekKey.Score_adverb2', {
+            'Score_adverb2': widget.score,
+            'incorrectQuestions_adverb2': widget.incorrectQuestions,
           }),
         );
       }
@@ -309,7 +311,7 @@ class _Bingo_Adverb_ResultScreenState
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PLay_Incorrect_Nouns(
+                                        PLay_Incorrect_Adverbs(
                                           incorrectQuestions:
                                           widget.incorrectQuestions,
                                           score1: widget.score,
@@ -338,10 +340,10 @@ class _Bingo_Adverb_ResultScreenState
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Week3Entry()));
+                                    builder: (context) => Week5Entry()));
                           },
                           child: _buildCircularButton(
-                              Icons.arrow_back, "Week 3", Colors.pink),
+                              Icons.arrow_back, "Week 5", Colors.pink),
                         ),
                         GestureDetector(
                           onTap: () {
