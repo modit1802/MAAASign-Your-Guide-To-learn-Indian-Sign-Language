@@ -48,7 +48,7 @@ class _Week5EntryState extends State<Week5Entry> {
         score2 = (data?['week']?['week5']?['Score_adjective2']?['score_adjective2'] ?? 0) as int;
         score3 = (data?['week']?['week5']?['Score_adverb']?['score_adverb'] ?? 0) as int;
         score4 = (data?['week']?['week5']?['Score_adverb2']?['score_adverb2'] ?? 0) as int;
-        score_challenger=(data?['week']?['week5']?['Score_Challenger_Week5']?['score_challenger'] ?? 0) as int;
+        score_challenger=(data?['week']?['Week5']?['Score_Challenger_Week5']?['score_challenger'] ?? 0) as int;
         score = score1 + score2 + score3 + score4;
       });
 
