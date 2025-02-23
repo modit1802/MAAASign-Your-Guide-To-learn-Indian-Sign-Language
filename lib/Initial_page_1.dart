@@ -1,7 +1,7 @@
 import 'package:SignEase/Learning_zone.dart';
 import 'package:SignEase/ScorePage.dart';
 import 'package:SignEase/about_page.dart';
-import 'package:SignEase/leaderboard.dart';
+// import 'package:SignEase/leaderboard.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:SignEase/sabse_jyada_main_page.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:SignEase/chatbot.dart';
 
 class InitialPage1 extends StatefulWidget {
   final int index;
@@ -62,6 +63,7 @@ class _InitialPage1State extends State<InitialPage1> {
   final List<Widget> _pages = [
     LearningZone(),
     ChallengePage(),
+    ChatBot(),
     ScorePage(),
     AboutPage(),
   ];
@@ -282,7 +284,7 @@ class _InitialPage1State extends State<InitialPage1> {
           radius: 20,
           backgroundColor: Colors.white,
           child: Icon(
-            Icons.score,
+            Icons.touch_app_outlined,
             size: 25,
             color: _currentIndex == 2
                 ? const Color.fromARGB(255, 238, 126, 34)
@@ -298,9 +300,25 @@ class _InitialPage1State extends State<InitialPage1> {
           radius: 20,
           backgroundColor: Colors.white,
           child: Icon(
-            Icons.info,
+            Icons.score,
             size: 25,
             color: _currentIndex == 3
+                ? const Color.fromARGB(255, 238, 126, 34)
+                : Colors.grey,
+          ),
+        ),
+      ),
+      Material(
+        elevation: _currentIndex == 4 ? 8 : 0,
+        color: Colors.transparent,
+        shape: const CircleBorder(),
+        child: CircleAvatar(
+          radius: 20,
+          backgroundColor: Colors.white,
+          child: Icon(
+            Icons.info,
+            size: 25,
+            color: _currentIndex == 4
                 ? const Color.fromARGB(255, 238, 126, 34)
                 : Colors.grey,
           ),

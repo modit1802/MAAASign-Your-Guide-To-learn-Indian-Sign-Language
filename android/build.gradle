@@ -1,5 +1,5 @@
-// Kotlin version updated to 1.8.10 (or higher) to resolve warning
-ext.kotlin_version = '1.8.10' 
+// Kotlin version updated to 1.9.24 for compatibility
+ext.kotlin_version = '1.9.24'
 
 allprojects {
     repositories {
@@ -22,10 +22,10 @@ tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
 
-// Adding Kotlin plugin dependency to ensure compatibility
+// Adding Kotlin plugin and Gradle plugin dependencies
 buildscript {
     ext {
-        kotlin_version = '1.8.10' // Make sure Kotlin is at least version 1.8.10
+        kotlin_version = '1.9.24' // Ensure Kotlin is updated
     }
 
     repositories {
@@ -35,6 +35,6 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:7.6.0' // Ensure Gradle plugin is updated
+        classpath 'com.android.tools.build:gradle:8.4.0' // Updated Gradle version
     }
 }
