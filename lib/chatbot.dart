@@ -1,3 +1,4 @@
+import 'package:SignEase/Week%201/learnalphabet.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -42,28 +43,43 @@ class _ChatBotState extends State<ChatBot> {
     await prefs.setStringList('chat_history', chatHistory);
   }
 
-  Future<void> _sendMessage() async {
-    String userMessage = _textController.text.trim().toLowerCase();
-    if (userMessage.isEmpty) return;
+ Future<void> _sendMessage() async {
+  String userMessage = _textController.text.trim().toLowerCase();
+  if (userMessage.isEmpty) return;
 
+  setState(() {
+    _messages.add(ChatMessage(text: userMessage, isUser: true));
+    _textController.clear();
+    _isLoading = true;
+  });
+
+  await _saveChatHistory();
+
+  // Check if user asks about Learning Zone
+  if (userMessage.contains("Alphabet learning zone") || userMessage.contains("ABCD") || userMessage.contains("ISL Alphabets")) {
     setState(() {
-      _messages.add(ChatMessage(text: userMessage, isUser: true));
-      _textController.clear();
-      _isLoading = true;
+      _messages.add(ChatMessage(
+        text: "Redirecting to Learning Zone...",
+        isUser: false,
+      ));
+      _isLoading = false;
     });
 
     await _saveChatHistory();
 
-    if (!userMessage.contains("sign")) {
-      setState(() {
-        _messages.add(ChatMessage(
-            text: "Sorry, I can only assist with Indian Sign Language.",
-            isUser: false));
-        _isLoading = false;
-      });
-      await _saveChatHistory();
-      return;
-    }
+    // Navigate to Learning Zone screen inside app
+    Future.delayed(const Duration(milliseconds: 500), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LearnAlphabet()),
+      );
+    });
+
+    return;
+  }
+
+    
+    
 
     const String apiKey = 'AIzaSyB6CVj-eRnnC6Ror4Hlm8tPOSppqZrGdpU';
     final String apiUrl =
