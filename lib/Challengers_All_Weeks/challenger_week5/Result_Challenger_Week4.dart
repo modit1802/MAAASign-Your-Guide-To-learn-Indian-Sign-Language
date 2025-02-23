@@ -58,7 +58,7 @@ class _Result_Challenger_Week4State extends State<Result_Challenger_Week4> {
     var userDoc = await userCollection.findOne(mongo.where.eq('userId', userId));
 
     // Define the week key
-    String weekKey = 'Week4';
+    String weekKey = 'Week5';
 
     if (userDoc == null) {
       // If user doesn't exist, insert new document with only Score_number
@@ -66,7 +66,7 @@ class _Result_Challenger_Week4State extends State<Result_Challenger_Week4> {
         'userId': userId,
         'week': {
           weekKey: {
-            'Score_Challenger_Week4': {
+            'Score_Challenger_Week5': {
               'score_challenger': widget.score,
               'Incorrect_challenges':widget.incorrectquestions,
             }
@@ -77,7 +77,7 @@ class _Result_Challenger_Week4State extends State<Result_Challenger_Week4> {
       // If user exists, add or update only the Score_number field inside Week4
       await userCollection.update(
         mongo.where.eq('userId', userId),
-        mongo.modify.set('week.$weekKey.Score_Challenger_Week4', {
+        mongo.modify.set('week.$weekKey.Score_Challenger_Week5', {
           'score_challenger': widget.score,
           'Incorrect_challenges':widget.incorrectquestions,
         }),
@@ -201,7 +201,7 @@ Widget build(BuildContext context) {
             ),
             const SizedBox(height:10),
             Text(
-              "Score based on Week 4 Challenger Performance", // Footer text
+              "Score based on Week 5 Challenger Performance", // Footer text
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
               textAlign: TextAlign.center,
             ),
@@ -217,10 +217,10 @@ Widget build(BuildContext context) {
               color: const Color.fromARGB(255, 255, 255, 255),
               title: widget.score > 600
                   ? "Go to Home Page"
-                  : "Practice again Week 4",
+                  : "Practice again Week 5",
               description: widget.score > 600
-                  ? "Congratulations! You have completed Week 4, now it's time to jump to week 5. Press me to directly go to week 5."
-                  : "Based on your performance in Week 4, we recommend you to practice again. Press me to restart Week 4.",
+                  ? "Congratulations! You have completed Week 5, now it's time to wait for new weeks. Press me to directly go to home page."
+                  : "Based on your performance in Week 5, we recommend you to practice again. Press me to restart Week 5.",
               index: 0,
             ),
             const SizedBox(height: 8), // Added to adjust the space between cards
@@ -228,8 +228,8 @@ Widget build(BuildContext context) {
               onTap: () => _handleCardTap(1, const DetailedProgressWeek4()),
               iconData: Icons.report,
               color: const Color.fromARGB(255, 255, 255, 255),
-              title: 'Week 4 Progress Report',
-              description: "Click me! to check the detailed progress report of Week 4",
+              title: 'Week 5 Progress Report',
+              description: "Click me! to check the detailed progress report of Week 5",
               index: 1,
             ),
           ],
