@@ -1,6 +1,7 @@
 import 'package:SignEase/Learning_zone.dart';
 import 'package:SignEase/ScorePage.dart';
 import 'package:SignEase/about_page.dart';
+import 'package:SignEase/schedule_session_page.dart';
 // import 'package:SignEase/leaderboard.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:SignEase/sabse_jyada_main_page.dart';
@@ -15,7 +16,6 @@ import 'package:SignEase/chatbot.dart';
 
 class InitialPage1 extends StatefulWidget {
   final int index;
-
   const InitialPage1({Key? key, this.index = 0}) : super(key: key);
 
   @override
@@ -47,13 +47,11 @@ class _InitialPage1State extends State<InitialPage1> {
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
-        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        final userDoc = await FirebaseFirestore.instance
             .collection('users')
             .doc(user.uid)
             .get();
-        setState(() {
-          _photoUrl = userDoc['photoUrl'];
-        });
+        setState(() => _photoUrl = userDoc['photoUrl']);
       }
     } catch (e) {
       print('Error fetching user photo: $e');
@@ -64,112 +62,103 @@ class _InitialPage1State extends State<InitialPage1> {
     LearningZone(),
     ChallengePage(),
     ChatBot(),
+    ScheduleSessionPage(),  // ← your new page at index 3
     ScorePage(),
     AboutPage(),
   ];
 
   void _onItemTapped(int index) {
+    setState(() => _currentIndex = index);
     _pageController.jumpToPage(index);
   }
 
   Future<void> _logout() async {
     try {
-      setState(() {
-        _isLoading = true;
-      });
+      setState(() => _isLoading = true);
       await _googleSignIn.signOut();
       await FirebaseAuth.instance.signOut();
       await Future.delayed(const Duration(seconds: 2));
-
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => Sabse_Jyada_Main_page()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => Sabse_Jyada_Main_page()),
+      );
     } catch (e) {
       print('Logout error: $e');
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() => _isLoading = false);
     }
   }
 
-  Widget _buildLoadingOverlay() {
-    return Container(
-      color: Colors.black.withOpacity(0.5),
-      width: double.infinity,
-      height: double.infinity,
-      child: Center(
-        child: Lottie.asset(
-          'assets/loading.json',
-          width: 200,
-          height: 200,
-          fit: BoxFit.contain,
-          alignment: Alignment.center,
+  Widget _buildLoadingOverlay() => Container(
+        color: Colors.black.withOpacity(0.5),
+        width: double.infinity,
+        height: double.infinity,
+        child: Center(
+          child: Lottie.asset(
+            'assets/loading.json',
+            width: 200,
+            height: 200,
+            fit: BoxFit.contain,
+          ),
+        ),
+      );
+
+  void _showProfileDialog() {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircleAvatar(
+              backgroundImage:
+                  _photoUrl != null ? NetworkImage(_photoUrl!) : null,
+              radius: 40,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Hi, ${FirebaseAuth.instance.currentUser?.displayName ?? 'User'}!',
+              style: const TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _logout();
+              },
+              child: const Text('Sign out'),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  void _showProfileDialog() {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircleAvatar(
-                backgroundImage:
-                    _photoUrl != null ? NetworkImage(_photoUrl!) : null,
-                radius: 40,
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'Hi, ${FirebaseAuth.instance.currentUser?.displayName ?? 'User'}!',
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  _logout();
-                },
-                child: const Text('Sign out'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
   Future<bool> _onWillPop() async {
-    return (await showDialog(
+    return (await showDialog<bool>(
           context: context,
-          builder: (BuildContext context) => AlertDialog(
+          builder: (_) => AlertDialog(
             title: const Text('Are you sure?',
                 style: TextStyle(
                     color: Color.fromARGB(255, 238, 126, 34),
                     fontWeight: FontWeight.bold)),
             content: const Text('Do you want to exit the app?'),
-            actions: <Widget>[
+            actions: [
               TextButton(
+                onPressed: () => Navigator.pop(context, false),
                 child: const Text('Cancel',
-                    style: TextStyle(color: Color.fromARGB(255, 238, 126, 34))),
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 238, 126, 34))),
               ),
               TextButton(
+                onPressed: () => SystemNavigator.pop(),
                 child: const Text('Yes',
-                    style: TextStyle(color: Color.fromARGB(255, 238, 126, 34))),
-                onPressed: () {
-                  SystemNavigator.pop();
-                },
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 238, 126, 34))),
               ),
             ],
           ),
@@ -189,7 +178,7 @@ class _InitialPage1State extends State<InitialPage1> {
           ),
           automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 250, 233, 215),
-          actions: <Widget>[
+          actions: [
             if (_photoUrl != null)
               GestureDetector(
                 onTap: _showProfileDialog,
@@ -210,124 +199,140 @@ class _InitialPage1State extends State<InitialPage1> {
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: _pages,
-              onPageChanged: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
+              onPageChanged: (i) => setState(() => _currentIndex = i),
             ),
             if (_isLoading) _buildLoadingOverlay(),
           ],
         ),
         bottomNavigationBar: Container(
-        
-  decoration: BoxDecoration(
-    color: const Color.fromARGB(255, 250, 233, 215),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(0.3),
-        spreadRadius: 2,
-        blurRadius: 10,
-        offset: const Offset(0, -3), // Shadow appears above the navbar
-      ),
-    ],
-    borderRadius: const BorderRadius.only(
-      topLeft: Radius.circular(25),
-      topRight: Radius.circular(25),
-    ),
-  ),
-  child: CurvedNavigationBar(
-    backgroundColor: Colors.transparent,
-    color: const Color.fromARGB(255, 250, 233, 215),
-    buttonBackgroundColor:  const Color.fromARGB(255, 255, 249, 242),
-    height: 60,
-    index: _currentIndex,
-    onTap: _onItemTapped,
-    items: [
-      Material(
-        elevation: _currentIndex == 0 ? 8: 0,
-        color: Colors.transparent,
-        shape: const CircleBorder(),
-        child: CircleAvatar(
-          radius: 20,
-          backgroundColor: Colors.white,
-          child: Icon(
-            Icons.home,
-            size: 25,
-            color: _currentIndex == 0
-                ? const Color.fromARGB(255, 238, 126, 34)
-                : Colors.grey,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 250, 233, 215),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: const Offset(0, -3),
+              ),
+            ],
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(25),
+              topRight: Radius.circular(25),
+            ),
+          ),
+          child: CurvedNavigationBar(
+            backgroundColor: Colors.transparent,
+            color: const Color.fromARGB(255, 250, 233, 215),
+            buttonBackgroundColor: const Color.fromARGB(255, 255, 249, 242),
+            height: 60,
+            index: _currentIndex,
+            onTap: _onItemTapped,
+            items: [
+              // 0: LearningZone
+              Material(
+                elevation: _currentIndex == 0 ? 8 : 0,
+                color: Colors.transparent,
+                shape: const CircleBorder(),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.home,
+                    size: 25,
+                    color: _currentIndex == 0
+                        ? const Color.fromARGB(255, 238, 126, 34)
+                        : Colors.grey,
+                  ),
+                ),
+              ),
+              // 1: ChallengePage
+              Material(
+                elevation: _currentIndex == 1 ? 8 : 0,
+                color: Colors.transparent,
+                shape: const CircleBorder(),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.fact_check,
+                    size: 25,
+                    color: _currentIndex == 1
+                        ? const Color.fromARGB(255, 238, 126, 34)
+                        : Colors.grey,
+                  ),
+                ),
+              ),
+              // 2: ChatBot
+              Material(
+                elevation: _currentIndex == 2 ? 8 : 0,
+                color: Colors.transparent,
+                shape: const CircleBorder(),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.touch_app_outlined,
+                    size: 25,
+                    color: _currentIndex == 2
+                        ? const Color.fromARGB(255, 238, 126, 34)
+                        : Colors.grey,
+                  ),
+                ),
+              ),
+              // 3: ScheduleSessionPage
+              Material(
+                elevation: _currentIndex == 3 ? 8 : 0,
+                color: Colors.transparent,
+                shape: const CircleBorder(),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.schedule,
+                    size: 25,
+                    color: _currentIndex == 3
+                        ? const Color.fromARGB(255, 238, 126, 34)
+                        : Colors.grey,
+                  ),
+                ),
+              ),
+              // 4: ScorePage
+              Material(
+                elevation: _currentIndex == 4 ? 8 : 0,
+                color: Colors.transparent,
+                shape: const CircleBorder(),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.score,
+                    size: 25,
+                    color: _currentIndex == 4
+                        ? const Color.fromARGB(255, 238, 126, 34)
+                        : Colors.grey,
+                  ),
+                ),
+              ),
+              // 5: AboutPage
+              Material(
+                elevation: _currentIndex == 5 ? 8 : 0,
+                color: Colors.transparent,
+                shape: const CircleBorder(),
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.info,
+                    size: 25,
+                    color: _currentIndex == 5
+                        ? const Color.fromARGB(255, 238, 126, 34)
+                        : Colors.grey,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-      ),
-      Material(
-        elevation: _currentIndex == 1 ? 8 : 0,
-        color: Colors.transparent,
-        shape: const CircleBorder(),
-        child: CircleAvatar(
-          radius: 20,
-          backgroundColor: Colors.white,
-          child: Icon(
-            Icons.fact_check,
-            size: 25,
-            color: _currentIndex == 1
-                ? const Color.fromARGB(255, 238, 126, 34)
-                : Colors.grey,
-          ),
-        ),
-      ),
-      Material(
-        elevation: _currentIndex == 2 ? 8 : 0,
-        color: Colors.transparent,
-        shape: const CircleBorder(),
-        child: CircleAvatar(
-          radius: 20,
-          backgroundColor: Colors.white,
-          child: Icon(
-            Icons.touch_app_outlined,
-            size: 25,
-            color: _currentIndex == 2
-                ? const Color.fromARGB(255, 238, 126, 34)
-                : Colors.grey,
-          ),
-        ),
-      ),
-      Material(
-        elevation: _currentIndex == 3 ? 8 : 0,
-        color: Colors.transparent,
-        shape: const CircleBorder(),
-        child: CircleAvatar(
-          radius: 20,
-          backgroundColor: Colors.white,
-          child: Icon(
-            Icons.score,
-            size: 25,
-            color: _currentIndex == 3
-                ? const Color.fromARGB(255, 238, 126, 34)
-                : Colors.grey,
-          ),
-        ),
-      ),
-      Material(
-        elevation: _currentIndex == 4 ? 8 : 0,
-        color: Colors.transparent,
-        shape: const CircleBorder(),
-        child: CircleAvatar(
-          radius: 20,
-          backgroundColor: Colors.white,
-          child: Icon(
-            Icons.info,
-            size: 25,
-            color: _currentIndex == 4
-                ? const Color.fromARGB(255, 238, 126, 34)
-                : Colors.grey,
-          ),
-        ),
-      ),
-    ],
-  ),
-)
-,
       ),
     );
   }
