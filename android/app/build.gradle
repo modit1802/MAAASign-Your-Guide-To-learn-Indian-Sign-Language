@@ -18,13 +18,13 @@ def flutterVersionName = "1.67"
 
 android {
     namespace = "com.maaa.flutter_login_signup"
-    compileSdk = 34 // Updated to a recent version
+    compileSdk = 35 // Updated to a recent version
     ndkVersion = "25.2.9519653" // Ensure the NDK version is up-to-date
 
     defaultConfig {
         applicationId = "com.maaa.flutter_login_signup"
         minSdk = 23 // Minimum SDK for compatibility
-        targetSdk = 34 // Align with compileSdk
+        targetSdk = 35 // Align with compileSdk
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
         multiDexEnabled true // Enable MultiDex support

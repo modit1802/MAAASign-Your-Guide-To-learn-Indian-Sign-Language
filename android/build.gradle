@@ -1,5 +1,5 @@
 // Kotlin version updated to 1.9.24 for compatibility
-ext.kotlin_version = '1.9.24'
+ext.kotlin_version = '2.1.0'
 
 allprojects {
     repositories {
@@ -24,9 +24,7 @@ tasks.register("clean", Delete) {
 
 // Adding Kotlin plugin and Gradle plugin dependencies
 buildscript {
-    ext {
-        kotlin_version = '1.9.24' // Ensure Kotlin is updated
-    }
+    ext.kotlin_version = '2.1.0'
 
     repositories {
         google()
@@ -34,7 +32,8 @@ buildscript {
     }
 
     dependencies {
+        classpath "com.android.tools.build:gradle:8.2.0" // or your current version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:8.4.0' // Updated Gradle version
     }
 }
+
