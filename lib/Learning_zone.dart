@@ -11,6 +11,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'Bonus_Week/Learn_Operators.dart';
+
 class LearningZone extends StatefulWidget {
   const LearningZone({super.key});
 
@@ -839,8 +841,7 @@ class _LearningZoneState extends State<LearningZone> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              LearnGreetings()),
+                                          builder: (context) => IslMathLearningPage()),
                                     );
                                     break;
                                   case 3:
@@ -848,24 +849,32 @@ class _LearningZoneState extends State<LearningZone> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              LearnRelations()),
+                                              LearnGreetings()),
                                     );
                                     break;
                                   case 4:
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => LearnVerbs()),
+                                          builder: (context) =>
+                                              LearnRelations()),
                                     );
                                     break;
                                   case 5:
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => LearnNouns()),
+                                          builder: (context) => LearnVerbs()),
                                     );
                                     break;
                                   case 6:
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LearnNouns()),
+                                    );
+                                    break;
+                                  case 7:
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -873,7 +882,7 @@ class _LearningZoneState extends State<LearningZone> {
                                               LearnPronouns()),
                                     );
                                     break;
-                                  case 7:
+                                  case 8:
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -896,15 +905,17 @@ class _LearningZoneState extends State<LearningZone> {
                                         ? 'images/alphabets.jpg'
                                         : index == 1
                                             ? 'images/numbers.jpg'
-                                            : index == 2
+                                        : index == 2
+                                            ? 'images/maths.png'
+                                            : index == 3
                                                 ? 'images/greetings.png'
-                                                : index == 3
+                                                : index == 4
                                                     ? 'images/Relation.jpg'
-                                                    : index == 4
+                                                    : index == 5
                                                         ? 'images/verbs.png'
-                                                        : index == 5
+                                                        : index == 6
                                                             ? 'images/nouns.png'
-                                                            : index == 6
+                                                            : index == 7
                                                                 ? 'images/pronouns.png'
                                                                 : 'images/sentence_struct.png',
                                   ),
@@ -912,15 +923,17 @@ class _LearningZoneState extends State<LearningZone> {
                                       ? 'Review Signing Alphabets'
                                       : index == 1
                                           ? 'Review Signing Numbers'
-                                          : index == 2
+                                      : index == 2
+                                      ? 'Basic Maths Operations'
+                                          : index == 3
                                               ? 'Review Signing Greetings'
-                                              : index == 3
+                                              : index == 4
                                                   ? 'Review Signing Relations'
-                                                  : index == 4
+                                                  : index == 5
                                                       ? 'Review Signing Verbs'
-                                                      : index == 5
+                                                      : index == 6
                                                           ? 'Review Signing Nouns'
-                                                          : index == 6
+                                                          : index == 7
                                                               ? 'Review Signing Pronouns'
                                                               : 'Review Basic Sentence Structure',
                                   onTap: () {
@@ -947,7 +960,7 @@ class _LearningZoneState extends State<LearningZone> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  LearnGreetings()),
+                                                  IslMathLearningPage()),
                                         );
                                         break;
                                       case 3:
@@ -955,7 +968,7 @@ class _LearningZoneState extends State<LearningZone> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  LearnRelations()),
+                                                  LearnGreetings()),
                                         );
                                         break;
                                       case 4:
@@ -963,7 +976,7 @@ class _LearningZoneState extends State<LearningZone> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  LearnVerbs()),
+                                                  LearnRelations()),
                                         );
                                         break;
                                       case 5:
@@ -971,7 +984,7 @@ class _LearningZoneState extends State<LearningZone> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  LearnNouns()),
+                                                  LearnVerbs()),
                                         );
                                         break;
                                       case 6:
@@ -979,10 +992,18 @@ class _LearningZoneState extends State<LearningZone> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  LearnPronouns()),
+                                                  LearnNouns()),
                                         );
                                         break;
                                       case 7:
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LearnPronouns()),
+                                        );
+                                        break;
+                                      case 8:
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
