@@ -49,6 +49,12 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   google_generative_ai: ^0.4.6
   flutter_gemini: ^3.0.0
+<<<<<<< HEAD
+=======
+  flutter_local_notifications: ^15.1.0
+  timezone: ^0.9.2
+  permission_handler: ^12.0.0+1
+>>>>>>> 6b05bb41bf1990553eb50ba2d9a32fd6577ee3e9
 
 dev_dependencies:
   flutter_test:
