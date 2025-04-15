@@ -1,7 +1,7 @@
 plugins {
     id "com.android.application"
     id "com.google.gms.google-services"  // Firebase configuration
-    id "kotlin-android"  // Kotlin plugin
+    id "kotlin-android"                  // Kotlin plugin
     id "dev.flutter.flutter-gradle-plugin"  // Flutter plugin
 }
 
@@ -41,7 +41,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.release
+            signingConfig signingConfigs.release
             minifyEnabled true // Enable code shrinking and optimization
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -51,12 +51,15 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11 // Updated for modern Java support
-        targetCompatibility = JavaVersion.VERSION_11 // Updated for modern Java support
+        // keep your Java 11 settings…
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        // …and add this line to enable core‐library desugaring
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
-        jvmTarget = "11" // Ensure compatibility with Java 11
+        jvmTarget = "11" // Ensure compatibility with Java 11
     }
 
     lintOptions {
@@ -80,7 +83,11 @@ dependencies {
 
     // Firebase BOM (Bill of Materials) to manage dependencies
     implementation platform('com.google.firebase:firebase-bom:32.2.0')
-    implementation "com.google.firebase:firebase-auth" // Firebase Authentication
-    implementation "com.google.firebase:firebase-database" // Firebase Realtime Database
+    implementation "com.google.firebase:firebase-auth"      // Firebase Authentication
+    implementation "com.google.firebase:firebase-database"  // Firebase Realtime Database
     implementation "com.google.firebase:firebase-analytics" // Firebase Analytics (optional)
+
+    // ← Add this to pull in the back‑ported Java 8+ APIs
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
+
 }
