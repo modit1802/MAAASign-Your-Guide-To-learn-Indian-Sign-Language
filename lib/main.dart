@@ -6,11 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:SignEase/Initial_page_1.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'firebase_options.dart';
 import 'login_page.dart';
-// 1️⃣ Import the notification service
-import 'package:SignEase/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,14 +17,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // 2️⃣ Initialize notification service
-  await NotificationService().init();
 
-  // 3️⃣ Request permission for Android 13+ (API 33+)
-  await requestAndroidNotificationPermission();
-
-  // 4️⃣ Schedule notification
-  NotificationService().scheduleInactivityReminder();
 
   // System UI styling
   SystemChrome.setSystemUIOverlayStyle(
@@ -45,19 +35,8 @@ void main() async {
   });
 }
 
-// ✅ Ask permission for Android 13+ using plugin method
-Future<void> requestAndroidNotificationPermission() async {
-  final plugin = FlutterLocalNotificationsPlugin();
-  final android = plugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
-  if (android != null) {
-    final granted = await android.requestPermission();
-    debugPrint("🔔 Notification permission granted: $granted");
-  }
-}
 
-extension on AndroidFlutterLocalNotificationsPlugin {
-  requestPermission() {}
-}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -1,5 +1,3 @@
-// lib/Initial_page_1.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -14,9 +12,7 @@ import 'package:SignEase/about_page.dart';
 import 'package:SignEase/schedule_session_page.dart';
 import 'package:SignEase/sabse_jyada_main_page.dart';
 import 'package:SignEase/challenge_page.dart';
-import 'package:SignEase/chatbot.dart';
-
-import 'package:SignEase/notification_service.dart';
+import 'package:SignEase/chatbot_screen.dart'; // <-- NEW
 
 class InitialPage1 extends StatefulWidget {
   final int index;
@@ -37,7 +33,6 @@ class _InitialPage1State extends State<InitialPage1> with WidgetsBindingObserver
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    NotificationService().scheduleInactivityReminder();
     _currentIndex = widget.index;
     _pageController = PageController(initialPage: _currentIndex);
     _fetchUserPhoto();
@@ -53,13 +48,6 @@ class _InitialPage1State extends State<InitialPage1> with WidgetsBindingObserver
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      NotificationService().scheduleInactivityReminder();
-    }
   }
 
   Future<void> _fetchUserPhoto() async {
@@ -80,7 +68,7 @@ class _InitialPage1State extends State<InitialPage1> with WidgetsBindingObserver
   final List<Widget> _pages = [
     LearningZone(),
     ChallengePage(),
-    ChatBot(),
+    ChatBot(), // <-- Updated
     ScheduleSessionPage(),
     ScorePage(),
     AboutPage(),
@@ -133,15 +121,13 @@ class _InitialPage1State extends State<InitialPage1> with WidgetsBindingObserver
           mainAxisSize: MainAxisSize.min,
           children: [
             CircleAvatar(
-              backgroundImage:
-                  _photoUrl != null ? NetworkImage(_photoUrl!) : null,
+              backgroundImage: _photoUrl != null ? NetworkImage(_photoUrl!) : null,
               radius: 40,
             ),
             const SizedBox(height: 10),
             Text(
               'Hi, ${FirebaseAuth.instance.currentUser?.displayName ?? "User"}!',
-              style: const TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
@@ -252,104 +238,33 @@ class _InitialPage1State extends State<InitialPage1> with WidgetsBindingObserver
             index: _currentIndex,
             onTap: _onItemTapped,
             items: [
-              Material(
-                elevation: _currentIndex == 0 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.home,
-                    size: 25,
-                    color: _currentIndex == 0
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              Material(
-                elevation: _currentIndex == 1 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.fact_check,
-                    size: 25,
-                    color: _currentIndex == 1
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              Material(
-                elevation: _currentIndex == 2 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.touch_app_outlined,
-                    size: 25,
-                    color: _currentIndex == 2
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              Material(
-                elevation: _currentIndex == 3 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.schedule,
-                    size: 25,
-                    color: _currentIndex == 3
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              Material(
-                elevation: _currentIndex == 4 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.score,
-                    size: 25,
-                    color: _currentIndex == 4
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              Material(
-                elevation: _currentIndex == 5 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.info,
-                    size: 25,
-                    color: _currentIndex == 5
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
+              _buildNavItem(Icons.home, 0),
+              _buildNavItem(Icons.fact_check, 1),
+              _buildNavItem(Icons.touch_app_outlined, 2),
+              _buildNavItem(Icons.schedule, 3),
+              _buildNavItem(Icons.score, 4),
+              _buildNavItem(Icons.info, 5),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, int index) {
+    return Material(
+      elevation: _currentIndex == index ? 8 : 0,
+      color: Colors.transparent,
+      shape: const CircleBorder(),
+      child: CircleAvatar(
+        radius: 20,
+        backgroundColor: Colors.white,
+        child: Icon(
+          icon,
+          size: 25,
+          color: _currentIndex == index
+              ? const Color.fromARGB(255, 238, 126, 34)
+              : Colors.grey,
         ),
       ),
     );
