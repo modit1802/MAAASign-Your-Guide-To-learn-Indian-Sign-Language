@@ -1,6 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:permission_handler/permission_handler.dart';
 
 class NotificationService {
   NotificationService._internal();
@@ -24,17 +25,20 @@ class NotificationService {
 
     await _plugin.initialize(
       InitializationSettings(android: android, iOS: ios),
-      onDidReceiveNotificationResponse: (_) {},
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
+        // Handle tap on notification here
+      },
+      onDidReceiveBackgroundNotificationResponse: notificationTapBackground, // Optional
     );
 
-    // Step 3: Request notification permission on Android 13+
-    await _plugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestPermission();
+    // Step 3: Ask notification permission on Android 13+ and iOS
+    if (await Permission.notification.isDenied) {
+      await Permission.notification.request();
+    }
   }
 
   Future<void> scheduleInactivityReminder() async {
-    await _plugin.cancel(0); // Cancel existing if any
+    await _plugin.cancel(0); // Cancel existing notification if any
 
     final when = tz.TZDateTime.now(tz.local).add(const Duration(minutes: 1)); // For testing
 
@@ -47,19 +51,20 @@ class NotificationService {
         android: AndroidNotificationDetails(
           'inactivity_channel',
           'Inactivity Reminders',
-          channelDescription: 'Notifies when you haven’t opened the app for 8 hrs',
+          channelDescription: 'Notifies when you haven’t opened the app for 8 hrs',
           importance: Importance.high,
           priority: Priority.high,
         ),
         iOS: DarwinNotificationDetails(),
       ),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 }
 
-extension on AndroidFlutterLocalNotificationsPlugin? {
-  requestPermission() {}
+// Optional background tap handler (for when the app is terminated)
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse notificationResponse) {
+  // Handle notification tap in the background (terminated app)
 }
-
-
