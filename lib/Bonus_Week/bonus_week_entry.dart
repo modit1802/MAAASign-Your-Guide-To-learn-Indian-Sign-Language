@@ -8,6 +8,8 @@ import 'package:SignEase/Week%201/matchmaker_alphabet_1.dart';
 import 'package:SignEase/Week%201/practiceassignment1.dart';
 import 'package:flutter/material.dart';
 
+import 'balance_scale.dart';
+
 class Bonus_Week_Entry extends StatefulWidget {
   const Bonus_Week_Entry({super.key});
 
@@ -352,13 +354,12 @@ class _Bonus_Week_EntryState extends State<Bonus_Week_Entry> {
 
                       SizedBox(height: screenHeight * 0.015),
                       _buildCard(
-                        onTap: () => _handleCardTap2(
-                            3, [Match_maker_alphabet1(score: 0)]),
-                        imagePath: 'images/match.png',
+                        onTap: () => _handleCardTap(3, BalanceScaleGame()),
+                        imagePath: 'images/balance_scale.jpg',
                         color: const Color.fromARGB(255, 255, 255, 255),
-                        title: 'Match It Up !',
+                        title: 'Balance The Scale !',
                         description:
-                        "Pair the equations with answers",
+                        "Balance the scale on both sides",
                         index: 3,
                       ),
                       SizedBox(height: screenHeight * 0.015),
