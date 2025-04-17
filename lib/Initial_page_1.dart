@@ -13,6 +13,8 @@ import 'package:SignEase/schedule_session_page.dart';
 import 'package:SignEase/sabse_jyada_main_page.dart';
 import 'package:SignEase/challenge_page.dart';
 import 'package:SignEase/chatbot_screen.dart'; // <-- NEW
+import 'package:SignEase/notification_service.dart';
+
 
 class InitialPage1 extends StatefulWidget {
   final int index;
@@ -36,6 +38,15 @@ class _InitialPage1State extends State<InitialPage1> with WidgetsBindingObserver
     _currentIndex = widget.index;
     _pageController = PageController(initialPage: _currentIndex);
     _fetchUserPhoto();
+  // NotificationService.init().then((_) {
+  //   NotificationService.showInstantNotification(); // Immediate test notification.
+  //   NotificationService.scheduleRepeatingNotification(); // Repeating notification every 2 minutes.
+  // });
+  // ✅ Initialize Notifications and start repeating every 1 min
+    NotificationService.init().then((_) {
+      NotificationService.showInstantNotification(); // One-time notification on app start
+      NotificationService.startRepeatingNotification(); // Repeats every 1 minute
+    });
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         systemNavigationBarColor: Colors.black,
@@ -47,6 +58,8 @@ class _InitialPage1State extends State<InitialPage1> with WidgetsBindingObserver
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    // ✅ Stop the notifications if you want them to end when user leaves this page
+    NotificationService.stopRepeatingNotification();
     super.dispose();
   }
 
