@@ -6,6 +6,7 @@ import 'package:SignEase/Week%203/learnnoun.dart';
 import 'package:SignEase/Week%203/learnpronoun.dart';
 import 'package:SignEase/Week%203/learnverbs.dart';
 import 'package:SignEase/Week 4/Simple_Sentence_Formation_using_Videos/learnpage_videos.dart';
+import 'package:SignEase/leaderboard.dart';
 import 'package:SignEase/searched_video_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -534,7 +535,7 @@ class _LearningZoneState extends State<LearningZone> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 250, 233, 215),
+      backgroundColor: const Color.fromARGB(255, 250, 233, 215),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -547,23 +548,79 @@ class _LearningZoneState extends State<LearningZone> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Greeting and Search Bar
-                  RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                          fontSize: screenWidth * 0.06, color: Colors.black),
-                      children: <TextSpan>[
-                        const TextSpan(text: "Hi "),
-                        TextSpan(
-                          text: username,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: screenWidth * 0.06,
-                          ),
-                        ),
-                        const TextSpan(text: " !"),
-                      ],
-                    ),
-                  ),
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    RichText(
+      text: TextSpan(
+        style: TextStyle(
+          fontSize: screenWidth * 0.06,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          const TextSpan(text: "Hi "),
+          TextSpan(
+            text: username,
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: screenWidth * 0.06,
+              color: const Color(0xFF1E1E1E),
+            ),
+          ),
+          const TextSpan(text: " !"),
+        ],
+      ),
+    ),
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LeaderBoard(),
+          ),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFFFC107), Color(0xFFFF8C00)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.orange.withOpacity(0.4),
+              offset: const Offset(0, 4),
+              blurRadius: 12,
+            ),
+          ],
+        ),
+        child: Row(
+          children: const [
+            Icon(
+              Icons.emoji_events,
+              color: Colors.white,
+              size: 22,
+            ),
+            SizedBox(width: 8),
+            Text(
+              "LeaderBoard",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 15,
+                letterSpacing: 0.8,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+),
+
                   const SizedBox(height: 20),
                   Center(
                     child: Container(
@@ -841,7 +898,8 @@ class _LearningZoneState extends State<LearningZone> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => IslMathLearningPage()),
+                                          builder: (context) =>
+                                              IslMathLearningPage()),
                                     );
                                     break;
                                   case 3:
@@ -905,37 +963,37 @@ class _LearningZoneState extends State<LearningZone> {
                                         ? 'images/alphabets.jpg'
                                         : index == 1
                                             ? 'images/numbers.jpg'
-                                        : index == 2
-                                            ? 'images/maths.png'
-                                            : index == 3
-                                                ? 'images/greetings.png'
-                                                : index == 4
-                                                    ? 'images/Relation.jpg'
-                                                    : index == 5
-                                                        ? 'images/verbs.png'
-                                                        : index == 6
-                                                            ? 'images/nouns.png'
-                                                            : index == 7
-                                                                ? 'images/pronouns.png'
-                                                                : 'images/sentence_struct.png',
+                                            : index == 2
+                                                ? 'images/maths.png'
+                                                : index == 3
+                                                    ? 'images/greetings.png'
+                                                    : index == 4
+                                                        ? 'images/Relation.jpg'
+                                                        : index == 5
+                                                            ? 'images/verbs.png'
+                                                            : index == 6
+                                                                ? 'images/nouns.png'
+                                                                : index == 7
+                                                                    ? 'images/pronouns.png'
+                                                                    : 'images/sentence_struct.png',
                                   ),
                                   title: index == 0
                                       ? 'Review Signing Alphabets'
                                       : index == 1
                                           ? 'Review Signing Numbers'
-                                      : index == 2
-                                      ? 'Basic Maths Operations'
-                                          : index == 3
-                                              ? 'Review Signing Greetings'
-                                              : index == 4
-                                                  ? 'Review Signing Relations'
-                                                  : index == 5
-                                                      ? 'Review Signing Verbs'
-                                                      : index == 6
-                                                          ? 'Review Signing Nouns'
-                                                          : index == 7
-                                                              ? 'Review Signing Pronouns'
-                                                              : 'Review Basic Sentence Structure',
+                                          : index == 2
+                                              ? 'Basic Maths Operations'
+                                              : index == 3
+                                                  ? 'Review Signing Greetings'
+                                                  : index == 4
+                                                      ? 'Review Signing Relations'
+                                                      : index == 5
+                                                          ? 'Review Signing Verbs'
+                                                          : index == 6
+                                                              ? 'Review Signing Nouns'
+                                                              : index == 7
+                                                                  ? 'Review Signing Pronouns'
+                                                                  : 'Review Basic Sentence Structure',
                                   onTap: () {
                                     // Ensure the onTap logic is passed correctly
                                     switch (index) {

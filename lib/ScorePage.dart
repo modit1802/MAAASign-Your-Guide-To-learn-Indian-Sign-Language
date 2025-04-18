@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:SignEase/Challengers_All_Weeks/challenger_week1/DetailedProgressWeek1.dart';
+import 'package:SignEase/leaderboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,42 @@ class _ScorePageState extends State<ScorePage> {
     _getUsername();
     connectToMongoDB();
   }
+
+  Future<void> calculateAndStoreAverage() async {
+  String? userId = await getUserId();
+  if (userId == null) {
+    print("User not logged in");
+    return;
+  }
+
+  // Convert scores to integers, handle nulls
+  int score1 = int.tryParse(score_challenger ?? '0') ?? 0;
+  int score2 = int.tryParse(score_challenger_week2 ?? '0') ?? 0;
+  int score3 = int.tryParse(score_challenger_week3 ?? '0') ?? 0;
+  int score4 = int.tryParse(score_challenger_week4 ?? '0') ?? 0;
+
+  // Calculate average
+  int total = score1 + score2 + score3 + score4;
+  double avgScore = total / 4;
+
+  print("Average Score: $avgScore");
+
+  try {
+    // Re-open DB if closed
+    if (!db.isConnected) await db.open();
+
+    // Update the user's document
+    await userCollection.update(
+      mongo.where.eq('userId', userId),
+      mongo.modify.set('Avg_score', avgScore),
+    );
+
+    print("Average score updated successfully in MongoDB!");
+  } catch (e) {
+    print("Error updating average score: $e");
+  }
+}
+
 
   Future<void> _getUsername() async {
     User? user = FirebaseAuth.instance.currentUser;
@@ -162,6 +199,7 @@ final ScreenshotController _screenshotController = ScreenshotController();
         print('No data found');
       }
     });
+    await calculateAndStoreAverage();
     await db.close();
   }
 
@@ -288,22 +326,79 @@ Widget build(BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Greeting Text
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    fontSize: screenHeight * 0.03,  // Responsive font size
-                    color: Colors.black,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(text: "Hi "),
-                    TextSpan(
-                      text: "$username",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(text: " !"),
-                  ],
-                ),
+          Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    RichText(
+      text: TextSpan(
+        style: TextStyle(
+          fontSize: screenWidth * 0.06,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          const TextSpan(text: "Hi "),
+          TextSpan(
+            text: username,
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: screenWidth * 0.06,
+              color: const Color(0xFF1E1E1E),
+            ),
+          ),
+          const TextSpan(text: " !"),
+        ],
+      ),
+    ),
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LeaderBoard(),
+          ),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFFFC107), Color(0xFFFF8C00)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.orange.withOpacity(0.4),
+              offset: const Offset(0, 4),
+              blurRadius: 12,
+            ),
+          ],
+        ),
+        child: Row(
+          children: const [
+            Icon(
+              Icons.emoji_events,
+              color: Colors.white,
+              size: 22,
+            ),
+            SizedBox(width: 8),
+            Text(
+              "LeaderBoard",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 15,
+                letterSpacing: 0.8,
               ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+),
+
               SizedBox(height: screenHeight * 0.02), // Responsive spacing
             
               // Score Zone Container

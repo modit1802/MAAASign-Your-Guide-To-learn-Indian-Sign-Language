@@ -74,7 +74,10 @@ flutter:
         - asset: fonts/DancingScript-VariableFont_wght.ttf
     - family: Courgette
       fonts:
-        - asset: fonts/Courgette-Regular.ttf   
+        - asset: fonts/Courgette-Regular.ttf  
+    - family: Lobsters
+      fonts:
+        - asset: fonts/Lobster-Regular.ttf 
 
   assets:
     - assets/

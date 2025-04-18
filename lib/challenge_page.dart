@@ -3,6 +3,7 @@ import 'package:SignEase/Week%201/week1_entry.dart';
 import 'package:SignEase/Week%202/week2_entry.dart';
 import 'package:SignEase/Week%203/week3_entry.dart';
 import 'package:SignEase/Week%204/week4_entry.dart';
+import 'package:SignEase/leaderboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -205,23 +206,79 @@ Widget build(BuildContext context) {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                      fontSize: screenWidth * 0.06, color: Colors.black),
-                  children: <TextSpan>[
-                    const TextSpan(text: "Hi "),
-                    TextSpan(
-                      text: "$username",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth * 0.06,
-                      ),
-                    ),
-                    const TextSpan(text: " !"),
-                  ],
-                ),
+             Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    RichText(
+      text: TextSpan(
+        style: TextStyle(
+          fontSize: screenWidth * 0.06,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          const TextSpan(text: "Hi "),
+          TextSpan(
+            text: username,
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: screenWidth * 0.06,
+              color: const Color(0xFF1E1E1E),
+            ),
+          ),
+          const TextSpan(text: " !"),
+        ],
+      ),
+    ),
+    GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LeaderBoard(),
+          ),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFFFC107), Color(0xFFFF8C00)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.orange.withOpacity(0.4),
+              offset: const Offset(0, 4),
+              blurRadius: 12,
+            ),
+          ],
+        ),
+        child: Row(
+          children: const [
+            Icon(
+              Icons.emoji_events,
+              color: Colors.white,
+              size: 22,
+            ),
+            SizedBox(width: 8),
+            Text(
+              "LeaderBoard",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 15,
+                letterSpacing: 0.8,
               ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ],
+),
+
               SizedBox(height: screenHeight * 0.02),
                   Center(
                     child: Container(
