@@ -1,3 +1,5 @@
+// lib/main.dart
+
 import 'package:SignEase/sabse_jyada_main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,20 +11,26 @@ import 'login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Set system bottom navigation bar color and orientation
+
+
+  // System UI styling
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      systemNavigationBarColor: Color.fromARGB(255, 250, 233, 215), // Change this to the color you want
-      systemNavigationBarIconBrightness: Brightness.light, // Set to light if the color is dark
+      systemNavigationBarColor: Color.fromARGB(255, 250, 233, 215),
+      systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
 
+  // Force portrait orientation
   SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  ).then((_) {
     runApp(const MyApp());
   });
 }
@@ -33,19 +41,19 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  
-
   @override
   Widget build(BuildContext context) {
+    // Keep navbar color consistent on hot reload
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        systemNavigationBarColor: Color.fromARGB(255, 250, 233, 215), // Choose your desired color
+        systemNavigationBarColor: Color.fromARGB(255, 250, 233, 215),
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'MAAASign:Your Guide to learn ISL',
+      title: 'MAAASign: Your Guide to Learn ISL',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

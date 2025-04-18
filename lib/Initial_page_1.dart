@@ -1,18 +1,20 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lottie/lottie.dart';
+
 import 'package:SignEase/Learning_zone.dart';
 import 'package:SignEase/ScorePage.dart';
 import 'package:SignEase/about_page.dart';
 import 'package:SignEase/schedule_session_page.dart';
-// import 'package:SignEase/leaderboard.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:SignEase/sabse_jyada_main_page.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:SignEase/challenge_page.dart';
-import 'package:flutter/services.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:lottie/lottie.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:SignEase/chatbot.dart';
+import 'package:SignEase/chatbot_screen.dart'; // <-- NEW
+import 'package:SignEase/notification_service.dart';
+
 
 class InitialPage1 extends StatefulWidget {
   final int index;
@@ -22,7 +24,7 @@ class InitialPage1 extends StatefulWidget {
   State<InitialPage1> createState() => _InitialPage1State();
 }
 
-class _InitialPage1State extends State<InitialPage1> {
+class _InitialPage1State extends State<InitialPage1> with WidgetsBindingObserver {
   late int _currentIndex;
   late PageController _pageController;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -32,15 +34,33 @@ class _InitialPage1State extends State<InitialPage1> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _currentIndex = widget.index;
     _pageController = PageController(initialPage: _currentIndex);
     _fetchUserPhoto();
+  // NotificationService.init().then((_) {
+  //   NotificationService.showInstantNotification(); // Immediate test notification.
+  //   NotificationService.scheduleRepeatingNotification(); // Repeating notification every 2 minutes.
+  // });
+  // ✅ Initialize Notifications and start repeating every 1 min
+    NotificationService.init().then((_) {
+      NotificationService.showInstantNotification(); // One-time notification on app start
+      NotificationService.startRepeatingNotification(); // Repeats every 1 minute
+    });
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         systemNavigationBarColor: Colors.black,
         systemNavigationBarIconBrightness: Brightness.light,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    // ✅ Stop the notifications if you want them to end when user leaves this page
+    NotificationService.stopRepeatingNotification();
+    super.dispose();
   }
 
   Future<void> _fetchUserPhoto() async {
@@ -61,8 +81,8 @@ class _InitialPage1State extends State<InitialPage1> {
   final List<Widget> _pages = [
     LearningZone(),
     ChallengePage(),
-    ChatBot(),
-    ScheduleSessionPage(),  // ← your new page at index 3
+    ChatBot(), // <-- Updated
+    ScheduleSessionPage(),
     ScorePage(),
     AboutPage(),
   ];
@@ -114,15 +134,13 @@ class _InitialPage1State extends State<InitialPage1> {
           mainAxisSize: MainAxisSize.min,
           children: [
             CircleAvatar(
-              backgroundImage:
-                  _photoUrl != null ? NetworkImage(_photoUrl!) : null,
+              backgroundImage: _photoUrl != null ? NetworkImage(_photoUrl!) : null,
               radius: 40,
             ),
             const SizedBox(height: 10),
             Text(
-              'Hi, ${FirebaseAuth.instance.currentUser?.displayName ?? 'User'}!',
-              style: const TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold),
+              'Hi, ${FirebaseAuth.instance.currentUser?.displayName ?? "User"}!',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
@@ -139,31 +157,36 @@ class _InitialPage1State extends State<InitialPage1> {
   }
 
   Future<bool> _onWillPop() async {
-    return (await showDialog<bool>(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: const Text('Are you sure?',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 238, 126, 34),
-                    fontWeight: FontWeight.bold)),
-            content: const Text('Do you want to exit the app?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: const Text('Cancel',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 238, 126, 34))),
-              ),
-              TextButton(
-                onPressed: () => SystemNavigator.pop(),
-                child: const Text('Yes',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 238, 126, 34))),
-              ),
-            ],
+    final shouldExit = await showDialog<bool>(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text(
+          'Are you sure?',
+          style: TextStyle(
+            color: Color.fromARGB(255, 238, 126, 34),
+            fontWeight: FontWeight.bold,
           ),
-        )) ??
-        false;
+        ),
+        content: const Text('Do you want to exit the app?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Color.fromARGB(255, 238, 126, 34)),
+            ),
+          ),
+          TextButton(
+            onPressed: () => SystemNavigator.pop(),
+            child: const Text(
+              'Yes',
+              style: TextStyle(color: Color.fromARGB(255, 238, 126, 34)),
+            ),
+          ),
+        ],
+      ),
+    );
+    return shouldExit ?? false;
   }
 
   @override
@@ -228,110 +251,33 @@ class _InitialPage1State extends State<InitialPage1> {
             index: _currentIndex,
             onTap: _onItemTapped,
             items: [
-              // 0: LearningZone
-              Material(
-                elevation: _currentIndex == 0 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.home,
-                    size: 25,
-                    color: _currentIndex == 0
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              // 1: ChallengePage
-              Material(
-                elevation: _currentIndex == 1 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.fact_check,
-                    size: 25,
-                    color: _currentIndex == 1
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              // 2: ChatBot
-              Material(
-                elevation: _currentIndex == 2 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.touch_app_outlined,
-                    size: 25,
-                    color: _currentIndex == 2
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              // 3: ScheduleSessionPage
-              Material(
-                elevation: _currentIndex == 3 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.schedule,
-                    size: 25,
-                    color: _currentIndex == 3
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              // 4: ScorePage
-              Material(
-                elevation: _currentIndex == 4 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.score,
-                    size: 25,
-                    color: _currentIndex == 4
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
-              // 5: AboutPage
-              Material(
-                elevation: _currentIndex == 5 ? 8 : 0,
-                color: Colors.transparent,
-                shape: const CircleBorder(),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.info,
-                    size: 25,
-                    color: _currentIndex == 5
-                        ? const Color.fromARGB(255, 238, 126, 34)
-                        : Colors.grey,
-                  ),
-                ),
-              ),
+              _buildNavItem(Icons.home, 0),
+              _buildNavItem(Icons.fact_check, 1),
+              _buildNavItem(Icons.touch_app_outlined, 2),
+              _buildNavItem(Icons.schedule, 3),
+              _buildNavItem(Icons.score, 4),
+              _buildNavItem(Icons.info, 5),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, int index) {
+    return Material(
+      elevation: _currentIndex == index ? 8 : 0,
+      color: Colors.transparent,
+      shape: const CircleBorder(),
+      child: CircleAvatar(
+        radius: 20,
+        backgroundColor: Colors.white,
+        child: Icon(
+          icon,
+          size: 25,
+          color: _currentIndex == index
+              ? const Color.fromARGB(255, 238, 126, 34)
+              : Colors.grey,
         ),
       ),
     );

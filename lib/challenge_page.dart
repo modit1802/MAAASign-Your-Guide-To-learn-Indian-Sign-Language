@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
+import 'Bonus_Week/bonus_week_entry.dart';
 import 'Week 5/week5_entry.dart';
 
 class ChallengePage extends StatefulWidget {
@@ -24,6 +25,9 @@ class _ChallengePageState extends State<ChallengePage> {
   String? score_challenger_week2 = '0';
    String? score_challenger_week3 = '0';
    String? score_challenger_week4 = '0';
+   String? score_numbers='0';
+  String? score_numbers_quiz='0';
+  String? score_numbers_match='0';
    String? comingsoon = '0';
      late mongo.Db db;
   late mongo.DbCollection userCollection;
@@ -58,9 +62,18 @@ class _ChallengePageState extends State<ChallengePage> {
     var result = await userCollection.findOne(mongo.where.eq('userId', userId));
     setState(() {
       if (result != null) {
+        score_numbers_quiz = result['week']?['week1']?['Score_number']
+        ?['score_number']?.toString()??'0';
+        score_numbers_match = result['week']?['week1']?['Score_number_match']
+        ?['score_number_match']?.toString()??'0';
         score_challenger_week1 = result['week']?['week1']?['Score_Challenger_week1']
                 ?['score_challenger']
             ?.toString()??'0';
+        int score_numbers_quiz1 = int.tryParse(score_numbers_quiz!) ?? 0;
+        int score_numbers_match1 = int.tryParse(score_numbers_match!) ?? 0;
+
+        int score_numbers_int = score_numbers_quiz1 + score_numbers_match1;
+        score_numbers=score_numbers_int?.toString()??'0';
         print(score_challenger_week1);
         score_challenger_week2 = result['week']?['week2']?['Score_Challenger_Week2']
                 ?['score_challenger']
@@ -438,7 +451,34 @@ Widget build(BuildContext context) {
                         scoreChallengerWeek1: int.parse(score_challenger_week1??'0')
                       ),
                     ),
-
+                    if (score_numbers != null && int.parse(score_numbers ?? '0') > 600) Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/Week_bonus.png'),
+                        title: 'Maths Operators',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Bonus_Week_Entry()),
+                          );
+                        }, scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
+                      ),
+                    ) else Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildCustomCard(
+                        image: AssetImage('images/Week_bonus.png'),
+                        title: 'Maths Operators 🔒',
+                        onTap: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Can't open this bonus week yet,please score more than 600 in Numbers Section of Week 1"),
+                            ),
+                          );
+                        },
+                        scoreChallengerWeek1: int.parse(score_challenger_week2??'0'),
+                      ),
+                    ),
               if (score_challenger_week1 != null && int.parse(score_challenger_week1 ?? '0') > 650) Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: buildCustomCard(
