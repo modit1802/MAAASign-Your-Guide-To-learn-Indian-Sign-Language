@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Trainer model
 class Trainer {
@@ -85,44 +86,102 @@ class _ScheduleSessionPageState extends State<ScheduleSessionPage> {
         ? "✅ ${_selectedTrainer!.name} is available at $_selectedTime on $day."
         : "❌ ${_selectedTrainer!.name} is not available at $_selectedTime on $day.";
   }
+  Future<void> _launchMeetLink(String url) async {
+    final uri = Uri.parse(url);
+    print('Trying to launch: $uri');
+
+    try {
+      final success = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication, // This is often more reliable for opening apps
+      );
+
+      if (!success) {
+        print('Could not launch URL');
+      } else {
+        print('URL launched successfully');
+      }
+    } catch (e) {
+      print('Error launching URL: $e');
+    }
+  }
+
 
   void _showBookingDialog() {
     final msg = _checkAvailability();
     final isAvailable = msg.startsWith("✅");
+    const meetLink = "https://meet.google.com/czo-yuqv-ifb";
+
+    print("Showing booking dialog");
+    print("Message: $msg");
+    print("Is available: $isAvailable");
+    print("Selected trainer: ${_selectedTrainer?.name ?? "None"}");
 
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
-        title: const Text('Booking Status'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(msg),
-            if (isAvailable) const SizedBox(height: 16),
-            if (isAvailable) ...[
-              const Text('Trainer Details:', style: TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-              Text('👤 Name: ${_selectedTrainer!.name}'),
-              Text('📧 Email: ${_selectedTrainer!.email}'),
-              Text('📱 Phone: ${_selectedTrainer!.phone}'),
-              const SizedBox(height: 12),
-              Text(
-                '➡️ Contact the trainer to confirm your session.',
-                style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-              ),
-            ],
+      useRootNavigator: true,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: const Text('Booking Status'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(msg),
+                if (isAvailable) const SizedBox(height: 16),
+                if (isAvailable) ...[
+                  const Text('Trainer Details:', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Text('👤 Name: ${_selectedTrainer?.name ?? "N/A"}'),
+                  Text('📧 Email: ${_selectedTrainer?.email ?? "N/A"}'),
+                  Text('📱 Phone: ${_selectedTrainer?.phone ?? "N/A"}'),
+                  const SizedBox(height: 12),
+                  Text(
+                    '➡️ Contact the trainer to confirm your session.',
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        print("Join Meet button pressed");
+                        _launchMeetLink(meetLink);
+                      },
+                      icon: const Icon(Icons.video_call),
+                      label: const Text("Join Meet"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                print("Dialog closed");
+                Navigator.of(dialogContext).pop();
+              },
+              child: const Text('OK'),
+            ),
           ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('OK'),
-          )
-        ],
-      ),
+        );
+      },
     );
   }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
