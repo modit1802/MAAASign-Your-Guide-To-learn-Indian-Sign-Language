@@ -1,0 +1,2 @@
+D:/MAAASign-Your-Guide-To-learn-Indian-Sign-Language/android/app/.cxx/Debug/4uk5a6s6/x86/CMakeFiles/edit_cache.dir
+D:/MAAASign-Your-Guide-To-learn-Indian-Sign-Language/android/app/.cxx/Debug/4uk5a6s6/x86/CMakeFiles/rebuild_cache.dir

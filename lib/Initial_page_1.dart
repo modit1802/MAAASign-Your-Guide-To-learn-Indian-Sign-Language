@@ -12,7 +12,7 @@ import 'package:SignEase/about_page.dart';
 import 'package:SignEase/schedule_session_page.dart';
 import 'package:SignEase/sabse_jyada_main_page.dart';
 import 'package:SignEase/challenge_page.dart';
-import 'package:SignEase/chatbot_screen.dart'; // <-- NEW
+import 'package:SignEase/chatbot.dart'; // <-- NEW
 import 'package:SignEase/notification_service.dart';
 
 
