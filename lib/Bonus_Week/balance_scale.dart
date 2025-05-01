@@ -42,7 +42,7 @@ class _BalanceScaleGameState extends State<BalanceScaleGame> with SingleTickerPr
     int right = getRightWeight();
 
     setState(() {
-      tiltAngle = (left - right) * 0.02; // subtle tilt
+      tiltAngle = (left - right) * 0.02;
     });
 
     if (left == right && left != 0 && right != 0) {
@@ -64,7 +64,7 @@ class _BalanceScaleGameState extends State<BalanceScaleGame> with SingleTickerPr
     return Scaffold(
       backgroundColor: Color(0xFFFCEFD8),
       appBar: AppBar(
-        title: const Text('🪙 Balance Game', style: TextStyle(fontSize: 19),),
+        title: const Text('🪙 Balance Game', style: TextStyle(fontSize: 19)),
         backgroundColor: Colors.orange,
         actions: [
           Center(
@@ -87,57 +87,64 @@ class _BalanceScaleGameState extends State<BalanceScaleGame> with SingleTickerPr
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(height: 20),
-                  const Text(
-                    '🎯 Drag ISL numbers to balance the scale!',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 20),
-                  buildAnimatedScale(),
-                  const SizedBox(height: 20),
-                  const Divider(indent: 40, endIndent: 40),
-                  buildDraggableItems(),
-                ],
-              ),
-            ),
-          ),
-          if (showCelebration)
-            Container(
-              color: Colors.black.withOpacity(0.7),
-              child: Center(
-                child: Container(
-                  padding: const EdgeInsets.all(30),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(24),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.green.withOpacity(0.3),
-                        blurRadius: 16,
-                        spreadRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: const Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text('🎉 Balanced!', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 10),
-                      Text('+100 Points', style: TextStyle(fontSize: 20, color: Colors.green)),
-                    ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Stack(
+            children: [
+              Center(
+                child: SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 20),
+                        const Text(
+                          '🎯 Drag ISL numbers to balance the scale!',
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 20),
+                        buildAnimatedScale(),
+                        const SizedBox(height: 20),
+                        const Divider(indent: 40, endIndent: 40),
+                        buildDraggableItems(constraints.maxWidth),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
+              if (showCelebration)
+                Container(
+                  color: Colors.black.withOpacity(0.7),
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(30),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(24),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.green.withOpacity(0.3),
+                            blurRadius: 16,
+                            spreadRadius: 5,
+                          ),
+                        ],
+                      ),
+                      child: const Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('🎉 Balanced!', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                          SizedBox(height: 10),
+                          Text('+100 Points', style: TextStyle(fontSize: 20, color: Colors.green)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -145,21 +152,24 @@ class _BalanceScaleGameState extends State<BalanceScaleGame> with SingleTickerPr
   Widget buildAnimatedScale() {
     return AnimatedRotation(
       duration: const Duration(milliseconds: 300),
-      turns: tiltAngle, // Tilt based on difference
+      turns: tiltAngle,
       child: buildScale(),
     );
   }
 
   Widget buildScale() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        buildScalePan(leftItems, 'Left'),
-        const SizedBox(width: 20),
-        const Icon(Icons.balance_outlined, size: 50, color: Color.fromARGB(255, 165, 74, 17)),
-        const SizedBox(width: 20),
-        buildScalePan(rightItems, 'Right'),
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          buildScalePan(leftItems, 'Left'),
+          const SizedBox(width: 20),
+          const Icon(Icons.balance_outlined, size: 50, color: Color.fromARGB(255, 165, 74, 17)),
+          const SizedBox(width: 20),
+          buildScalePan(rightItems, 'Right'),
+        ],
+      ),
     );
   }
 
@@ -220,16 +230,19 @@ class _BalanceScaleGameState extends State<BalanceScaleGame> with SingleTickerPr
     );
   }
 
-  Widget buildDraggableItems() {
+  Widget buildDraggableItems(double maxWidth) {
+    int columns = maxWidth > 800 ? 6 : 4; // adapt to screen size
     return Container(
       height: 300,
       padding: const EdgeInsets.all(12),
       color: Colors.grey[100],
+      width: double.infinity,
       child: GridView.count(
-        crossAxisCount: 4,
+        crossAxisCount: columns,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        physics: const NeverScrollableScrollPhysics(), // no scrolling
+        physics: const NeverScrollableScrollPhysics(),
+        childAspectRatio: 1,
         children: islNumbers.map((item) {
           return Draggable<Map<String, dynamic>>(
             data: item,
