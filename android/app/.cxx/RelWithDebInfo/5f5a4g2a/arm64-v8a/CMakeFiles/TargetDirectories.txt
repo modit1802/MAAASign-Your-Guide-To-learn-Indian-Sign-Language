@@ -1,0 +1,2 @@
+C:/Users/Amogh Bansal/Desktop/SignEase/android/app/.cxx/RelWithDebInfo/5f5a4g2a/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Amogh Bansal/Desktop/SignEase/android/app/.cxx/RelWithDebInfo/5f5a4g2a/arm64-v8a/CMakeFiles/rebuild_cache.dir
